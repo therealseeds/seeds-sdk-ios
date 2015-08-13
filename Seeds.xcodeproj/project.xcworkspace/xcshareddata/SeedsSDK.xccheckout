@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>495EBE3F-900A-44AB-97E6-72477A5DE63A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SeedsSDK</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0EB80F80303F94B23072D7C289FB2C69A76BDB68</key>
+		<string>github.com:therealseeds/seeds-sdk-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SeedsSDK.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0EB80F80303F94B23072D7C289FB2C69A76BDB68</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:therealseeds/seeds-sdk-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0EB80F80303F94B23072D7C289FB2C69A76BDB68</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0EB80F80303F94B23072D7C289FB2C69A76BDB68</string>
+			<key>IDESourceControlWCCName</key>
+			<string>seeds-sdk-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
