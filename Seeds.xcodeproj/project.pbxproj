@@ -24,14 +24,10 @@
 		8A50845A1B7CAF7B00A6CF52 /* MFRedirectChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50843A1B7CAF7B00A6CF52 /* MFRedirectChecker.m */; };
 		8A50845B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50843B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h */; };
 		8A50845C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50843C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m */; };
-		8A50845D1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50843D1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.h */; };
-		8A50845E1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50843E1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.m */; };
 		8A50845F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50843F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h */; };
 		8A5084601B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084401B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.m */; };
 		8A5084611B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084411B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h */; };
 		8A5084621B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084421B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m */; };
-		8A5084631B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084431B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.h */; };
-		8A5084641B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084441B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.m */; };
 		8A5084651B7CAF7B00A6CF52 /* MobFoxToolBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084451B7CAF7B00A6CF52 /* MobFoxToolBar.h */; };
 		8A5084661B7CAF7B00A6CF52 /* MobFoxToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084461B7CAF7B00A6CF52 /* MobFoxToolBar.m */; };
 		8A5084671B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084471B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.h */; };
@@ -86,14 +82,10 @@
 		8A50843A1B7CAF7B00A6CF52 /* MFRedirectChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFRedirectChecker.m; sourceTree = "<group>"; };
 		8A50843B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxAdBrowserViewController.h; sourceTree = "<group>"; };
 		8A50843C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobFoxAdBrowserViewController.m; sourceTree = "<group>"; };
-		8A50843D1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxCreativesQueueManager.h; sourceTree = "<group>"; };
-		8A50843E1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobFoxCreativesQueueManager.m; sourceTree = "<group>"; };
 		8A50843F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxHTMLBannerView.h; sourceTree = "<group>"; };
 		8A5084401B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobFoxHTMLBannerView.m; sourceTree = "<group>"; };
 		8A5084411B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxInterstitialPlayerViewController.h; sourceTree = "<group>"; };
 		8A5084421B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobFoxInterstitialPlayerViewController.m; sourceTree = "<group>"; };
-		8A5084431B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxInterstitialViewController.h; sourceTree = "<group>"; };
-		8A5084441B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobFoxInterstitialViewController.m; sourceTree = "<group>"; };
 		8A5084451B7CAF7B00A6CF52 /* MobFoxToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxToolBar.h; sourceTree = "<group>"; };
 		8A5084461B7CAF7B00A6CF52 /* MobFoxToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobFoxToolBar.m; sourceTree = "<group>"; };
 		8A5084471B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobFoxVideoInterstitialViewController.h; sourceTree = "<group>"; };
@@ -210,14 +202,10 @@
 				8A50843A1B7CAF7B00A6CF52 /* MFRedirectChecker.m */,
 				8A50843B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h */,
 				8A50843C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m */,
-				8A50843D1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.h */,
-				8A50843E1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.m */,
 				8A50843F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h */,
 				8A5084401B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.m */,
 				8A5084411B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h */,
 				8A5084421B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m */,
-				8A5084431B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.h */,
-				8A5084441B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.m */,
 				8A5084451B7CAF7B00A6CF52 /* MobFoxToolBar.h */,
 				8A5084461B7CAF7B00A6CF52 /* MobFoxToolBar.m */,
 				8A5084471B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.h */,
@@ -265,7 +253,6 @@
 				8A5084651B7CAF7B00A6CF52 /* MobFoxToolBar.h in Headers */,
 				8A50846A1B7CAF7B00A6CF52 /* NSBundle+MobFox.h in Headers */,
 				8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */,
-				8A50845D1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.h in Headers */,
 				8A50845B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h in Headers */,
 				8A50847E1B7CAF9300A6CF52 /* MFCustomEventBanner.h in Headers */,
 				8A5084321B7CAF2300A6CF52 /* SeedsDB.h in Headers */,
@@ -273,7 +260,6 @@
 				8A5084701B7CAF7B00A6CF52 /* UIButton+MobFox.h in Headers */,
 				8A50846C1B7CAF7B00A6CF52 /* NSString+MobFox.h in Headers */,
 				8A50842F1B7CAF2300A6CF52 /* Seeds.h in Headers */,
-				8A5084631B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.h in Headers */,
 				8A50845F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h in Headers */,
 				8A5084591B7CAF7B00A6CF52 /* MFRedirectChecker.h in Headers */,
 				8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */,
@@ -388,7 +374,6 @@
 				8A5084771B7CAF7B00A6CF52 /* UIView+FindViewController.m in Sources */,
 				8A5084661B7CAF7B00A6CF52 /* MobFoxToolBar.m in Sources */,
 				8A5084311B7CAF2300A6CF52 /* Seeds.xcdatamodeld in Sources */,
-				8A5084641B7CAF7B00A6CF52 /* MobFoxInterstitialViewController.m in Sources */,
 				8A5084301B7CAF2300A6CF52 /* Seeds.m in Sources */,
 				8A50846D1B7CAF7B00A6CF52 /* NSString+MobFox.m in Sources */,
 				8A5084621B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m in Sources */,
@@ -399,7 +384,6 @@
 				8A5084681B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.m in Sources */,
 				8A5084751B7CAF7B00A6CF52 /* UIImage+MobFox.m in Sources */,
 				8A50845C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m in Sources */,
-				8A50845E1B7CAF7B00A6CF52 /* MobFoxCreativesQueueManager.m in Sources */,
 				8A5084711B7CAF7B00A6CF52 /* UIButton+MobFox.m in Sources */,
 				8A50846B1B7CAF7B00A6CF52 /* NSBundle+MobFox.m in Sources */,
 				8A5084731B7CAF7B00A6CF52 /* UIDevice+MFIdentifierAddition.m in Sources */,

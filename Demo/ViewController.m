@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <MobFoxInterstitialDelegate>
+@interface ViewController () <MobFoxVideoInterstitialViewControllerDelegate>
 
 @end
 
@@ -18,24 +18,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    self.interstitial = [[MobFoxInterstitialViewController alloc] initWithViewController:self];
+    self.interstitial = [[MobFoxVideoInterstitialViewController alloc] init];
     self.interstitial.delegate = self;
+    self.interstitial.requestURL = @"http://devdash.playseeds.com";
+    self.interstitial.enableInterstitialAds = YES;
+    [self.view addSubview:self.interstitial.view];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)mobfoxVideoInterstitialViewDidLoadMobFoxAd:(MobFoxVideoInterstitialViewController *)videoInterstitial advertTypeLoaded:(MobFoxAdType)advertType {
+    [self.interstitial presentAd:MobFoxAdTypeText];
 }
 
-- (void)mobfoxInterstitialDidLoad {
-    [self.interstitial showAd];
-}
-
-- (void)mobfoxDidFailToLoadWithError:(NSError *)error {
+- (void)mobfoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial didFailToReceiveAdWithError:(NSError *)error {
     NSLog(@"Failed to load %@", error);
 }
 
-- (NSString*)publisherIdForMobFoxInterstitial {
+- (NSString *)publisherIdForMobFoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial {
     return @"test";
 }
 

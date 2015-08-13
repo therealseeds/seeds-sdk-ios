@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Seeds.h"
-#import "MobFoxInterstitialViewController.h"
+#import "MobFoxVideoInterstitialViewController.h"
 
 @interface ViewController : UIViewController
 
-@property (nonatomic, strong) MobFoxInterstitialViewController* interstitial;
+@property (nonatomic, strong) MobFoxVideoInterstitialViewController* interstitial;
 
 @end
 
