@@ -102,8 +102,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 @property (nonatomic, strong) NSMutableDictionary *browserUserAgentDict;
 
-- (void)videoFailedToLoad;
-
 - (void)interstitialStartTimer;
 - (void)interstitialStopTimer;
 - (void)interstitialSkipAction:(id)sender;
