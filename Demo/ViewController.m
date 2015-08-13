@@ -23,6 +23,7 @@
     self.interstitial.requestURL = @"http://devdash.playseeds.com";
     self.interstitial.enableInterstitialAds = YES;
     [self.view addSubview:self.interstitial.view];
+    [self addChildViewController:self.interstitial];
 }
 
 - (void)mobfoxVideoInterstitialViewDidLoadMobFoxAd:(MobFoxVideoInterstitialViewController *)videoInterstitial advertTypeLoaded:(MobFoxAdType)advertType {
