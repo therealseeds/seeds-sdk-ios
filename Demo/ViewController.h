@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Countly.h"
+#import "MobFoxInterstitialViewController.h"
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, strong) MobFoxInterstitialViewController* interstitial;
 
 @end
 

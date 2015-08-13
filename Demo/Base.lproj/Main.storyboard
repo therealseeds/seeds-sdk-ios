@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,7 +15,62 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Kg-nm-291">
+                                <rect key="frame" x="180" y="100" width="240" height="64"/>
+                                <color key="backgroundColor" red="0.28341542120000002" green="0.28341542120000002" blue="0.28341542120000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="BYl-60-AH2"/>
+                                    <constraint firstAttribute="height" constant="64" id="rVb-8N-W3E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Seeds IAP event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="seedsIapEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QAf-7h-6ij"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Qvw-Xc-2fy">
+                                <rect key="frame" x="180" y="172" width="240" height="64"/>
+                                <color key="backgroundColor" red="0.28341542120000002" green="0.28341542120000002" blue="0.28341542120000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="U7i-fT-0tA"/>
+                                    <constraint firstAttribute="width" constant="240" id="mor-4A-TID"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Show in-app message">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showIAM:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wob-vA-Fel"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="w8t-mx-9Gp">
+                                <rect key="frame" x="180" y="28" width="240" height="64"/>
+                                <color key="backgroundColor" red="0.28341542120000002" green="0.28341542120000002" blue="0.28341542120000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="POi-mP-Lrj"/>
+                                    <constraint firstAttribute="height" constant="64" id="a04-Km-9Ja"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="IAP event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="iapEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gwc-9D-Lwq"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="w8t-mx-9Gp" secondAttribute="centerX" id="3GE-fL-xB5"/>
+                            <constraint firstItem="3Kg-nm-291" firstAttribute="top" secondItem="w8t-mx-9Gp" secondAttribute="bottom" constant="8" id="EqP-nC-3br"/>
+                            <constraint firstAttribute="centerX" secondItem="3Kg-nm-291" secondAttribute="centerX" id="YOh-jd-ClA"/>
+                            <constraint firstItem="w8t-mx-9Gp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="ev5-Ff-45Y"/>
+                            <constraint firstAttribute="centerX" secondItem="Qvw-Xc-2fy" secondAttribute="centerX" id="vQD-Xk-lvB"/>
+                            <constraint firstItem="Qvw-Xc-2fy" firstAttribute="top" secondItem="3Kg-nm-291" secondAttribute="bottom" constant="8" id="ycd-Ob-t0j"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
