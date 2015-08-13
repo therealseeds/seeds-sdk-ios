@@ -24,7 +24,7 @@
 #   define SEEDS_LOG(...)
 #endif
 
-#define SEEDS_SDK_VERSION "0.1.0"
+#define COUNTLY_SDK_VERSION "15.06.01"
 
 #ifndef SEEDS_TARGET_WATCHKIT
 #define SEEDS_DEFAULT_UPDATE_INTERVAL 60.0
@@ -690,7 +690,7 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)beginSession
 {
-	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="SEEDS_SDK_VERSION"&begin_session=1&metrics=%@",
+	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&begin_session=1&metrics=%@",
 					  self.appKey,
 					  [CountlyDeviceInfo udid],
 					  time(NULL),
@@ -713,7 +713,7 @@ NSString* const kCLYUserCustom = @"custom";
     
     SEEDS_LOG(@"Sending APN token in mode %d", testMode);
     
-    NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="SEEDS_SDK_VERSION"&token_session=1&ios_token=%@&test_mode=%d",
+    NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&token_session=1&ios_token=%@&test_mode=%d",
                       self.appKey,
                       [CountlyDeviceInfo udid],
                       time(NULL),
@@ -761,7 +761,7 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)sendUserDetails
 {
-    NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="SEEDS_SDK_VERSION"&user_details=%@",
+    NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&user_details=%@",
                       self.appKey,
                       [CountlyDeviceInfo udid],
                       time(NULL),
@@ -774,7 +774,7 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)storeCrashReportToTryLater:(NSString *)report
 {
-    NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="SEEDS_SDK_VERSION"&crash=%@",
+    NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&crash=%@",
                       self.appKey,
                       [CountlyDeviceInfo udid],
                       time(NULL),
