@@ -1,0 +1,12 @@
+## AppCode-related based on https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+.idea/
+
+## XCode-related based on https://github.com/github/gitignore/blob/master/Global/Xcode.gitignore
+*.pbxuser
+xcuserdata
+
+## MacOSX-specific
+.DS_Store
+
+## Windows-specific
+thumbs.db
