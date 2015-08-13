@@ -5,50 +5,50 @@
 // Please visit www.count.ly for more information.
 
 
-#import "CountlyDB.h"
+#import "SeedsDB.h"
 
-#ifndef COUNTLY_DEBUG
-#define COUNTLY_DEBUG 0
+#ifndef SEEDS_DEBUG
+#define SEEDS_DEBUG 0
 #endif
 
-#if COUNTLY_DEBUG
-#   define COUNTLY_LOG(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
+#if SEEDS_DEBUG
+#   define SEEDS_LOG(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
 #else
-#   define COUNTLY_LOG(...)
+#   define SEEDS_LOG(...)
 #endif
 
-//#   define COUNTLY_APP_GROUP_ID @"group.example.myapp"
-#if COUNTLY_TARGET_WATCHKIT
-#   ifndef COUNTLY_APP_GROUP_ID
+//#   define SEEDS_APP_GROUP_ID @"group.example.myapp"
+#if SEEDS_TARGET_WATCHKIT
+#   ifndef SEEDS_APP_GROUP_ID
 #       error "Application Group Identifier not specified! Please uncomment the line above and specify it."
 #   endif
 #import <WatchKit/WatchKit.h>
 #endif
 
 /*
-Countly iOS SDK WatchKit Support
+Seeds iOS SDK WatchKit Support
 ================================
-To use Countly iOS SDK in WatchKit apps:
-1) While adding Countly iOS SDK files to the project, make sure you select WatchKit Extension target too.
+To use Seeds iOS SDK in WatchKit apps:
+1) While adding Seeds iOS SDK files to the project, make sure you select WatchKit Extension target too.
    (Or add them manually to WatchKit Extension target's Build Settings > Compile Sources section)
 2) Add "-DCOUNTLY_TARGET_WATCHKIT=1" flag to "Other C Flags" under WatchKit Extension target's Build Settings
 3) For both WatchKit Extension target and Container App target enable App Groups under Capabilities section. 
    ( For details: http://is.gd/ConfiguringAppGroups )
-4) Uncomment COUNTLY_APP_GROUP_ID line and specify Application Group Identifier there
-5) Inside awakeWithContext:(id)context method of your watch app's main entry point (InterfaceController.m by default), start Countly as usual
-    [[Countly sharedInstance] start:@"YOUR_APP_KEY" withHost:@"https://YOUR_API_HOST.com"];
+4) Uncomment SEEDS_APP_GROUP_ID line and specify Application Group Identifier there
+5) Inside awakeWithContext:(id)context method of your watch app's main entry point (InterfaceController.m by default), start Seeds as usual
+    [[Seeds sharedInstance] start:@"YOUR_APP_KEY" withHost:@"https://YOUR_API_HOST.com"];
 6) That's it. You should see a new session on your Dashboard, when you run WatchKit Extension target. 
    And you can record custom events as usual. 
 */
 
-@interface CountlyDB()
+@interface SeedsDB()
 @end
 
-@implementation CountlyDB
+@implementation SeedsDB
 
 +(instancetype)sharedInstance
 {
-    static CountlyDB* s_sharedCountlyDB;
+    static SeedsDB* s_sharedCountlyDB;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{s_sharedCountlyDB = self.new;});
 	return s_sharedCountlyDB;
@@ -80,7 +80,7 @@ To use Countly iOS SDK in WatchKit apps:
     NSManagedObjectContext *context = [self managedObjectContext];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:@"Data" inManagedObjectContext:context];
     
-#ifdef COUNTLY_TARGET_WATCHKIT
+#ifdef SEEDS_TARGET_WATCHKIT
     NSString* watchSegmentationKey = @"[CLY]_apple_watch";
     NSString* watchModel = (WKInterfaceDevice.currentDevice.screenBounds.size.width == 136.0)?@"38mm":@"42mm";
     NSString* segmentation = [NSString stringWithFormat:@"{\"%@\":\"%@\"}", watchSegmentationKey, watchModel];
@@ -116,7 +116,7 @@ To use Countly iOS SDK in WatchKit apps:
     
     if (error)
     {
-        COUNTLY_LOG(@"CoreData error %@, %@", error, [error userInfo]);
+        SEEDS_LOG(@"CoreData error %@, %@", error, [error userInfo]);
     }
     
     return result;
@@ -133,7 +133,7 @@ To use Countly iOS SDK in WatchKit apps:
     
     if (error)
     {
-         COUNTLY_LOG(@"CoreData error %@, %@", error, [error userInfo]);
+         SEEDS_LOG(@"CoreData error %@, %@", error, [error userInfo]);
     }
     
     return result;
@@ -150,7 +150,7 @@ To use Countly iOS SDK in WatchKit apps:
     
     if (error)
     {
-        COUNTLY_LOG(@"CoreData error %@, %@", error, [error userInfo]);
+        SEEDS_LOG(@"CoreData error %@, %@", error, [error userInfo]);
     }
     
     return count;
@@ -167,7 +167,7 @@ To use Countly iOS SDK in WatchKit apps:
     
     if (error)
     {
-        COUNTLY_LOG(@"CoreData error %@, %@", error, [error userInfo]);
+        SEEDS_LOG(@"CoreData error %@, %@", error, [error userInfo]);
     }
     
     return count;
@@ -181,7 +181,7 @@ To use Countly iOS SDK in WatchKit apps:
     {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
         {
-           COUNTLY_LOG(@"CoreData error %@, %@", error, [error userInfo]);
+           SEEDS_LOG(@"CoreData error %@, %@", error, [error userInfo]);
         }
     }
 }
@@ -195,7 +195,7 @@ To use Countly iOS SDK in WatchKit apps:
     if (![fm fileExistsAtPath:[url absoluteString]])
     {
         [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&error];
-        if(error) COUNTLY_LOG(@"Can not create Application Support directory: %@", error);
+        if(error) SEEDS_LOG(@"Can not create Application Support directory: %@", error);
     }
 
     return url;
@@ -226,10 +226,10 @@ To use Countly iOS SDK in WatchKit apps:
 
     static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-        NSURL *modelURL = [[NSBundle bundleForClass:[CountlyDB class]] URLForResource:@"Countly" withExtension:@"momd"];
+        NSURL *modelURL = [[NSBundle bundleForClass:[SeedsDB class]] URLForResource:@"Seeds" withExtension:@"momd"];
 
         if (modelURL == nil)
-            modelURL = [[NSBundle bundleForClass:[CountlyDB class]] URLForResource:@"Countly" withExtension:@"mom"];
+            modelURL = [[NSBundle bundleForClass:[SeedsDB class]] URLForResource:@"Seeds" withExtension:@"mom"];
         
         s_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     });
@@ -247,18 +247,18 @@ To use Countly iOS SDK in WatchKit apps:
         s_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
         
         NSError *error=nil;
-#ifdef COUNTLY_APP_GROUP_ID
-        NSURL *storeURL = [[NSFileManager.defaultManager containerURLForSecurityApplicationGroupIdentifier:COUNTLY_APP_GROUP_ID] URLByAppendingPathComponent:@"Countly.sqlite"];
+#ifdef SEEDS_APP_GROUP_ID
+        NSURL *storeURL = [[NSFileManager.defaultManager containerURLForSecurityApplicationGroupIdentifier:SEEDS_APP_GROUP_ID] URLByAppendingPathComponent:@"Seeds.sqlite"];
 #else
-        NSURL *storeURL = [[self applicationSupportDirectory] URLByAppendingPathComponent:@"Countly.sqlite"];
+        NSURL *storeURL = [[self applicationSupportDirectory] URLByAppendingPathComponent:@"Seeds.sqlite"];
 #endif        
         [s_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
         if(error)
-            COUNTLY_LOG(@"Store opening error %@", error);
+            SEEDS_LOG(@"Store opening error %@", error);
         
         [storeURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&error];
         if(error)
-            COUNTLY_LOG(@"Unable to exclude Countly persistent store from backups (%@), error: %@", storeURL.absoluteString, error);
+            SEEDS_LOG(@"Unable to exclude Seeds persistent store from backups (%@), error: %@", storeURL.absoluteString, error);
     });
 
     return s_persistentStoreCoordinator;

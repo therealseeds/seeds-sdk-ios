@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Countly.h"
+#import "Seeds.h"
 #import "MobFoxInterstitialViewController.h"
 
 @interface ViewController : UIViewController

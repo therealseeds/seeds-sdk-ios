@@ -3,12 +3,16 @@
 // This code is provided under the MIT License.
 //
 // Please visit www.count.ly for more information.
-
+//
+// Changed by Oleksii Pelykh
+//
+// Changes: renamed from 'CountlyDB'
+//
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@interface CountlyDB : NSObject
+@interface SeedsDB : NSObject
 
 +(instancetype)sharedInstance;
 

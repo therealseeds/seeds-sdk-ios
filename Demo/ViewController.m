@@ -40,11 +40,11 @@
 }
 
 - (IBAction)iapEvent:(id)sender {
-    [[Countly sharedInstance] recordEvent:@"ios_iap" count:1 sum:0.99];
+    [[Seeds sharedInstance] recordEvent:@"ios_iap" count:1 sum:0.99];
 }
 
 - (IBAction)seedsIapEvent:(id)sender {
-    [[Countly sharedInstance] recordEvent:@"ios_seeds_iap" count:1 sum:0.99];
+    [[Seeds sharedInstance] recordEvent:@"ios_seeds_iap" count:1 sum:0.99];
 }
 
 - (IBAction)showIAM:(id)sender {

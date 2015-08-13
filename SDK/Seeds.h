@@ -1,24 +1,29 @@
 
-// Countly.h
+// Seeds.h
 //
 // This code is provided under the MIT License.
 //
 // Please visit www.count.ly for more information.
+//
+// Changed by Oleksii Pelykh
+//
+// Changes: renamed from 'Seeds';
+//
 
 #import <Foundation/Foundation.h>
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!COUNTLY_TARGET_WATCHKIT)
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 #import <UIKit/UIKit.h>
 #endif
-@class CountlyEventQueue;
+@class SeedsEventQueue;
 
-@interface Countly : NSObject
+@interface Seeds : NSObject
 {
 	double unsentSessionLength;
 	NSTimer *timer;
     time_t startTime;
 	double lastTime;
 	BOOL isSuspended;
-    CountlyEventQueue *eventQueue;
+    SeedsEventQueue *eventQueue;
 }
 
 + (instancetype)sharedInstance;
@@ -47,10 +52,10 @@ extern NSString* const kCLYUserPicturePath;
 extern NSString* const kCLYUserBirthYear;
 extern NSString* const kCLYUserCustom;
 
-#pragma mark - Countly Messaging
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!COUNTLY_TARGET_WATCHKIT)
+#pragma mark - Seeds Messaging
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 /**
- * Countly Messaging support
+ * Seeds Messaging support
  */
 - (void)startWithMessagingUsing:(NSString *)appKey withHost:(NSString *)appHost andOptions:(NSDictionary *)options;
 
@@ -80,17 +85,17 @@ extern NSString* const kCLYUserCustom;
 - (NSMutableSet *) countlyNotificationCategoriesWithActionTitles:(NSArray *)actions;
 
 /**
- * Method that does automatic processing for Countly Messaging:
+ * Method that does automatic processing for Seeds Messaging:
  * - It records that the message has been received.
- * - In case of standard Countly messages (Message, URL, Update, Review) it displays alert with app name as a title:
+ * - In case of standard Seeds messages (Message, URL, Update, Review) it displays alert with app name as a title:
  * --- for Message - just alert with message text and button OK;
  * --- for URL - Cancel & Open buttons;
  * --- for Update - Cancel & Update buttons;
  * --- for Review - Cancel & Review buttons.
- * Whenever user presses one of (Open, Update, Review) buttons Countly performs corresponding action (opens up a Safari for URL type, opens your app page in App Store for Update and review section of your app in App Store for Review) and records Action event so you could then see conversion rates in Countly Dashboard.
+ * Whenever user presses one of (Open, Update, Review) buttons Seeds performs corresponding action (opens up a Safari for URL type, opens your app page in App Store for Update and review section of your app in App Store for Review) and records Action event so you could then see conversion rates in Seeds Dashboard.
  * @param info Dictionary you got from application:didReceiveRemoteNotification:
  * @param titles Array of NSString objects in following order: Cancel, Open, Update, Review
- * @return TRUE When Countly has successfully handled notification and presented alert, FALSE otherwise.
+ * @return TRUE When Seeds has successfully handled notification and presented alert, FALSE otherwise.
  */
 - (BOOL)handleRemoteNotification:(NSDictionary *)info withButtonTitles:(NSArray *)titles;
 
@@ -100,32 +105,32 @@ extern NSString* const kCLYUserCustom;
 - (BOOL)handleRemoteNotification:(NSDictionary *)info;
 
 /**
- * Method records push opened event. Quite handy if you do not call handleRemoteNotification: method, but still want to see conversions in Countly Dashboard.
+ * Method records push opened event. Quite handy if you do not call handleRemoteNotification: method, but still want to see conversions in Seeds Dashboard.
  * @param c NSDictionary of @"c" userInfo key.
  */
 - (void)recordPushOpenForCountlyDictionary:(NSDictionary *)c;
 
 /**
- * Method records push action event. Quite handy if you do not call handleRemoteNotification: method, but still want to see conversions in Countly Dashboard.
+ * Method records push action event. Quite handy if you do not call handleRemoteNotification: method, but still want to see conversions in Seeds Dashboard.
  * @param c NSDictionary of @"c" userInfo key.
  */
 - (void)recordPushActionForCountlyDictionary:(NSDictionary *)c;
 #endif
 
-#pragma mark - Countly CrashReporting
+#pragma mark - Seeds CrashReporting
 /*
- This SDK can be used for Countly CrashReporting service in addition to Countly Analytics.
- If the only thing you need is Countly Analytics, you can skip this section. 
- For Countly CrashReporting, you'll need to add one more line of Countly code to your application:
+ This SDK can be used for Seeds CrashReporting service in addition to Seeds Analytics.
+ If the only thing you need is Seeds Analytics, you can skip this section. 
+ For Seeds CrashReporting, you'll need to add one more line of Seeds code to your application:
  
- For iOS, inside `application:didFinishLaunchingWithOptions:` method, just after the line you started Countly, add this line:
- `[[Countly sharedInstance] startCrashReporting];`
+ For iOS, inside `application:didFinishLaunchingWithOptions:` method, just after the line you started Seeds, add this line:
+ `[[Seeds sharedInstance] startCrashReporting];`
  
- With this one line of code, Countly iOS SDK will generate a crash report if your application crashes due to an exception, and send it to Countly Server for further inspection. If a crash report can not be delivered to server (i.e. no internet connection, unavailable server), the SDK stores the crash report locally in order to try again later.
+ With this one line of code, Seeds iOS SDK will generate a crash report if your application crashes due to an exception, and send it to Seeds Server for further inspection. If a crash report can not be delivered to server (i.e. no internet connection, unavailable server), the SDK stores the crash report locally in order to try again later.
  
  And you can use `CountlyCrashLog()` (just like `NSLog()`) to get custom logs with the crash reports. Logs generated by `CountlyCrashLog()` are stored in a non-persistent structure, and delivered to server only in case of a crash.
  
- A crash report includes following information in addition to Countly Analytics already provides:
+ A crash report includes following information in addition to Seeds Analytics already provides:
  
  - Exception Name
  - Exception Description
@@ -143,7 +148,7 @@ extern NSString* const kCLYUserCustom;
  - Time Since Launch
  - Custom Logs generated by `CountlyCrashLog()`
  */
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!COUNTLY_TARGET_WATCHKIT)
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 - (void)startCrashReporting;
 - (void)startCrashReportingWithSegments:(NSDictionary *)segments;
 - (void)recordHandledException:(NSException *)exception;
@@ -158,8 +163,8 @@ void CCL(const char* function, NSUInteger line, NSString* message);
 #endif
 
 
-#pragma mark - Countly Background Fetch Session Ending
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!COUNTLY_TARGET_WATCHKIT)
+#pragma mark - Seeds Background Fetch Session Ending
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 - (void)endBackgroundSessionWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler;
 #endif
 

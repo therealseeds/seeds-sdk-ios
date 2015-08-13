@@ -56,7 +56,7 @@
 #define kOpenUDIDErrorOptedOut      1
 #define kOpenUDIDErrorCompromised   2
 
-@interface Countly_OpenUDID : NSObject {
+@interface Seeds_OpenUDID : NSObject {
 }
 + (NSString*) value;
 + (NSString*) valueWithError:(NSError**)error;

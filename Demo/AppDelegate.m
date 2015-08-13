@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "Countly.h"
+#import "Seeds.h"
 
 //#define YOUR_SERVER @"http://dash.playseeds.com"
 //#define YOUR_APP_KEY @"test"
@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [[Countly sharedInstance] start:YOUR_APP_KEY withHost:YOUR_SERVER];
+    [[Seeds sharedInstance] start:YOUR_APP_KEY withHost:YOUR_SERVER];
 
     // Override point for customization after application launch.
     return YES;
