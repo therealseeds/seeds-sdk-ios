@@ -63,7 +63,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     self.autoresizingMask = UIViewAutoresizingNone;
 	self.backgroundColor = [UIColor clearColor];
 	refreshAnimation = UIViewAnimationTransitionFlipFromLeft;
-    self.allowDelegateAssigmentToRequestAd = YES;
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -133,18 +132,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
 - (void)setDelegate:(id <MobFoxHTMLBannerViewDelegate>)newDelegate
 {
-	if (newDelegate != delegate)
-	{
-		delegate = newDelegate;
-
-		if (delegate)
-		{
-			if(self.allowDelegateAssigmentToRequestAd) {
-                [self requestAd];
-            }
-		}
-	} else {
-    }
+    delegate = newDelegate;
 }
 
 - (void)setRefreshTimerActive:(BOOL)active
@@ -157,15 +145,15 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         return;
     }
     
-	if (active && !bannerViewActionInProgress && (_refreshInterval || _customReloadTime))
-	{
-        if(_customReloadTime) {
-            _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:_customReloadTime target:self selector:@selector(requestAd) userInfo:nil repeats:YES];
-        } else {
-            _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:_refreshInterval target:self selector:@selector(requestAd) userInfo:nil repeats:YES];
-        }
-        
-	}
+//	if (active && !bannerViewActionInProgress && (_refreshInterval || _customReloadTime))
+//	{
+//        if(_customReloadTime) {
+//            _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:_customReloadTime target:self selector:@selector(requestAd) userInfo:nil repeats:YES];
+//        } else {
+//            _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:_refreshInterval target:self selector:@selector(requestAd) userInfo:nil repeats:YES];
+//        }
+//        
+//	}
 }
 
 #pragma - mark Utilities
@@ -790,7 +778,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @synthesize refreshAnimation;
 @synthesize refreshTimerOff;
 @synthesize requestURL;
-@synthesize allowDelegateAssigmentToRequestAd;
 @synthesize userAgent;
 @synthesize skipOverlay;
 @synthesize adType;

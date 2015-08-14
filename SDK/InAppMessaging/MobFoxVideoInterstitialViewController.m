@@ -545,7 +545,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 {
 	advertTypeCurrentlyPlaying = MobFoxAdTypeText;
 
-    NSString *publisherId = [delegate publisherIdForMobFoxVideoInterstitialView:self];
     switch (advertTypeCurrentlyPlaying) {
         case MobFoxAdTypeText:
         case MobFoxAdTypeImage: {
@@ -560,7 +559,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
             }
             break;
         }
-            
+
+        case MobFoxAdTypeUnknown:
         case MobFoxAdTypeNoAdInventory:
             return;
         case MobFoxAdTypeError:{
@@ -602,7 +602,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     
     MobFoxHTMLBannerView* bannerView = [[MobFoxHTMLBannerView alloc] initWithFrame:interstitialHoldingView.frame];
 
-    bannerView.allowDelegateAssigmentToRequestAd = NO;
     bannerView.delegate = self;
     bannerView.adspaceHeight = interstitialHoldingView.bounds.size.height;
     bannerView.adspaceWidth = interstitialHoldingView.bounds.size.width;

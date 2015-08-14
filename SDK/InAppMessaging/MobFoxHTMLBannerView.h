@@ -84,14 +84,10 @@ enum {
 @property (nonatomic, strong) NSString* userGender;
 @property (nonatomic, retain) NSArray* keywords;
 
-@property (nonatomic, assign) BOOL allowDelegateAssigmentToRequestAd;
-
 @property (nonatomic, assign) BOOL locationAwareAdverts;
 
 
 - (void)setLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
-
-- (void)requestAd;
 
 @end
 
