@@ -15,6 +15,7 @@
 #import <UIKit/UIKit.h>
 #endif
 @class SeedsEventQueue;
+@protocol SeedsInAppMessageDelegate;
 
 @interface Seeds : NSObject
 {
@@ -26,11 +27,11 @@
     SeedsEventQueue *eventQueue;
 }
 
+@property (atomic, assign) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
+
 + (instancetype)sharedInstance;
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost;
-
-- (void)startOnCloudWithAppKey:(NSString *)appKey;
 
 - (void)recordEvent:(NSString *)key count:(int)count;
 
@@ -51,6 +52,14 @@ extern NSString* const kCLYUserPicture;
 extern NSString* const kCLYUserPicturePath;
 extern NSString* const kCLYUserBirthYear;
 extern NSString* const kCLYUserCustom;
+
+- (void)recordIAPEvent:(NSString *)key price:(double)price;
+
+- (void)recordSeedsIAPEvent:(NSString *)key price:(double)price;
+
+- (void)requestInAppMessage;
+
+- (void)showInAppMessageIn:(UIViewController*)viewController;
 
 #pragma mark - Seeds Messaging
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)

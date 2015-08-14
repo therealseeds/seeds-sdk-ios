@@ -43,6 +43,8 @@
 #import "Seeds.h"
 #import "Seeds_OpenUDID.h"
 #import "SeedsDB.h"
+#import "SeedsInAppMessageDelegate.h"
+#import "InAppMessaging/MobFoxVideoInterstitialViewController.h"
 #import <objc/runtime.h>
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -868,6 +870,131 @@ NSString* const kCLYUserCustom = @"custom";
 
 @end
 
+#pragma mark - Seeds Interstitial Ads
+
+@interface SeedsInterstitialAds : NSObject <MobFoxVideoInterstitialViewControllerDelegate>
+
+@property (nonatomic, copy) NSString *appKey;
+@property (nonatomic, copy) NSString *appHost;
+@property (nonatomic, retain) MobFoxVideoInterstitialViewController *controller;
+
++ (instancetype)sharedInstance;
+
+- (void)requestInAppMessage;
+
+- (void)showInAppMessageIn:(UIViewController*)viewController;
+
+@end
+
+@implementation SeedsInterstitialAds
+
+@synthesize appKey;
+@synthesize appHost;
+
++ (instancetype)sharedInstance
+{
+    static SeedsInterstitialAds *s_sharedSeedsInterstitialAds = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{s_sharedSeedsInterstitialAds = self.new;});
+    return s_sharedSeedsInterstitialAds;
+}
+
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        self.controller = [[MobFoxVideoInterstitialViewController alloc] init];
+        self.controller.delegate = self;
+        self.controller.enableInterstitialAds = YES;
+    }
+    return self;
+}
+
+- (void)requestInAppMessage
+{
+    self.controller.requestURL = self.appHost;
+    [self.controller requestAd];
+}
+
+- (void)showInAppMessageIn:(UIViewController*)viewController
+{
+    [self.controller.view removeFromSuperview];
+    [self.controller removeFromParentViewController];
+
+    [viewController.view addSubview:self.controller.view];
+    [viewController addChildViewController:self.controller];
+
+    [self.controller presentAd:MobFoxAdTypeText];
+}
+
+- (NSString *)publisherIdForMobFoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial
+{
+    return self.appKey;
+}
+
+- (void)mobfoxVideoInterstitialViewDidLoadMobFoxAd:(MobFoxVideoInterstitialViewController *)videoInterstitial advertTypeLoaded:(MobFoxAdType)advertType
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidLoadMobFoxAd");
+
+    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
+        [delegate seedsInAppMessageLoadSucceeded:nil];
+}
+
+- (void)mobfoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial didFailToReceiveAdWithError:(NSError *)error
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialView didFailToReceiveAdWithError");
+
+    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound)])
+        [delegate seedsNoInAppMessageFound];
+}
+
+- (void)mobfoxVideoInterstitialViewActionWillPresentScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillPresentScreen");
+
+    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
+        [delegate seedsInAppMessageShown:nil withSuccess:YES];
+}
+
+- (void)mobfoxVideoInterstitialViewWillDismissScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewWillDismissScreen");
+}
+
+- (void)mobfoxVideoInterstitialViewDidDismissScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidDismissScreen");
+
+    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
+        [delegate seedsInAppMessageClosed:nil andCompleted:YES];
+
+    [self.controller.view removeFromSuperview];
+    [self.controller removeFromParentViewController];
+}
+
+- (void)mobfoxVideoInterstitialViewActionWillLeaveApplication:(MobFoxVideoInterstitialViewController *)videoInterstitial
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillLeaveApplication");
+
+    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
+        [delegate seedsInAppMessageClosed:nil andCompleted:YES];
+}
+
+- (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial
+{
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
+
+    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
+        [delegate seedsInAppMessageClicked:nil];
+}
+
+@end
 
 #pragma mark - Seeds Core
 
@@ -879,6 +1006,8 @@ NSString* const kCLYUserCustom = @"custom";
 @end
 
 @implementation Seeds
+
+@synthesize inAppMessageDelegate;
 
 + (instancetype)sharedInstance
 {
@@ -930,11 +1059,9 @@ NSString* const kCLYUserCustom = @"custom";
 	[[SeedsConnectionQueue sharedInstance] setAppKey:appKey];
 	[[SeedsConnectionQueue sharedInstance] setAppHost:appHost];
 	[[SeedsConnectionQueue sharedInstance] beginSession];
-}
 
-- (void)startOnCloudWithAppKey:(NSString *)appKey
-{
-    [self start:appKey withHost:@"https://cloud.count.ly"];
+    [[SeedsInterstitialAds sharedInstance] setAppKey:appKey];
+    [[SeedsInterstitialAds sharedInstance] setAppHost:appHost];
 }
 
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
@@ -1056,6 +1183,40 @@ NSString* const kCLYUserCustom = @"custom";
     NSLog(@"%s",__FUNCTION__);
     [SeedsUserDetails.sharedUserDetails deserialize:userDetails];
     [SeedsConnectionQueue.sharedInstance sendUserDetails];
+}
+
+- (void)recordGenericIAPEvent:(NSString *)key price:(double)price isSeedsEvent:(BOOL)isSeedsEvent
+{
+    NSMutableDictionary *segmentation = [[NSMutableDictionary alloc] init];
+    
+    [segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
+
+//    if (isA_bTestingOn()) {
+//        segmentation.put("message", getMessageVariantName());
+//
+//    }
+
+    [self recordEvent:[@"IAP:" stringByAppendingString:key] segmentation:segmentation count:1 sum:price];
+}
+
+- (void)recordIAPEvent:(NSString *)key price:(double)price
+{
+    [self recordGenericIAPEvent:key price:price isSeedsEvent:NO];
+}
+
+- (void)recordSeedsIAPEvent:(NSString *)key price:(double)price
+{
+    [self recordGenericIAPEvent:key price:price isSeedsEvent:YES];
+}
+
+- (void)requestInAppMessage
+{
+    [[SeedsInterstitialAds sharedInstance] requestInAppMessage];
+}
+
+- (void)showInAppMessageIn:(UIViewController*)viewController;
+{
+    [[SeedsInterstitialAds sharedInstance] showInAppMessageIn:viewController];
 }
 
 - (void)setLocation:(double)latitude longitude:(double)longitude

@@ -54,6 +54,7 @@
 		8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50847D1B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h */; };
 		8A5084B31B7CB3D300A6CF52 /* SeedsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; };
 		8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; };
+		8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		8A50847C1B7CAF9300A6CF52 /* MFCustomEventFullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCustomEventFullscreen.m; sourceTree = "<group>"; };
 		8A50847D1B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCustomEventFullscreenDelegate.h; sourceTree = "<group>"; };
 		8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsSDK.h; sourceTree = "<group>"; };
+		8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsInAppMessageDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				8A5084291B7CAF2300A6CF52 /* Seeds.xcdatamodeld */,
 				8A50842B1B7CAF2300A6CF52 /* SeedsDB.h */,
 				8A50842C1B7CAF2300A6CF52 /* SeedsDB.m */,
+				8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */,
 				8A5084361B7CAF6500A6CF52 /* LICENSE */,
 				8A50839F1B7CADAB00A6CF52 /* Info.plist */,
 			);
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A5084761B7CAF7B00A6CF52 /* UIView+FindViewController.h in Headers */,
+				8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */,
 				8A5084651B7CAF7B00A6CF52 /* MobFoxToolBar.h in Headers */,
 				8A50846A1B7CAF7B00A6CF52 /* NSBundle+MobFox.h in Headers */,
 				8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */,
