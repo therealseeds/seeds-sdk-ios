@@ -923,8 +923,11 @@ NSString* const kCLYUserCustom = @"custom";
 
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
-
-    [self.controller presentAd:MobFoxAdTypeText];
+    
+    NSLog(@"%d", [Seeds sharedInstance].inAppMessageDoNotShow);
+    if (![Seeds sharedInstance].inAppMessageDoNotShow) {
+        [self.controller presentAd:MobFoxAdTypeText];
+    }
 }
 
 - (NSString *)publisherIdForMobFoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -1858,5 +1861,7 @@ void SCL(const char* function, NSUInteger line, NSString* message)
     }];
 }
 #endif
+
+
 
 @end

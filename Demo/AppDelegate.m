@@ -12,7 +12,7 @@
 //#define YOUR_SERVER @"http://dash.playseeds.com"
 //#define YOUR_APP_KEY @"test"
 #define YOUR_SERVER @"http://devdash.playseeds.com"
-#define YOUR_APP_KEY @"f04df490114e12ccd358d28b84920faf788104f2"
+#define YOUR_APP_KEY @"test" //"f04df490114e12ccd358d28b84920faf788104f2"
 
 @interface AppDelegate ()
 

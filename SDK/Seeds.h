@@ -29,6 +29,7 @@
 
 @property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
 @property (atomic, assign) BOOL inAppMessageABTestingEnabled;
+@property (atomic, assign) BOOL inAppMessageDoNotShow;
 @property (atomic, copy) NSString* inAppMessageVariantName;
 
 + (instancetype)sharedInstance;

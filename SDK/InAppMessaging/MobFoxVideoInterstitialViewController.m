@@ -496,6 +496,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
                                        [orientation stringByUrlEncoding],
                                        [deviceId stringByUrlEncoding]];
 
+        
+        
         NSURL *serverURL = [self serverURL];
         
         if (!serverURL) {
@@ -509,6 +511,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         NSURL *url;
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/o/messages?%@", serverURL, fullRequestString]];
 
+        
+        //DEBUG
+        NSLog(@"request: %@", url);
         
         NSMutableURLRequest *request;
         NSError *error;

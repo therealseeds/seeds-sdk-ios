@@ -396,6 +396,16 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 //                InAppMessageManager.sharedInstance().doNotShow();
 //            }
 //        }
+        
+    
+        BOOL doNotShow = [[json valueForKey:@"doNotShow"] boolValue];
+        
+        NSLog(@"get json bool   %d", doNotShow);
+        if (doNotShow)
+        {
+            [Seeds sharedInstance].inAppMessageDoNotShow = YES;
+        }
+        
 
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
         
