@@ -48,10 +48,10 @@ To use Seeds iOS SDK in WatchKit apps:
 
 +(instancetype)sharedInstance
 {
-    static SeedsDB* s_sharedCountlyDB;
+    static SeedsDB* s_sharedSeedsDB;
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{s_sharedCountlyDB = self.new;});
-	return s_sharedCountlyDB;
+    dispatch_once(&onceToken, ^{s_sharedSeedsDB = self.new;});
+	return s_sharedSeedsDB;
 }
 
 -(void)createEvent:(NSString*) eventKey count:(double)count sum:(double)sum segmentation:(NSDictionary*)segmentation timestamp:(NSTimeInterval)timestamp

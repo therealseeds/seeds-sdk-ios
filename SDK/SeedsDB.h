@@ -1,4 +1,4 @@
-// CountlyDB.h
+// SeedsDB.h
 //
 // This code is provided under the MIT License.
 //

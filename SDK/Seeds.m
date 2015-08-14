@@ -3,6 +3,11 @@
 // This code is provided under the MIT License.
 //
 // Please visit www.count.ly for more information.
+//
+// Changed by Oleksii Pelykh
+//
+// Changes: renamed from 'Seeds';
+//
 
 #pragma mark - Directives
 
@@ -60,11 +65,11 @@
 
 #pragma mark - Helper Functions
 
-NSString* CountlyJSONFromObject(id object);
-NSString* CountlyURLEscapedString(NSString* string);
-NSString* CountlyURLUnescapedString(NSString* string);
+NSString* SeedsJSONFromObject(id object);
+NSString* SeedsURLEscapedString(NSString* string);
+NSString* SeedsURLUnescapedString(NSString* string);
 
-NSString* CountlyJSONFromObject(id object)
+NSString* SeedsJSONFromObject(id object)
 {
 	NSError *error = nil;
 	NSData *data = [NSJSONSerialization dataWithJSONObject:object options:0 error:&error];
@@ -75,7 +80,7 @@ NSString* CountlyJSONFromObject(id object)
 	return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
-NSString* CountlyURLEscapedString(NSString* string)
+NSString* SeedsURLEscapedString(NSString* string)
 {
 	// Encode all the reserved characters, per RFC 3986
 	// (<http://www.ietf.org/rfc/rfc3986.txt>)
@@ -88,7 +93,7 @@ NSString* CountlyURLEscapedString(NSString* string)
 	return (NSString*)CFBridgingRelease(escaped);
 }
 
-NSString* CountlyURLUnescapedString(NSString* string)
+NSString* SeedsURLUnescapedString(NSString* string)
 {
 	NSMutableString *resultString = [NSMutableString stringWithString:string];
 	[resultString replaceOccurrencesOfString:@"+"
@@ -109,9 +114,9 @@ NSString* CountlyURLUnescapedString(NSString* string)
 }
 @end
 
-#pragma mark - CountlyDeviceInfo
+#pragma mark - SeedsDeviceInfo
 
-@interface CountlyDeviceInfo : NSObject
+@interface SeedsDeviceInfo : NSObject
 
 + (NSString *)udid;
 + (NSString *)device;
@@ -128,7 +133,7 @@ NSString* CountlyURLUnescapedString(NSString* string)
 
 @end
 
-@implementation CountlyDeviceInfo
+@implementation SeedsDeviceInfo
 
 + (NSString *)udid
 {
@@ -216,19 +221,19 @@ NSString* CountlyURLUnescapedString(NSString* string)
 + (NSString *)metrics
 {
     NSMutableDictionary* metricsDictionary = [NSMutableDictionary dictionary];
-	metricsDictionary[@"_device"] = CountlyDeviceInfo.device;
-	metricsDictionary[@"_os"] = CountlyDeviceInfo.osName;
-	metricsDictionary[@"_os_version"] = CountlyDeviceInfo.osVersion;
+	metricsDictionary[@"_device"] = SeedsDeviceInfo.device;
+	metricsDictionary[@"_os"] = SeedsDeviceInfo.osName;
+	metricsDictionary[@"_os_version"] = SeedsDeviceInfo.osVersion;
     
-	NSString *carrier = CountlyDeviceInfo.carrier;
+	NSString *carrier = SeedsDeviceInfo.carrier;
 	if (carrier)
         metricsDictionary[@"_carrier"] = carrier;
 
-	metricsDictionary[@"_resolution"] = CountlyDeviceInfo.resolution;
-	metricsDictionary[@"_locale"] = CountlyDeviceInfo.locale;
-	metricsDictionary[@"_app_version"] = CountlyDeviceInfo.appVersion;
+	metricsDictionary[@"_resolution"] = SeedsDeviceInfo.resolution;
+	metricsDictionary[@"_locale"] = SeedsDeviceInfo.locale;
+	metricsDictionary[@"_app_version"] = SeedsDeviceInfo.appVersion;
 	
-	return CountlyURLEscapedString(CountlyJSONFromObject(metricsDictionary));
+	return SeedsURLEscapedString(SeedsJSONFromObject(metricsDictionary));
 }
 
 + (NSString *)bundleId
@@ -239,8 +244,8 @@ NSString* CountlyURLUnescapedString(NSString* string)
 @end
 
 
-#pragma mark - CountlyUserDetails
-@interface CountlyUserDetails : NSObject
+#pragma mark - SeedsUserDetails
+@interface SeedsUserDetails : NSObject
 
 @property(nonatomic,strong) NSString* name;
 @property(nonatomic,strong) NSString* username;
@@ -253,13 +258,13 @@ NSString* CountlyURLUnescapedString(NSString* string)
 @property(nonatomic,readwrite) NSInteger birthYear;
 @property(nonatomic,strong) NSDictionary* custom;
 
-+(CountlyUserDetails*)sharedUserDetails;
++(SeedsUserDetails*)sharedUserDetails;
 -(void)deserialize:(NSDictionary*)userDictionary;
 -(NSString*)serialize;
 
 @end
 
-@implementation CountlyUserDetails
+@implementation SeedsUserDetails
 
 NSString* const kCLYUserName = @"name";
 NSString* const kCLYUserUsername = @"username";
@@ -272,13 +277,13 @@ NSString* const kCLYUserPicturePath = @"picturePath";
 NSString* const kCLYUserBirthYear = @"byear";
 NSString* const kCLYUserCustom = @"custom";
 
-+(CountlyUserDetails*)sharedUserDetails
++(SeedsUserDetails*)sharedUserDetails
 {
-    static CountlyUserDetails *s_CountlyUserDetails = nil;
+    static SeedsUserDetails *s_SeedsUserDetails = nil;
     static dispatch_once_t onceToken;
     
-    dispatch_once(&onceToken, ^{s_CountlyUserDetails = CountlyUserDetails.new;});
-    return s_CountlyUserDetails;
+    dispatch_once(&onceToken, ^{s_SeedsUserDetails = SeedsUserDetails.new;});
+    return s_SeedsUserDetails;
 }
 
 -(void)deserialize:(NSDictionary*)userDictionary
@@ -329,12 +334,12 @@ NSString* const kCLYUserCustom = @"custom";
     if(self.custom)
         userDictionary[kCLYUserCustom] = self.custom;
     
-    return CountlyURLEscapedString(CountlyJSONFromObject(userDictionary));
+    return SeedsURLEscapedString(SeedsJSONFromObject(userDictionary));
 }
 
 -(NSString*)extractPicturePathFromURLString:(NSString*)URLString
 {
-    NSString* unescaped = CountlyURLUnescapedString(URLString);
+    NSString* unescaped = SeedsURLUnescapedString(URLString);
     NSRange rPicturePathKey = [unescaped rangeOfString:kCLYUserPicturePath];
     if (rPicturePathKey.location == NSNotFound)
         return nil;
@@ -362,9 +367,9 @@ NSString* const kCLYUserCustom = @"custom";
 }
 @end
 
-#pragma mark - CountlyEvent
+#pragma mark - SeedsEvent
 
-@interface CountlyEvent : NSObject
+@interface SeedsEvent : NSObject
 {
 }
 
@@ -376,7 +381,7 @@ NSString* const kCLYUserCustom = @"custom";
 
 @end
 
-@implementation CountlyEvent
+@implementation SeedsEvent
 
 - (void)dealloc
 {
@@ -384,9 +389,9 @@ NSString* const kCLYUserCustom = @"custom";
     self.segmentation = nil;
 }
 
-+ (CountlyEvent*)objectWithManagedObject:(NSManagedObject*)managedObject
++ (SeedsEvent*)objectWithManagedObject:(NSManagedObject*)managedObject
 {
-	CountlyEvent* event = [CountlyEvent new];
+	SeedsEvent* event = [SeedsEvent new];
 	
 	event.key = [managedObject valueForKey:@"key"];
 	event.count = [[managedObject valueForKey:@"count"] doubleValue];
@@ -440,7 +445,7 @@ NSString* const kCLYUserCustom = @"custom";
 		NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
 		for (id managedEventObject in events)
         {
-			CountlyEvent* event = [CountlyEvent objectWithManagedObject:managedEventObject];
+			SeedsEvent* event = [SeedsEvent objectWithManagedObject:managedEventObject];
             
 			[result addObject:event.serializedData];
             
@@ -448,7 +453,7 @@ NSString* const kCLYUserCustom = @"custom";
         }
     }
     
-	return CountlyURLEscapedString(CountlyJSONFromObject(result));
+	return SeedsURLEscapedString(SeedsJSONFromObject(result));
 }
 
 - (void)recordEvent:(NSString *)key count:(int)count
@@ -458,7 +463,7 @@ NSString* const kCLYUserCustom = @"custom";
         NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
         for (NSManagedObject* obj in events)
         {
-            CountlyEvent *event = [CountlyEvent objectWithManagedObject:obj];
+            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
             if ([event.key isEqualToString:key])
             {
                 event.count += count;
@@ -472,7 +477,7 @@ NSString* const kCLYUserCustom = @"custom";
             }
         }
         
-        CountlyEvent *event = [CountlyEvent new];
+        SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.count = count;
         event.timestamp = time(NULL);
@@ -488,7 +493,7 @@ NSString* const kCLYUserCustom = @"custom";
         NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
         for (NSManagedObject* obj in events)
         {
-            CountlyEvent *event = [CountlyEvent objectWithManagedObject:obj];
+            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
             if ([event.key isEqualToString:key])
             {
                 event.count += count;
@@ -505,7 +510,7 @@ NSString* const kCLYUserCustom = @"custom";
             }
         }
         
-        CountlyEvent *event = [CountlyEvent new];
+        SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.count = count;
         event.sum = sum;
@@ -522,7 +527,7 @@ NSString* const kCLYUserCustom = @"custom";
         NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
         for (NSManagedObject* obj in events)
         {
-            CountlyEvent *event = [CountlyEvent objectWithManagedObject:obj];
+            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
             if ([event.key isEqualToString:key] &&
                 event.segmentation && [event.segmentation isEqualToDictionary:segmentation])
             {
@@ -538,7 +543,7 @@ NSString* const kCLYUserCustom = @"custom";
             }
         }
         
-        CountlyEvent *event = [CountlyEvent new];
+        SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.segmentation = segmentation;
         event.count = count;
@@ -555,7 +560,7 @@ NSString* const kCLYUserCustom = @"custom";
         NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
         for (NSManagedObject* obj in events)
         {
-            CountlyEvent *event = [CountlyEvent objectWithManagedObject:obj];
+            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
             if ([event.key isEqualToString:key] &&
                 event.segmentation && [event.segmentation isEqualToDictionary:segmentation])
             {
@@ -573,7 +578,7 @@ NSString* const kCLYUserCustom = @"custom";
             }
         }
         
-        CountlyEvent *event = [CountlyEvent new];
+        SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.segmentation = segmentation;
         event.count = count;
@@ -587,9 +592,9 @@ NSString* const kCLYUserCustom = @"custom";
 @end
 
 
-#pragma mark - CountlyConnectionQueue
+#pragma mark - SeedsConnectionQueue
 
-@interface CountlyConnectionQueue : NSObject
+@interface SeedsConnectionQueue : NSObject
 
 @property (nonatomic, copy) NSString *appKey;
 @property (nonatomic, copy) NSString *appHost;
@@ -605,14 +610,14 @@ NSString* const kCLYUserCustom = @"custom";
 @end
 
 
-@implementation CountlyConnectionQueue : NSObject
+@implementation SeedsConnectionQueue : NSObject
 
 + (instancetype)sharedInstance
 {
-    static CountlyConnectionQueue *s_sharedCountlyConnectionQueue = nil;
+    static SeedsConnectionQueue *s_sharedSeedsConnectionQueue = nil;
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{s_sharedCountlyConnectionQueue = self.new;});
-	return s_sharedCountlyConnectionQueue;
+    dispatch_once(&onceToken, ^{s_sharedSeedsConnectionQueue = self.new;});
+	return s_sharedSeedsConnectionQueue;
 }
 
 - (void) tick
@@ -646,7 +651,7 @@ NSString* const kCLYUserCustom = @"custom";
     }
     
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
-    NSString* picturePath = [CountlyUserDetails.sharedUserDetails extractPicturePathFromURLString:urlString];
+    NSString* picturePath = [SeedsUserDetails.sharedUserDetails extractPicturePathFromURLString:urlString];
     if(picturePath && ![picturePath isEqualToString:@""])
     {
         SEEDS_LOG(@"picturePath: %@", picturePath);
@@ -692,9 +697,9 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&begin_session=1&metrics=%@",
 					  self.appKey,
-					  [CountlyDeviceInfo udid],
+					  [SeedsDeviceInfo udid],
 					  time(NULL),
-					  [CountlyDeviceInfo metrics]];
+					  [SeedsDeviceInfo metrics]];
     
     [[SeedsDB sharedInstance] addToQueue:data];
     
@@ -715,7 +720,7 @@ NSString* const kCLYUserCustom = @"custom";
     
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&token_session=1&ios_token=%@&test_mode=%d",
                       self.appKey,
-                      [CountlyDeviceInfo udid],
+                      [SeedsDeviceInfo udid],
                       time(NULL),
                       [token length] ? token : @"",
                       testMode];
@@ -731,7 +736,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&session_duration=%d",
 					  self.appKey,
-					  [CountlyDeviceInfo udid],
+					  [SeedsDeviceInfo udid],
 					  time(NULL),
 					  duration];
     
@@ -750,7 +755,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&end_session=1&session_duration=%d",
 					  self.appKey,
-					  [CountlyDeviceInfo udid],
+					  [SeedsDeviceInfo udid],
 					  time(NULL),
 					  duration];
     
@@ -763,9 +768,9 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&user_details=%@",
                       self.appKey,
-                      [CountlyDeviceInfo udid],
+                      [SeedsDeviceInfo udid],
                       time(NULL),
-                      [[CountlyUserDetails sharedUserDetails] serialize]];
+                      [[SeedsUserDetails sharedUserDetails] serialize]];
     
     [[SeedsDB sharedInstance] addToQueue:data];
     
@@ -776,7 +781,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&crash=%@",
                       self.appKey,
-                      [CountlyDeviceInfo udid],
+                      [SeedsDeviceInfo udid],
                       time(NULL),
                       report];
     
@@ -789,7 +794,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&events=%@",
 					  self.appKey,
-					  [CountlyDeviceInfo udid],
+					  [SeedsDeviceInfo udid],
 					  time(NULL),
 					  events];
     
@@ -824,7 +829,7 @@ NSString* const kCLYUserCustom = @"custom";
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)err
 {
     #if SEEDS_DEBUG
-        NSArray* dataQueue = [[[CountlyDB sharedInstance] getQueue] copy];
+        NSArray* dataQueue = [[[SeedsDB sharedInstance] getQueue] copy];
         SEEDS_LOG(@"Request Failed \n %@: %@", [dataQueue[0] description], [err description]);
     #endif
     
@@ -877,10 +882,10 @@ NSString* const kCLYUserCustom = @"custom";
 
 + (instancetype)sharedInstance
 {
-    static Seeds *s_sharedCountly = nil;
+    static Seeds *s_sharedSeeds = nil;
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{s_sharedCountly = self.new;});
-	return s_sharedCountly;
+    dispatch_once(&onceToken, ^{s_sharedSeeds = self.new;});
+	return s_sharedSeeds;
 }
 
 - (instancetype)init
@@ -922,9 +927,9 @@ NSString* const kCLYUserCustom = @"custom";
 										   userInfo:nil
 											repeats:YES];
 	lastTime = CFAbsoluteTimeGetCurrent();
-	[[CountlyConnectionQueue sharedInstance] setAppKey:appKey];
-	[[CountlyConnectionQueue sharedInstance] setAppHost:appHost];
-	[[CountlyConnectionQueue sharedInstance] beginSession];
+	[[SeedsConnectionQueue sharedInstance] setAppKey:appKey];
+	[[SeedsConnectionQueue sharedInstance] setAppHost:appHost];
+	[[SeedsConnectionQueue sharedInstance] beginSession];
 }
 
 - (void)startOnCloudWithAppKey:(NSString *)appKey
@@ -947,7 +952,7 @@ NSString* const kCLYUserCustom = @"custom";
 - (void)startWithTestMessagingUsing:(NSString *)appKey withHost:(NSString *)appHost andOptions:(NSDictionary *)options
 {
     [self start:appKey withHost:appHost];
-    [[CountlyConnectionQueue sharedInstance] setStartedWithTest:YES];
+    [[SeedsConnectionQueue sharedInstance] setStartedWithTest:YES];
     
     NSDictionary *notification = [options objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notification) {
@@ -960,11 +965,11 @@ NSString* const kCLYUserCustom = @"custom";
     }];
 }
 
-- (NSMutableSet *) countlyNotificationCategories {
-    return [self countlyNotificationCategoriesWithActionTitles:@[@"Cancel", @"Open", @"Update", @"Review"]];
+- (NSMutableSet *) seedsNotificationCategories {
+    return [self seedsNotificationCategoriesWithActionTitles:@[@"Cancel", @"Open", @"Update", @"Review"]];
 }
 
-- (NSMutableSet *) countlyNotificationCategoriesWithActionTitles:(NSArray *)actions {
+- (NSMutableSet *) seedsNotificationCategoriesWithActionTitles:(NSArray *)actions {
     UIMutableUserNotificationCategory *url = [UIMutableUserNotificationCategory new],
                                       *upd = [UIMutableUserNotificationCategory new],
                                       *rev = [UIMutableUserNotificationCategory new];
@@ -1019,7 +1024,7 @@ NSString* const kCLYUserCustom = @"custom";
     [eventQueue recordEvent:key count:count];
     
     if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[CountlyConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
 }
 
 - (void)recordEvent:(NSString *)key count:(int)count sum:(double)sum
@@ -1027,7 +1032,7 @@ NSString* const kCLYUserCustom = @"custom";
     [eventQueue recordEvent:key count:count sum:sum];
     
     if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[CountlyConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
 }
 
 - (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count
@@ -1035,7 +1040,7 @@ NSString* const kCLYUserCustom = @"custom";
     [eventQueue recordEvent:key segmentation:segmentation count:count];
     
     if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[CountlyConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
 }
 
 - (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count sum:(double)sum
@@ -1043,19 +1048,19 @@ NSString* const kCLYUserCustom = @"custom";
     [eventQueue recordEvent:key segmentation:segmentation count:count sum:sum];
     
     if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[CountlyConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
 }
 
 - (void)recordUserDetails:(NSDictionary *)userDetails
 {
     NSLog(@"%s",__FUNCTION__);
-    [CountlyUserDetails.sharedUserDetails deserialize:userDetails];
-    [CountlyConnectionQueue.sharedInstance sendUserDetails];
+    [SeedsUserDetails.sharedUserDetails deserialize:userDetails];
+    [SeedsConnectionQueue.sharedInstance sendUserDetails];
 }
 
 - (void)setLocation:(double)latitude longitude:(double)longitude
 {
-    CountlyConnectionQueue.sharedInstance.locationString = [NSString stringWithFormat:@"%f,%f", latitude, longitude];
+    SeedsConnectionQueue.sharedInstance.locationString = [NSString stringWithFormat:@"%f,%f", latitude, longitude];
 }
 
 
@@ -1069,11 +1074,11 @@ NSString* const kCLYUserCustom = @"custom";
 	lastTime = currTime;
     
 	int duration = unsentSessionLength;
-	[[CountlyConnectionQueue sharedInstance] updateSessionWithDuration:duration];
+	[[SeedsConnectionQueue sharedInstance] updateSessionWithDuration:duration];
 	unsentSessionLength -= duration;
     
     if (eventQueue.count > 0)
-        [[CountlyConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
 }
 
 - (void)suspend
@@ -1081,13 +1086,13 @@ NSString* const kCLYUserCustom = @"custom";
 	isSuspended = YES;
     
     if (eventQueue.count > 0)
-        [[CountlyConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
     
 	double currTime = CFAbsoluteTimeGetCurrent();
 	unsentSessionLength += currTime - lastTime;
     
 	int duration = unsentSessionLength;
-	[[CountlyConnectionQueue sharedInstance] endSessionWithDuration:duration];
+	[[SeedsConnectionQueue sharedInstance] endSessionWithDuration:duration];
 	unsentSessionLength -= duration;
 }
 
@@ -1095,7 +1100,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	lastTime = CFAbsoluteTimeGetCurrent();
     
-	[[CountlyConnectionQueue sharedInstance] beginSession];
+	[[SeedsConnectionQueue sharedInstance] beginSession];
     
 	isSuspended = NO;
 }
@@ -1171,7 +1176,7 @@ NSString* const kCLYUserCustom = @"custom";
     if (countly[@"i"]) {
         SEEDS_LOG(@"Message id: %@", countly[@"i"]);
 
-        [self recordPushOpenForCountlyDictionary:countly];
+        [self recordPushOpenForSeedsDictionary:countly];
         NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleNameKey];
         NSString *message = [aps objectForKey:@"alert"];
         
@@ -1223,7 +1228,7 @@ NSString* const kCLYUserCustom = @"custom";
         // do nothing
     } else if (buttonIndex != alertView.cancelButtonIndex) {
         if (alertView.tag == kPushToOpenLink) {
-            [self recordPushActionForCountlyDictionary:info[@"c"]];
+            [self recordPushActionForSeedsDictionary:info[@"c"]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:info[@"c"][@"l"]]];
         } else if (alertView.tag == kPushToUpdate) {
             if ([info[@"c"][@"u"] length]) {
@@ -1252,7 +1257,7 @@ NSString* const kCLYUserCustom = @"custom";
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSString *appStoreId = nil;
-            NSString *bundle = [CountlyDeviceInfo bundleId];
+            NSString *bundle = [SeedsDeviceInfo bundleId];
             NSString *appStoreCountry = [(NSLocale *)[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
             if ([appStoreCountry isEqualToString:@"150"]) {
                 appStoreCountry = @"eu";
@@ -1300,7 +1305,7 @@ NSString* const kCLYUserCustom = @"custom";
     urlFormat = @"macappstore://itunes.apple.com/app/id%@";
 #endif
 
-    [self recordPushActionForCountlyDictionary:info[@"c"]];
+    [self recordPushActionForSeedsDictionary:info[@"c"]];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:urlFormat, appId]];
     [[UIApplication sharedApplication] openURL:url];
@@ -1321,17 +1326,17 @@ NSString* const kCLYUserCustom = @"custom";
     urlFormat = @"macappstore://itunes.apple.com/app/id%@";
 #endif
 
-    [self recordPushActionForCountlyDictionary:info[@"c"]];
+    [self recordPushActionForSeedsDictionary:info[@"c"]];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:urlFormat, appId]];
     [[UIApplication sharedApplication] openURL:url];
 }
 
-- (void)recordPushOpenForCountlyDictionary:(NSDictionary *)c {
+- (void)recordPushOpenForSeedsDictionary:(NSDictionary *)c {
     [self recordEvent:kPushEventKeyOpen segmentation:@{@"i": c[@"i"]} count:1];
 }
 
-- (void)recordPushActionForCountlyDictionary:(NSDictionary *)c {
+- (void)recordPushActionForSeedsDictionary:(NSDictionary *)c {
     [self recordEvent:kPushEventKeyAction segmentation:@{@"i": c[@"i"]} count:1];
 }
 
@@ -1341,11 +1346,11 @@ NSString* const kCLYUserCustom = @"custom";
                        ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
                        ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
                        ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
-    [[CountlyConnectionQueue sharedInstance] tokenSession:token];
+    [[SeedsConnectionQueue sharedInstance] tokenSession:token];
 }
 
 - (void)didFailToRegisterForRemoteNotifications {
-    [[CountlyConnectionQueue sharedInstance] tokenSession:nil];
+    [[SeedsConnectionQueue sharedInstance] tokenSession:nil];
 }
 #endif
 
@@ -1353,17 +1358,17 @@ NSString* const kCLYUserCustom = @"custom";
 #pragma mark - Seeds CrashReporting
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 
-#define kCountlyCrashUserInfoKey @"[CLY]_stack_trace"
+#define kSeedsCrashUserInfoKey @"[SDS]_stack_trace"
 
 - (void)startCrashReporting
 {
-    NSSetUncaughtExceptionHandler(&CountlyUncaughtExceptionHandler);
-    signal(SIGABRT, CountlySignalHandler);
-	signal(SIGILL, CountlySignalHandler);
-	signal(SIGSEGV, CountlySignalHandler);
-	signal(SIGFPE, CountlySignalHandler);
-	signal(SIGBUS, CountlySignalHandler);
-	signal(SIGPIPE, CountlySignalHandler);
+    NSSetUncaughtExceptionHandler(&SeedsUncaughtExceptionHandler);
+    signal(SIGABRT, SeedsSignalHandler);
+	signal(SIGILL, SeedsSignalHandler);
+	signal(SIGSEGV, SeedsSignalHandler);
+	signal(SIGFPE, SeedsSignalHandler);
+	signal(SIGBUS, SeedsSignalHandler);
+	signal(SIGPIPE, SeedsSignalHandler);
 }
 
 - (void)startCrashReportingWithSegments:(NSDictionary *)segments
@@ -1374,7 +1379,7 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)recordHandledException:(NSException *)exception
 {
-    CountlyExceptionHandler(exception, true);
+    SeedsExceptionHandler(exception, true);
 }
 
 - (void)crashTest
@@ -1407,20 +1412,20 @@ NSString* const kCLYUserCustom = @"custom";
     crashView.frame = aRect;
 }
 
-void CountlyUncaughtExceptionHandler(NSException *exception)
+void SeedsUncaughtExceptionHandler(NSException *exception)
 {
-    CountlyExceptionHandler(exception, false);
+    SeedsExceptionHandler(exception, false);
 }
 
-void CountlyExceptionHandler(NSException *exception, bool nonfatal)
+void SeedsExceptionHandler(NSException *exception, bool nonfatal)
 {
     NSMutableDictionary* crashReport = NSMutableDictionary.dictionary;
     
-    crashReport[@"_os"] = CountlyDeviceInfo.osName;
-    crashReport[@"_os_version"] = CountlyDeviceInfo.osVersion;
-    crashReport[@"_device"] = CountlyDeviceInfo.device;
-    crashReport[@"_resolution"] = CountlyDeviceInfo.resolution;
-    crashReport[@"_app_version"] = CountlyDeviceInfo.appVersion;
+    crashReport[@"_os"] = SeedsDeviceInfo.osName;
+    crashReport[@"_os_version"] = SeedsDeviceInfo.osVersion;
+    crashReport[@"_device"] = SeedsDeviceInfo.device;
+    crashReport[@"_resolution"] = SeedsDeviceInfo.resolution;
+    crashReport[@"_app_version"] = SeedsDeviceInfo.appVersion;
     crashReport[@"_name"] = exception.debugDescription;
     crashReport[@"_nonfatal"] = @(nonfatal);
     
@@ -1442,10 +1447,10 @@ void CountlyExceptionHandler(NSException *exception, bool nonfatal)
     if(Seeds.sharedInstance.crashCustom)
         crashReport[@"_custom"] = Seeds.sharedInstance.crashCustom;
 
-    if(CountlyCustomCrashLogs)
-        crashReport[@"_logs"] = [CountlyCustomCrashLogs componentsJoinedByString:@"\n"];
+    if(SeedsCustomCrashLogs)
+        crashReport[@"_logs"] = [SeedsCustomCrashLogs componentsJoinedByString:@"\n"];
 
-    NSArray* stackArray = exception.userInfo[kCountlyCrashUserInfoKey];
+    NSArray* stackArray = exception.userInfo[kSeedsCrashUserInfoKey];
     if(!stackArray) stackArray = exception.callStackSymbols;
 
     NSMutableString* stackString = NSMutableString.string;
@@ -1459,13 +1464,13 @@ void CountlyExceptionHandler(NSException *exception, bool nonfatal)
     
     crashReport[@"_error"] = stackString;
    
-    NSString *urlString = [NSString stringWithFormat:@"%@/i", CountlyConnectionQueue.sharedInstance.appHost];
+    NSString *urlString = [NSString stringWithFormat:@"%@/i", SeedsConnectionQueue.sharedInstance.appHost];
 
     NSString *queryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&crash=%@",
-                           CountlyConnectionQueue.sharedInstance.appKey,
-                           [CountlyDeviceInfo udid],
+                           SeedsConnectionQueue.sharedInstance.appKey,
+                           [SeedsDeviceInfo udid],
                            time(NULL),
-                           CountlyURLEscapedString(CountlyJSONFromObject(crashReport))];
+                           SeedsURLEscapedString(SeedsJSONFromObject(crashReport))];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     request.HTTPMethod = @"POST";
@@ -1479,7 +1484,7 @@ void CountlyExceptionHandler(NSException *exception, bool nonfatal)
 	if (error || !recvData)
     {
         SEEDS_LOG(@"CrashReporting failed, report stored to try again later");
-        [CountlyConnectionQueue.sharedInstance storeCrashReportToTryLater:CountlyURLEscapedString(CountlyJSONFromObject(crashReport))];
+        [SeedsConnectionQueue.sharedInstance storeCrashReportToTryLater:SeedsURLEscapedString(SeedsJSONFromObject(crashReport))];
     }
     
     NSSetUncaughtExceptionHandler(NULL);
@@ -1491,7 +1496,7 @@ void CountlyExceptionHandler(NSException *exception, bool nonfatal)
 	signal(SIGPIPE, SIG_DFL);
 }
 
-void CountlySignalHandler(int signalCode)
+void SeedsSignalHandler(int signalCode)
 {
     void* callstack[128];
     NSInteger frames = backtrace(callstack, 128);
@@ -1506,30 +1511,30 @@ void CountlySignalHandler(int signalCode)
     free(lines);
     
 	NSMutableDictionary *userInfo =[NSMutableDictionary dictionaryWithObject:@(signalCode) forKey:@"signal_code"];
-	[userInfo setObject:backtrace forKey:kCountlyCrashUserInfoKey];
+	[userInfo setObject:backtrace forKey:kSeedsCrashUserInfoKey];
     NSString *reason = [NSString stringWithFormat:@"App terminated by SIG%@",[NSString stringWithUTF8String:sys_signame[signalCode]].uppercaseString];
 
     NSException *e = [NSException exceptionWithName:@"Fatal Signal" reason:reason userInfo:userInfo];
 
-    CountlyUncaughtExceptionHandler(e);
+    SeedsUncaughtExceptionHandler(e);
 }
 
-static NSMutableArray *CountlyCustomCrashLogs = nil;
+static NSMutableArray *SeedsCustomCrashLogs = nil;
 
-void CCL(const char* function, NSUInteger line, NSString* message)
+void SCL(const char* function, NSUInteger line, NSString* message)
 {
     static NSDateFormatter* df = nil;
     
-    if( CountlyCustomCrashLogs == nil )
+    if( SeedsCustomCrashLogs == nil )
     {
-        CountlyCustomCrashLogs = NSMutableArray.new;
+        SeedsCustomCrashLogs = NSMutableArray.new;
         df = NSDateFormatter.new;
         df.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
     }
 
     NSString* f = [[NSString.alloc initWithUTF8String:function] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-[]"]];
     NSString* log = [NSString stringWithFormat:@"[%@] <%@ %li> %@",[df stringFromDate:NSDate.date],f,(unsigned long)line,message];
-    [CountlyCustomCrashLogs addObject:log];
+    [SeedsCustomCrashLogs addObject:log];
 }
 
 - (unsigned long long)freeRAM
@@ -1655,8 +1660,8 @@ void CCL(const char* function, NSUInteger line, NSString* message)
     if (eventQueue.count > 0)
     {
         NSString *eventsQueryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&events=%@",
-                                       CountlyConnectionQueue.sharedInstance.appKey,
-                                       [CountlyDeviceInfo udid],
+                                       SeedsConnectionQueue.sharedInstance.appKey,
+                                       [SeedsDeviceInfo udid],
                                        time(NULL),
                                        [eventQueue events]];
         
@@ -1668,12 +1673,12 @@ void CCL(const char* function, NSUInteger line, NSString* message)
     int duration = unsentSessionLength;
     
     NSString *endSessionQueryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&end_session=1&session_duration=%d",
-                                       CountlyConnectionQueue.sharedInstance.appKey,
-                                       [CountlyDeviceInfo udid],
+                                       SeedsConnectionQueue.sharedInstance.appKey,
+                                       [SeedsDeviceInfo udid],
                                        time(NULL),
                                        duration];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/i?%@", CountlyConnectionQueue.sharedInstance.appHost, endSessionQueryString];
+    NSString *urlString = [NSString stringWithFormat:@"%@/i?%@", SeedsConnectionQueue.sharedInstance.appHost, endSessionQueryString];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]
                                        queue:NSOperationQueue.mainQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
