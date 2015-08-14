@@ -24,6 +24,8 @@
 
 #import "MFCustomEventBanner.h"
 
+#import "Seeds.h"
+
 NSString * const MobFoxErrorDomain = @"MobFox";
 
 @interface MobFoxHTMLBannerView () <UIWebViewDelegate, MFCustomEventBannerDelegate, UIGestureRecognizerDelegate> {
@@ -390,14 +392,12 @@ NSString * const MobFoxErrorDomain = @"MobFox";
             bannerSize = CGSizeMake(320, 50);
         }
 
-//        String messageVariant = jsonObject.getString("messageVariant");
-//
-//        if (messageVariant != null && !messageVariant.equals("false")) {
-//            Log.d("setting a b testing on");
-//            Seeds.sharedInstance().setA_bTestingOn(true);
-//            Seeds.sharedInstance().setMessageVariantName(messageVariant);
-//        }
-//
+        NSString *messageVariant = [json objectForKey:@"messageVariant"];
+        if (messageVariant && ![messageVariant isEqualToString:@"false"])
+        {
+            [Seeds sharedInstance].inAppMessageABTestingEnabled = YES;
+            [Seeds sharedInstance].inAppMessageVariantName = messageVariant;
+        }
 //
 //        // result of policies such as do not show to paying users
 //        if (jsonObject.containsKey("doNotShow")) {

@@ -27,7 +27,9 @@
     SeedsEventQueue *eventQueue;
 }
 
-@property (atomic, assign) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
+@property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
+@property (atomic, assign) BOOL inAppMessageABTestingEnabled;
+@property (atomic, copy) NSString* inAppMessageVariantName;
 
 + (instancetype)sharedInstance;
 

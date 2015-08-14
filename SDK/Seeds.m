@@ -1044,6 +1044,9 @@ NSString* const kCLYUserCustom = @"custom";
 													 name:UIApplicationWillTerminateNotification
 												   object:nil];
 #endif
+
+        self.inAppMessageABTestingEnabled = NO;
+        self.inAppMessageVariantName = nil;
 	}
 	return self;
 }
@@ -1191,10 +1194,8 @@ NSString* const kCLYUserCustom = @"custom";
     
     [segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
 
-//    if (isA_bTestingOn()) {
-//        segmentation.put("message", getMessageVariantName());
-//
-//    }
+    if (self.inAppMessageABTestingEnabled)
+        [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
 
     [self recordEvent:[@"IAP:" stringByAppendingString:key] segmentation:segmentation count:1 sum:price];
 }
