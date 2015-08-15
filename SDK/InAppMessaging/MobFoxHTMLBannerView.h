@@ -86,7 +86,7 @@ enum {
 
 @property (nonatomic, assign) BOOL locationAwareAdverts;
 
-
+- (void)setupAdFromJson:(NSDictionary*)json;
 - (void)setLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
 
 @end
