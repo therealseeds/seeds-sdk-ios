@@ -1050,6 +1050,7 @@ NSString* const kCLYUserCustom = @"custom";
 
         self.inAppMessageABTestingEnabled = NO;
         self.inAppMessageVariantName = nil;
+        self.inAppMessageDoNotShow = NO;
 	}
 	return self;
 }
