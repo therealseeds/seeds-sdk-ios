@@ -27,6 +27,7 @@
     SeedsEventQueue *eventQueue;
 }
 
+@property (readonly, nonatomic, copy) NSString* deviceId;
 @property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
 @property (atomic, assign) BOOL inAppMessageABTestingEnabled;
 @property (atomic, assign) BOOL inAppMessageDoNotShow;
@@ -35,6 +36,8 @@
 + (instancetype)sharedInstance;
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost;
+
+- (void)start:(NSString *)appKey withHost:(NSString *)appHost andDeviceId:(NSString *)deviceId;
 
 - (void)recordEvent:(NSString *)key count:(int)count;
 

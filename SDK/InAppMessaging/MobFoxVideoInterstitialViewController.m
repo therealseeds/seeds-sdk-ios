@@ -33,8 +33,8 @@
 
 #include "MobFoxInterstitialPlayerViewController.h"
 
-#import <AdSupport/AdSupport.h>
 #import "MFCustomEventFullscreen.h"
+#import "Seeds.h"
 
 NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial";
 
@@ -482,14 +482,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         requestedAdOrientation = interfaceOrientation;
         NSString *orientation = UIInterfaceOrientationIsPortrait(interfaceOrientation) ? @"portrait" : @"landscape";
-        NSString *deviceId = nil;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 60000
-        if (!deviceId) {
-            if ([ASIdentifierManager instancesRespondToSelector:@selector(advertisingIdentifier )]) {
-                deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-            }
-        }
-#endif
+        NSString *deviceId = [Seeds sharedInstance].deviceId;
 
         NSString *fullRequestString = [NSString stringWithFormat:@"app_key=%@&orientation=%@&device_id=%@",
                                        [publisherId stringByUrlEncoding],

@@ -19,10 +19,6 @@
 #define SEEDS_IGNORE_INVALID_CERTIFICATES 0
 #endif
 
-#ifndef SEEDS_PREFER_IDFA
-#define SEEDS_PREFER_IDFA 0
-#endif
-
 #if SEEDS_DEBUG
 #   define SEEDS_LOG(fmt, ...) NSLog(fmt, ##__VA_ARGS__)
 #else
@@ -51,9 +47,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
-#if SEEDS_PREFER_IDFA
-#import <AdSupport/ASIdentifierManager.h>
-#endif
 #endif
 
 #include <sys/types.h>
@@ -120,7 +113,6 @@ NSString* SeedsURLUnescapedString(NSString* string)
 
 @interface SeedsDeviceInfo : NSObject
 
-+ (NSString *)udid;
 + (NSString *)device;
 + (NSString *)osName;
 + (NSString *)osVersion;
@@ -136,15 +128,6 @@ NSString* SeedsURLUnescapedString(NSString* string)
 @end
 
 @implementation SeedsDeviceInfo
-
-+ (NSString *)udid
-{
-#if SEEDS_PREFER_IDFA && (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || SEEDS_TARGET_WATCHKIT)
-    return ASIdentifierManager.sharedManager.advertisingIdentifier.UUIDString;
-#else
-	return [Seeds_OpenUDID value];
-#endif
-}
 
 + (NSString *)device
 {
@@ -699,7 +682,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&begin_session=1&metrics=%@",
 					  self.appKey,
-					  [SeedsDeviceInfo udid],
+					  [Seeds sharedInstance].deviceId,
 					  time(NULL),
 					  [SeedsDeviceInfo metrics]];
     
@@ -722,7 +705,7 @@ NSString* const kCLYUserCustom = @"custom";
     
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&token_session=1&ios_token=%@&test_mode=%d",
                       self.appKey,
-                      [SeedsDeviceInfo udid],
+                      [Seeds sharedInstance].deviceId,
                       time(NULL),
                       [token length] ? token : @"",
                       testMode];
@@ -738,7 +721,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&session_duration=%d",
 					  self.appKey,
-					  [SeedsDeviceInfo udid],
+					  [Seeds sharedInstance].deviceId,
 					  time(NULL),
 					  duration];
     
@@ -757,7 +740,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&end_session=1&session_duration=%d",
 					  self.appKey,
-					  [SeedsDeviceInfo udid],
+					  [Seeds sharedInstance].deviceId,
 					  time(NULL),
 					  duration];
     
@@ -770,7 +753,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&user_details=%@",
                       self.appKey,
-                      [SeedsDeviceInfo udid],
+                      [Seeds sharedInstance].deviceId,
                       time(NULL),
                       [[SeedsUserDetails sharedUserDetails] serialize]];
     
@@ -783,7 +766,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&crash=%@",
                       self.appKey,
-                      [SeedsDeviceInfo udid],
+                      [Seeds sharedInstance].deviceId,
                       time(NULL),
                       report];
     
@@ -796,7 +779,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&events=%@",
 					  self.appKey,
-					  [SeedsDeviceInfo udid],
+					  [Seeds sharedInstance].deviceId,
 					  time(NULL),
 					  events];
     
@@ -1003,6 +986,7 @@ NSString* const kCLYUserCustom = @"custom";
 
 @interface Seeds ()
 
+@property (nonatomic, copy) NSString* deviceId;
 @property (nonatomic, strong) NSMutableDictionary *messageInfos;
 @property (nonatomic, strong) NSDictionary* crashCustom;
 
@@ -1048,6 +1032,7 @@ NSString* const kCLYUserCustom = @"custom";
 												   object:nil];
 #endif
 
+        self.deviceId = nil;
         self.inAppMessageABTestingEnabled = NO;
         self.inAppMessageVariantName = nil;
         self.inAppMessageDoNotShow = NO;
@@ -1057,12 +1042,19 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost
 {
+    [self start:appKey withHost:appHost andDeviceId:nil];
+}
+
+- (void)start:(NSString *)appKey withHost:(NSString *)appHost andDeviceId:(NSString *)deviceId
+{
 	timer = [NSTimer scheduledTimerWithTimeInterval:SEEDS_DEFAULT_UPDATE_INTERVAL
 											 target:self
 										   selector:@selector(onTimer:)
 										   userInfo:nil
 											repeats:YES];
 	lastTime = CFAbsoluteTimeGetCurrent();
+    self.deviceId = deviceId ? deviceId : [Seeds_OpenUDID value];
+
 	[[SeedsConnectionQueue sharedInstance] setAppKey:appKey];
 	[[SeedsConnectionQueue sharedInstance] setAppHost:appHost];
 	[[SeedsConnectionQueue sharedInstance] beginSession];
@@ -1634,7 +1626,7 @@ void SeedsExceptionHandler(NSException *exception, bool nonfatal)
 
     NSString *queryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&crash=%@",
                            SeedsConnectionQueue.sharedInstance.appKey,
-                           [SeedsDeviceInfo udid],
+                           [Seeds sharedInstance].deviceId,
                            time(NULL),
                            SeedsURLEscapedString(SeedsJSONFromObject(crashReport))];
     
@@ -1827,7 +1819,7 @@ void SCL(const char* function, NSUInteger line, NSString* message)
     {
         NSString *eventsQueryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&events=%@",
                                        SeedsConnectionQueue.sharedInstance.appKey,
-                                       [SeedsDeviceInfo udid],
+                                       self.deviceId,
                                        time(NULL),
                                        [eventQueue events]];
         
@@ -1840,7 +1832,7 @@ void SCL(const char* function, NSUInteger line, NSString* message)
     
     NSString *endSessionQueryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&end_session=1&session_duration=%d",
                                        SeedsConnectionQueue.sharedInstance.appKey,
-                                       [SeedsDeviceInfo udid],
+                                       self.deviceId,
                                        time(NULL),
                                        duration];
     
