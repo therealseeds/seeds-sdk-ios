@@ -13,9 +13,9 @@
 		8A5083E51B7CAE0700A6CF52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A5083E31B7CAE0700A6CF52 /* Main.storyboard */; };
 		8A5083E71B7CAE0700A6CF52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5083E61B7CAE0700A6CF52 /* Images.xcassets */; };
 		8A5083EA1B7CAE0700A6CF52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5083E81B7CAE0700A6CF52 /* LaunchScreen.xib */; };
-		8A50842D1B7CAF2300A6CF52 /* Seeds_OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084251B7CAF2300A6CF52 /* Seeds_OpenUDID.h */; };
+		8A50842D1B7CAF2300A6CF52 /* Seeds_OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084251B7CAF2300A6CF52 /* Seeds_OpenUDID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A50842E1B7CAF2300A6CF52 /* Seeds_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084261B7CAF2300A6CF52 /* Seeds_OpenUDID.m */; };
-		8A50842F1B7CAF2300A6CF52 /* Seeds.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084271B7CAF2300A6CF52 /* Seeds.h */; };
+		8A50842F1B7CAF2300A6CF52 /* Seeds.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084271B7CAF2300A6CF52 /* Seeds.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A5084301B7CAF2300A6CF52 /* Seeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084281B7CAF2300A6CF52 /* Seeds.m */; };
 		8A5084311B7CAF2300A6CF52 /* Seeds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084291B7CAF2300A6CF52 /* Seeds.xcdatamodeld */; };
 		8A5084321B7CAF2300A6CF52 /* SeedsDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50842B1B7CAF2300A6CF52 /* SeedsDB.h */; };
@@ -53,8 +53,8 @@
 		8A5084821B7CAF9300A6CF52 /* MFCustomEventFullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50847C1B7CAF9300A6CF52 /* MFCustomEventFullscreen.m */; };
 		8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50847D1B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h */; };
 		8A5084B31B7CB3D300A6CF52 /* SeedsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; };
-		8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; };
-		8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */; };
+		8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
