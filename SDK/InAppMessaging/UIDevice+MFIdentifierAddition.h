@@ -19,6 +19,11 @@
 //  Copyright 2011 Aurora Apps. All rights reserved.
 //
 //  With additional IP Address Lookup Code
+//
+//  Changed by Oleksii Pelykh
+//
+//  Changes: added dummy class;
+//
 
 #import <UIKit/UIKit.h>
 
@@ -29,5 +34,9 @@
 + (NSString *) localWiFiIPAddress;
 + (NSString *) localCellularIPAddress;
 + (NSString *) localSimulatorIPAddress;
+
+@end
+
+@interface DummyDevice : NSObject
 
 @end

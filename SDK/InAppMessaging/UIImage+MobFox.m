@@ -12,21 +12,14 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+//
+//  Changed by Oleksii Pelykh
+//
+//  Changes: removed unused imports;
+//
 #import "UIImage+MobFox.h"
-#import "NSBundle+MobFox.h"
 
 @implementation UIImage (MobFox)
-
-+ (UIImage*)mobFoxImageNamed:(NSString*)name {
-
-    UIImage *imageFromMainBundle = [UIImage imageNamed:name];
-    if (imageFromMainBundle) {
-        return imageFromMainBundle;
-    }
-
-    UIImage *imageFromMobFoxLibraryBundle = [UIImage imageWithContentsOfFile:[[[NSBundle mobFoxLibraryResourcesBundle] resourcePath] stringByAppendingPathComponent:name]];
-    return imageFromMobFoxLibraryBundle;
-}
 
 + (UIImage *)mobfoxToolBarImage {
 

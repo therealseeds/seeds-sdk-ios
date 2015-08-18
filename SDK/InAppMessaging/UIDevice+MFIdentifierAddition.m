@@ -19,6 +19,11 @@
 //  Copyright 2011 Aurora Apps. All rights reserved.
 //
 //  With additional IP Address Lookup Code
+//
+//  Changed by Oleksii Pelykh
+//
+//  Changes: added dummy class;
+//
 
 #import "UIDevice+MFIdentifierAddition.h"
 #import "NSString+MobFox.h"
@@ -84,5 +89,9 @@
 {
     return [UIDevice localAddressForInterface:@"en1"];
 }
+
+@end
+
+@implementation DummyDevice
 
 @end

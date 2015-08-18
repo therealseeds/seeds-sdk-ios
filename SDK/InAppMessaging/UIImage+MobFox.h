@@ -12,11 +12,15 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+//
+//  Changed by Oleksii Pelykh
+//
+//  Changes: removed unused methods;
+//
 #import <UIKit/UIKit.h>
 
 @interface UIImage (MobFox)
 
-+ (UIImage*)mobFoxImageNamed:(NSString*)name;
 + (UIImage *)mobfoxAdCloseButtonImage;
 
 + (UIImage *)mobfoxToolBarImage;

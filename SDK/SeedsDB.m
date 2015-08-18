@@ -3,7 +3,11 @@
 // This code is provided under the MIT License.
 //
 // Please visit www.count.ly for more information.
-
+//
+// Changed by Oleksii Pelykh
+//
+// Changes: renamed from 'CountlyDB'; changed resources lookup method;
+//
 
 #import "SeedsDB.h"
 
@@ -226,10 +230,15 @@ To use Seeds iOS SDK in WatchKit apps:
 
     static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-        NSURL *modelURL = [[NSBundle bundleForClass:[SeedsDB class]] URLForResource:@"Seeds" withExtension:@"momd"];
+        NSURL *resourcesBundleUrl = [[NSBundle mainBundle] URLForResource:@"SeedsResources" withExtension:@"bundle"];
+        NSBundle *resourcesBundle = (resourcesBundleUrl != nil)
+            ? [NSBundle bundleWithURL:resourcesBundleUrl]
+            : [NSBundle bundleForClass:[SeedsDB class]];
+
+        NSURL *modelURL = [resourcesBundle URLForResource:@"Seeds" withExtension:@"momd"];
 
         if (modelURL == nil)
-            modelURL = [[NSBundle bundleForClass:[SeedsDB class]] URLForResource:@"Seeds" withExtension:@"mom"];
+            modelURL = [resourcesBundle URLForResource:@"Seeds" withExtension:@"mom"];
         
         s_managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     });
