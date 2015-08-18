@@ -1068,6 +1068,11 @@ NSString* const kCLYUserCustom = @"custom";
     [[SeedsInterstitialAds sharedInstance] setAppHost:appHost];
 }
 
+- (BOOL)isStarted
+{
+    return (timer != nil);
+}
+
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 - (void)startWithMessagingUsing:(NSString *)appKey withHost:(NSString *)appHost andOptions:(NSDictionary *)options
 {
