@@ -899,6 +899,11 @@ NSString* const kCLYUserCustom = @"custom";
     [self.controller requestAd];
 }
 
+- (BOOL)isInAppMessageLoaded
+{
+    return self.controller.advertLoaded;
+}
+
 - (void)showInAppMessageIn:(UIViewController*)viewController
 {
     [self.controller.view removeFromSuperview];
@@ -1209,6 +1214,11 @@ NSString* const kCLYUserCustom = @"custom";
 - (void)requestInAppMessage
 {
     [[SeedsInterstitialAds sharedInstance] requestInAppMessage];
+}
+
+- (BOOL)isInAppMessageLoaded
+{
+    return [[SeedsInterstitialAds sharedInstance] isInAppMessageLoaded];
 }
 
 - (void)showInAppMessageIn:(UIViewController*)viewController;
