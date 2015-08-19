@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8A3EF9511B843D160025254B /* Unity3D */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8A3EF9541B843D160025254B /* Build configuration list for PBXAggregateTarget "Unity3D" */;
+			buildPhases = (
+				8A3EF95A1B843D5A0025254B /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Unity3D;
+			productName = Unity3D;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		8A5083DC1B7CAE0700A6CF52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083DB1B7CAE0700A6CF52 /* main.m */; };
 		8A5083DF1B7CAE0700A6CF52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083DE1B7CAE0700A6CF52 /* AppDelegate.m */; };
@@ -133,6 +147,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildUnity3D.sh; sourceTree = "<group>"; };
 		8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeedsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A50839F1B7CADAB00A6CF52 /* EmbeddedFrameworkInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EmbeddedFrameworkInfo.plist; sourceTree = "<group>"; };
 		8A5083D71B7CAE0700A6CF52 /* SeedsDemo_EmbeddedFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedsDemo_EmbeddedFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +258,7 @@
 		8A50838F1B7CAD6100A6CF52 = {
 			isa = PBXGroup;
 			children = (
+				8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */,
 				8A5084241B7CAE4E00A6CF52 /* SDK */,
 				8AC3B8DE1B8340410059D3CA /* Frameworks */,
 				8A5083D81B7CAE0700A6CF52 /* Demo */,
@@ -495,6 +511,9 @@
 			attributes = {
 				LastUpgradeCheck = 0640;
 				TargetAttributes = {
+					8A3EF9511B843D160025254B = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					8A50839A1B7CADAB00A6CF52 = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -527,6 +546,7 @@
 				8AC3B8FC1B834CC30059D3CA /* SeedsLibrary */,
 				8A5083D61B7CAE0700A6CF52 /* SeedsDemo_EmbeddedFramework */,
 				8AC3B9351B83525C0059D3CA /* SeedsDemo_Legacy */,
+				8A3EF9511B843D160025254B /* Unity3D */,
 			);
 		};
 /* End PBXProject section */
@@ -568,6 +588,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8A3EF95A1B843D5A0025254B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PROJECT_DIR/BuildUnity3D.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A5083961B7CADAB00A6CF52 /* Sources */ = {
@@ -687,6 +723,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8A3EF9521B843D160025254B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8A3EF9531B843D160025254B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8A5083941B7CAD6100A6CF52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1169,6 +1219,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A3EF9541B843D160025254B /* Build configuration list for PBXAggregateTarget "Unity3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A3EF9521B843D160025254B /* Debug */,
+				8A3EF9531B843D160025254B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		8A5083931B7CAD6100A6CF52 /* Build configuration list for PBXProject "Seeds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

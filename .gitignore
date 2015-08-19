@@ -10,3 +10,6 @@ xcuserdata
 
 ## Windows-specific
 thumbs.db
+
+## Build output
+/build
