@@ -23,7 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [[Seeds sharedInstance] start:YOUR_APP_KEY withHost:YOUR_SERVER];
+    [Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
 
     // Override point for customization after application launch.
     return YES;

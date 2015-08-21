@@ -20,7 +20,7 @@
 
     // Do any additional setup after loading the view, typically from a nib.
 
-    [Seeds sharedInstance].inAppMessageDelegate = self;
+    Seeds.sharedInstance.inAppMessageDelegate = self;
 }
 
 - (void)seedsInAppMessageClicked:(SeedsInAppMessage*)inAppMessage {
@@ -32,7 +32,7 @@
 }
 
 - (void)seedsInAppMessageLoadSucceeded:(SeedsInAppMessage*)inAppMessage {
-    [[Seeds sharedInstance] showInAppMessageIn:self];
+    [Seeds.sharedInstance showInAppMessageIn:self];
 }
 
 - (void)seedsInAppMessageShown:(SeedsInAppMessage*)inAppMessage withSuccess:(BOOL)success {
@@ -44,15 +44,18 @@
 }
 
 - (IBAction)iapEvent:(id)sender {
-    [[Seeds sharedInstance] recordIAPEvent:@"ios_iap" price:0.99];
+    [Seeds.sharedInstance recordIAPEvent:@"ios_iap" price:0.99];
 }
 
 - (IBAction)seedsIapEvent:(id)sender {
-    [[Seeds sharedInstance] recordSeedsIAPEvent:@"ios_seeds_iap" price:0.99];
+    [Seeds.sharedInstance recordSeedsIAPEvent:@"ios_seeds_iap" price:0.99];
 }
 
 - (IBAction)showIAM:(id)sender {
-    [[Seeds sharedInstance] requestInAppMessage];
+    if (Seeds.sharedInstance.isInAppMessageLoaded)
+        [Seeds.sharedInstance showInAppMessageIn:self];
+    else
+        [Seeds.sharedInstance requestInAppMessage];
 }
 
 @end

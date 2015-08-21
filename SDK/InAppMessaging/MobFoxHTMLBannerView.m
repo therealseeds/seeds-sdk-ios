@@ -383,29 +383,15 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         NSString *messageVariant = [json objectForKey:@"messageVariant"];
         if (messageVariant && ![messageVariant isEqualToString:@"false"])
         {
-            [Seeds sharedInstance].inAppMessageABTestingEnabled = YES;
-            [Seeds sharedInstance].inAppMessageVariantName = messageVariant;
+            Seeds.sharedInstance.inAppMessageABTestingEnabled = YES;
+            Seeds.sharedInstance.inAppMessageVariantName = messageVariant;
         }
-//
-//        // result of policies such as do not show to paying users
-//        if (jsonObject.containsKey("doNotShow")) {
-//
-//            boolean doNotShow = jsonObject.getBoolean("doNotShow");
-//            
-//            if (doNotShow) {
-//                InAppMessageManager.sharedInstance().doNotShow();
-//            }
-//        }
-        
-    
-        BOOL doNotShow = [[json valueForKey:@"doNotShow"] boolValue];
-        
-        NSLog(@"get json bool   %d", doNotShow);
-        if (doNotShow)
-        {
-            [Seeds sharedInstance].inAppMessageDoNotShow = YES;
-        }
-        
+
+        id doNotShowValue = [json objectForKey:@"doNotShow"];
+        if (doNotShowValue)
+            Seeds.sharedInstance.inAppMessageDoNotShow = [doNotShowValue boolValue];
+        else
+            Seeds.sharedInstance.inAppMessageDoNotShow = NO;
 
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
         

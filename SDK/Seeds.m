@@ -682,7 +682,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&begin_session=1&metrics=%@",
 					  self.appKey,
-					  [Seeds sharedInstance].deviceId,
+					  Seeds.sharedInstance.deviceId,
 					  time(NULL),
 					  [SeedsDeviceInfo metrics]];
     
@@ -705,7 +705,7 @@ NSString* const kCLYUserCustom = @"custom";
     
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&token_session=1&ios_token=%@&test_mode=%d",
                       self.appKey,
-                      [Seeds sharedInstance].deviceId,
+                      Seeds.sharedInstance.deviceId,
                       time(NULL),
                       [token length] ? token : @"",
                       testMode];
@@ -721,7 +721,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&session_duration=%d",
 					  self.appKey,
-					  [Seeds sharedInstance].deviceId,
+					  Seeds.sharedInstance.deviceId,
 					  time(NULL),
 					  duration];
     
@@ -740,7 +740,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&end_session=1&session_duration=%d",
 					  self.appKey,
-					  [Seeds sharedInstance].deviceId,
+					  Seeds.sharedInstance.deviceId,
 					  time(NULL),
 					  duration];
     
@@ -753,7 +753,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&user_details=%@",
                       self.appKey,
-                      [Seeds sharedInstance].deviceId,
+                      Seeds.sharedInstance.deviceId,
                       time(NULL),
                       [[SeedsUserDetails sharedUserDetails] serialize]];
     
@@ -766,7 +766,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&sdk_version="COUNTLY_SDK_VERSION"&crash=%@",
                       self.appKey,
-                      [Seeds sharedInstance].deviceId,
+                      Seeds.sharedInstance.deviceId,
                       time(NULL),
                       report];
     
@@ -779,7 +779,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
 	NSString *data = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&events=%@",
 					  self.appKey,
-					  [Seeds sharedInstance].deviceId,
+					  Seeds.sharedInstance.deviceId,
 					  time(NULL),
 					  events];
     
@@ -906,16 +906,17 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)showInAppMessageIn:(UIViewController*)viewController
 {
-    [self.controller.view removeFromSuperview];
-    [self.controller removeFromParentViewController];
+    if (!self.isInAppMessageLoaded || Seeds.sharedInstance.inAppMessageDoNotShow) {
+        id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
+            [delegate seedsInAppMessageShown:nil withSuccess:NO];
+        return;
+    }
 
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
     
-    NSLog(@"%d", [Seeds sharedInstance].inAppMessageDoNotShow);
-    if (![Seeds sharedInstance].inAppMessageDoNotShow) {
-        [self.controller presentAd:MobFoxAdTypeText];
-    }
+    [self.controller presentAd:MobFoxAdTypeText];
 }
 
 - (NSString *)publisherIdForMobFoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -927,7 +928,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidLoadMobFoxAd");
 
-    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
         [delegate seedsInAppMessageLoadSucceeded:nil];
 }
@@ -936,7 +937,7 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialView didFailToReceiveAdWithError");
 
-    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound)])
         [delegate seedsNoInAppMessageFound];
 }
@@ -957,7 +958,7 @@ NSString* const kCLYUserCustom = @"custom";
                                     count:1];
     }
 
-    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
         [delegate seedsInAppMessageShown:nil withSuccess:YES];
 }
@@ -971,10 +972,6 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidDismissScreen");
 
-    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
-        [delegate seedsInAppMessageClosed:nil andCompleted:YES];
-
     [self.controller.view removeFromSuperview];
     [self.controller removeFromParentViewController];
 }
@@ -983,7 +980,9 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillLeaveApplication");
 
-    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    [self.controller interstitialStopAdvert];
+
+    id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
         [delegate seedsInAppMessageClosed:nil andCompleted:YES];
 }
@@ -991,7 +990,6 @@ NSString* const kCLYUserCustom = @"custom";
 - (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
-
 
     if (Seeds.sharedInstance.inAppMessageABTestingEnabled)
     {
@@ -1005,7 +1003,7 @@ NSString* const kCLYUserCustom = @"custom";
                                     count:1];
     }
 
-    id<SeedsInAppMessageDelegate> delegate = [Seeds sharedInstance].inAppMessageDelegate;
+    id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
         [delegate seedsInAppMessageClicked:nil];
 }
@@ -1666,7 +1664,7 @@ void SeedsExceptionHandler(NSException *exception, bool nonfatal)
 
     NSString *queryString = [NSString stringWithFormat:@"app_key=%@&device_id=%@&timestamp=%ld&crash=%@",
                            SeedsConnectionQueue.sharedInstance.appKey,
-                           [Seeds sharedInstance].deviceId,
+                           Seeds.sharedInstance.deviceId,
                            time(NULL),
                            SeedsURLEscapedString(SeedsJSONFromObject(crashReport))];
     

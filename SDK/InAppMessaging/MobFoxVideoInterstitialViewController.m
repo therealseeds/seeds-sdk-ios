@@ -35,6 +35,7 @@
 
 #import "MFCustomEventFullscreen.h"
 #import "Seeds.h"
+#import "SeedsInAppMessageDelegate.h"
 
 NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial";
 
@@ -482,7 +483,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         requestedAdOrientation = interfaceOrientation;
         NSString *orientation = UIInterfaceOrientationIsPortrait(interfaceOrientation) ? @"portrait" : @"landscape";
-        NSString *deviceId = [Seeds sharedInstance].deviceId;
+        NSString *deviceId = Seeds.sharedInstance.deviceId;
 
         NSString *fullRequestString = [NSString stringWithFormat:@"app_key=%@&orientation=%@&device_id=%@",
                                        [publisherId stringByUrlEncoding],
@@ -1192,6 +1193,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 - (void)interstitialSkipAction:(id)sender {
     [self interstitialStopAdvert];
 
+    id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
+    if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
+        [seedsDelegate seedsInAppMessageClosed:nil andCompleted:NO];
 }
 
 #pragma mark -

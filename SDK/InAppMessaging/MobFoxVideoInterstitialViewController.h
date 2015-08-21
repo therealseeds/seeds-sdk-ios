@@ -99,6 +99,7 @@ typedef enum {
 
 - (void)setLocationWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
 
+- (void)interstitialStopAdvert;
 
 @end
 
