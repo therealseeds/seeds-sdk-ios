@@ -381,9 +381,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         }
 
         NSString *messageVariant = [json objectForKey:@"messageVariant"];
-        if (messageVariant && ![messageVariant isEqualToString:@"false"])
+        if (messageVariant)
         {
-            Seeds.sharedInstance.inAppMessageABTestingEnabled = YES;
             Seeds.sharedInstance.inAppMessageVariantName = messageVariant;
         }
 

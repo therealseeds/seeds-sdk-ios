@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'SeedsSDK'
-  s.version  = '0.2.4'
+  s.version  = '0.3.0'
   s.license  = {
     :type => 'COMMUNITY',
     :text => <<-LICENSE
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
               THE SOFTWARE.
     LICENSE
   }
-  s.summary  = 'iOS SDK for Seeds mobile analytics forked to add In-App Messaging'
+  s.summary  = 'iOS SDK for the Seeds SDK'
   s.homepage = 'https://github.com/therealseeds/seeds-sdk-ios'
   s.author   = {'Seeds' => 'sungwon@playseeds.com'}
   s.source   = {

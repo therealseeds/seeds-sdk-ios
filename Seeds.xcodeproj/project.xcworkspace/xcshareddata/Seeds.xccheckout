@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0EB80F80303F94B23072D7C289FB2C69A76BDB68</key>
-		<string>github.com:therealseeds/seeds-sdk-ios.git</string>
+		<string>http://github.com/therealseeds/seeds-sdk-ios</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Seeds.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:therealseeds/seeds-sdk-ios.git</string>
+	<string>http://github.com/therealseeds/seeds-sdk-ios</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

@@ -946,17 +946,11 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillPresentScreen");
 
-    if (Seeds.sharedInstance.inAppMessageABTestingEnabled)
-    {
-        [Seeds.sharedInstance recordEvent:@"message shown"
-                             segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
-                                    count:1];
-    }
-    else
-    {
-        [Seeds.sharedInstance recordEvent:@"message shown"
-                                    count:1];
-    }
+
+    [Seeds.sharedInstance recordEvent:@"message shown"
+                          segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
+                          count:1];
+
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
@@ -991,17 +985,11 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
 
-    if (Seeds.sharedInstance.inAppMessageABTestingEnabled)
-    {
-        [Seeds.sharedInstance recordEvent:@"message clicked"
-                             segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
-                                    count:1];
-    }
-    else
-    {
-        [Seeds.sharedInstance recordEvent:@"message clicked"
-                                    count:1];
-    }
+
+    [Seeds.sharedInstance recordEvent:@"message clicked"
+                          segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
+                          count:1];
+
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
@@ -1061,7 +1049,6 @@ NSString* const kCLYUserCustom = @"custom";
 #endif
 
         self.deviceId = nil;
-        self.inAppMessageABTestingEnabled = NO;
         self.inAppMessageVariantName = nil;
         self.inAppMessageDoNotShow = NO;
 	}
@@ -1223,8 +1210,8 @@ NSString* const kCLYUserCustom = @"custom";
     
     [segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
 
-    if (self.inAppMessageABTestingEnabled)
-        [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
+
+    [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
 
     [self recordEvent:[@"IAP:" stringByAppendingString:key] segmentation:segmentation count:1 sum:price];
 }
