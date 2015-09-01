@@ -45,6 +45,7 @@
 
 - (IBAction)iapEvent:(id)sender {
     [Seeds.sharedInstance recordIAPEvent:@"ios_iap" price:0.99];
+    //[Seeds.sharedInstance trackPurchase:@"ios_iap" price:0.99];
 }
 
 - (IBAction)seedsIapEvent:(id)sender {

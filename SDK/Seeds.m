@@ -928,6 +928,8 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidLoadMobFoxAd");
 
+    Seeds.sharedInstance.adClicked = NO;
+    
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
         [delegate seedsInAppMessageLoadSucceeded:nil];
@@ -989,7 +991,10 @@ NSString* const kCLYUserCustom = @"custom";
     [Seeds.sharedInstance recordEvent:@"message clicked"
                           segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
                           count:1];
-
+    
+    Seeds.sharedInstance.adClicked = YES;
+    
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked %hhd", Seeds.sharedInstance.adClicked);
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
@@ -1031,6 +1036,7 @@ NSString* const kCLYUserCustom = @"custom";
         eventQueue = [[SeedsEventQueue alloc] init];
         self.crashCustom = nil;
         
+        
         self.messageInfos = [NSMutableDictionary new];
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
@@ -1051,6 +1057,7 @@ NSString* const kCLYUserCustom = @"custom";
         self.deviceId = nil;
         self.inAppMessageVariantName = nil;
         self.inAppMessageDoNotShow = NO;
+        self.adClicked = NO;
 	}
 	return self;
 }
@@ -1208,12 +1215,31 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSMutableDictionary *segmentation = [[NSMutableDictionary alloc] init];
     
-    [segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
+    //[segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
+    if (isSeedsEvent) {
+        [segmentation setObject:@"Seeds" forKey:@"IAP type"];
+        [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
+    } else {
+        [segmentation setObject:@"Non-Seeds" forKey:@"IAP type"];
+    }
 
-
-    [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
+    [segmentation setObject:key forKey:@"item"];
 
     [self recordEvent:[@"IAP:" stringByAppendingString:key] segmentation:segmentation count:1 sum:price];
+}
+
+- (void) trackPurchase:(NSString *)key price:(double)price
+{
+ 
+    NSLog(@"[Seeds] trackPurchase start %hhd", Seeds.sharedInstance.adClicked);
+
+    
+    if (Seeds.sharedInstance.adClicked) {
+        [self recordSeedsIAPEvent:key price:price];
+        Seeds.sharedInstance.adClicked = NO;
+    } else {
+        [self recordIAPEvent:key price:price];
+    }
 }
 
 - (void)recordIAPEvent:(NSString *)key price:(double)price
