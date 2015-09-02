@@ -1227,9 +1227,6 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void) trackPurchase:(NSString *)key price:(double)price
 {
- 
-    NSLog(@"[Seeds] trackPurchase start %hhd", Seeds.sharedInstance.adClicked);
-
     
     if (Seeds.sharedInstance.adClicked) {
         [self recordSeedsIAPEvent:key price:price];
