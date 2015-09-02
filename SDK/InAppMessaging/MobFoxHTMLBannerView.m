@@ -589,7 +589,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	}
 	if (_tapThroughLeavesApp || [_tapThroughURL isDeviceSupported])
 	{
-
         if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionWillLeaveApplication:)])
         {
             [delegate mobfoxHTMLBannerViewActionWillLeaveApplication:self];

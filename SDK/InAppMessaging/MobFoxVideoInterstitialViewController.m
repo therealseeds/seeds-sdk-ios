@@ -1027,6 +1027,10 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 	if (tapThroughLeavesApp || [tapThroughURL isDeviceSupported])
 	{
+        if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+        {
+            [delegate mobfoxVideoInterstitialViewWasClicked:self];
+        }
 
         if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
         {
@@ -1490,6 +1494,11 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 }
 
 -(void) mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner {
+    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+    {
+        [delegate mobfoxVideoInterstitialViewWasClicked:self];
+    }
+
     if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
     {
         [delegate mobfoxVideoInterstitialViewActionWillLeaveApplication:self];
