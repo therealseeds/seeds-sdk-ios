@@ -948,11 +948,9 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillPresentScreen");
 
-
     [Seeds.sharedInstance recordEvent:@"message shown"
                           segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
                           count:1];
-
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
@@ -987,14 +985,13 @@ NSString* const kCLYUserCustom = @"custom";
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
 
-
     [Seeds.sharedInstance recordEvent:@"message clicked"
                           segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
                           count:1];
     
     Seeds.sharedInstance.adClicked = YES;
     
-    NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked %hhd", Seeds.sharedInstance.adClicked);
+    NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked (ad clicked = %s)", Seeds.sharedInstance.adClicked ? "yes" : "no");
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
