@@ -32,6 +32,7 @@
 }
 
 - (void)seedsInAppMessageLoadSucceeded:(SeedsInAppMessage*)inAppMessage {
+    NSLog(@"seedsInAppMessageLoadSucceeded");
     [Seeds.sharedInstance showInAppMessageIn:self];
 }
 

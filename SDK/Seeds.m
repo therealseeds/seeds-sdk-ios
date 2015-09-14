@@ -216,8 +216,11 @@ NSString* SeedsURLUnescapedString(NSString* string)
 
 	metricsDictionary[@"_resolution"] = SeedsDeviceInfo.resolution;
 	metricsDictionary[@"_locale"] = SeedsDeviceInfo.locale;
-	metricsDictionary[@"_app_version"] = SeedsDeviceInfo.appVersion;
-	
+    NSString *appVersion = [SeedsDeviceInfo appVersion];
+    if (appVersion) {
+        metricsDictionary[@"_app_version"] = appVersion;
+    }
+    NSLog(@"%@", metricsDictionary);
 	return SeedsURLEscapedString(SeedsJSONFromObject(metricsDictionary));
 }
 
@@ -1215,7 +1218,9 @@ NSString* const kCLYUserCustom = @"custom";
     //[segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
     if (isSeedsEvent) {
         [segmentation setObject:@"Seeds" forKey:@"IAP type"];
-        [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
+        if (self.inAppMessageVariantName) {
+            [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
+        }
     } else {
         [segmentation setObject:@"Non-Seeds" forKey:@"IAP type"];
     }
@@ -1228,7 +1233,7 @@ NSString* const kCLYUserCustom = @"custom";
 - (void) trackPurchase:(NSString *)key price:(double)price
 {
  
-    NSLog(@"[Seeds] trackPurchase start %hhd", Seeds.sharedInstance.adClicked);
+    NSLog(@"[Seeds] trackPurchase start %@", Seeds.sharedInstance.adClicked ? @"YES" : @"NO");
 
     
     if (Seeds.sharedInstance.adClicked) {
@@ -1601,7 +1606,6 @@ NSString* const kCLYUserCustom = @"custom";
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wunused-variable"
     NSArray* anArray = @[@"one",@"two",@"three"];
-    NSString* myCrashingString = anArray[5];
     #pragma clang diagnostic pop
 }
 

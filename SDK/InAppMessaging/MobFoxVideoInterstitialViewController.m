@@ -379,7 +379,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 	label.numberOfLines = 0;
 	label.backgroundColor = [UIColor clearColor];
 	label.font = [UIFont boldSystemFontOfSize:12];
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentCenter;
 	label.textColor = [UIColor redColor];
 
 	label.text = text;
@@ -742,7 +742,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
                 interstitialViewController.wantsFullScreenLayout = YES;
 
-                [interstitialViewController presentModalViewController:self.mobFoxInterstitialPlayerViewController animated:NO];
+                [interstitialViewController presentViewController:self.mobFoxInterstitialPlayerViewController animated:NO completion:nil];
 
                 [self advertShow:advertType viewToShow:self.mobFoxInterstitialPlayerViewController.view];
 
@@ -771,7 +771,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 	}
     
     [self advertTidyUpAfterAd:advertTypeCurrentlyPlaying];
-    [interstitialViewController dismissModalViewControllerAnimated:NO];
+    [interstitialViewController dismissViewControllerAnimated:NO completion:nil];
     [self interstitialTidyUpAfterAd];
 
 }
@@ -1048,7 +1048,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     browser.webView.scalesPageToFit = YES;
 	browser.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-    [viewController presentModalViewController:browser animated:YES];
+    [viewController presentViewController:browser animated:YES completion:nil];
 }
 
 - (void)postTrackingEvent:(NSString*)urlString {
@@ -1283,13 +1283,13 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     if(!_browser)
         return;
 
-    [rootViewController presentModalViewController:_browser animated:YES];
+    [rootViewController presentViewController:_browser animated:YES completion:nil];
 
 }
 
 - (void)mobfoxAdBrowserControllerDidDismiss:(MobFoxAdBrowserViewController *)mobfoxAdBrowserController
 {
-	[mobfoxAdBrowserController dismissModalViewControllerAnimated:YES];
+    [mobfoxAdBrowserController dismissViewControllerAnimated:YES completion:nil];
 
     _browser = nil;
 

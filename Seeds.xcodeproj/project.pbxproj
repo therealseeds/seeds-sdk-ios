@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		7ED393BE1BA698E500890DE3 /* SeedsSDK_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */; };
+		7ED393BF1BA698E500890DE3 /* SeedsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; };
+		7ED393CE1BA6AF9100890DE3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED393CD1BA6AF9100890DE3 /* TestViewController.m */; };
 		8A5083DC1B7CAE0700A6CF52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083DB1B7CAE0700A6CF52 /* main.m */; };
 		8A5083DF1B7CAE0700A6CF52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083DE1B7CAE0700A6CF52 /* AppDelegate.m */; };
 		8A5083E21B7CAE0700A6CF52 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083E11B7CAE0700A6CF52 /* ViewController.m */; };
@@ -100,6 +103,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7ED393C01BA698E500890DE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A5083901B7CAD6100A6CF52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A50839A1B7CADAB00A6CF52;
+			remoteInfo = SeedsSDK;
+		};
+		8A628DD21BA6DD8700CB77E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A5083901B7CAD6100A6CF52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A5083D61B7CAE0700A6CF52;
+			remoteInfo = SeedsDemo_EmbeddedFramework;
+		};
 		8AC3B9491B8352E90059D3CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A5083901B7CAD6100A6CF52 /* Project object */;
@@ -147,6 +164,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7ED393B91BA698E500890DE3 /* SeedsSDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SeedsSDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7ED393BC1BA698E500890DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeedsSDK_Tests.m; sourceTree = "<group>"; };
+		7ED393CC1BA6AF9100890DE3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		7ED393CD1BA6AF9100890DE3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildUnity3D.sh; sourceTree = "<group>"; };
 		8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeedsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A50839F1B7CADAB00A6CF52 /* EmbeddedFrameworkInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EmbeddedFrameworkInfo.plist; sourceTree = "<group>"; };
@@ -212,6 +234,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7ED393B61BA698E500890DE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7ED393BF1BA698E500890DE3 /* SeedsSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A5083971B7CADAB00A6CF52 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,11 +285,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7ED393BA1BA698E500890DE3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7ED393CF1BA6D48A00890DE3 /* TestViewController */,
+				7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */,
+				7ED393BB1BA698E500890DE3 /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		7ED393BB1BA698E500890DE3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7ED393BC1BA698E500890DE3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7ED393CF1BA6D48A00890DE3 /* TestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7ED393CC1BA6AF9100890DE3 /* TestViewController.h */,
+				7ED393CD1BA6AF9100890DE3 /* TestViewController.m */,
+			);
+			name = TestViewController;
+			sourceTree = "<group>";
+		};
 		8A50838F1B7CAD6100A6CF52 = {
 			isa = PBXGroup;
 			children = (
 				8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */,
 				8A5084241B7CAE4E00A6CF52 /* SDK */,
+				7ED393BA1BA698E500890DE3 /* Tests */,
 				8AC3B8DE1B8340410059D3CA /* Frameworks */,
 				8A5083D81B7CAE0700A6CF52 /* Demo */,
 				8A50839C1B7CADAB00A6CF52 /* Products */,
@@ -274,6 +332,7 @@
 				8AC3B8FD1B834CC30059D3CA /* libSeedsLibrary.a */,
 				8A5083D71B7CAE0700A6CF52 /* SeedsDemo_EmbeddedFramework.app */,
 				8AC3B9451B83525C0059D3CA /* SeedsDemo_Legacy.app */,
+				7ED393B91BA698E500890DE3 /* SeedsSDK Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -413,6 +472,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		7ED393B81BA698E500890DE3 /* SeedsSDK Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7ED393C21BA698E500890DE3 /* Build configuration list for PBXNativeTarget "SeedsSDK Tests" */;
+			buildPhases = (
+				7ED393B51BA698E500890DE3 /* Sources */,
+				7ED393B61BA698E500890DE3 /* Frameworks */,
+				7ED393B71BA698E500890DE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7ED393C11BA698E500890DE3 /* PBXTargetDependency */,
+				8A628DD31BA6DD8700CB77E6 /* PBXTargetDependency */,
+			);
+			name = "SeedsSDK Tests";
+			productName = "SeedsSDK Tests";
+			productReference = 7ED393B91BA698E500890DE3 /* SeedsSDK Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8A50839A1B7CADAB00A6CF52 /* SeedsSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A5083B31B7CADAB00A6CF52 /* Build configuration list for PBXNativeTarget "SeedsSDK" */;
@@ -511,6 +589,10 @@
 			attributes = {
 				LastUpgradeCheck = 0640;
 				TargetAttributes = {
+					7ED393B81BA698E500890DE3 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 8A5083D61B7CAE0700A6CF52;
+					};
 					8A3EF9511B843D160025254B = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -547,11 +629,19 @@
 				8A5083D61B7CAE0700A6CF52 /* SeedsDemo_EmbeddedFramework */,
 				8AC3B9351B83525C0059D3CA /* SeedsDemo_Legacy */,
 				8A3EF9511B843D160025254B /* Unity3D */,
+				7ED393B81BA698E500890DE3 /* SeedsSDK Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7ED393B71BA698E500890DE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A5083991B7CADAB00A6CF52 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -606,6 +696,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7ED393B51BA698E500890DE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7ED393CE1BA6AF9100890DE3 /* TestViewController.m in Sources */,
+				7ED393BE1BA698E500890DE3 /* SeedsSDK_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A5083961B7CADAB00A6CF52 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -686,6 +785,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7ED393C11BA698E500890DE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A50839A1B7CADAB00A6CF52 /* SeedsSDK */;
+			targetProxy = 7ED393C01BA698E500890DE3 /* PBXContainerItemProxy */;
+		};
+		8A628DD31BA6DD8700CB77E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A5083D61B7CAE0700A6CF52 /* SeedsDemo_EmbeddedFramework */;
+			targetProxy = 8A628DD21BA6DD8700CB77E6 /* PBXContainerItemProxy */;
+		};
 		8AC3B94A1B8352E90059D3CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A50839A1B7CADAB00A6CF52 /* SeedsSDK */;
@@ -723,6 +832,102 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7ED393C31BA698E500890DE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeedsDemo_EmbeddedFramework.app/SeedsDemo_EmbeddedFramework";
+			};
+			name = Debug;
+		};
+		7ED393C41BA698E500890DE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeedsDemo_EmbeddedFramework.app/SeedsDemo_EmbeddedFramework";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		8A3EF9521B843D160025254B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -777,6 +982,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -833,6 +1040,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -879,6 +1088,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -927,6 +1138,8 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1219,6 +1432,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7ED393C21BA698E500890DE3 /* Build configuration list for PBXNativeTarget "SeedsSDK Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7ED393C31BA698E500890DE3 /* Debug */,
+				7ED393C41BA698E500890DE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8A3EF9541B843D160025254B /* Build configuration list for PBXAggregateTarget "Unity3D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1226,6 +1448,7 @@
 				8A3EF9531B843D160025254B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A5083931B7CAD6100A6CF52 /* Build configuration list for PBXProject "Seeds" */ = {
 			isa = XCConfigurationList;

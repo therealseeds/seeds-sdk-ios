@@ -200,7 +200,7 @@
 	}
 	else 
 	{
-		[self dismissModalViewControllerAnimated:NO];
+		[self dismissViewControllerAnimated:NO completion:nil];
 	}
 }
 

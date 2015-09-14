@@ -11,6 +11,8 @@
 
 #define YOUR_SERVER @"http://dash.playseeds.com"
 #define YOUR_APP_KEY @"test"
+//#define YOUR_SERVER @"http://devdash.playseeds.com"
+//#define YOUR_APP_KEY @"aa1fd1f255b25fb89b413f216f11e8719188129d"
 
 @interface AppDelegate ()
 

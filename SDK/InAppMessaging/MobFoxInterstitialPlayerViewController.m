@@ -37,7 +37,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
-    self.wantsFullScreenLayout = YES;
+    self.edgesForExtendedLayout = UIRectEdgeAll;
 
 }
 

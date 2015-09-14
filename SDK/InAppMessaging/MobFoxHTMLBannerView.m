@@ -521,7 +521,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	label.numberOfLines = 0;
 	label.backgroundColor = [UIColor whiteColor];
 	label.font = [UIFont boldSystemFontOfSize:12];
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentCenter;
 	label.textColor = [UIColor redColor];
 	label.text = text;
 	[self addSubview:label];
@@ -546,7 +546,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     {
         [delegate mobfoxHTMLBannerViewActionWillPresent:self];
     }
-    [viewController presentModalViewController:browser animated:YES];
+    [viewController presentViewController:browser animated:YES completion:nil];
+
 	bannerViewActionInProgress = YES;
 }
 
@@ -567,7 +568,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     {
         [delegate mobfoxHTMLBannerViewActionWillPresent:self];
     }
-    [viewController presentModalViewController:browser animated:YES];
+    [viewController presentViewController:browser animated:YES completion:nil];
 	bannerViewActionInProgress = YES;
 }
 
@@ -617,7 +618,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     {
         [delegate mobfoxHTMLBannerViewActionWillPresent:self];
     }
-    [viewController presentModalViewController:browser animated:YES];
+    [viewController presentViewController:browser animated:YES completion:nil];
 	bannerViewActionInProgress = YES;
 }
 
@@ -642,7 +643,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 		[delegate mobfoxHTMLBannerViewActionWillFinish:self];
 	}
     [self showStatusBarIfNecessary];
-	[mobfoxAdBrowserController dismissModalViewControllerAnimated:YES];
+    [mobfoxAdBrowserController dismissViewControllerAnimated:YES completion:nil];
 	bannerViewActionInProgress = NO;
 	[self setRefreshTimerActive:YES];
 	if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionDidFinish:)])
