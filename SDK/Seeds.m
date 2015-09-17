@@ -1085,6 +1085,12 @@ NSString* const kCLYUserCustom = @"custom";
     [[SeedsInterstitialAds sharedInstance] setAppHost:appHost];
 }
 
+- (NSString *)getAppKey {
+
+    return [[SeedsConnectionQueue sharedInstance] appKey];
+
+}
+
 - (BOOL)isStarted
 {
     return (timer != nil);
