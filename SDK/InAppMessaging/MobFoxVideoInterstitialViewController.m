@@ -508,7 +508,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         
         NSMutableURLRequest *request;
         NSError *error;
-        NSError *error1;
         NSURLResponse *response;
         NSData *dataReply;
         
