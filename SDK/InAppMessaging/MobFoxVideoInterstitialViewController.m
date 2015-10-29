@@ -490,8 +490,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
                                        [orientation stringByUrlEncoding],
                                        [deviceId stringByUrlEncoding]];
 
-        
-        
         NSURL *serverURL = [self serverURL];
         
         if (!serverURL) {
@@ -505,12 +503,12 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         NSURL *url;
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/o/messages?%@", serverURL, fullRequestString]];
 
-        
         //DEBUG
-        NSLog(@"request: %@", url);
+        NSLog(@"request = %@, fullRequestString = %@", url, fullRequestString);
         
         NSMutableURLRequest *request;
         NSError *error;
+        NSError *error1;
         NSURLResponse *response;
         NSData *dataReply;
         
@@ -519,19 +517,42 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
 
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSString *cachePath = [paths objectAtIndex:0];
+        NSFileManager* fileManager = [NSFileManager defaultManager];
+        NSString* cacheFile = [cachePath stringByAppendingPathComponent:fullRequestString];
+
         dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if ([fileManager fileExistsAtPath:cacheFile])
+            dataReply = [NSData dataWithContentsOfFile:cacheFile];
+        if (!dataReply)
+        {
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Error reading response from server"
+                                                                 forKey:NSLocalizedDescriptionKey];
+
+            NSError *error = [NSError errorWithDomain:MobFoxVideoInterstitialErrorDomain
+                                                 code:MobFoxInterstitialViewErrorUnknown
+                                             userInfo:userInfo];
+            [self performSelectorOnMainThread:@selector(reportError:) withObject:error waitUntilDone:YES];
+            return;
+        }
 
         error = nil;
         id jsonReply = [NSJSONSerialization JSONObjectWithData:dataReply options:0 error:&error];
 
         if (!jsonReply)
         {
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Error parsing json response from server" forKey:NSLocalizedDescriptionKey];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Error parsing json response from server"
+                                                                 forKey:NSLocalizedDescriptionKey];
             
-            NSError *error = [NSError errorWithDomain:MobFoxVideoInterstitialErrorDomain code:MobFoxInterstitialViewErrorUnknown userInfo:userInfo];
+            NSError *error = [NSError errorWithDomain:MobFoxVideoInterstitialErrorDomain
+                                                 code:MobFoxInterstitialViewErrorUnknown
+                                             userInfo:userInfo];
             [self performSelectorOnMainThread:@selector(reportError:) withObject:error waitUntilDone:YES];
             return;
         }
+
+        [dataReply writeToFile:cacheFile atomically:YES];
 
         [self performSelectorOnMainThread:@selector(advertCreateFromJSON:) withObject:jsonReply waitUntilDone:YES];
 	}
