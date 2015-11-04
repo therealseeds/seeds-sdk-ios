@@ -9,12 +9,14 @@
 #import "AppDelegate.h"
 #import "Seeds.h"
 
-//#define YOUR_SERVER @"http://dash.playseeds.com"
-//#define YOUR_APP_KEY @"test"
-#define YOUR_SERVER @"http://devdash.playseeds.com"
-#define YOUR_APP_KEY_NEVER @"ef2444ec9f590d24db5054fad8385991138a394b"
-#define YOUR_APP_KEY_ALWAYS @"c30f02a55541cbe362449d29d83d777c125c8dd6"
-#define YOUR_APP_KEY YOUR_APP_KEY_ALWAYS
+#define YOUR_SERVER @"https://dash.playseeds.com"
+#define YOUR_APP_KEY @"test"
+
+//development server info
+//#define YOUR_SERVER @"https://devdash.playseeds.com"
+//#define YOUR_APP_KEY_NEVER @"ef2444ec9f590d24db5054fad8385991138a394b"
+//#define YOUR_APP_KEY_ALWAYS @"c30f02a55541cbe362449d29d83d777c125c8dd6"
+//#define YOUR_APP_KEY YOUR_APP_KEY_ALWAYS
 
 @interface AppDelegate ()
 
