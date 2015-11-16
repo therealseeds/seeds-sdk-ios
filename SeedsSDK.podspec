@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'SeedsSDK'
-  s.version  = '0.3.2'
+  s.version  = '0.3.3'
   s.license  = {
     :type => 'COMMUNITY',
     :text => <<-LICENSE
@@ -36,7 +36,10 @@ Pod::Spec.new do |s|
     :tag => s.version.to_s
   }
   s.source_files = 'SDK/**/*.{h,m}'
-  s.public_header_files = 'SDK/Seeds.h'
+  s.public_header_files = [
+    'SDK/Seeds.h',
+    'SDK/SeedsInAppMessageDelegate.h'
+  ]
   s.resources = 'SDK/**/*.{xcdatamodeld}'
   s.requires_arc = true
   s.ios.deployment_target = '5.0'
