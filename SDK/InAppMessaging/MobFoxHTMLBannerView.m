@@ -395,7 +395,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
         
         //load HTML string later (to avoid calling impression pixels when using custom events)
-        if(/*!headers*/true) { //means that it's an interstitial ad
+        if(/*!headers*/false) { //means that it's an interstitial ad
             _htmlString = [NSString stringWithFormat: @"<style>* { -webkit-tap-highlight-color: rgba(0,0,0,0);} body {height:100%%; width:100%%;} img {max-width:100%%; max-height:100%%; width:auto; height:auto; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;}</style>%@",html];
         } else {
             _htmlString = html;
