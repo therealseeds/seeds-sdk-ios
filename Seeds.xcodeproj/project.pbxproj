@@ -223,6 +223,9 @@
 		8A50847C1B7CAF9300A6CF52 /* MFCustomEventFullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFCustomEventFullscreen.m; sourceTree = "<group>"; };
 		8A50847D1B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFCustomEventFullscreenDelegate.h; sourceTree = "<group>"; };
 		8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SeedsSDK.h; path = ../SeedsSDK.h; sourceTree = "<group>"; };
+		8A7C95D71C7ED35100409025 /* BuildFramework.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = BuildFramework.sh; sourceTree = "<group>"; };
+		8A7C95D81C7ED35100409025 /* SeedsSDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SeedsSDK.podspec; sourceTree = "<group>"; };
+		8A7C95D91C7ED35100409025 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsInAppMessageDelegate.h; sourceTree = "<group>"; };
 		8AC3B8DC1B83403A0059D3CA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		8AC3B8DF1B83406E0059D3CA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -316,6 +319,9 @@
 			isa = PBXGroup;
 			children = (
 				8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */,
+				8A7C95D71C7ED35100409025 /* BuildFramework.sh */,
+				8A7C95D81C7ED35100409025 /* SeedsSDK.podspec */,
+				8A7C95D91C7ED35100409025 /* README.md */,
 				8A5084241B7CAE4E00A6CF52 /* SDK */,
 				7ED393BA1BA698E500890DE3 /* Tests */,
 				8AC3B8DE1B8340410059D3CA /* Frameworks */,
