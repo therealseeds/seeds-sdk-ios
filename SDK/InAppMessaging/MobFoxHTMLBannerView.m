@@ -339,8 +339,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
     NSArray *previousSubviews = [NSArray arrayWithArray:self.subviews];
 
-    self.skipOverlay = @"0";//[htmlElement.attributes objectForKey:@"skipoverlaybutton"];
-
 	NSString *clickType = [json objectForKey:@"clicktype"];
 	if ([clickType isEqualToString:@"inapp"])
 	{
@@ -356,7 +354,12 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         clickUrlString = [clickUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
 		_tapThroughURL = [NSURL URLWithString:clickUrlString];
+        self.skipOverlay = @"0";
 	}
+    else
+    {
+        self.skipOverlay = @"1";
+    }
 	_shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
     _shouldSkipLinkPreflight = YES; //[[xml.documentRoot getNamedChild:@"skippreflight"].text isEqualToString:@"yes"];
 	self.bannerView = nil;
