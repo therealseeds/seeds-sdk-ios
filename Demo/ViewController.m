@@ -65,6 +65,8 @@
 - (void)handleUrl:(NSURL*)url {
     NSLog(@"url = %@", url);
     [self.urlLabel setText:[NSString stringWithFormat:@"InApp URL: %@", url]];
+
+    [Seeds.sharedInstance recordSeedsIAPEvent:@"deep-link-item" price:0.99];
 }
 
 @end
