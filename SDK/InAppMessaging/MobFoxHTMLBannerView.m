@@ -395,7 +395,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
             Seeds.sharedInstance.inAppMessageDoNotShow = [doNotShowValue boolValue];
         else
             Seeds.sharedInstance.inAppMessageDoNotShow = NO;
-        Seeds.sharedInstance.inAppMessageDoNotShow = NO;
 
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
         
