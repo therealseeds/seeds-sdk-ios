@@ -2,8 +2,8 @@
 
 XCODEBUILD=`which xcodebuild`
 if [ -z "$XCODEBUILD" ]; then
-echo "xcodebuild tool not found"
-exit 127
+    echo "xcodebuild tool not found"
+    exit 127
 fi
 
 $XCODEBUILD -project Seeds.xcodeproj -configuration Release -target SeedsSDK -sdk iphoneos clean build
