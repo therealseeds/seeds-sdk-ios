@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 #import "Seeds.h"
 
 //#define YOUR_SERVER @"https://dash.playseeds.com"
@@ -29,6 +30,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
+
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey] != nil) {
+        NSURL *url = [launchOptions objectForKey: UIApplicationLaunchOptionsURLKey];
+        ViewController* viewController = (ViewController*)self.window.rootViewController;
+        [viewController handleUrl:url];
+    }
 
     // Override point for customization after application launch.
     return YES;
@@ -54,6 +61,14 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
+
+    ViewController* viewController = (ViewController*)self.window.rootViewController;
+    [viewController handleUrl:url];
+
+    return YES;
 }
 
 @end

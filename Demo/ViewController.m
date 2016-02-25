@@ -11,6 +11,8 @@
 
 @interface ViewController () <SeedsInAppMessageDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
+
 @end
 
 @implementation ViewController
@@ -58,6 +60,11 @@
         [Seeds.sharedInstance showInAppMessageIn:self];
     else
         [Seeds.sharedInstance requestInAppMessage];
+}
+
+- (void)handleUrl:(NSURL*)url {
+    NSLog(@"url = %@", url);
+    [self.urlLabel setText:[NSString stringWithFormat:@"InApp URL: %@", url]];
 }
 
 @end

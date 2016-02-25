@@ -11,5 +11,7 @@
 
 @interface ViewController : UIViewController
 
+- (void)handleUrl:(NSURL*)url;
+
 @end
 

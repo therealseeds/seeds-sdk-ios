@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -61,20 +62,35 @@
                                     <action selector="iapEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gwc-9D-Lwq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InApp URL: none" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="9" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mR7-BV-e3y" userLabel="InApp URL">
+                                <rect key="frame" x="100" y="304" width="400" height="216"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="w8t-mx-9Gp" secondAttribute="centerX" id="3GE-fL-xB5"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mR7-BV-e3y" secondAttribute="bottom" constant="80" id="Asx-WP-qtq"/>
                             <constraint firstItem="3Kg-nm-291" firstAttribute="top" secondItem="w8t-mx-9Gp" secondAttribute="bottom" constant="8" id="EqP-nC-3br"/>
+                            <constraint firstItem="mR7-BV-e3y" firstAttribute="top" secondItem="Qvw-Xc-2fy" secondAttribute="bottom" constant="68" id="KBZ-TE-7Jz"/>
+                            <constraint firstItem="mR7-BV-e3y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="80" id="MWH-Kt-ew3"/>
                             <constraint firstAttribute="centerX" secondItem="3Kg-nm-291" secondAttribute="centerX" id="YOh-jd-ClA"/>
                             <constraint firstItem="w8t-mx-9Gp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="ev5-Ff-45Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mR7-BV-e3y" secondAttribute="trailing" constant="80" id="jam-ed-Tyn"/>
                             <constraint firstAttribute="centerX" secondItem="Qvw-Xc-2fy" secondAttribute="centerX" id="vQD-Xk-lvB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qvw-Xc-2fy" secondAttribute="bottom" constant="364" id="wUt-z5-aFc"/>
                             <constraint firstItem="Qvw-Xc-2fy" firstAttribute="top" secondItem="3Kg-nm-291" secondAttribute="bottom" constant="8" id="ycd-Ob-t0j"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="urlLabel" destination="mR7-BV-e3y" id="wNO-Ot-Gm3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-65" y="333"/>
         </scene>
     </scenes>
 </document>
