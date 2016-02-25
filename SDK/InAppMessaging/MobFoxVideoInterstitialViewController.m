@@ -522,8 +522,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         NSString* cacheFile = [cachePath stringByAppendingPathComponent:fullRequestString];
 
         dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        if ([fileManager fileExistsAtPath:cacheFile])
-            dataReply = [NSData dataWithContentsOfFile:cacheFile];
+//        if ([fileManager fileExistsAtPath:cacheFile])
+//            dataReply = [NSData dataWithContentsOfFile:cacheFile];
         if (!dataReply)
         {
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Error reading response from server"
@@ -611,12 +611,12 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     [self updateAllFrames:requestedAdOrientation];
     
     self.mobFoxInterstitialPlayerViewController.adInterstitialOrientation = adInterstitialOrientation;
-    self.mobFoxInterstitialPlayerViewController.view.backgroundColor = [UIColor clearColor];
     self.mobFoxInterstitialPlayerViewController.view.frame = self.view.bounds;
 //    self.mobFoxInterstitialPlayerViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.interstitialHoldingView = [[UIView alloc] initWithFrame:self.view.bounds];
 //    self.interstitialHoldingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.interstitialHoldingView.backgroundColor = [UIColor clearColor];
+    self.interstitialHoldingView.opaque = NO;
     self.interstitialHoldingView.autoresizesSubviews = YES;
     
     MobFoxHTMLBannerView* bannerView = [[MobFoxHTMLBannerView alloc] initWithFrame:interstitialHoldingView.frame];
@@ -760,9 +760,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
                 interstitialViewController = [self firstAvailableUIViewController];
 
-                interstitialViewController.wantsFullScreenLayout = YES;
-
-                [interstitialViewController presentViewController:self.mobFoxInterstitialPlayerViewController animated:NO completion:nil];
+                [interstitialViewController addChildViewController:self.mobFoxInterstitialPlayerViewController];
+                [interstitialViewController.view addSubview:self.mobFoxInterstitialPlayerViewController.view];
 
                 [self advertShow:advertType viewToShow:self.mobFoxInterstitialPlayerViewController.view];
 
@@ -791,7 +790,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 	}
     
     [self advertTidyUpAfterAd:advertTypeCurrentlyPlaying];
-    [interstitialViewController dismissViewControllerAnimated:NO completion:nil];
+    [self.mobFoxInterstitialPlayerViewController.view removeFromSuperview];
+    [self.mobFoxInterstitialPlayerViewController removeFromParentViewController];
     [self interstitialTidyUpAfterAd];
 
 }

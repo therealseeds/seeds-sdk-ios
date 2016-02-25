@@ -62,6 +62,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     [self setUpBrowserUserAgentStrings];
     self.autoresizingMask = UIViewAutoresizingNone;
 	self.backgroundColor = [UIColor clearColor];
+    self.opaque = NO;
 	refreshAnimation = UIViewAnimationTransitionFlipFromLeft;
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -391,6 +392,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
             Seeds.sharedInstance.inAppMessageDoNotShow = [doNotShowValue boolValue];
         else
             Seeds.sharedInstance.inAppMessageDoNotShow = NO;
+        Seeds.sharedInstance.inAppMessageDoNotShow = NO;
 
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
         
@@ -424,7 +426,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 //          add overlay later, only if no custom event is shown
         }
 		webView.backgroundColor = [UIColor clearColor];
-		webView.opaque = NO;
+        webView.opaque = NO;
         webView.scrollView.scrollsToTop = false;
 
 		self.bannerView = webView;
