@@ -632,7 +632,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     [bannerView performSelectorOnMainThread:@selector(setupAdFromJson:) withObject:json waitUntilDone:YES];
     
     [self.interstitialHoldingView addSubview:bannerView];
-    
+
+    /*
     interstitialSkipButtonShow = YES;
     
     UIImage *buttonImage = [UIImage mobfoxSkipButtonImage];
@@ -647,6 +648,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     [self.interstitialSkipButton setImage:buttonDisabledImage forState:UIControlStateHighlighted];
   
     self.interstitialSkipButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+    */
     [self showInterstitialSkipButton];
     return [bannerView isBannerLoaded];
 }
@@ -990,7 +992,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
     if (self.interstitialTopToolbar) {
         self.interstitialTopToolbar.items = self.interstitialTopToolbarButtons;
-    } else {
+    } else if (self.interstitialSkipButton) {
         float skipButtonSize = buttonSize + 4.0f;
         CGRect buttonFrame = self.interstitialSkipButton.frame;
         buttonFrame.origin.x = self.view.frame.size.width - (skipButtonSize+10.0f);
