@@ -58,7 +58,6 @@ enum {
 	BOOL _shouldScaleWebView;
 	BOOL _shouldSkipLinkPreflight;
 	BOOL _statusBarWasVisible;
-	NSURL *_tapThroughURL;
     NSInteger _refreshInterval;
 	NSTimer *_refreshTimer;
 
@@ -77,7 +76,8 @@ enum {
 
 @property (nonatomic, assign) BOOL refreshTimerOff;
 @property (nonatomic, assign) NSInteger customReloadTime;
-@property (nonatomic, retain) UIImage *_bannerImage;
+@property (nonatomic, retain) NSURL *tapThroughURL;
+@property (nonatomic, retain) UIImage *bannerImage;
 @property (strong, nonatomic) NSString *requestURL;
 
 @property (nonatomic, assign) NSInteger userAge;

@@ -348,12 +348,12 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	{
 		_tapThroughLeavesApp = YES;
 	}
-	NSString *clickUrlString = [json objectForKey:@"clickurl"];
-	if ([clickUrlString length])
+	NSString *clickUrl = [json objectForKey:@"clickurl"];
+	if ([clickUrl length] > 0)
 	{
-        clickUrlString = [clickUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        clickUrl = [clickUrl stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-		_tapThroughURL = [NSURL URLWithString:clickUrlString];
+		_tapThroughURL = [NSURL URLWithString:clickUrl];
         self.skipOverlay = @"0";
 	}
     else
@@ -397,9 +397,9 @@ NSString * const MobFoxErrorDomain = @"MobFox";
             Seeds.sharedInstance.inAppMessageDoNotShow = NO;
 
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
-        
+
         //load HTML string later (to avoid calling impression pixels when using custom events)
-        if(/*!headers*/false) { //means that it's an interstitial ad
+        if([clickUrl length] > 0) { //means that it's an interstitial ad
             _htmlString = [NSString stringWithFormat: @"<style>* { -webkit-tap-highlight-color: rgba(0,0,0,0);} body {height:100%%; width:100%%;} img {max-width:100%%; max-height:100%%; width:auto; height:auto; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;}</style>%@",html];
         } else {
             _htmlString = html;
@@ -665,7 +665,10 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     NSString *urlString = [url absoluteString];
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
 	{
-        if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""] && wasUserAction) {
+        if ([urlString isEqualToString:@"about:close"]) {
+
+            return NO;
+        } else if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""] && wasUserAction) {
             if(_tapThroughURL) {
                 NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL:_tapThroughURL];
                 [request2 setHTTPMethod: @"GET"];

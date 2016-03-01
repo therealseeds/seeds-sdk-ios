@@ -627,29 +627,31 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
     bannerView.refreshTimerOff = YES;
     
-    bannerView._bannerImage = _bannerImage;
+    bannerView.bannerImage = _bannerImage;
 
     [bannerView performSelectorOnMainThread:@selector(setupAdFromJson:) withObject:json waitUntilDone:YES];
     
     [self.interstitialHoldingView addSubview:bannerView];
 
-    /*
     interstitialSkipButtonShow = YES;
     
     UIImage *buttonImage = [UIImage mobfoxSkipButtonImage];
     UIImage *buttonDisabledImage = buttonDisabledImage = [UIImage mobfoxSkipButtonDisabledImage];
     
     float skipButtonSize = buttonSize + 4.0f;
-                
-    self.interstitialSkipButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    [self.interstitialSkipButton setFrame:CGRectMake(0, 0, skipButtonSize, skipButtonSize)];
-    [self.interstitialSkipButton addTarget:self action:@selector(interstitialSkipAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.interstitialSkipButton setImage:buttonImage forState:UIControlStateNormal];
-    [self.interstitialSkipButton setImage:buttonDisabledImage forState:UIControlStateHighlighted];
+
+    if (bannerView.tapThroughURL) {
+        self.interstitialSkipButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        [self.interstitialSkipButton setFrame:CGRectMake(0, 0, skipButtonSize, skipButtonSize)];
+        [self.interstitialSkipButton addTarget:self action:@selector(interstitialSkipAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.interstitialSkipButton setImage:buttonImage forState:UIControlStateNormal];
+        [self.interstitialSkipButton setImage:buttonDisabledImage forState:UIControlStateHighlighted];
   
-    self.interstitialSkipButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-    */
-    [self showInterstitialSkipButton];
+        self.interstitialSkipButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+
+        [self showInterstitialSkipButton];
+    }
+
     return [bannerView isBannerLoaded];
 }
 
