@@ -666,8 +666,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
 	{
         if ([urlString isEqualToString:@"about:close"]) {
-
-            return NO;
+            [self.delegate interstitialSkipAction:nil];
+            return YES;
         } else if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""] && wasUserAction) {
             if(_tapThroughURL) {
                 NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL:_tapThroughURL];

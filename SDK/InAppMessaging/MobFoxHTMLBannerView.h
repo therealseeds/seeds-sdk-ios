@@ -46,6 +46,8 @@ enum {
 
 - (void)mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner;
 
+- (void)interstitialSkipAction:(id)sender;
+
 @end
 
 @interface MobFoxHTMLBannerView : UIView 

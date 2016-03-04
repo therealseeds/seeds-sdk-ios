@@ -522,8 +522,10 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         NSString* cacheFile = [cachePath stringByAppendingPathComponent:fullRequestString];
 
         dataReply = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//        if ([fileManager fileExistsAtPath:cacheFile])
-//            dataReply = [NSData dataWithContentsOfFile:cacheFile];
+        if (!dataReply) {
+            if ([fileManager fileExistsAtPath:cacheFile])
+                dataReply = [NSData dataWithContentsOfFile:cacheFile];
+        }
         if (!dataReply)
         {
             NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Error reading response from server"
