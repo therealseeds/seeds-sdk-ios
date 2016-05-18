@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -62,7 +62,7 @@
                                     <action selector="iapEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gwc-9D-Lwq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="InApp URL: none" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="9" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mR7-BV-e3y" userLabel="InApp URL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="InApp URL: none" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="9" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mR7-BV-e3y" userLabel="InApp URL">
                                 <rect key="frame" x="100" y="304" width="400" height="216"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -72,7 +72,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="w8t-mx-9Gp" secondAttribute="centerX" id="3GE-fL-xB5"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mR7-BV-e3y" secondAttribute="bottom" constant="80" id="Asx-WP-qtq"/>
                             <constraint firstItem="3Kg-nm-291" firstAttribute="top" secondItem="w8t-mx-9Gp" secondAttribute="bottom" constant="8" id="EqP-nC-3br"/>
                             <constraint firstItem="mR7-BV-e3y" firstAttribute="top" secondItem="Qvw-Xc-2fy" secondAttribute="bottom" constant="68" id="KBZ-TE-7Jz"/>
                             <constraint firstItem="mR7-BV-e3y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="80" id="MWH-Kt-ew3"/>
@@ -83,6 +82,11 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qvw-Xc-2fy" secondAttribute="bottom" constant="364" id="wUt-z5-aFc"/>
                             <constraint firstItem="Qvw-Xc-2fy" firstAttribute="top" secondItem="3Kg-nm-291" secondAttribute="bottom" constant="8" id="ycd-Ob-t0j"/>
                         </constraints>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="wUt-z5-aFc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="urlLabel" destination="mR7-BV-e3y" id="wNO-Ot-Gm3"/>
