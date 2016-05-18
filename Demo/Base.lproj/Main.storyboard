@@ -43,6 +43,12 @@
                                 <state key="normal" title="Show in-app message">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="180" y="172" width="240" height="264"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="280" y="172" width="240" height="264"/>
+                                </variation>
                                 <connections>
                                     <action selector="showIAM:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wob-vA-Fel"/>
                                 </connections>
@@ -67,6 +73,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular" misplaced="YES">
+                                    <rect key="frame" x="100" y="504" width="400" height="17"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="100" y="504" width="600" height="17"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -82,7 +94,17 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qvw-Xc-2fy" secondAttribute="bottom" constant="364" id="wUt-z5-aFc"/>
                             <constraint firstItem="Qvw-Xc-2fy" firstAttribute="top" secondItem="3Kg-nm-291" secondAttribute="bottom" constant="8" id="ycd-Ob-t0j"/>
                         </constraints>
+                        <variation key="heightClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="wUt-z5-aFc"/>
+                            </mask>
+                        </variation>
                         <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="wUt-z5-aFc"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <exclude reference="wUt-z5-aFc"/>
                             </mask>
