@@ -46,13 +46,10 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
 @end
 
-
-
 @implementation MobFoxHTMLBannerView
 {
 	MFRedirectChecker *redirectChecker;
 }
-
 
 - (void)setup
 {
@@ -348,6 +345,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	{
 		_tapThroughLeavesApp = YES;
 	}
+
 	NSString *clickUrl = [json objectForKey:@"clickurl"];
 	if ([clickUrl length] > 0)
 	{
@@ -360,7 +358,11 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     {
         self.skipOverlay = @"1";
     }
-	_shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
+
+    NSString *messageId = [json objectForKey:@"message_id"];
+    Seeds.sharedInstance.inAppMessageId = messageId;
+
+    _shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
     _shouldSkipLinkPreflight = YES; //[[xml.documentRoot getNamedChild:@"skippreflight"].text isEqualToString:@"yes"];
 	self.bannerView = nil;
 	adType = @"textAd";//[xml.documentRoot.attributes objectForKey:@"type"];

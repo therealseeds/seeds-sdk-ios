@@ -866,9 +866,9 @@ NSString* const kCLYUserCustom = @"custom";
 
 + (instancetype)sharedInstance;
 
-- (void)requestInAppMessage;
+- (void)requestInAppMessage:(NSString*)messageId;
 
-- (void)showInAppMessageIn:(UIViewController*)viewController;
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
 
 @end
 
@@ -896,29 +896,29 @@ NSString* const kCLYUserCustom = @"custom";
     return self;
 }
 
-- (void)requestInAppMessage
+- (void)requestInAppMessage:(NSString*)messageId
 {
     self.controller.requestURL = self.appHost;
-    [self.controller requestAd];
+    [self.controller requestAd:messageId];
 }
 
-- (BOOL)isInAppMessageLoaded
+- (BOOL)isInAppMessageLoaded:(NSString*)messageId
 {
-    return self.controller.advertLoaded;
+    return [self.controller isAdvertLoaded:messageId];
 }
 
-- (void)showInAppMessageIn:(UIViewController*)viewController
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController
 {
-    if (!self.isInAppMessageLoaded || Seeds.sharedInstance.inAppMessageDoNotShow) {
+    if (![self isInAppMessageLoaded:messageId] || Seeds.sharedInstance.inAppMessageDoNotShow) {
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-            [delegate seedsInAppMessageShown:nil withSuccess:NO];
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withMessageId:withSuccess:)])
+            [delegate seedsInAppMessageShown:nil withMessageId:Seeds.sharedInstance.inAppMessageId withSuccess:NO];
         return;
     }
 
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
-    
+
     [self.controller presentAd:MobFoxAdTypeText];
 }
 
@@ -934,8 +934,8 @@ NSString* const kCLYUserCustom = @"custom";
     Seeds.sharedInstance.adClicked = NO;
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
-        [delegate seedsInAppMessageLoadSucceeded:nil];
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:withMessageId:)])
+        [delegate seedsInAppMessageLoadSucceeded:nil withMessageId:Seeds.sharedInstance.inAppMessageId];
 }
 
 - (void)mobfoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial didFailToReceiveAdWithError:(NSError *)error
@@ -943,8 +943,8 @@ NSString* const kCLYUserCustom = @"custom";
     NSLog(@"[Seeds] mobfoxVideoInterstitialView didFailToReceiveAdWithError");
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound)])
-        [delegate seedsNoInAppMessageFound];
+    if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound:)])
+        [delegate seedsNoInAppMessageFound:Seeds.sharedInstance.inAppMessageId];
 }
 
 - (void)mobfoxVideoInterstitialViewActionWillPresentScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -956,8 +956,8 @@ NSString* const kCLYUserCustom = @"custom";
                           count:1];
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-        [delegate seedsInAppMessageShown:nil withSuccess:YES];
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withMessageId:withSuccess:)])
+        [delegate seedsInAppMessageShown:nil withMessageId:Seeds.sharedInstance.inAppMessageId withSuccess:YES];
 }
 
 - (void)mobfoxVideoInterstitialViewWillDismissScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -980,8 +980,8 @@ NSString* const kCLYUserCustom = @"custom";
     [self.controller interstitialStopAdvert];
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
-        [delegate seedsInAppMessageClosed:nil andCompleted:YES];
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:withMessageId:andCompleted:)])
+        [delegate seedsInAppMessageClosed:nil withMessageId:Seeds.sharedInstance.inAppMessageId andCompleted:YES];
 }
 
 - (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -997,8 +997,8 @@ NSString* const kCLYUserCustom = @"custom";
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked (ad clicked = %s)", Seeds.sharedInstance.adClicked ? "yes" : "no");
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
-        [delegate seedsInAppMessageClicked:nil];
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withMessageId:)])
+        [delegate seedsInAppMessageClicked:nil withMessageId:Seeds.sharedInstance.inAppMessageId];
 }
 
 @end
@@ -1055,6 +1055,7 @@ NSString* const kCLYUserCustom = @"custom";
 #endif
 
         self.deviceId = nil;
+        self.inAppMessageId = nil;
         self.inAppMessageVariantName = nil;
         self.inAppMessageDoNotShow = NO;
         self.adClicked = NO;
@@ -1262,17 +1263,32 @@ NSString* const kCLYUserCustom = @"custom";
 
 - (void)requestInAppMessage
 {
-    [[SeedsInterstitialAds sharedInstance] requestInAppMessage];
+    [self requestInAppMessage:nil];
+}
+
+- (void)requestInAppMessage:(NSString*)messageId
+{
+    [[SeedsInterstitialAds sharedInstance] requestInAppMessage:messageId];
 }
 
 - (BOOL)isInAppMessageLoaded
 {
-    return [[SeedsInterstitialAds sharedInstance] isInAppMessageLoaded];
+    return [[SeedsInterstitialAds sharedInstance] isInAppMessageLoaded:nil];
+}
+
+- (BOOL)isInAppMessageLoaded:(NSString*)messageId
+{
+    return [[SeedsInterstitialAds sharedInstance] isInAppMessageLoaded:messageId];
 }
 
 - (void)showInAppMessageIn:(UIViewController*)viewController;
 {
-    [[SeedsInterstitialAds sharedInstance] showInAppMessageIn:viewController];
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController];
+}
+
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
+{
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController];
 }
 
 - (void)setLocation:(double)latitude longitude:(double)longitude

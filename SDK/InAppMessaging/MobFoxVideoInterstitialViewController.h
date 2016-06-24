@@ -66,7 +66,7 @@ typedef enum {
 @interface MobFoxVideoInterstitialViewController : UIViewController
 {
 
-    BOOL advertLoaded;
+    BOOL _advertLoaded;
 	BOOL advertViewActionInProgress;
 
     __unsafe_unretained id <MobFoxVideoInterstitialViewControllerDelegate> delegate;
@@ -81,7 +81,6 @@ typedef enum {
 
 @property (nonatomic, assign) IBOutlet __unsafe_unretained id <MobFoxVideoInterstitialViewControllerDelegate> delegate;
 
-@property (nonatomic, readonly, getter=isAdvertLoaded) BOOL advertLoaded;
 @property (nonatomic, readonly, getter=isAdvertViewActionInProgress) BOOL advertViewActionInProgress;
 
 @property (nonatomic, assign) BOOL locationAwareAdverts;
@@ -93,7 +92,9 @@ typedef enum {
 
 @property (nonatomic, strong) NSString *requestURL;
 
-- (void)requestAd;
+- (BOOL)isAdvertLoaded:(NSString*)messageId;
+
+- (void)requestAd:(NSString*)messageId;
 
 - (void)presentAd:(MobFoxAdType)advertType;
 

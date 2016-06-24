@@ -49,6 +49,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     BOOL alreadyRequestedInterstitial;
 
     UIInterfaceOrientation requestedAdOrientation;
+    NSString* requestedMessageId;
     
     BOOL currentlyPlayingInterstitial;
     float statusBarHeight;
@@ -129,7 +130,13 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 @implementation MobFoxVideoInterstitialViewController
 
-@synthesize delegate, locationAwareAdverts, enableInterstitialAds, currentLatitude, currentLongitude, advertLoaded, advertViewActionInProgress, requestURL;
+@synthesize delegate;
+@synthesize locationAwareAdverts;
+@synthesize enableInterstitialAds;
+@synthesize currentLatitude;
+@synthesize currentLongitude;
+@synthesize advertViewActionInProgress;
+@synthesize requestURL;
 
 @synthesize videoAdvertTrackingEvents, IPAddress;
 @synthesize interstitialTimer;
@@ -210,7 +217,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskAll;
 }
 
@@ -428,7 +435,14 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 #pragma mark - Ad Request
 
-- (void)requestAd
+- (BOOL)isAdvertLoaded:(NSString*)messageId
+{
+    if (!self.advertLoaded)
+        return NO;
+    return messageId == nil || [messageId isEqualToString:requestedMessageId];
+}
+
+- (void)requestAd:(NSString*)messageId
 {
     if (self.advertLoaded || self.advertViewActionInProgress || advertRequestInProgress) {
         return;
@@ -463,23 +477,28 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     alreadyRequestedInterstitial = NO;
     
     if (enableInterstitialAds) {
-        [self performSelectorInBackground:@selector(asyncRequestAdWithPublisherId:) withObject:publisherId];
+        [self performSelectorInBackground:@selector(asyncRequestAdWrapper:) withObject:[NSArray arrayWithObjects:publisherId, messageId, nil]];
     } else {
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"Error creating ad- both video and interstitial ads disabled" forKey:NSLocalizedDescriptionKey];
         NSError *error = [NSError errorWithDomain:MobFoxVideoInterstitialErrorDomain code:MobFoxInterstitialViewErrorUnknown userInfo:userInfo];
         [self performSelectorOnMainThread:@selector(reportError:) withObject:error waitUntilDone:YES];
         advertRequestInProgress = NO;
-        return;
     }
-	
-
 }
 
-- (void)asyncRequestAdWithPublisherId:(NSString *)publisherId
+- (void)asyncRequestAdWrapper:(NSArray*)args
+{
+    [self asyncRequestAdWithPublisherId:[args objectAtIndex:0]
+                           andMessageId:[args objectAtIndex:1]];
+}
+
+- (void)asyncRequestAdWithPublisherId:(NSString *)publisherId andMessageId:(NSString*)messageId
 {
     alreadyRequestedInterstitial = YES;
 	@autoreleasepool
 	{
+        requestedMessageId = messageId;
+
         UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         requestedAdOrientation = interfaceOrientation;
         NSString *orientation = UIInterfaceOrientationIsPortrait(interfaceOrientation) ? @"portrait" : @"landscape";
@@ -489,6 +508,11 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
                                        [publisherId stringByUrlEncoding],
                                        [orientation stringByUrlEncoding],
                                        [deviceId stringByUrlEncoding]];
+        if (messageId != nil)
+        {
+            fullRequestString = [fullRequestString stringByAppendingString:[NSString stringWithFormat:@"&message_id=%@",
+                                                                            [messageId stringByUrlEncoding]]];
+        }
 
         NSURL *serverURL = [self serverURL];
         
@@ -539,7 +563,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         }
 
         error = nil;
-        id jsonReply = [NSJSONSerialization JSONObjectWithData:dataReply options:0 error:&error];
+        NSDictionary* jsonReply = [NSJSONSerialization JSONObjectWithData:dataReply options:0 error:&error];
 
         if (!jsonReply)
         {
@@ -554,6 +578,10 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         }
 
         [dataReply writeToFile:cacheFile atomically:YES];
+
+        jsonReply = [NSMutableDictionary dictionaryWithDictionary:jsonReply];
+        if (messageId != nil && [jsonReply objectForKey:@"message_id"] == nil)
+            [(NSMutableDictionary*)jsonReply setObject:messageId forKey:@"message_id"];
 
         [self performSelectorOnMainThread:@selector(advertCreateFromJSON:) withObject:jsonReply waitUntilDone:YES];
 	}
@@ -697,7 +725,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 {
     if(_customEventFullscreen) {
         return;
-    } else if(advertLoaded) {
+    } else if(_advertLoaded) {
         [self advertCreatedSuccessfully:advertTypeCurrentlyPlaying];
         return;
     } else if (enableInterstitialAds && !alreadyRequestedInterstitial && !_customEventFullscreen) {
@@ -1224,8 +1252,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     [self interstitialStopAdvert];
 
     id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
-        [seedsDelegate seedsInAppMessageClosed:nil andCompleted:NO];
+    if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageClosed:withMessageId:andCompleted:)])
+        [seedsDelegate seedsInAppMessageClosed:nil withMessageId:requestedMessageId andCompleted:NO];
 }
 
 #pragma mark -

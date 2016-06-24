@@ -73,7 +73,7 @@
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
     UIApplication *app = [UIApplication sharedApplication];
     [app setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 

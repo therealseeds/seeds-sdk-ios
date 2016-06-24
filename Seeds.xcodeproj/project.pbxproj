@@ -67,7 +67,6 @@
 		8A5084811B7CAF9300A6CF52 /* MFCustomEventFullscreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50847B1B7CAF9300A6CF52 /* MFCustomEventFullscreen.h */; };
 		8A5084821B7CAF9300A6CF52 /* MFCustomEventFullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50847C1B7CAF9300A6CF52 /* MFCustomEventFullscreen.m */; };
 		8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50847D1B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h */; };
-		8A5084B31B7CB3D300A6CF52 /* SeedsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; };
 		8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AC3B9141B834CE80059D3CA /* Seeds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084291B7CAF2300A6CF52 /* Seeds.xcdatamodeld */; };
@@ -257,7 +256,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AC3B9471B8352E90059D3CA /* SeedsSDK.framework in Frameworks */,
-				8A5084B31B7CB3D300A6CF52 /* SeedsSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,7 +591,7 @@
 		8A5083901B7CAD6100A6CF52 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0730;
 				TargetAttributes = {
 					7ED393B81BA698E500890DE3 = {
 						CreatedOnToolsVersion = 6.4;
@@ -883,6 +881,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeedsDemo_EmbeddedFramework.app/SeedsDemo_EmbeddedFramework";
@@ -927,6 +926,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeedsDemo_EmbeddedFramework.app/SeedsDemo_EmbeddedFramework";
@@ -951,6 +951,8 @@
 		8A5083941B7CAD6100A6CF52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
@@ -1009,6 +1011,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1060,6 +1063,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.ios.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1114,6 +1118,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.ios$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1157,6 +1162,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.ios$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1205,6 +1211,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1246,6 +1253,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1383,6 +1391,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.ios$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1428,6 +1437,7 @@
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.playseeds.ios$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -6,6 +6,7 @@
 //
 //
 
+#import "AppDelegate.h"
 #import "ViewController.h"
 #import "SeedsInAppMessageDelegate.h"
 
@@ -25,25 +26,25 @@
     Seeds.sharedInstance.inAppMessageDelegate = self;
 }
 
-- (void)seedsInAppMessageClicked:(SeedsInAppMessage*)inAppMessage {
-    NSLog(@"seedsInAppMessageClicked");
+- (void)seedsInAppMessageClicked:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId {
+    NSLog(@"seedsInAppMessageClicked(%@)", messageId);
 }
 
-- (void)seedsInAppMessageClosed:(SeedsInAppMessage*)inAppMessage andCompleted:(BOOL)completed {
-    NSLog(@"seedsInAppMessageClosed, completed = %@", completed ? @"YES" : @"NO");
+- (void)seedsInAppMessageClosed:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId andCompleted:(BOOL)completed {
+    NSLog(@"seedsInAppMessageClosed(%@), completed = %@", messageId, completed ? @"YES" : @"NO");
 }
 
-- (void)seedsInAppMessageLoadSucceeded:(SeedsInAppMessage*)inAppMessage {
-    NSLog(@"seedsInAppMessageLoadSucceeded");
-    [Seeds.sharedInstance showInAppMessageIn:self];
+- (void)seedsInAppMessageLoadSucceeded:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId {
+    NSLog(@"seedsInAppMessageLoadSucceeded(%@)", messageId);
+    [Seeds.sharedInstance showInAppMessage:messageId in:self];
 }
 
-- (void)seedsInAppMessageShown:(SeedsInAppMessage*)inAppMessage withSuccess:(BOOL)success {
-    NSLog(@"seedsInAppMessageShown, success = %@", success ? @"YES" : @"NO");
+- (void)seedsInAppMessageShown:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId withSuccess:(BOOL)success {
+    NSLog(@"seedsInAppMessageShown(%@), success = %@", messageId, success ? @"YES" : @"NO");
 }
 
-- (void)seedsNoInAppMessageFound {
-    NSLog(@"seedsNoInAppMessageFound");
+- (void)seedsNoInAppMessageFound:(NSString*)messageId {
+    NSLog(@"seedsNoInAppMessageFound(%@)", messageId);
 }
 
 - (IBAction)iapEvent:(id)sender {
@@ -55,11 +56,18 @@
     [Seeds.sharedInstance recordSeedsIAPEvent:@"ios_seeds_iap" price:0.99];
 }
 
-- (IBAction)showIAM:(id)sender {
-    if (Seeds.sharedInstance.isInAppMessageLoaded)
-        [Seeds.sharedInstance showInAppMessageIn:self];
+- (IBAction)showIAM0:(id)sender {
+    if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_0])
+        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_0 in:self];
     else
-        [Seeds.sharedInstance requestInAppMessage];
+        [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_0];
+}
+
+- (IBAction)showIAM1:(id)sender {
+    if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_1])
+        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self];
+    else
+        [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
 }
 
 - (void)handleUrl:(NSURL*)url {
