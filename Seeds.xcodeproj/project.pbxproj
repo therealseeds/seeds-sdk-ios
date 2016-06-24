@@ -24,6 +24,9 @@
 		7ED393BE1BA698E500890DE3 /* SeedsSDK_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */; };
 		7ED393BF1BA698E500890DE3 /* SeedsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; };
 		7ED393CE1BA6AF9100890DE3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED393CD1BA6AF9100890DE3 /* TestViewController.m */; };
+		8A0FCBF81D1D7C2C00AE396B /* SKProductHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A0FCBF71D1D7C2C00AE396B /* SKProductHelper.h */; };
+		8A0FCBFC1D1D7CA200AE396B /* SKProductHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FCBFB1D1D7CA200AE396B /* SKProductHelper.m */; };
+		8A0FCBFD1D1D7CA200AE396B /* SKProductHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FCBFB1D1D7CA200AE396B /* SKProductHelper.m */; };
 		8A5083DC1B7CAE0700A6CF52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083DB1B7CAE0700A6CF52 /* main.m */; };
 		8A5083DF1B7CAE0700A6CF52 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083DE1B7CAE0700A6CF52 /* AppDelegate.m */; };
 		8A5083E21B7CAE0700A6CF52 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5083E11B7CAE0700A6CF52 /* ViewController.m */; };
@@ -168,6 +171,8 @@
 		7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeedsSDK_Tests.m; sourceTree = "<group>"; };
 		7ED393CC1BA6AF9100890DE3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		7ED393CD1BA6AF9100890DE3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		8A0FCBF71D1D7C2C00AE396B /* SKProductHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKProductHelper.h; sourceTree = "<group>"; };
+		8A0FCBFB1D1D7CA200AE396B /* SKProductHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKProductHelper.m; sourceTree = "<group>"; };
 		8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildUnity3D.sh; sourceTree = "<group>"; };
 		8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeedsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A50839F1B7CADAB00A6CF52 /* EmbeddedFrameworkInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EmbeddedFrameworkInfo.plist; sourceTree = "<group>"; };
@@ -416,6 +421,8 @@
 				8A5084551B7CAF7B00A6CF52 /* UIImage+MobFox.m */,
 				8A5084561B7CAF7B00A6CF52 /* UIView+FindViewController.h */,
 				8A5084571B7CAF7B00A6CF52 /* UIView+FindViewController.m */,
+				8A0FCBF71D1D7C2C00AE396B /* SKProductHelper.h */,
+				8A0FCBFB1D1D7CA200AE396B /* SKProductHelper.m */,
 			);
 			path = InAppMessaging;
 			sourceTree = "<group>";
@@ -463,6 +470,7 @@
 				8A50845F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h in Headers */,
 				8A5084591B7CAF7B00A6CF52 /* MFRedirectChecker.h in Headers */,
 				8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */,
+				8A0FCBF81D1D7C2C00AE396B /* SKProductHelper.h in Headers */,
 				8A50846E1B7CAF7B00A6CF52 /* NSURL+MobFox.h in Headers */,
 				8A5084671B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.h in Headers */,
 				8A5084741B7CAF7B00A6CF52 /* UIImage+MobFox.h in Headers */,
@@ -724,6 +732,7 @@
 				8A5084331B7CAF2300A6CF52 /* SeedsDB.m in Sources */,
 				8A50847F1B7CAF9300A6CF52 /* MFCustomEventBanner.m in Sources */,
 				8A5084681B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.m in Sources */,
+				8A0FCBFC1D1D7CA200AE396B /* SKProductHelper.m in Sources */,
 				8A5084751B7CAF7B00A6CF52 /* UIImage+MobFox.m in Sources */,
 				8A50845C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m in Sources */,
 				8A5084711B7CAF7B00A6CF52 /* UIButton+MobFox.m in Sources */,
@@ -771,6 +780,7 @@
 				8AC3B9241B834D720059D3CA /* MFRedirectChecker.m in Sources */,
 				8AC3B9321B834D720059D3CA /* SeedsDB.m in Sources */,
 				8AC3B92A1B834D720059D3CA /* NSString+MobFox.m in Sources */,
+				8A0FCBFD1D1D7CA200AE396B /* SKProductHelper.m in Sources */,
 				8AC3B9271B834D720059D3CA /* MobFoxInterstitialPlayerViewController.m in Sources */,
 				8AC3B9251B834D720059D3CA /* MobFoxAdBrowserViewController.m in Sources */,
 			);

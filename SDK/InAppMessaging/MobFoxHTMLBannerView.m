@@ -27,7 +27,7 @@
 #import "Seeds.h"
 
 #import <StoreKit/StoreKit.h>
-#import "SKProduct+priceAsString.h"
+#import "SKProductHelper.h"
 
 NSString * const MobFoxErrorDomain = @"MobFox";
 
@@ -413,22 +413,18 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         }
 
         NSString *productPrice = @"BUY";
-//        if (productId != nil && [SKPaymentQueue canMakePayments]) {
-//            SKProduct *product;
-//            SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:
-//                                          [NSSet setWithObjects:productId, nil]];
-//            request.delegate = self;
-//            [request start];
-//
-//
-//
-//            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-//            [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-//            [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-//            [formatter setLocale:product.priceLocale];
-//
-//            productPrice = [formatter stringFromNumber:product.price];
-//        }
+        if (productId != nil && [SKPaymentQueue canMakePayments]) {
+            SKProduct *product = [SKProductHelper productWithIdentifier:productId];
+
+            if (product != nil) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+                [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                [formatter setLocale:product.priceLocale];
+
+                productPrice = [formatter stringFromNumber:product.price];
+            }
+        }
         _htmlString = [_htmlString stringByReplacingOccurrencesOfString:@"%{LocalizedPrice}" withString:productPrice];
 
 		if([skipOverlay isEqualToString:@"1"]) {
