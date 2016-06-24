@@ -26,6 +26,9 @@
 
 #import "Seeds.h"
 
+#import <StoreKit/StoreKit.h>
+#import "SKProduct+priceAsString.h"
+
 NSString * const MobFoxErrorDomain = @"MobFox";
 
 @interface MobFoxHTMLBannerView () <UIWebViewDelegate, MFCustomEventBannerDelegate, UIGestureRecognizerDelegate> {
@@ -362,6 +365,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     NSString *messageId = [json objectForKey:@"message_id"];
     Seeds.sharedInstance.inAppMessageId = messageId;
 
+    NSString *productId = [json objectForKey:@"productIdIos"];
+
     _shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
     _shouldSkipLinkPreflight = YES; //[[xml.documentRoot getNamedChild:@"skippreflight"].text isEqualToString:@"yes"];
 	self.bannerView = nil;
@@ -406,7 +411,25 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         } else {
             _htmlString = html;
         }
-        
+
+        NSString *productPrice = @"BUY";
+//        if (productId != nil && [SKPaymentQueue canMakePayments]) {
+//            SKProduct *product;
+//            SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:
+//                                          [NSSet setWithObjects:productId, nil]];
+//            request.delegate = self;
+//            [request start];
+//
+//
+//
+//            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//            [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+//            [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+//            [formatter setLocale:product.priceLocale];
+//
+//            productPrice = [formatter stringFromNumber:product.price];
+//        }
+        _htmlString = [_htmlString stringByReplacingOccurrencesOfString:@"%{LocalizedPrice}" withString:productPrice];
 
 		if([skipOverlay isEqualToString:@"1"]) {
 
