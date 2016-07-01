@@ -34,6 +34,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @interface MobFoxHTMLBannerView () <UIWebViewDelegate, MFCustomEventBannerDelegate, UIGestureRecognizerDelegate> {
     NSString *skipOverlay;
     BOOL wasUserAction;
+
+    SKProductHelper *productHelper;
 }
 
 @property (nonatomic, strong) NSString *userAgent;
@@ -67,6 +69,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+
+    productHelper = [[SKProductHelper alloc] init];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -414,7 +418,20 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
         NSString *productPrice = @"BUY";
         if (productId != nil && [SKPaymentQueue canMakePayments]) {
-            SKProduct *product = [SKProductHelper productWithIdentifier:productId];
+            __block BOOL finished = false;
+            __block SKProduct *product;
+
+            [productHelper getProductsByIdentifiers:@[productId] withResult:^(NSArray *products, NSError *error) {
+                if (products) {
+                    product = [products firstObject];
+                }
+
+                finished = true;
+            }];
+
+            while (!finished) {
+                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+            }
 
             if (product != nil) {
                 NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];

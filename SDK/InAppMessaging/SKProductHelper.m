@@ -8,81 +8,46 @@
 
 #import "SKProductHelper.h"
 
-@interface SKProductHelper ()
-
-@end
-
-@interface SKProductRequestHandler : NSObject <SKProductsRequestDelegate>
-
-@property (nonatomic, strong) SKProductsRequest *lastRequest;
-@property (nonatomic, strong) SKProductsResponse *lastResponse;
-@property (nonatomic, strong) NSError *lastError;
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response;
-- (void)requestDidFinish:(SKRequest *)request;
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error;
-
-- (void)startAndWait:(SKProductsRequest*)request;
-
-@end
-
 @implementation SKProductHelper
 
-+ (SKProduct*)productWithIdentifier:(NSString*)productId
-{
-    SKProductRequestHandler *handler = [[SKProductRequestHandler alloc] init];
+- (void)getProductsByIdentifiers:(NSArray *)productsId withResult:(void (^)(NSArray *products, NSError *error))block{
 
-    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:
-                                  [NSSet setWithObjects:productId, nil]];
+    if (!block) {
+        return;
+    }
 
-    [handler startAndWait:request];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-    if (handler.lastResponse != nil && handler.lastResponse.products.count > 0)
-        return [handler.lastResponse.products objectAtIndex:0];
+    productResultBlock = [block copy];
 
-    return nil;
+    _request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:productsId]];
+
+    _request.delegate = self;
+
+    [_request start];
+
 }
 
-@end
+#pragma mark - SKProductsRequestDelegate
 
-@implementation SKProductRequestHandler
-{
-    dispatch_semaphore_t semaphore;
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+
+    NSLog(@"responce - %@", response);
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+    productResultBlock(response.products, nil);
+
 }
 
-@synthesize lastRequest;
-@synthesize lastResponse;
-@synthesize lastError;
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
 
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
-{
-    self.lastRequest = request;
-    self.lastResponse = response;
-}
+    NSLog(@"error - %@", error.localizedDescription);
 
-- (void)requestDidFinish:(SKRequest *)request
-{
-    self.lastRequest = (SKProductsRequest *)request;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
-    dispatch_semaphore_signal(semaphore);
-}
+    productResultBlock(nil, error);
 
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error
-{
-    self.lastRequest = (SKProductsRequest *)request;
-    self.lastError = error;
-
-    dispatch_semaphore_signal(semaphore);
-}
-
-- (void)startAndWait:(SKProductsRequest*)request
-{
-    semaphore = dispatch_semaphore_create(0);
-
-    request.delegate = self;
-    [request start];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
 @end

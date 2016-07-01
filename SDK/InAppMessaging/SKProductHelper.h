@@ -9,11 +9,18 @@
 #ifndef SKProductHelper_h
 #define SKProductHelper_h
 
+#import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
-@interface SKProductHelper : NSObject
+@interface SKProductHelper : NSObject <SKProductsRequestDelegate> {
 
-+ (SKProduct*)productWithIdentifier:(NSString*)productId;
+    void (^productResultBlock)(NSArray *products, NSError *error);
+
+}
+
+@property (strong, nonatomic) SKProductsRequest *request;
+
+- (void)getProductsByIdentifiers:(NSArray *)productsId withResult:(void (^)(NSArray *products, NSError *error))block;
 
 @end
 
