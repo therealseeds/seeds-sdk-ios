@@ -941,6 +941,7 @@ NSString* const kCLYUserCustom = @"custom";
 - (void)mobfoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial didFailToReceiveAdWithError:(NSError *)error
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialView didFailToReceiveAdWithError");
+    NSLog(@"[Seeds] Are you trying to request an interstitial before calling the [[Seeds sharedInstance] start ...] method?");
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound:)])
