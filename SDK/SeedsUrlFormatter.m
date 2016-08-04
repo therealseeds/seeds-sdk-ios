@@ -8,10 +8,9 @@
 #   define SEEDS_LOG(...)
 
 #import <Foundation/Foundation.h>
+#import "SeedsUrlFormatter.h"
 
-NSString* SeedsJSONFromObject(id object);
-NSString* SeedsURLEscapedString(NSString* string);
-NSString* SeedsURLUnescapedString(NSString* string);
+@implementation SeedsUrlFormatter
 
 NSString* SeedsJSONFromObject(id object)
 {
@@ -47,8 +46,6 @@ NSString* SeedsURLUnescapedString(NSString* string)
     return [resultString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-@interface NSMutableData (AppendStringUTF8)
--(void)appendStringUTF8:(NSString*)string;
 @end
 
 @implementation NSMutableData (AppendStringUTF8)

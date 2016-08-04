@@ -34,7 +34,7 @@
 #include "MobFoxInterstitialPlayerViewController.h"
 
 #import "MFCustomEventFullscreen.h"
-#import "Seeds.h"
+#import "SeedsCore.h"
 #import "SeedsInAppMessageDelegate.h"
 
 NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial";

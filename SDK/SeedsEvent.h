@@ -6,8 +6,20 @@
 //
 //
 
-#ifndef SeedsEvent_h
-#define SeedsEvent_h
+#pragma mark - SeedsEvent
 
+#import <CoreData/NSManagedObject.h>
 
-#endif /* SeedsEvent_h */
+@interface SeedsEvent : NSObject
+
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, retain) NSDictionary *segmentation;
+@property (nonatomic, assign) int count;
+@property (nonatomic, assign) double sum;
+@property (nonatomic, assign) NSTimeInterval timestamp;
+
+- (void)dealloc;
++ (SeedsEvent*)objectWithManagedObject:(NSManagedObject*)managedObject;
+- (NSDictionary*)serializedData;
+
+@end

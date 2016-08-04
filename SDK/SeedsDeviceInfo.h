@@ -1,13 +1,17 @@
-//
-//  SeedsDeviceInfo.h
-//  Seeds
-//
-//  Created by Obioma Ofoamalu on 04/08/2016.
-//
-//
+#pragma mark - SeedsDeviceInfo
 
-#ifndef SeedsDeviceInfo_h
-#define SeedsDeviceInfo_h
+@interface SeedsDeviceInfo : NSObject
 
++ (NSString *)device;
++ (NSString *)osName;
++ (NSString *)osVersion;
++ (NSString *)carrier;
++ (NSString *)resolution;
++ (NSString *)locale;
++ (NSString *)appVersion;
 
-#endif /* SeedsDeviceInfo_h */
++ (NSString *)metrics;
+
++ (NSString *)bundleId;
+
+@end

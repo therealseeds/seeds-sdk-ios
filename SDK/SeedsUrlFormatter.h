@@ -6,8 +6,16 @@
 //
 //
 
-#ifndef SeedsUrlFormatter_h
-#define SeedsUrlFormatter_h
+@interface SeedsUrlFormatter: NSObject
+
+NSString* SeedsJSONFromObject(id object);
+NSString* SeedsURLEscapedString(NSString* string);
+NSString* SeedsURLUnescapedString(NSString* string);
+
+@end
+
+@interface NSMutableData (AppendStringUTF8)
+-(void)appendStringUTF8:(NSString*)string;
+@end
 
 
-#endif /* SeedsUrlFormatter_h */

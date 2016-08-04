@@ -6,8 +6,13 @@
 //
 //
 
-#ifndef SeedsEventQueue_h
-#define SeedsEventQueue_h
+#pragma mark - SeedsEventQueue
 
-
-#endif /* SeedsEventQueue_h */
+@interface SeedsEventQueue : NSObject
+- (NSUInteger)count;
+- (NSString *)events;
+- (void)recordEvent:(NSString *)key count:(int)count;
+- (void)recordEvent:(NSString *)key count:(int)count sum:(double)sum;
+- (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count;
+- (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count sum:(double)sum;
+@end
