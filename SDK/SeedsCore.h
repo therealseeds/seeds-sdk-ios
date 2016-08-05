@@ -26,9 +26,11 @@
     double lastTime;
     BOOL isSuspended;
     SeedsEventQueue *eventQueue;
+    NSDictionary *crashCustom;
+    NSMutableDictionary *_messageInfos;
 }
 
-@property (readonly, nonatomic, copy) NSString* deviceId;
+@property (nonatomic, copy) NSString* deviceId;
 @property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
 
 @property (atomic, copy) NSString* inAppMessageId;

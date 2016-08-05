@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "Seeds.h"
+#import "SeedsCore.h"
 #import "SeedsInAppMessageDelegate.h"
 #import "TestViewController.h"
 

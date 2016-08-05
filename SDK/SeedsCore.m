@@ -83,10 +83,10 @@
         isSuspended = NO;
         unsentSessionLength = 0;
         eventQueue = [[SeedsEventQueue alloc] init];
-        self.crashCustom = nil;
+        crashCustom = nil;
         
         
-        self.messageInfos = [NSMutableDictionary new];
+        _messageInfos = [NSMutableDictionary new];
         
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -655,7 +655,7 @@
 
 - (void)startCrashReportingWithSegments:(NSDictionary *)segments
 {
-    self.crashCustom = segments;
+    crashCustom = segments;
     [self startCrashReporting];
 }
 
@@ -725,8 +725,8 @@ void SeedsExceptionHandler(NSException *exception, bool nonfatal)
     crashReport[@"_background"] = @(Seeds.sharedInstance.isInBackground);
     crashReport[@"_run"] = @(Seeds.sharedInstance.timeSinceLaunch);
     
-    if(Seeds.sharedInstance.crashCustom)
-        crashReport[@"_custom"] = Seeds.sharedInstance.crashCustom;
+    if(Seeds.sharedInstance->crashCustom)
+        crashReport[@"_custom"] = Seeds.sharedInstance->crashCustom;
     
     if(SeedsCustomCrashLogs)
         crashReport[@"_logs"] = [SeedsCustomCrashLogs componentsJoinedByString:@"\n"];

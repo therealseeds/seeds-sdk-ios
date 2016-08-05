@@ -2,14 +2,13 @@
 //  SeedsTest.m
 //  Seeds
 //
-//  Created by Obioma Ofoamalu on 03/08/2016.
-//
-//
 
 #import <XCTest/XCTest.h>
-#import "SeedsCore.h"
 #import <OCMock/OCMockObject.h>
 #import <OCMock/OCMock.h>
+#import "SeedsCore.h"
+#import "SeedsConnectionQueue.h"
+#import "SeedsInterstitialAds.h"
 
 NSString *appKey;
 NSString *appHost;
@@ -47,6 +46,11 @@ Seeds *seedsMock;
     [[Seeds sharedInstance] start:appKey withHost:appHost andDeviceId:deviceId];
     
     XCTAssertEqual(appKey, [[Seeds sharedInstance] getAppKey]);
+    XCTAssertEqual(appKey, [[SeedsInterstitialAds sharedInstance] appKey]);
+    XCTAssertEqual(appKey, [[SeedsConnectionQueue sharedInstance] appKey]);
+    XCTAssertEqual(appHost, [[SeedsConnectionQueue sharedInstance] appHost]);
+    XCTAssertEqual(appHost, [[SeedsInterstitialAds sharedInstance] appHost]);
+
     XCTAssertTrue([[Seeds sharedInstance] isStarted]);
     XCTAssertNotNil([[Seeds sharedInstance] deviceId]);
     XCTAssertEqual(deviceId, [[Seeds sharedInstance] deviceId]);
@@ -59,6 +63,7 @@ Seeds *seedsMock;
     XCTAssertEqual(appKey, [[Seeds sharedInstance] getAppKey]);
     XCTAssertTrue([[Seeds sharedInstance] isStarted]);
     XCTAssertNotEqual(deviceId, [[Seeds sharedInstance] deviceId]);
+    XCTAssertTrue([[SeedsConnectionQueue sharedInstance] startedWithTest]);
 }
 
 - (void) testSeedsNotificationCategories {
@@ -91,11 +96,14 @@ Seeds *seedsMock;
     OCMVerify([seedsMock recordEvent:appKey segmentation: nil count:4 sum:2]);
 }
 
+- (void) testRecordUserDetails {
+    [seedsMock recordUserDetails:@{}];
+    OCMVerify([seedsMock recordUserDetails:@{}]);
+}
+
 - (void) testTrackPurchase {
-//    
-//    [seedsMock trackPurchase:appKey price:0.99];
-//    OCMVerify([seedsMock trackPurchase:appKey price:0.99]);
-//    OCMVerify([seedsMock recordIAPEvent:appKey price:0.99]);
+    [seedsMock trackPurchase:appKey price:0.99];
+    OCMVerify([seedsMock trackPurchase:appKey price:0.99]);
 }
 
 - (void) testRecordIAPEvent {
@@ -146,6 +154,62 @@ Seeds *seedsMock;
     isHandled = [[Seeds sharedInstance] handleRemoteNotification:nil withButtonTitles:nil];
     XCTAssertFalse(isHandled);
 }
+
+- (void) testRecordPushOpenForSeedsDictionary {
+    [seedsMock recordPushOpenForSeedsDictionary:nil];
+    OCMVerify([seedsMock recordPushOpenForSeedsDictionary:nil]);
+}
+
+- (void) testRecordPushActionForSeedsDictionary {
+    [seedsMock recordPushActionForSeedsDictionary:nil];
+    OCMVerify([seedsMock recordPushActionForSeedsDictionary:nil]);
+}
+
+- (void) testDidRegisterForRemoteNotificationWithDeviceToken {
+    [seedsMock didRegisterForRemoteNotificationsWithDeviceToken:nil];
+    OCMVerify([seedsMock didRegisterForRemoteNotificationsWithDeviceToken:nil]);
+}
+
+- (void) testDidFailToREgisterForRemoteNotification {
+    [seedsMock didFailToRegisterForRemoteNotifications];
+     OCMVerify([seedsMock didFailToRegisterForRemoteNotifications]);
+}
+
+- (void) testStartCrashReporting {
+    [seedsMock startCrashReporting];
+    OCMVerify([seedsMock startCrashReporting]);
+}
+
+- (void) testStartCrashReportingWithSegments {
+    [seedsMock startCrashReportingWithSegments:@{}];
+    OCMVerify([seedsMock startCrashReportingWithSegments:@{}]);
+}
+
+- (void) testRecordHandledException {
+    [seedsMock recordHandledException:nil];
+    OCMVerify([seedsMock recordHandledException:nil]);
+}
+
+- (void) testCrashTest {
+    [seedsMock crashTest];
+    OCMVerify([seedsMock crashTest]);
+}
+
+- (void) testCrashTest2 {
+    [seedsMock crashTest2];
+    OCMVerify([seedsMock crashTest2]);
+}
+
+- (void) testCrashTest3 {
+    [seedsMock crashTest3];
+    OCMVerify([seedsMock crashTest3]);
+}
+
+- (void) testCrashTest4 {
+    [seedsMock crashTest4];
+    OCMVerify([seedsMock crashTest4]);
+}
+
 
 //- (void)testPerformanceExample {
 //    // This is an example of a performance test case.

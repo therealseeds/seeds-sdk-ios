@@ -2,9 +2,6 @@
 //  SeedsConnectionQueue.h
 //  Seeds
 //
-//  Created by Obioma Ofoamalu on 04/08/2016.
-//
-//
 
 #pragma mark - SeedsConnectionQueue
 
@@ -27,5 +24,6 @@
 - (void)updateSessionWithDuration:(int)duration;
 - (void)endSessionWithDuration:(int)duration;
 - (void)tokenSession:(NSString *)token;
+- (void)storeCrashReportToTryLater:(NSString *)report;
 
 @end
