@@ -12,6 +12,7 @@
 
 NSString *appKey;
 NSString *appHost;
+NSString *eventKey;
 NSString *deviceId;
 Seeds *seedsMock;
 
@@ -23,9 +24,10 @@ Seeds *seedsMock;
 
 - (void)setUp {
     [super setUp];
-    appKey = @"1234";
-    appHost = @"www.testurl.com";
+    appKey = @"123hghgiodiidig949854";
+    appHost = @"http://dash.playseeds.com";
     deviceId = nil;
+    eventKey = @"purchase_item";
     seedsMock = OCMClassMock([Seeds class]);
 }
 
@@ -39,6 +41,26 @@ Seeds *seedsMock;
     XCTAssertEqual(appKey, [[Seeds sharedInstance] getAppKey]);
     XCTAssertTrue([[Seeds sharedInstance] isStarted]);
     XCTAssertNotEqual(deviceId, [[Seeds sharedInstance] deviceId]);
+}
+
+- (void) testStartWithInvalidAppKey {
+    @try {
+       [[Seeds sharedInstance] start:@"1234" withHost:appHost];
+        XCTFail();
+    }
+    @catch(NSException *e) {
+        // test passes
+    }
+}
+
+- (void) testStartWithInvalidAppHost {
+    @try {
+        [[Seeds sharedInstance] start:appKey withHost:@"www.testurl.com"];
+        XCTFail();
+    }
+    @catch(NSException *e) {
+        // test passes
+    }
 }
 
 - (void) testStartWithDeviceId {
@@ -83,17 +105,37 @@ Seeds *seedsMock;
 }
 
 - (void) testRecordEvent {
-    [seedsMock recordEvent:appKey count:2];
-    OCMVerify([seedsMock recordEvent:appKey count:2]);
+    [seedsMock recordEvent:eventKey count:2];
+    OCMVerify([seedsMock recordEvent:eventKey count:2]);
     
-    [seedsMock recordEvent:appKey count:3 sum:10];
-    OCMVerify([seedsMock recordEvent:appKey count:3 sum:10]);
+    [seedsMock recordEvent:eventKey count:3 sum:10];
+    OCMVerify([seedsMock recordEvent:eventKey count:3 sum:10]);
     
-    [seedsMock recordEvent:appKey segmentation:nil count:1];
-    OCMVerify([seedsMock recordEvent:appKey segmentation:nil count:1]);
+    [seedsMock recordEvent:eventKey segmentation:nil count:1];
+    OCMVerify([seedsMock recordEvent:eventKey segmentation:nil count:1]);
     
-    [seedsMock recordEvent:appKey segmentation: nil count:4 sum:2];
-    OCMVerify([seedsMock recordEvent:appKey segmentation: nil count:4 sum:2]);
+    [seedsMock recordEvent:eventKey segmentation: nil count:4 sum:2];
+    OCMVerify([seedsMock recordEvent:eventKey segmentation: nil count:4 sum:2]);
+}
+
+- (void) testRecordEventWithNullKey {
+    @try {
+        [[Seeds sharedInstance] recordEvent:nil count:1];
+        XCTFail();
+    }
+    @catch(NSException *e) {
+        // test passes
+    }
+}
+
+- (void) testRecordEventWithNullInvalidCount {
+    @try {
+        [[Seeds sharedInstance] recordEvent:eventKey count:0];
+        XCTFail();
+    }
+    @catch(NSException *e) {
+        // test passes
+    }
 }
 
 - (void) testRecordUserDetails {
@@ -102,18 +144,18 @@ Seeds *seedsMock;
 }
 
 - (void) testTrackPurchase {
-    [seedsMock trackPurchase:appKey price:0.99];
-    OCMVerify([seedsMock trackPurchase:appKey price:0.99]);
+    [seedsMock trackPurchase:eventKey price:0.99];
+    OCMVerify([seedsMock trackPurchase:eventKey price:0.99]);
 }
 
 - (void) testRecordIAPEvent {
-    [seedsMock recordIAPEvent:appKey price:0.99];
-    OCMVerify([seedsMock recordIAPEvent:appKey price:0.99]);
+    [seedsMock recordIAPEvent:eventKey price:0.99];
+    OCMVerify([seedsMock recordIAPEvent:eventKey price:0.99]);
 }
 
 - (void) testSeedsIAPEvent {
-    [seedsMock recordSeedsIAPEvent:appKey price:0.99];
-    OCMVerify([seedsMock recordSeedsIAPEvent:appKey price:0.99]);
+    [seedsMock recordSeedsIAPEvent:eventKey price:0.99];
+    OCMVerify([seedsMock recordSeedsIAPEvent:eventKey price:0.99]);
 }
 
 - (void) testRequestInAppMessage {
