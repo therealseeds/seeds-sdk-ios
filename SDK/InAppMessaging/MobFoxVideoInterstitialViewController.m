@@ -492,6 +492,11 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
                            andMessageId:[args count] == 2 ? [args objectAtIndex:1] : nil];
 }
 
+- (void)asyncRequestAdWithPublisherId:(NSString *)publisherId
+{
+    [self asyncRequestAdWithPublisherId:publisherId andMessageId:nil];
+}
+
 - (void)asyncRequestAdWithPublisherId:(NSString *)publisherId andMessageId:(NSString*)messageId
 {
     alreadyRequestedInterstitial = YES;
