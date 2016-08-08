@@ -56,6 +56,10 @@
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withMessageId:withSuccess:)])
             [delegate seedsInAppMessageShown:nil withMessageId:Seeds.sharedInstance.inAppMessageId withSuccess:NO];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
+            [delegate seedsInAppMessageShown:nil withSuccess:NO];
+
         return;
     }
     
@@ -79,6 +83,11 @@
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:withMessageId:)])
         [delegate seedsInAppMessageLoadSucceeded:nil withMessageId:Seeds.sharedInstance.inAppMessageId];
+    
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
+        [delegate seedsInAppMessageLoadSucceeded:nil];
+    
 }
 
 - (void)mobfoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial didFailToReceiveAdWithError:(NSError *)error
@@ -89,6 +98,9 @@
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound:)])
         [delegate seedsNoInAppMessageFound:Seeds.sharedInstance.inAppMessageId];
+    
+    if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound)])
+        [delegate seedsNoInAppMessageFound];
 }
 
 - (void)mobfoxVideoInterstitialViewActionWillPresentScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -102,6 +114,10 @@
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withMessageId:withSuccess:)])
         [delegate seedsInAppMessageShown:nil withMessageId:Seeds.sharedInstance.inAppMessageId withSuccess:YES];
+    
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
+        [delegate seedsInAppMessageShown:nil withSuccess:YES];
+    
 }
 
 - (void)mobfoxVideoInterstitialViewWillDismissScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -126,6 +142,10 @@
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:withMessageId:andCompleted:)])
         [delegate seedsInAppMessageClosed:nil withMessageId:Seeds.sharedInstance.inAppMessageId andCompleted:YES];
+    
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
+        [delegate seedsInAppMessageClosed:nil andCompleted:YES];
+    
 }
 
 - (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -143,6 +163,9 @@
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withMessageId:)])
         [delegate seedsInAppMessageClicked:nil withMessageId:Seeds.sharedInstance.inAppMessageId];
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
+        [delegate seedsInAppMessageClicked:nil];
 }
 
 @end
