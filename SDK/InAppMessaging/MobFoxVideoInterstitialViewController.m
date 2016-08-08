@@ -786,7 +786,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 
 - (void)presentAd:(MobFoxAdType)advertType {
-
     switch (advertType) {
         case MobFoxAdTypeImage:
         case MobFoxAdTypeText:
@@ -815,7 +814,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
             }
             break;
     }
-
 }
 
 - (void)interstitialStopAdvert {
@@ -911,8 +909,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     }
 
     self.advertViewActionInProgress = NO;
-    self.advertLoaded = NO;
-
 }
 
 #pragma mark - Request Status Reporting
