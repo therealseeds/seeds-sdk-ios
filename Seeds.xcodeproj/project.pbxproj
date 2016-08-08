@@ -35,8 +35,6 @@
 		8A5083EA1B7CAE0700A6CF52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A5083E81B7CAE0700A6CF52 /* LaunchScreen.xib */; };
 		8A50842D1B7CAF2300A6CF52 /* Seeds_OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084251B7CAF2300A6CF52 /* Seeds_OpenUDID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A50842E1B7CAF2300A6CF52 /* Seeds_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084261B7CAF2300A6CF52 /* Seeds_OpenUDID.m */; };
-		8A50842F1B7CAF2300A6CF52 /* Seeds.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084271B7CAF2300A6CF52 /* Seeds.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A5084301B7CAF2300A6CF52 /* Seeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084281B7CAF2300A6CF52 /* Seeds.m */; };
 		8A5084311B7CAF2300A6CF52 /* Seeds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084291B7CAF2300A6CF52 /* Seeds.xcdatamodeld */; };
 		8A5084321B7CAF2300A6CF52 /* SeedsDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50842B1B7CAF2300A6CF52 /* SeedsDB.h */; };
 		8A5084331B7CAF2300A6CF52 /* SeedsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50842C1B7CAF2300A6CF52 /* SeedsDB.m */; };
@@ -70,7 +68,6 @@
 		8A5084811B7CAF9300A6CF52 /* MFCustomEventFullscreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50847B1B7CAF9300A6CF52 /* MFCustomEventFullscreen.h */; };
 		8A5084821B7CAF9300A6CF52 /* MFCustomEventFullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50847C1B7CAF9300A6CF52 /* MFCustomEventFullscreen.m */; };
 		8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A50847D1B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h */; };
-		8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A7D3B381B7E07B300440CC8 /* SeedsInAppMessageDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AC3B9141B834CE80059D3CA /* Seeds.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084291B7CAF2300A6CF52 /* Seeds.xcdatamodeld */; };
 		8AC3B9241B834D720059D3CA /* MFRedirectChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50843A1B7CAF7B00A6CF52 /* MFRedirectChecker.m */; };
@@ -86,7 +83,6 @@
 		8AC3B92E1B834D720059D3CA /* UIImage+MobFox.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084551B7CAF7B00A6CF52 /* UIImage+MobFox.m */; };
 		8AC3B92F1B834D720059D3CA /* UIView+FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084571B7CAF7B00A6CF52 /* UIView+FindViewController.m */; };
 		8AC3B9301B834D720059D3CA /* Seeds_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084261B7CAF2300A6CF52 /* Seeds_OpenUDID.m */; };
-		8AC3B9311B834D720059D3CA /* Seeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084281B7CAF2300A6CF52 /* Seeds.m */; };
 		8AC3B9321B834D720059D3CA /* SeedsDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50842C1B7CAF2300A6CF52 /* SeedsDB.m */; };
 		8AC3B9331B834D790059D3CA /* MFCustomEventBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5084791B7CAF9300A6CF52 /* MFCustomEventBanner.m */; };
 		8AC3B9341B834D790059D3CA /* MFCustomEventFullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A50847C1B7CAF9300A6CF52 /* MFCustomEventFullscreen.m */; };
@@ -102,6 +98,22 @@
 		8AC3B9481B8352E90059D3CA /* SeedsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8AC3B94D1B8354030059D3CA /* libSeedsLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3B8FD1B834CC30059D3CA /* libSeedsLibrary.a */; };
 		8AC3B9501B8355120059D3CA /* SeedsResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AC3B8F21B834C380059D3CA /* SeedsResources.bundle */; };
+		C467A2D71D54884200E2DCDC /* SeedsCore.h in Headers */ = {isa = PBXBuildFile; fileRef = C47793D71D533E1500E4FCC6 /* SeedsCore.h */; };
+		C467A2D81D54887300E2DCDC /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; };
+		C467A2DA1D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C467A2D91D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m */; };
+		C467A2DC1D54B20700E2DCDC /* SeedsConnectionQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C467A2DB1D54B20700E2DCDC /* SeedsConnectionQueueTest.m */; };
+		C467A2DE1D54C97400E2DCDC /* SeedsEventQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C467A2DD1D54C97400E2DCDC /* SeedsEventQueueTest.m */; };
+		C467A2E01D54D30700E2DCDC /* SeedsEventTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C467A2DF1D54D30700E2DCDC /* SeedsEventTest.m */; };
+		C47793D21D52297300E4FCC6 /* SeedsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793D11D52297300E4FCC6 /* SeedsTest.m */; };
+		C47793D41D522BC500E4FCC6 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C47793D31D522BC500E4FCC6 /* libOCMock.a */; };
+		C47793D61D533D6600E4FCC6 /* SeedsCore.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793D51D533D6600E4FCC6 /* SeedsCore.m */; };
+		C47793D91D534E9400E4FCC6 /* SeedsDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793D81D534E9400E4FCC6 /* SeedsDeviceInfo.m */; };
+		C47793DD1D537D7200E4FCC6 /* SeedsUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793DC1D537D7200E4FCC6 /* SeedsUserDetails.m */; };
+		C47793DF1D537EE100E4FCC6 /* SeedsEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793DE1D537EE100E4FCC6 /* SeedsEvent.m */; };
+		C47793E31D53912C00E4FCC6 /* SeedsEventQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E21D53912C00E4FCC6 /* SeedsEventQueue.m */; };
+		C47793E51D5393AF00E4FCC6 /* SeedsUrlFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E41D5393AF00E4FCC6 /* SeedsUrlFormatter.m */; };
+		C47793E91D53978000E4FCC6 /* SeedsConnectionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E81D53978000E4FCC6 /* SeedsConnectionQueue.m */; };
+		C47793EB1D539BE600E4FCC6 /* SeedsInterstitialAds.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793EA1D539BE600E4FCC6 /* SeedsInterstitialAds.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,8 +200,6 @@
 		8A5083E91B7CAE0700A6CF52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8A5084251B7CAF2300A6CF52 /* Seeds_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seeds_OpenUDID.h; sourceTree = "<group>"; };
 		8A5084261B7CAF2300A6CF52 /* Seeds_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeds_OpenUDID.m; sourceTree = "<group>"; };
-		8A5084271B7CAF2300A6CF52 /* Seeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seeds.h; sourceTree = "<group>"; };
-		8A5084281B7CAF2300A6CF52 /* Seeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeds.m; sourceTree = "<group>"; };
 		8A50842A1B7CAF2300A6CF52 /* Seeds.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Seeds.xcdatamodel; sourceTree = "<group>"; };
 		8A50842B1B7CAF2300A6CF52 /* SeedsDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsDB.h; sourceTree = "<group>"; };
 		8A50842C1B7CAF2300A6CF52 /* SeedsDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsDB.m; sourceTree = "<group>"; };
@@ -238,6 +248,28 @@
 		8AC3B9451B83525C0059D3CA /* SeedsDemo_Legacy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedsDemo_Legacy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC3B94C1B83538F0059D3CA /* Info-EmbeddedFramework.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-EmbeddedFramework.plist"; sourceTree = "<group>"; };
 		8AC3B94F1B8354DA0059D3CA /* ResourcesBundleInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ResourcesBundleInfo.plist; sourceTree = "<group>"; };
+		C467A2D91D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsInterstitialAdsTest.m; sourceTree = "<group>"; };
+		C467A2DB1D54B20700E2DCDC /* SeedsConnectionQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsConnectionQueueTest.m; sourceTree = "<group>"; };
+		C467A2DD1D54C97400E2DCDC /* SeedsEventQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsEventQueueTest.m; sourceTree = "<group>"; };
+		C467A2DF1D54D30700E2DCDC /* SeedsEventTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsEventTest.m; sourceTree = "<group>"; };
+		C47793D11D52297300E4FCC6 /* SeedsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsTest.m; sourceTree = "<group>"; };
+		C47793D31D522BC500E4FCC6 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = usr/lib/libOCMock.a; sourceTree = "<group>"; };
+		C47793D51D533D6600E4FCC6 /* SeedsCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsCore.m; sourceTree = "<group>"; };
+		C47793D71D533E1500E4FCC6 /* SeedsCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SeedsCore.h; path = SDK/SeedsCore.h; sourceTree = SOURCE_ROOT; };
+		C47793D81D534E9400E4FCC6 /* SeedsDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsDeviceInfo.m; sourceTree = "<group>"; };
+		C47793DA1D534F8200E4FCC6 /* SeedsDeviceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsDeviceInfo.h; sourceTree = "<group>"; };
+		C47793DB1D537D1E00E4FCC6 /* SeedsUserDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsUserDetails.h; sourceTree = "<group>"; };
+		C47793DC1D537D7200E4FCC6 /* SeedsUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsUserDetails.m; sourceTree = "<group>"; };
+		C47793DE1D537EE100E4FCC6 /* SeedsEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsEvent.m; sourceTree = "<group>"; };
+		C47793E01D537F6F00E4FCC6 /* SeedsEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsEvent.h; sourceTree = "<group>"; };
+		C47793E11D5390CF00E4FCC6 /* SeedsEventQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsEventQueue.h; sourceTree = "<group>"; };
+		C47793E21D53912C00E4FCC6 /* SeedsEventQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsEventQueue.m; sourceTree = "<group>"; };
+		C47793E41D5393AF00E4FCC6 /* SeedsUrlFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsUrlFormatter.m; sourceTree = "<group>"; };
+		C47793E61D5394CE00E4FCC6 /* SeedsUrlFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsUrlFormatter.h; sourceTree = "<group>"; };
+		C47793E71D53975200E4FCC6 /* SeedsConnectionQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsConnectionQueue.h; sourceTree = "<group>"; };
+		C47793E81D53978000E4FCC6 /* SeedsConnectionQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsConnectionQueue.m; sourceTree = "<group>"; };
+		C47793EA1D539BE600E4FCC6 /* SeedsInterstitialAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsInterstitialAds.m; sourceTree = "<group>"; };
+		C47793EC1D539C2D00E4FCC6 /* SeedsInterstitialAds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsInterstitialAds.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47793D41D522BC500E4FCC6 /* libOCMock.a in Frameworks */,
 				7ED393BF1BA698E500890DE3 /* SeedsSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +330,11 @@
 				7ED393CF1BA6D48A00890DE3 /* TestViewController */,
 				7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */,
 				7ED393BB1BA698E500890DE3 /* Supporting Files */,
+				C47793D11D52297300E4FCC6 /* SeedsTest.m */,
+				C467A2D91D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m */,
+				C467A2DB1D54B20700E2DCDC /* SeedsConnectionQueueTest.m */,
+				C467A2DD1D54C97400E2DCDC /* SeedsEventQueueTest.m */,
+				C467A2DF1D54D30700E2DCDC /* SeedsEventTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -378,8 +416,6 @@
 				8A5084341B7CAF2D00A6CF52 /* InAppMessaging */,
 				8A5084251B7CAF2300A6CF52 /* Seeds_OpenUDID.h */,
 				8A5084261B7CAF2300A6CF52 /* Seeds_OpenUDID.m */,
-				8A5084271B7CAF2300A6CF52 /* Seeds.h */,
-				8A5084281B7CAF2300A6CF52 /* Seeds.m */,
 				8A5084291B7CAF2300A6CF52 /* Seeds.xcdatamodeld */,
 				8A50842B1B7CAF2300A6CF52 /* SeedsDB.h */,
 				8A50842C1B7CAF2300A6CF52 /* SeedsDB.m */,
@@ -387,6 +423,22 @@
 				8A5084361B7CAF6500A6CF52 /* LICENSE */,
 				8AC3B94F1B8354DA0059D3CA /* ResourcesBundleInfo.plist */,
 				8A50839F1B7CADAB00A6CF52 /* EmbeddedFrameworkInfo.plist */,
+				C47793D71D533E1500E4FCC6 /* SeedsCore.h */,
+				C47793D51D533D6600E4FCC6 /* SeedsCore.m */,
+				C47793DA1D534F8200E4FCC6 /* SeedsDeviceInfo.h */,
+				C47793D81D534E9400E4FCC6 /* SeedsDeviceInfo.m */,
+				C47793DB1D537D1E00E4FCC6 /* SeedsUserDetails.h */,
+				C47793DC1D537D7200E4FCC6 /* SeedsUserDetails.m */,
+				C47793E01D537F6F00E4FCC6 /* SeedsEvent.h */,
+				C47793DE1D537EE100E4FCC6 /* SeedsEvent.m */,
+				C47793E11D5390CF00E4FCC6 /* SeedsEventQueue.h */,
+				C47793E21D53912C00E4FCC6 /* SeedsEventQueue.m */,
+				C47793E61D5394CE00E4FCC6 /* SeedsUrlFormatter.h */,
+				C47793E41D5393AF00E4FCC6 /* SeedsUrlFormatter.m */,
+				C47793E71D53975200E4FCC6 /* SeedsConnectionQueue.h */,
+				C47793E81D53978000E4FCC6 /* SeedsConnectionQueue.m */,
+				C47793EC1D539C2D00E4FCC6 /* SeedsInterstitialAds.h */,
+				C47793EA1D539BE600E4FCC6 /* SeedsInterstitialAds.m */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -443,6 +495,7 @@
 		8AC3B8DE1B8340410059D3CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C47793D31D522BC500E4FCC6 /* libOCMock.a */,
 				8AC3B8DF1B83406E0059D3CA /* CoreTelephony.framework */,
 				8AC3B8DC1B83403A0059D3CA /* CoreData.framework */,
 			);
@@ -460,16 +513,16 @@
 				8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */,
 				8A5084651B7CAF7B00A6CF52 /* MobFoxToolBar.h in Headers */,
 				8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */,
+				C467A2D81D54887300E2DCDC /* SeedsSDK.h in Headers */,
 				8A50845B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h in Headers */,
 				8A50847E1B7CAF9300A6CF52 /* MFCustomEventBanner.h in Headers */,
 				8A5084321B7CAF2300A6CF52 /* SeedsDB.h in Headers */,
 				8A5084611B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h in Headers */,
+				C467A2D71D54884200E2DCDC /* SeedsCore.h in Headers */,
 				8A5084701B7CAF7B00A6CF52 /* UIButton+MobFox.h in Headers */,
 				8A50846C1B7CAF7B00A6CF52 /* NSString+MobFox.h in Headers */,
-				8A50842F1B7CAF2300A6CF52 /* Seeds.h in Headers */,
 				8A50845F1B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.h in Headers */,
 				8A5084591B7CAF7B00A6CF52 /* MFRedirectChecker.h in Headers */,
-				8A5084B81B7CB88800A6CF52 /* SeedsSDK.h in Headers */,
 				8A0FCBF81D1D7C2C00AE396B /* SKProductHelper.h in Headers */,
 				8A50846E1B7CAF7B00A6CF52 /* NSURL+MobFox.h in Headers */,
 				8A5084671B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.h in Headers */,
@@ -713,7 +766,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ED393CE1BA6AF9100890DE3 /* TestViewController.m in Sources */,
+				C467A2E01D54D30700E2DCDC /* SeedsEventTest.m in Sources */,
+				C467A2DA1D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m in Sources */,
 				7ED393BE1BA698E500890DE3 /* SeedsSDK_Tests.m in Sources */,
+				C467A2DE1D54C97400E2DCDC /* SeedsEventQueueTest.m in Sources */,
+				C47793D21D52297300E4FCC6 /* SeedsTest.m in Sources */,
+				C467A2DC1D54B20700E2DCDC /* SeedsConnectionQueueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,25 +779,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47793E91D53978000E4FCC6 /* SeedsConnectionQueue.m in Sources */,
+				C47793DD1D537D7200E4FCC6 /* SeedsUserDetails.m in Sources */,
 				8A5084771B7CAF7B00A6CF52 /* UIView+FindViewController.m in Sources */,
 				8A5084661B7CAF7B00A6CF52 /* MobFoxToolBar.m in Sources */,
 				8A5084311B7CAF2300A6CF52 /* Seeds.xcdatamodeld in Sources */,
-				8A5084301B7CAF2300A6CF52 /* Seeds.m in Sources */,
+				C47793DF1D537EE100E4FCC6 /* SeedsEvent.m in Sources */,
 				8A50846D1B7CAF7B00A6CF52 /* NSString+MobFox.m in Sources */,
 				8A5084621B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m in Sources */,
 				8A5084601B7CAF7B00A6CF52 /* MobFoxHTMLBannerView.m in Sources */,
+				C47793E51D5393AF00E4FCC6 /* SeedsUrlFormatter.m in Sources */,
 				8A50846F1B7CAF7B00A6CF52 /* NSURL+MobFox.m in Sources */,
 				8A5084331B7CAF2300A6CF52 /* SeedsDB.m in Sources */,
 				8A50847F1B7CAF9300A6CF52 /* MFCustomEventBanner.m in Sources */,
 				8A5084681B7CAF7B00A6CF52 /* MobFoxVideoInterstitialViewController.m in Sources */,
+				C47793D61D533D6600E4FCC6 /* SeedsCore.m in Sources */,
+				C47793EB1D539BE600E4FCC6 /* SeedsInterstitialAds.m in Sources */,
 				8A0FCBFC1D1D7CA200AE396B /* SKProductHelper.m in Sources */,
 				8A5084751B7CAF7B00A6CF52 /* UIImage+MobFox.m in Sources */,
+				C47793D91D534E9400E4FCC6 /* SeedsDeviceInfo.m in Sources */,
 				8A50845C1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.m in Sources */,
 				8A5084711B7CAF7B00A6CF52 /* UIButton+MobFox.m in Sources */,
 				8A5084731B7CAF7B00A6CF52 /* UIDevice+MFIdentifierAddition.m in Sources */,
 				8A50845A1B7CAF7B00A6CF52 /* MFRedirectChecker.m in Sources */,
 				8A5084821B7CAF9300A6CF52 /* MFCustomEventFullscreen.m in Sources */,
 				8A50842E1B7CAF2300A6CF52 /* Seeds_OpenUDID.m in Sources */,
+				C47793E31D53912C00E4FCC6 /* SeedsEventQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +834,6 @@
 				8AC3B9291B834D720059D3CA /* MobFoxVideoInterstitialViewController.m in Sources */,
 				8AC3B92C1B834D720059D3CA /* UIButton+MobFox.m in Sources */,
 				8AC3B92E1B834D720059D3CA /* UIImage+MobFox.m in Sources */,
-				8AC3B9311B834D720059D3CA /* Seeds.m in Sources */,
 				8AC3B9281B834D720059D3CA /* MobFoxToolBar.m in Sources */,
 				8AC3B9331B834D790059D3CA /* MFCustomEventBanner.m in Sources */,
 				8AC3B92B1B834D720059D3CA /* NSURL+MobFox.m in Sources */,
@@ -886,11 +950,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/usr/include";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/usr/lib",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -932,10 +1002,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/usr/include";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/usr/lib",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rk.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -961,7 +1037,9 @@
 		8A5083941B7CAD6100A6CF52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ENABLE_TESTABILITY = YES;
+				HEADER_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
@@ -969,6 +1047,8 @@
 		8A5083951B7CAD6100A6CF52 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

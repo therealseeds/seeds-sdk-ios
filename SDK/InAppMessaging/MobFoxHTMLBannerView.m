@@ -24,7 +24,7 @@
 
 #import "MFCustomEventBanner.h"
 
-#import "Seeds.h"
+#import "SeedsCore.h"
 
 #import <StoreKit/StoreKit.h>
 #import "SKProductHelper.h"

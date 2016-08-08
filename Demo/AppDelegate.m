@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "Seeds.h"
+#import "SeedsCore.h"
 
 @interface AppDelegate ()
 
