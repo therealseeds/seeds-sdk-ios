@@ -9,8 +9,8 @@ test:
             PROVISIONING_PROFILE=
             -sdk iphonesimulator
             -destination 'platform=iOS Simulator,OS=9.0,name=iPhone 6'
-            -workspace Seeds.xcworkspace
-            -scheme Seeds
+            -workspace seeds-sdk-ios/Seeds.xcodeproj
+            -scheme SeedsDemo_EmbeddedFramework
             clean build test |
           tee $CIRCLE_ARTIFACTS/xcode_raw.log |
           xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
