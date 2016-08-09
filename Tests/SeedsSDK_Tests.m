@@ -31,7 +31,7 @@
     BOOL _seedsInAppMessageShownAlways;
     BOOL _seedsNotFoundAlways;
     
-    TestViewController *_testVC;
+    UIViewController *_testVC;
 
 }
 
@@ -45,7 +45,12 @@
 
     [Seeds sharedInstance].inAppMessageDelegate = self;
 
+<<<<<<< HEAD
     _testVC = [[TestViewController alloc] init];
+=======
+    _testVC = OCMClassMock([UIViewController class]);
+    Seeds.sharedInstance.inAppMessageVariantName = @"testVariantName";
+>>>>>>> 210379b... Fix tests
     
 }
 

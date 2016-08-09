@@ -29,7 +29,7 @@ SeedsEventQueue *seedsEventQueueMock;
 }
 
 - (void) testCount {
-    NSUInteger countStub = @4;
+    NSUInteger countStub = 4;
     
     OCMStub([seedsEventQueueMock count]).andReturn(countStub);
     
