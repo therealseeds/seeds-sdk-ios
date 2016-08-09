@@ -125,10 +125,10 @@ Seeds *seedsMock;
 }
 
 - (void) testIsMessageLoaded {
-    BOOL isLoaded = [[Seeds sharedInstance] isInAppMessageLoaded];
+    BOOL isLoaded = [[Seeds sharedInstance] isInAppMessageLoaded:@"testString"];
     XCTAssertFalse(isLoaded);
     
-    isLoaded = [[Seeds sharedInstance] isInAppMessageLoaded:@"testString"];
+    isLoaded = [[Seeds sharedInstance] isInAppMessageLoaded];
     XCTAssertFalse(isLoaded);
 }
 
