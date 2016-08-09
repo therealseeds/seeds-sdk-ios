@@ -114,6 +114,7 @@
 		C47793E51D5393AF00E4FCC6 /* SeedsUrlFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E41D5393AF00E4FCC6 /* SeedsUrlFormatter.m */; };
 		C47793E91D53978000E4FCC6 /* SeedsConnectionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E81D53978000E4FCC6 /* SeedsConnectionQueue.m */; };
 		C47793EB1D539BE600E4FCC6 /* SeedsInterstitialAds.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793EA1D539BE600E4FCC6 /* SeedsInterstitialAds.m */; };
+		C4DC5E061D5A24A70097DEC1 /* circle.yml in Resources */ = {isa = PBXBuildFile; fileRef = C4DC5E051D5A24A70097DEC1 /* circle.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +271,7 @@
 		C47793E81D53978000E4FCC6 /* SeedsConnectionQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsConnectionQueue.m; sourceTree = "<group>"; };
 		C47793EA1D539BE600E4FCC6 /* SeedsInterstitialAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsInterstitialAds.m; sourceTree = "<group>"; };
 		C47793EC1D539C2D00E4FCC6 /* SeedsInterstitialAds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeedsInterstitialAds.h; sourceTree = "<group>"; };
+		C4DC5E051D5A24A70097DEC1 /* circle.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = circle.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +361,7 @@
 		8A50838F1B7CAD6100A6CF52 = {
 			isa = PBXGroup;
 			children = (
+				C4DC5E051D5A24A70097DEC1 /* circle.yml */,
 				8A3EF95B1B843D7E0025254B /* BuildUnity3D.sh */,
 				8A7C95D71C7ED35100409025 /* BuildFramework.sh */,
 				8A7C95D81C7ED35100409025 /* SeedsSDK.podspec */,
@@ -711,6 +714,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4DC5E061D5A24A70097DEC1 /* circle.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
