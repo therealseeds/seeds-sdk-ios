@@ -33,7 +33,7 @@
     BOOL _seedsInAppMessageShownAlways;
     BOOL _seedsNotFoundAlways;
     
-    TestViewController *_testVC;
+    UIViewController *_testVC;
 
 }
 
@@ -48,6 +48,7 @@
     [Seeds sharedInstance].inAppMessageDelegate = self;
 
     _testVC = OCMClassMock([UIViewController class]);
+    Seeds.sharedInstance.inAppMessageVariantName = @"testVariantName";
     
 }
 
@@ -71,7 +72,7 @@
 
     [[NSRunLoop currentRunLoop] runUntilDate:fiveSeconds];
     
-    XCTAssertFalse(_seedsInAppMessageShown, @"in app message not shown");
+    XCTAssert(_seedsInAppMessageShown, @"in app message not shown");
     XCTAssert(_seedsInAppMessageLoaded, @"not loaded");
     XCTAssertFalse(_seedsNotFound, @"not found");
 
