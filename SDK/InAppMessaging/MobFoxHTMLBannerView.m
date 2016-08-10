@@ -705,7 +705,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	{
         if ([urlString isEqualToString:@"about:close"]) {
             [self.delegate interstitialSkipAction:nil];
-            return YES;
+            return NO;
         } else if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""] && wasUserAction) {
             if(_tapThroughURL) {
                 NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL:_tapThroughURL];
