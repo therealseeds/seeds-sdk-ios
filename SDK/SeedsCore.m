@@ -119,6 +119,17 @@
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost andDeviceId:(NSString *)deviceId
 {
+    NSString *validUrl = @".+(?:\\.playseeds\\.com)$";
+    NSPredicate *isValidUrl = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validUrl];
+
+    if (appKey == nil || appKey.length < 20) {
+        [NSException raise:@"A valid app key is required" format:@"App key of %@ is invalid", appKey];
+    }
+    
+    if (![isValidUrl evaluateWithObject:appHost]) {
+        [NSException raise:@"A valid server url is required" format:@"Url of %@ is invalid. Did you mean: http://dash.playseeds.com ", appHost];
+    }
+    
     timer = [NSTimer scheduledTimerWithTimeInterval:SEEDS_DEFAULT_UPDATE_INTERVAL
                                              target:self
                                            selector:@selector(onTimer:)
@@ -230,30 +241,32 @@
 
 - (void)recordEvent:(NSString *)key count:(int)count
 {
-    [eventQueue recordEvent:key count:count];
-    
-    if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+    [[Seeds sharedInstance] recordEvent:key segmentation:nil count:count sum:0];
 }
 
 - (void)recordEvent:(NSString *)key count:(int)count sum:(double)sum
 {
-    [eventQueue recordEvent:key count:count sum:sum];
-    
-    if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+    [[Seeds sharedInstance] recordEvent:key segmentation:nil count:count sum:sum];
 }
 
 - (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count
 {
-    [eventQueue recordEvent:key segmentation:segmentation count:count];
     
-    if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
-        [[SeedsConnectionQueue sharedInstance] recordEvents:[eventQueue events]];
+    [[Seeds sharedInstance] recordEvent:key segmentation:segmentation count:count sum:0];
 }
 
 - (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count sum:(double)sum
 {
+    if (key == nil || key.length == 0) {
+        // throw exception
+        [NSException raise:@"A valid Seeds event ID is required" format:@"ID of %@ is invalid", key];
+    }
+    
+    if (count < 1) {
+        // throw exception
+        [NSException raise:@"Seeds event count must be greater than zero" format:@"Count of %d is invalid", count];
+    }
+        
     [eventQueue recordEvent:key segmentation:segmentation count:count sum:sum];
     
     if (eventQueue.count >= SEEDS_EVENT_SEND_THRESHOLD)
