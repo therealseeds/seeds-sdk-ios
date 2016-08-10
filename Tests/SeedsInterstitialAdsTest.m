@@ -55,8 +55,8 @@ MobFoxVideoInterstitialViewController *mockVideoController;
 }
 
 - (void) testMobFoxVideoInterstitialViewDidLoadMobFoxAd {
-    [seedsInterstitialAdsMock mobfoxVideoInterstitialViewDidLoadMobFoxAd:mockVideoController advertTypeLoaded:nil];
-    OCMVerify([seedsInterstitialAdsMock mobfoxVideoInterstitialViewDidLoadMobFoxAd:mockVideoController advertTypeLoaded:nil]);
+    [seedsInterstitialAdsMock mobfoxVideoInterstitialViewDidLoadMobFoxAd:mockVideoController advertTypeLoaded:0];
+    OCMVerify([seedsInterstitialAdsMock mobfoxVideoInterstitialViewDidLoadMobFoxAd:mockVideoController advertTypeLoaded:0]);
 }
 
 - (void) testMobFoxVideoInterstitialView {

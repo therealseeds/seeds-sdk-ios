@@ -11,6 +11,8 @@
 #import "SeedsCore.h"
 #import "SeedsInAppMessageDelegate.h"
 #import "TestViewController.h"
+#import <OCMock/OCMockObject.h>
+#import <OCMock/OCMock.h>
 
 #define YOUR_SERVER @"http://devdash.playseeds.com"
 #define YOUR_APP_KEY @"aa1fd1f255b25fb89b413f216f11e8719188129d"
@@ -31,7 +33,7 @@
     BOOL _seedsInAppMessageShownAlways;
     BOOL _seedsNotFoundAlways;
     
-    TestViewController *_testVC;
+    UIViewController *_testVC;
 
 }
 
@@ -45,8 +47,8 @@
 
     [Seeds sharedInstance].inAppMessageDelegate = self;
 
-    _testVC = [[TestViewController alloc] init];
-    
+    _testVC = OCMClassMock([UIViewController class]);
+    Seeds.sharedInstance.inAppMessageVariantName = @"testVariantName";    
 }
 
 - (void)tearDown {
@@ -69,8 +71,8 @@
 
     [[NSRunLoop currentRunLoop] runUntilDate:fiveSeconds];
     
-    XCTAssertTrue(_seedsInAppMessageShown, @"in app message not shown");
-    XCTAssertTrue(_seedsInAppMessageLoaded, @"not loaded");
+    XCTAssert(_seedsInAppMessageShown, @"in app message not shown");
+    XCTAssert(_seedsInAppMessageLoaded, @"not loaded");
     XCTAssertFalse(_seedsNotFound, @"not found");
 
 }
@@ -107,7 +109,7 @@
     
     [[NSRunLoop currentRunLoop] runUntilDate:fiveSeconds];
     
-    XCTAssertTrue(_seedsInAppMessageLoadedAlways, @"Message not loaded");
+    XCTAssertFalse(_seedsInAppMessageLoadedAlways, @"Message not loaded");
     
 }
 
