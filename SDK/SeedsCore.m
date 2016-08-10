@@ -119,11 +119,14 @@
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost andDeviceId:(NSString *)deviceId
 {
+    NSString *validUrl = @".+(?:\\.playseeds\\.com)$";
+    NSPredicate *isValidUrl = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validUrl];
+
     if (appKey == nil || appKey.length < 20) {
         [NSException raise:@"A valid app key is required" format:@"App key of %@ is invalid", appKey];
     }
     
-    if (!([appHost  isEqual: @"http://dash.playseeds.com"] || [appHost isEqual:@"http://staging.playseeds.com"])) {
+    if (![isValidUrl evaluateWithObject:appHost]) {
         [NSException raise:@"A valid server url is required" format:@"Url of %@ is invalid. Did you mean: http://dash.playseeds.com ", appHost];
     }
     
