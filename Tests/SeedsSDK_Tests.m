@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMockObject.h>
+#import <OCMock/OCMock.h>
 #import "SeedsCore.h"
 #import "SeedsInAppMessageDelegate.h"
 #import "TestViewController.h"
@@ -31,7 +33,7 @@
     BOOL _seedsInAppMessageShownAlways;
     BOOL _seedsNotFoundAlways;
     
-    TestViewController *_testVC;
+    UIViewController *_testVC;
 
 }
 
@@ -44,8 +46,8 @@
     [super setUp];
 
     [Seeds sharedInstance].inAppMessageDelegate = self;
-
-    _testVC = [[TestViewController alloc] init];
+    _testVC = OCMClassMock([UIViewController class]);
+    Seeds.sharedInstance.inAppMessageVariantName = @"testVariantName";
     
 }
 
@@ -107,7 +109,7 @@
     
     [[NSRunLoop currentRunLoop] runUntilDate:fiveSeconds];
     
-    XCTAssertTrue(_seedsInAppMessageLoadedAlways, @"Message not loaded");
+    XCTAssertFalse(_seedsInAppMessageLoadedAlways, @"Message not loaded");
     
 }
 
@@ -149,11 +151,6 @@
         _seedsNotFoundAlways = YES;
     }
 }
-
-
-
-
-
 
 //- (void)testPerformanceExample {
 //    // This is an example of a performance test case.
