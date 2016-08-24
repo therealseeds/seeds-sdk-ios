@@ -21,6 +21,11 @@
 
     [Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
 
+    [Seeds.sharedInstance requestInAppMessageStats:^(NSString* key, int purchasesCount) {
+
+    }
+                                                 of:@""];
+
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey] != nil) {
         NSURL *url = [launchOptions objectForKey: UIApplicationLaunchOptionsURLKey];
         ViewController* viewController = (ViewController*)self.window.rootViewController;

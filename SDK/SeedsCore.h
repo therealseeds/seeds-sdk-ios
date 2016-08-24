@@ -46,6 +46,8 @@
 
 - (NSString *)getAppKey;
 
+- (NSString *)getAppHost;
+
 - (BOOL)isStarted;
 
 - (void)recordEvent:(NSString *)key count:(int)count;
@@ -82,6 +84,16 @@ extern NSString* const kCLYUserCustom;
 
 - (void)showInAppMessageIn:(UIViewController*)viewController;
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
+
+#pragma mark - Seeds Statistics
+
+typedef void (^ SeedsInAppPurchaseStatsCallback)(NSString* key, int purchasesCount);
+- (void)requestInAppPurchaseCount:(SeedsInAppPurchaseStatsCallback)callback of:(NSString*)key;
+- (void)requestInAppPurchasesCount:(SeedsInAppPurchaseStatsCallback)callback;
+
+typedef void (^ SeedsInAppMessageStatsCallback)(NSString* messageId, int shownCount);
+- (void)requestInAppMessageStats:(SeedsInAppMessageStatsCallback)callback;
+- (void)requestInAppMessageStats:(SeedsInAppMessageStatsCallback)callback of:(NSString*)messageId;
 
 #pragma mark - Seeds Messaging
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
