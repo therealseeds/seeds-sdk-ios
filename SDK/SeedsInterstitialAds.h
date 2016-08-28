@@ -15,7 +15,7 @@
 
 + (instancetype)sharedInstance;
 - (void)requestInAppMessage:(NSString*)messageId;
-- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;
 - (BOOL)isInAppMessageLoaded:(NSString*)messageId;
 
 @end

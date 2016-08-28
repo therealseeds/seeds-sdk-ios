@@ -34,6 +34,7 @@
 @property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
 
 @property (atomic, copy) NSString* inAppMessageId;
+@property (atomic, copy) NSString* inAppMessageContext;
 @property (atomic, assign) BOOL inAppMessageDoNotShow;
 @property (atomic, assign) BOOL adClicked;
 @property (atomic, copy) NSString* inAppMessageVariantName;
@@ -83,7 +84,9 @@ extern NSString* const kCLYUserCustom;
 - (BOOL)isInAppMessageLoaded:(NSString*)messageId;
 
 - (void)showInAppMessageIn:(UIViewController*)viewController;
+- (void)showInAppMessageIn:(UIViewController*)viewController withContext:(NSString*)messageContext;
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;
 
 #pragma mark - Seeds Statistics
 

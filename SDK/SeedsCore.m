@@ -106,6 +106,7 @@
         
         self.deviceId = nil;
         self.inAppMessageId = nil;
+        self.inAppMessageContext = nil;
         self.inAppMessageVariantName = nil;
         self.inAppMessageDoNotShow = NO;
         self.adClicked = NO;
@@ -348,12 +349,22 @@
 
 - (void)showInAppMessageIn:(UIViewController*)viewController;
 {
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController];
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController withContext:nil];
+}
+
+- (void)showInAppMessageIn:(UIViewController*)viewController withContext:(NSString*)messageContext;
+{
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController withContext:messageContext];
 }
 
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
 {
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController];
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController withContext:nil];
+}
+
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;
+{
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController withContext:messageContext];
 }
 
 - (void)setLocation:(double)latitude longitude:(double)longitude

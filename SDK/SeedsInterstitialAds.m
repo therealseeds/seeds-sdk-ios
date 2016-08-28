@@ -50,7 +50,7 @@
     return [self.controller isAdvertLoaded:messageId];
 }
 
-- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController
+- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext
 {
     if (![self isInAppMessageLoaded:messageId] || Seeds.sharedInstance.inAppMessageDoNotShow) {
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
@@ -65,7 +65,8 @@
     
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
-    
+
+    Seeds.sharedInstance.inAppMessageContext = messageContext;
     [self.controller presentAd:MobFoxAdTypeText];
 }
 
@@ -108,7 +109,8 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillPresentScreen");
     
     [Seeds.sharedInstance recordEvent:@"message shown"
-                         segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
+                         segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName,
+                                         @"context" : Seeds.sharedInstance.inAppMessageContext }
                                 count:1];
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
@@ -153,7 +155,8 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
     
     [Seeds.sharedInstance recordEvent:@"message clicked"
-                         segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName }
+                         segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName,
+                                         @"context" : Seeds.sharedInstance.inAppMessageContext }
                                 count:1];
     
     Seeds.sharedInstance.adClicked = YES;
