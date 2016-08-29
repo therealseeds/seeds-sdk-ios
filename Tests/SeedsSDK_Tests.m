@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMockObject.h>
 #import <OCMock/OCMock.h>
-#import "SeedsCore.h"
+#import "Seeds.h"
 #import "SeedsInAppMessageDelegate.h"
 #import "TestViewController.h"
 

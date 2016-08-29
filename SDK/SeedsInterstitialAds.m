@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "SeedsInterstitialAds.h"
-#import "SeedsCore.h"
+#import "Seeds.h"
 #import "SeedsInAppMessageDelegate.h"
 
 @interface SeedsInterstitialAds()

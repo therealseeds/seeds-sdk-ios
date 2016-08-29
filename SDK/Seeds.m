@@ -30,7 +30,7 @@
 #define SEEDS_DEFAULT_UPDATE_INTERVAL 60.0
 
 #import <Foundation/Foundation.h>
-#import "SeedsCore.h"
+#import "Seeds.h"
 #import "SeedsEventQueue.h"
 #import "SeedsDeviceInfo.h"
 #import "SeedsConnectionQueue.h"

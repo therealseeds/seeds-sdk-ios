@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SeedsCore.h"
+#import "Seeds.h"
 
 @interface ViewController : UIViewController
 

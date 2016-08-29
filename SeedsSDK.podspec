@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   }
   s.source_files = 'SDK/**/*.{h,m}'
   s.public_header_files = [
-    'SDK/SeedsCore.h',
+    'SDK/Seeds.h',
     'SDK/SeedsInAppMessageDelegate.h'
   ]
   s.resources = 'SDK/**/*.{xcdatamodeld}'

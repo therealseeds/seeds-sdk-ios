@@ -16,7 +16,7 @@
 #import "SeedsDB.h"
 #import "SeedsUrlFormatter.h"
 #import "SeedsDeviceInfo.h"
-#import "SeedsCore.h"
+#import "Seeds.h"
 
 @implementation SeedsConnectionQueue : NSObject
 
