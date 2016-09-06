@@ -98,6 +98,7 @@
 		8AC3B9481B8352E90059D3CA /* SeedsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8AC3B94D1B8354030059D3CA /* libSeedsLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3B8FD1B834CC30059D3CA /* libSeedsLibrary.a */; };
 		8AC3B9501B8355120059D3CA /* SeedsResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AC3B8F21B834C380059D3CA /* SeedsResources.bundle */; };
+		8ADCF8501D7E9E3F00D5F6D0 /* Seeds.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793D51D533D6600E4FCC6 /* Seeds.m */; };
 		C467A2D71D54884200E2DCDC /* Seeds.h in Headers */ = {isa = PBXBuildFile; fileRef = C47793D71D533E1500E4FCC6 /* Seeds.h */; };
 		C467A2D81D54887300E2DCDC /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; };
 		C467A2DA1D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C467A2D91D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m */; };
@@ -840,6 +841,7 @@
 				8AC3B92E1B834D720059D3CA /* UIImage+MobFox.m in Sources */,
 				8AC3B9281B834D720059D3CA /* MobFoxToolBar.m in Sources */,
 				8AC3B9331B834D790059D3CA /* MFCustomEventBanner.m in Sources */,
+				8ADCF8501D7E9E3F00D5F6D0 /* Seeds.m in Sources */,
 				8AC3B92B1B834D720059D3CA /* NSURL+MobFox.m in Sources */,
 				8AC3B92F1B834D720059D3CA /* UIView+FindViewController.m in Sources */,
 				8AC3B9301B834D720059D3CA /* Seeds_OpenUDID.m in Sources */,
