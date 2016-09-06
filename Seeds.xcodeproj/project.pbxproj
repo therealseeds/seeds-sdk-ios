@@ -99,6 +99,13 @@
 		8AC3B94D1B8354030059D3CA /* libSeedsLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AC3B8FD1B834CC30059D3CA /* libSeedsLibrary.a */; };
 		8AC3B9501B8355120059D3CA /* SeedsResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8AC3B8F21B834C380059D3CA /* SeedsResources.bundle */; };
 		8ADCF8501D7E9E3F00D5F6D0 /* Seeds.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793D51D533D6600E4FCC6 /* Seeds.m */; };
+		8ADCF8511D7E9F1E00D5F6D0 /* SeedsDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793D81D534E9400E4FCC6 /* SeedsDeviceInfo.m */; };
+		8ADCF8531D7E9F2500D5F6D0 /* SeedsUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793DC1D537D7200E4FCC6 /* SeedsUserDetails.m */; };
+		8ADCF8541D7E9F2A00D5F6D0 /* SeedsEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793DE1D537EE100E4FCC6 /* SeedsEvent.m */; };
+		8ADCF8551D7E9F2D00D5F6D0 /* SeedsEventQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E21D53912C00E4FCC6 /* SeedsEventQueue.m */; };
+		8ADCF8561D7E9F3000D5F6D0 /* SeedsUrlFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E41D5393AF00E4FCC6 /* SeedsUrlFormatter.m */; };
+		8ADCF8571D7E9F3300D5F6D0 /* SeedsConnectionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793E81D53978000E4FCC6 /* SeedsConnectionQueue.m */; };
+		8ADCF8581D7E9F3600D5F6D0 /* SeedsInterstitialAds.m in Sources */ = {isa = PBXBuildFile; fileRef = C47793EA1D539BE600E4FCC6 /* SeedsInterstitialAds.m */; };
 		C467A2D71D54884200E2DCDC /* Seeds.h in Headers */ = {isa = PBXBuildFile; fileRef = C47793D71D533E1500E4FCC6 /* Seeds.h */; };
 		C467A2D81D54887300E2DCDC /* SeedsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A5084B51B7CB44600A6CF52 /* SeedsSDK.h */; };
 		C467A2DA1D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C467A2D91D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m */; };
@@ -835,7 +842,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ADCF8511D7E9F1E00D5F6D0 /* SeedsDeviceInfo.m in Sources */,
 				8AC3B9261B834D720059D3CA /* MobFoxHTMLBannerView.m in Sources */,
+				8ADCF8571D7E9F3300D5F6D0 /* SeedsConnectionQueue.m in Sources */,
+				8ADCF8531D7E9F2500D5F6D0 /* SeedsUserDetails.m in Sources */,
 				8AC3B9291B834D720059D3CA /* MobFoxVideoInterstitialViewController.m in Sources */,
 				8AC3B92C1B834D720059D3CA /* UIButton+MobFox.m in Sources */,
 				8AC3B92E1B834D720059D3CA /* UIImage+MobFox.m in Sources */,
@@ -846,12 +856,16 @@
 				8AC3B92F1B834D720059D3CA /* UIView+FindViewController.m in Sources */,
 				8AC3B9301B834D720059D3CA /* Seeds_OpenUDID.m in Sources */,
 				8AC3B9341B834D790059D3CA /* MFCustomEventFullscreen.m in Sources */,
+				8ADCF8561D7E9F3000D5F6D0 /* SeedsUrlFormatter.m in Sources */,
 				8AC3B92D1B834D720059D3CA /* UIDevice+MFIdentifierAddition.m in Sources */,
 				8AC3B9241B834D720059D3CA /* MFRedirectChecker.m in Sources */,
 				8AC3B9321B834D720059D3CA /* SeedsDB.m in Sources */,
 				8AC3B92A1B834D720059D3CA /* NSString+MobFox.m in Sources */,
+				8ADCF8581D7E9F3600D5F6D0 /* SeedsInterstitialAds.m in Sources */,
+				8ADCF8551D7E9F2D00D5F6D0 /* SeedsEventQueue.m in Sources */,
 				8A0FCBFD1D1D7CA200AE396B /* SKProductHelper.m in Sources */,
 				8AC3B9271B834D720059D3CA /* MobFoxInterstitialPlayerViewController.m in Sources */,
+				8ADCF8541D7E9F2A00D5F6D0 /* SeedsEvent.m in Sources */,
 				8AC3B9251B834D720059D3CA /* MobFoxAdBrowserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
