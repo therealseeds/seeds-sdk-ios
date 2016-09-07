@@ -713,7 +713,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
                 [NSURLConnection sendAsynchronousRequest:request2 queue:[[NSOperationQueue alloc] init] completionHandler:nil];
             }
             _tapThroughURL = url;
-            [self tapThrough:nil];
+            [Seeds sharedInstance].clickUrl = _tapThroughURL;
+            [self tapThrough:nil ];
             return NO;
         } else {
             return YES;

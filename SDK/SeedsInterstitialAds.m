@@ -64,7 +64,8 @@
     }
     
     Seeds.sharedInstance.adClicked = NO;
-    
+    [Seeds sharedInstance].clickUrl = nil;
+
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
 
@@ -82,6 +83,7 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidLoadMobFoxAd");
     
     Seeds.sharedInstance.adClicked = NO;
+    Seeds.sharedInstance.clickUrl = nil;
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
@@ -153,29 +155,38 @@
     }
 }
 
-- (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial
-{
+- (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial withUrl:(NSURL *)url {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
     
     [Seeds.sharedInstance recordEvent:@"message clicked"
                          segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName,
                                          @"context" : Seeds.sharedInstance.inAppMessageContext }
                                 count:1];
-    
+
     Seeds.sharedInstance.adClicked = YES;
     
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked (ad clicked = %s)", Seeds.sharedInstance.adClicked ? "yes" : "no");
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     
-    // TODO: Test this with links which lead nowhere (= do not open other application)
-    // TODO: Could the selector also include the url of the link? For the subscription feature.
-    
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
         [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
         [delegate seedsInAppMessageClicked];
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked: withPrice:)]) {
+        // Interpret the price from the link url
+        NSString* path = [url path];
+        bool isPriceUrl = [[url path] hasPrefix:@"/price"];
+        if (isPriceUrl) {
+            float price = [[url lastPathComponent] floatValue];
+            [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId withPrice:price];
+        }
+
+    }
+    
+    // - (void)seedsInAppMessageClicked:(NSString*)messageId withPrice:(double)price;
 }
 
 @end

@@ -30,6 +30,10 @@
     NSLog(@"seedsInAppMessageClicked(%@)", messageId);
 }
 
+- (void)seedsInAppMessageClicked:(NSString*)messageId withPrice:(double)price {
+    NSLog(@"seedsInAppMessageClicked(%@), price = %@", messageId, @(price));
+}
+
 - (void)seedsInAppMessageDismissed:(NSString*)messageId {
     NSLog(@"seedsInAppMessageDismissed(%@)", messageId);
 }
@@ -62,12 +66,13 @@
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_0];
 }
 
-- (IBAction)showIAM1:(id)sender {
+- (IBAction)showIAM1:(id)sender {   
     if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_1])
         [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self];
     else
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
 }
+
 
 - (void)handleUrl:(NSURL*)url {
     NSLog(@"url = %@", url);

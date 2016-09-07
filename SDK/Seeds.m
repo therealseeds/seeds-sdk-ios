@@ -110,6 +110,7 @@
         self.inAppMessageVariantName = nil;
         self.inAppMessageDoNotShow = NO;
         self.adClicked = NO;
+        self.clickUrl = nil;
     }
     return self;
 }

@@ -760,9 +760,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 - (void)customEventFullscreenWillLeaveApplication
 {
-    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
     {
-        [delegate mobfoxVideoInterstitialViewWasClicked:self];
+        [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:nil];
     }
 
     if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
@@ -1082,9 +1082,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 	if (tapThroughLeavesApp || [tapThroughURL isDeviceSupported])
 	{
-        if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+        if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
         {
-            [delegate mobfoxVideoInterstitialViewWasClicked:self];
+            [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:nil];
         }
 
         if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
@@ -1253,8 +1253,11 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     [self interstitialStopAdvert];
 
     id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageClosed:withMessageId:andCompleted:)])
-        [seedsDelegate seedsInAppMessageClosed:nil withMessageId:requestedMessageId andCompleted:NO];
+    if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
+        [seedsDelegate seedsInAppMessageDismissed:requestedMessageId];
+    
+    if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed)])
+        [seedsDelegate seedsInAppMessageDismissed];
 }
 
 #pragma mark -
@@ -1370,13 +1373,14 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
         
         [self checkAndCancelAutoClose];
         if(_overlayClickThrough) {
-            if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
-            {
-                [delegate mobfoxVideoInterstitialViewWasClicked:self];
-            }
-            [self advertActionTrackingEvent:@"overlayClick"];
             NSString *escapedDataString = [_overlayClickThrough stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             NSURL *clickUrl = [NSURL URLWithString:escapedDataString];
+            
+            if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
+            {
+                [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl: clickUrl];
+            }
+            [self advertActionTrackingEvent:@"overlayClick"];
             [self tapThrough:YES tapThroughURL:clickUrl];
         }
     }
@@ -1388,9 +1392,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
         if(_videoClickThrough) {
             [self advertActionTrackingEvent:@"videoClick"];
-            if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+            if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
             {
-                [delegate mobfoxVideoInterstitialViewWasClicked:self];
+                [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:nil];
             }
             NSString *escapedDataString = [_videoClickThrough stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             NSURL *clickUrl = [NSURL URLWithString:escapedDataString];
@@ -1542,16 +1546,16 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 #pragma mark Banner View Delegate
 
 -(void) mobfoxHTMLBannerViewActionWillPresent:(MobFoxHTMLBannerView *)banner {
-    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
     {
-        [delegate mobfoxVideoInterstitialViewWasClicked:self];
+        [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:nil];
     }
 }
 
 -(void) mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner {
-    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:)])
+    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
     {
-        [delegate mobfoxVideoInterstitialViewWasClicked:self];
+        [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:[Seeds sharedInstance].clickUrl];
     }
 
     if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
