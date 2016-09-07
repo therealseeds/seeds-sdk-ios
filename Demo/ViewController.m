@@ -26,20 +26,20 @@
     Seeds.sharedInstance.inAppMessageDelegate = self;
 }
 
-- (void)seedsInAppMessageClicked:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId {
+- (void)seedsInAppMessageClicked:(NSString*)messageId {
     NSLog(@"seedsInAppMessageClicked(%@)", messageId);
 }
 
-- (void)seedsInAppMessageClosed:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId andCompleted:(BOOL)completed {
-    NSLog(@"seedsInAppMessageClosed(%@), completed = %@", messageId, completed ? @"YES" : @"NO");
+- (void)seedsInAppMessageDismissed:(NSString*)messageId {
+    NSLog(@"seedsInAppMessageDismissed(%@)", messageId);
 }
 
-- (void)seedsInAppMessageLoadSucceeded:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId {
+- (void)seedsInAppMessageLoadSucceeded:(NSString *)messageId {
     NSLog(@"seedsInAppMessageLoadSucceeded(%@)", messageId);
     [Seeds.sharedInstance showInAppMessage:messageId in:self];
 }
 
-- (void)seedsInAppMessageShown:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId withSuccess:(BOOL)success {
+- (void)seedsInAppMessageShown:(NSString*)messageId withSuccess:(BOOL)success {
     NSLog(@"seedsInAppMessageShown(%@), success = %@", messageId, success ? @"YES" : @"NO");
 }
 
@@ -49,7 +49,6 @@
 
 - (IBAction)iapEvent:(id)sender {
     [Seeds.sharedInstance recordIAPEvent:@"ios_iap" price:0.99];
-    //[Seeds.sharedInstance trackPurchase:@"ios_iap" price:0.99];
 }
 
 - (IBAction)seedsIapEvent:(id)sender {

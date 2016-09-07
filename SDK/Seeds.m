@@ -305,9 +305,7 @@
 
 - (void) trackPurchase:(NSString *)key price:(double)price
 {
-    
     NSLog(@"[Seeds] trackPurchase start %@", Seeds.sharedInstance.adClicked ? @"YES" : @"NO");
-    
     
     if (Seeds.sharedInstance.adClicked) {
         [self recordSeedsIAPEvent:key price:price];

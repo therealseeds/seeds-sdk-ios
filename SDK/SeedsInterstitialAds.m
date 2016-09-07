@@ -54,14 +54,16 @@
 {
     if (![self isInAppMessageLoaded:messageId] || Seeds.sharedInstance.inAppMessageDoNotShow) {
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withMessageId:withSuccess:)])
-            [delegate seedsInAppMessageShown:nil withMessageId:Seeds.sharedInstance.inAppMessageId withSuccess:NO];
-
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-            [delegate seedsInAppMessageShown:nil withSuccess:NO];
+            [delegate seedsInAppMessageShown:Seeds.sharedInstance.inAppMessageId withSuccess:NO];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
+            [delegate seedsInAppMessageShown:NO];
 
         return;
     }
+    
+    Seeds.sharedInstance.adClicked = NO;
     
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
@@ -82,12 +84,11 @@
     Seeds.sharedInstance.adClicked = NO;
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:withMessageId:)])
-        [delegate seedsInAppMessageLoadSucceeded:nil withMessageId:Seeds.sharedInstance.inAppMessageId];
-    
-
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
-        [delegate seedsInAppMessageLoadSucceeded:nil];
+        [delegate seedsInAppMessageLoadSucceeded:Seeds.sharedInstance.inAppMessageId];
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded)])
+        [delegate seedsInAppMessageLoadSucceeded];
     
 }
 
@@ -114,11 +115,11 @@
                                 count:1];
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withMessageId:withSuccess:)])
-        [delegate seedsInAppMessageShown:nil withMessageId:Seeds.sharedInstance.inAppMessageId withSuccess:YES];
-    
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-        [delegate seedsInAppMessageShown:nil withSuccess:YES];
+        [delegate seedsInAppMessageShown:Seeds.sharedInstance.inAppMessageId withSuccess:YES];
+    
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
+        [delegate seedsInAppMessageShown:YES];
     
 }
 
@@ -142,12 +143,14 @@
     [self.controller interstitialStopAdvert];
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:withMessageId:andCompleted:)])
-        [delegate seedsInAppMessageClosed:nil withMessageId:Seeds.sharedInstance.inAppMessageId andCompleted:YES];
     
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClosed:andCompleted:)])
-        [delegate seedsInAppMessageClosed:nil andCompleted:YES];
-    
+    if (!Seeds.sharedInstance.adClicked) {
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
+            [delegate seedsInAppMessageDismissed:Seeds.sharedInstance.inAppMessageId];
+        
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageDismissed)])
+            [delegate seedsInAppMessageDismissed:nil];
+    }
 }
 
 - (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -164,11 +167,15 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked (ad clicked = %s)", Seeds.sharedInstance.adClicked ? "yes" : "no");
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withMessageId:)])
-        [delegate seedsInAppMessageClicked:nil withMessageId:Seeds.sharedInstance.inAppMessageId];
-
+    
+    // TODO: Test this with links which lead nowhere (= do not open other application)
+    // TODO: Could the selector also include the url of the link? For the subscription feature.
+    
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
-        [delegate seedsInAppMessageClicked:nil];
+        [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId];
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
+        [delegate seedsInAppMessageClicked];
 }
 
 @end
