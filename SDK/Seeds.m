@@ -347,7 +347,7 @@
 
 - (void)showInAppMessageIn:(UIViewController*)viewController;
 {
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController withContext:nil];
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController withContext:@""];
 }
 
 - (void)showInAppMessageIn:(UIViewController*)viewController withContext:(NSString*)messageContext;
@@ -357,7 +357,7 @@
 
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
 {
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController withContext:nil];
+    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController withContext:@""];
 }
 
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;
