@@ -73,7 +73,6 @@
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
 }
 
-
 - (void)handleUrl:(NSURL*)url {
     NSLog(@"url = %@", url);
     [self.urlLabel setText:[NSString stringWithFormat:@"InApp URL: %@", url]];

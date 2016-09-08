@@ -47,7 +47,7 @@
 
     [Seeds sharedInstance].inAppMessageDelegate = self;
     _testVC = OCMClassMock([UIViewController class]);
-    Seeds.sharedInstance.inAppMessageVariantName = @"testVariantName";
+    Seeds.sharedInstance.currentMessageId = @"testVariantName";
     
 }
 

@@ -107,7 +107,7 @@
         self.deviceId = nil;
         self.inAppMessageId = nil;
         self.inAppMessageContext = nil;
-        self.inAppMessageVariantName = nil;
+        self.currentMessageId = nil;
         self.inAppMessageDoNotShow = NO;
         self.adClicked = NO;
         self.clickUrl = nil;
@@ -292,8 +292,8 @@
     //[segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
     if (isSeedsEvent) {
         [segmentation setObject:@"Seeds" forKey:@"IAP type"];
-        if (self.inAppMessageVariantName) {
-            [segmentation setObject:self.inAppMessageVariantName forKey:@"message"];
+        if (self.currentMessageId) {
+            [segmentation setObject:self.currentMessageId forKey:@"message"];
         }
     } else {
         [segmentation setObject:@"Non-Seeds" forKey:@"IAP type"];

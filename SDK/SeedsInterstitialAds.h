@@ -11,7 +11,7 @@
 
 @property (nonatomic, copy) NSString *appKey;
 @property (nonatomic, copy) NSString *appHost;
-@property (nonatomic, retain) MobFoxVideoInterstitialViewController *controller;
+@property (nonatomic, retain) NSMutableDictionary<NSString *, MobFoxVideoInterstitialViewController *> *interstitialsByMessageId;
 
 + (instancetype)sharedInstance;
 - (void)requestInAppMessage:(NSString*)messageId;

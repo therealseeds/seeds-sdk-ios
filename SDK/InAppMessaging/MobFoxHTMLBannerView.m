@@ -398,7 +398,9 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         NSString *messageVariant = [json objectForKey:@"messageVariant"];
         if (messageVariant)
         {
-            Seeds.sharedInstance.inAppMessageVariantName = messageVariant;
+            // Useful for cases where the message id is not defined explicitly
+            // TODO: Refactor this out when moving to model where message is is always explicitly required
+            Seeds.sharedInstance.currentMessageId = messageVariant;
         }
 
         id doNotShowValue = [json objectForKey:@"doNotShow"];
