@@ -69,7 +69,7 @@
     [viewController.view addSubview:self.controller.view];
     [viewController addChildViewController:self.controller];
 
-    Seeds.sharedInstance.inAppMessageContext = messageContext;
+    Seeds.sharedInstance.inAppMessageContext = messageContext != nil ? messageContext : @"";
     [self.controller presentAd:MobFoxAdTypeText];
 }
 
@@ -110,7 +110,7 @@
 - (void)mobfoxVideoInterstitialViewActionWillPresentScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillPresentScreen");
-    
+
     [Seeds.sharedInstance recordEvent:@"message shown"
                          segmentation:@{ @"message" : Seeds.sharedInstance.inAppMessageVariantName,
                                          @"context" : Seeds.sharedInstance.inAppMessageContext }
