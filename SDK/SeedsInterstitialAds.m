@@ -175,13 +175,13 @@
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
         [delegate seedsInAppMessageClicked];
 
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked: withPrice:)]) {
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
         // Interpret the price from the link url
         NSString* path = [url path];
         bool isPriceUrl = [[url path] hasPrefix:@"/price"];
         if (isPriceUrl) {
             float price = [[url lastPathComponent] floatValue];
-            [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId withPrice:price];
+            [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId withDynamicPrice:price];
         }
 
     }

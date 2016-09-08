@@ -30,7 +30,7 @@
     NSLog(@"seedsInAppMessageClicked(%@)", messageId);
 }
 
-- (void)seedsInAppMessageClicked:(NSString*)messageId withPrice:(double)price {
+- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(double)price {
     NSLog(@"seedsInAppMessageClicked(%@), price = %@", messageId, @(price));
 }
 
