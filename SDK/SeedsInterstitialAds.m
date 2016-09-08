@@ -70,7 +70,7 @@
     if (![self isInAppMessageLoaded:messageId] || Seeds.sharedInstance.inAppMessageDoNotShow) {
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-            [delegate seedsInAppMessageShown:Seeds.sharedInstance.inAppMessageId withSuccess:NO];
+            [delegate seedsInAppMessageShown:Seeds.sharedInstance.currentMessageId withSuccess:NO];
 
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
             [delegate seedsInAppMessageShown:NO];
@@ -107,7 +107,7 @@
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
-        [delegate seedsInAppMessageLoadSucceeded:Seeds.sharedInstance.inAppMessageId];
+        [delegate seedsInAppMessageLoadSucceeded:Seeds.sharedInstance.currentMessageId];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded)])
         [delegate seedsInAppMessageLoadSucceeded];
@@ -121,7 +121,7 @@
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound:)])
-        [delegate seedsNoInAppMessageFound:Seeds.sharedInstance.inAppMessageId];
+        [delegate seedsNoInAppMessageFound:Seeds.sharedInstance.currentMessageId];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound)])
         [delegate seedsNoInAppMessageFound];
@@ -138,7 +138,7 @@
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-        [delegate seedsInAppMessageShown:Seeds.sharedInstance.inAppMessageId withSuccess:YES];
+        [delegate seedsInAppMessageShown:Seeds.sharedInstance.currentMessageId withSuccess:YES];
     
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
         [delegate seedsInAppMessageShown:YES];
@@ -168,7 +168,7 @@
     
     if (!Seeds.sharedInstance.adClicked) {
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
-            [delegate seedsInAppMessageDismissed:Seeds.sharedInstance.inAppMessageId];
+            [delegate seedsInAppMessageDismissed:Seeds.sharedInstance.currentMessageId];
         
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageDismissed)])
             [delegate seedsInAppMessageDismissed:nil];
@@ -190,7 +190,7 @@
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
-        [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId];
+        [delegate seedsInAppMessageClicked:Seeds.sharedInstance.currentMessageId];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
         [delegate seedsInAppMessageClicked];
@@ -200,7 +200,7 @@
         bool isPriceUrl = [[url path] hasPrefix:@"/price"];
         if (isPriceUrl) {
             float price = [[url lastPathComponent] floatValue];
-            [delegate seedsInAppMessageClicked:Seeds.sharedInstance.inAppMessageId withDynamicPrice:price];
+            [delegate seedsInAppMessageClicked:Seeds.sharedInstance.currentMessageId withDynamicPrice:price];
         }
 
     }

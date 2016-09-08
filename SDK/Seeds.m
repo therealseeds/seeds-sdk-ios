@@ -105,7 +105,6 @@
 #endif
         
         self.deviceId = nil;
-        self.inAppMessageId = nil;
         self.inAppMessageContext = nil;
         self.currentMessageId = nil;
         self.inAppMessageDoNotShow = NO;

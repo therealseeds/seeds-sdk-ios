@@ -366,9 +366,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         self.skipOverlay = @"1";
     }
 
-    NSString *messageId = [json objectForKey:@"message_id"];
-    Seeds.sharedInstance.inAppMessageId = messageId;
-
     NSString *productId = [json objectForKey:@"productIdIos"];
 
     _shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
