@@ -49,7 +49,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     BOOL alreadyRequestedInterstitial;
 
     UIInterfaceOrientation requestedAdOrientation;
-    NSString* requestedMessageId;
     
     BOOL currentlyPlayingInterstitial;
     float statusBarHeight;
@@ -440,7 +439,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 {
     if (!self.advertLoaded)
         return NO;
-    return messageId == nil || [messageId isEqualToString:requestedMessageId];
+    return messageId == nil || [messageId isEqualToString:seedsMessageId];
 }
 
 - (void)requestAd:(NSString*)messageId
@@ -503,8 +502,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     alreadyRequestedInterstitial = YES;
 	@autoreleasepool
 	{
-        requestedMessageId = messageId;
-
         UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         requestedAdOrientation = interfaceOrientation;
         NSString *orientation = UIInterfaceOrientationIsPortrait(interfaceOrientation) ? @"portrait" : @"landscape";
@@ -1260,7 +1257,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
     id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
-        [seedsDelegate seedsInAppMessageDismissed:requestedMessageId];
+        [seedsDelegate seedsInAppMessageDismissed:seedsMessageId];
     
     if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed)])
         [seedsDelegate seedsInAppMessageDismissed];
