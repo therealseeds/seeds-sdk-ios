@@ -106,7 +106,6 @@
         
         self.deviceId = nil;
         self.inAppMessageContext = nil;
-        self.currentMessageId = nil;
         self.inAppMessageDoNotShow = NO;
         self.adClicked = NO;
         self.clickUrl = nil;
@@ -287,13 +286,9 @@
 - (void)recordGenericIAPEvent:(NSString *)key price:(double)price isSeedsEvent:(BOOL)isSeedsEvent
 {
     NSMutableDictionary *segmentation = [[NSMutableDictionary alloc] init];
-    
-    //[segmentation setObject:isSeedsEvent ? @"Seeds" : @"Non-Seeds" forKey:@"IAP type"];
+
     if (isSeedsEvent) {
         [segmentation setObject:@"Seeds" forKey:@"IAP type"];
-        if (self.currentMessageId) {
-            [segmentation setObject:self.currentMessageId forKey:@"message"];
-        }
     } else {
         [segmentation setObject:@"Non-Seeds" forKey:@"IAP type"];
     }

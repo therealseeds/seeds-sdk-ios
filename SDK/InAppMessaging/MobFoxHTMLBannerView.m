@@ -397,7 +397,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         {
             // Useful for cases where the message id is not defined explicitly
             // TODO: Refactor this out when moving to model where message is is always explicitly required
-            Seeds.sharedInstance.currentMessageId = messageVariant;
+            inferredSeedsMessageId = messageVariant;
         }
 
         id doNotShowValue = [json objectForKey:@"doNotShow"];
@@ -818,6 +818,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @synthesize refreshAnimation;
 @synthesize refreshTimerOff;
 @synthesize requestURL;
+@synthesize inferredSeedsMessageId;
 @synthesize userAgent;
 @synthesize skipOverlay;
 @synthesize adType;

@@ -47,6 +47,7 @@
         self.interstitialsByMessageId[key] = [[MobFoxVideoInterstitialViewController alloc] init];
         self.interstitialsByMessageId[key].delegate = self;
         self.interstitialsByMessageId[key].enableInterstitialAds = YES;
+        self.interstitialsByMessageId[key].seedsMessageId = messageId;
     }
 
     return self.interstitialsByMessageId[key];
@@ -70,7 +71,7 @@
     if (![self isInAppMessageLoaded:messageId] || Seeds.sharedInstance.inAppMessageDoNotShow) {
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-            [delegate seedsInAppMessageShown:Seeds.sharedInstance.currentMessageId withSuccess:NO];
+            [delegate seedsInAppMessageShown:messageId withSuccess:NO];
 
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
             [delegate seedsInAppMessageShown:NO];
@@ -80,10 +81,6 @@
     
     [Seeds sharedInstance].adClicked = NO;
     [Seeds sharedInstance].clickUrl = nil;
-
-    if (messageId != nil) {
-        [Seeds sharedInstance].currentMessageId = messageId;
-    }
 
     MobFoxVideoInterstitialViewController *interstitial = [self getInterstitial:messageId];
     [viewController.view addSubview:interstitial.view];
@@ -101,17 +98,16 @@
 - (void)mobfoxVideoInterstitialViewDidLoadMobFoxAd:(MobFoxVideoInterstitialViewController *)videoInterstitial advertTypeLoaded:(MobFoxAdType)advertType
 {
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidLoadMobFoxAd");
-    
+
     Seeds.sharedInstance.adClicked = NO;
     Seeds.sharedInstance.clickUrl = nil;
-    
+    // TODO TODO videoInterstitial
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
-        [delegate seedsInAppMessageLoadSucceeded:Seeds.sharedInstance.currentMessageId];
+        [delegate seedsInAppMessageLoadSucceeded:videoInterstitial.seedsMessageId];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded)])
         [delegate seedsInAppMessageLoadSucceeded];
-    
 }
 
 - (void)mobfoxVideoInterstitialView:(MobFoxVideoInterstitialViewController *)videoInterstitial didFailToReceiveAdWithError:(NSError *)error
@@ -121,7 +117,7 @@
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound:)])
-        [delegate seedsNoInAppMessageFound:Seeds.sharedInstance.currentMessageId];
+        [delegate seedsNoInAppMessageFound:videoInterstitial.seedsMessageId];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsNoInAppMessageFound)])
         [delegate seedsNoInAppMessageFound];
@@ -132,14 +128,14 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewActionWillPresentScreen");
 
     [Seeds.sharedInstance recordEvent:@"message shown"
-                         segmentation:@{ @"message" : Seeds.sharedInstance.currentMessageId,
+                         segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
                                          @"context" : Seeds.sharedInstance.inAppMessageContext }
                                 count:1];
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
-        [delegate seedsInAppMessageShown:Seeds.sharedInstance.currentMessageId withSuccess:YES];
-    
+        [delegate seedsInAppMessageShown:videoInterstitial.seedsMessageId withSuccess:YES];
+
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
         [delegate seedsInAppMessageShown:YES];
     
@@ -168,7 +164,7 @@
     
     if (!Seeds.sharedInstance.adClicked) {
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
-            [delegate seedsInAppMessageDismissed:Seeds.sharedInstance.currentMessageId];
+            [delegate seedsInAppMessageDismissed:videoInterstitial.seedsMessageId];
         
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageDismissed)])
             [delegate seedsInAppMessageDismissed:nil];
@@ -179,7 +175,7 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
     
     [Seeds.sharedInstance recordEvent:@"message clicked"
-                         segmentation:@{ @"message" : Seeds.sharedInstance.currentMessageId,
+                         segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
                                          @"context" : Seeds.sharedInstance.inAppMessageContext }
                                 count:1];
 
@@ -188,22 +184,23 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked (ad clicked = %s)", Seeds.sharedInstance.adClicked ? "yes" : "no");
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
-    
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
-        [delegate seedsInAppMessageClicked:Seeds.sharedInstance.currentMessageId];
-
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
-        [delegate seedsInAppMessageClicked];
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
         // Interpret the price from the link url
         bool isPriceUrl = [[url path] hasPrefix:@"/price"];
         if (isPriceUrl) {
             float price = [[url lastPathComponent] floatValue];
-            [delegate seedsInAppMessageClicked:Seeds.sharedInstance.currentMessageId withDynamicPrice:price];
+            [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:price];
+            return; // Don't send the normal click event in case of dynamic pricing
         }
 
     }
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
+        [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId];
+
+    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
+        [delegate seedsInAppMessageClicked];
     
     // - (void)seedsInAppMessageClicked:(NSString*)messageId withPrice:(double)price;
 }

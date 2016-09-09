@@ -145,6 +145,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 @synthesize interstitialURL, interstitialHoldingView, interstitialWebView, interstitialMarkup, browserBackButton, browserForwardButton;
 @synthesize userAgent;
 @synthesize userAge, userGender, keywords;
+@synthesize seedsMessageId;
 
 
 #pragma mark - Init/Dealloc Methods
@@ -665,7 +666,12 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     bannerView.bannerImage = _bannerImage;
 
     [bannerView performSelectorOnMainThread:@selector(setupAdFromJson:) withObject:json waitUntilDone:YES];
-    
+
+    // TODO: Refactor this out when moving to model where message is is always explicitly required
+    if (seedsMessageId == nil) {
+        seedsMessageId = bannerView.inferredSeedsMessageId;
+    }
+
     [self.interstitialHoldingView addSubview:bannerView];
 
     interstitialSkipButtonShow = YES;
