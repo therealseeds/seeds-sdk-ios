@@ -21,6 +21,9 @@
 
     [Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
 
+    [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_0];
+    [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
+
     [Seeds.sharedInstance requestInAppMessageStats:^(NSString* key, int purchasesCount) {
 
     }

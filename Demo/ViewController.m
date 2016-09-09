@@ -40,7 +40,6 @@
 
 - (void)seedsInAppMessageLoadSucceeded:(NSString *)messageId {
     NSLog(@"seedsInAppMessageLoadSucceeded(%@)", messageId);
-    [Seeds.sharedInstance showInAppMessage:messageId in:self];
 }
 
 - (void)seedsInAppMessageShown:(NSString*)messageId withSuccess:(BOOL)success {
