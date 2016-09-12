@@ -82,13 +82,16 @@ extern NSString* const kCLYUserCustom;
 
 #pragma mark - Seeds Statistics
 
-typedef void (^ SeedsInAppPurchaseStatsCallback)(NSString* key, int purchasesCount);
-- (void)requestInAppPurchaseCount:(SeedsInAppPurchaseStatsCallback)callback of:(NSString*)key;
-- (void)requestInAppPurchasesCount:(SeedsInAppPurchaseStatsCallback)callback;
+typedef void (^ SeedsInAppPurchaseCountCallback)(NSString* errorMessage, int purchasesCount);
+- (void)requestInAppPurchaseCount:(SeedsInAppPurchaseCountCallback)callback of:(NSString*)key;
+- (void)requestTotalInAppPurchaseCount:(SeedsInAppPurchaseCountCallback)callback;
 
-typedef void (^ SeedsInAppMessageStatsCallback)(NSString* messageId, int shownCount);
-- (void)requestInAppMessageStats:(SeedsInAppMessageStatsCallback)callback;
-- (void)requestInAppMessageStats:(SeedsInAppMessageStatsCallback)callback of:(NSString*)messageId;
+typedef void (^ SeedsInAppMessageShowCountCallback)(NSString* errorMessage, int showCount);
+- (void)requestTotalInAppMessageShowCount:(SeedsInAppMessageShowCountCallback)callback;
+- (void)requestInAppMessageShowCount:(SeedsInAppMessageShowCountCallback)callback of:(NSString*)messageId;
+
+typedef void (^ SeedsGenericUserBehaviorQueryCallback)(NSString* errorMessage, id result);
+- (void)requestGenericUserBehaviorQuery:(SeedsGenericUserBehaviorQueryCallback)callback of:(NSString*)queryPath;
 
 #pragma mark - Seeds Messaging
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)

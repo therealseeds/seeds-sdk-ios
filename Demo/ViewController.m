@@ -32,6 +32,7 @@
 
 - (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(double)price {
     NSLog(@"seedsInAppMessageClicked(%@), price = %@", messageId, @(price));
+    [Seeds.sharedInstance recordSeedsIAPEvent:IAP_KEY price:0.99];
 }
 
 - (void)seedsInAppMessageDismissed:(NSString*)messageId {
@@ -52,6 +53,28 @@
 
 - (IBAction)iapEvent:(id)sender {
     [Seeds.sharedInstance recordIAPEvent:@"ios_iap" price:0.99];
+
+
+    // TODO: Create a separate button for user queries
+    [Seeds.sharedInstance requestInAppMessageShowCount:^(NSString *errorMessage, int shownCount) {
+        if(errorMessage == nil)
+            NSLog(@"requestInAppMessageShowCount(%@): %i", MESSAGE_ID_0, shownCount);
+    } of: MESSAGE_ID_0];
+
+    [Seeds.sharedInstance requestTotalInAppMessageShowCount:^(NSString *errorMessage, int showCount) {
+        if(errorMessage == nil)
+            NSLog(@"requestTotalInAppMessageShowCount: %i", showCount);
+    }];
+
+    [Seeds.sharedInstance requestInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount) {
+        if(errorMessage == nil)
+            NSLog(@"requestInAppPurchaseCount(%@): %i", IAP_KEY, purchaseCount);
+    } of: IAP_KEY];
+
+    [Seeds.sharedInstance requestTotalInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount) {
+        if (errorMessage == nil)
+            NSLog(@"requestTotalInAppPurchaseCount: %i", purchaseCount);
+    }];
 }
 
 - (IBAction)seedsIapEvent:(id)sender {
@@ -70,13 +93,6 @@
         [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self withContext: @"in-demo-app"];
     else
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
-}
-
-- (void)handleUrl:(NSURL*)url {
-    NSLog(@"url = %@", url);
-    [self.urlLabel setText:[NSString stringWithFormat:@"InApp URL: %@", url]];
-
-    [Seeds.sharedInstance recordSeedsIAPEvent:@"deep-link-item" price:0.99];
 }
 
 @end

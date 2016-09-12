@@ -17,6 +17,7 @@
 #define YOUR_APP_KEY @"71ac2900e9d31647d68d0ddc6f0aaf52611a612d"
 #define MESSAGE_ID_0 @"575f872a64bc1e5b0eca506f"
 #define MESSAGE_ID_1 @"5746851bb29ee753053a7c9a"
+#define IAP_KEY @"test_iap_event"
 
 //development server info
 //#define YOUR_SERVER @"https://devdash.playseeds.com"

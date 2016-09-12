@@ -328,7 +328,7 @@
     SeedsConnectionQueue.sharedInstance.locationString = [NSString stringWithFormat:@"%f,%f", latitude, longitude];
 }
 
-- (void)requestInAppPurchaseCount:(SeedsInAppPurchaseStatsCallback)callback of:(NSString*)key
+- (void)requestInAppPurchaseCount:(SeedsInAppPurchaseCountCallback)callback of:(NSString*)key
 {
     NSString* endpoint = [self.getAppHost stringByAppendingString:@"/o/app-user/query-iap-purchase-count"];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
@@ -339,6 +339,7 @@
     } else {
         endpoint = [endpoint stringByAppendingString:@"/total"];
     }
+
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", endpoint, parameters]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod: @"GET"];
@@ -349,27 +350,30 @@
                                NSDictionary* jsonReply = [NSJSONSerialization JSONObjectWithData:data
                                                                                          options:0
                                                                                            error:&error];
-                               if (!jsonReply || error) {
+                               NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                               if (httpResponse.statusCode != 200 || !jsonReply || error) {
                                    SEEDS_LOG(@"requestInAppPurchaseCount error: %@", error);
+                                   if (callback)
+                                       callback(@"status code not 200 or JSON is invalid", -1);
                                    return;
                                }
 
                                if (callback)
-                                   callback(key, [[jsonReply valueForKey:@"result"] intValue]);
+                                   callback(nil, [[jsonReply valueForKey:@"result"] intValue]);
     }];
 }
 
-- (void)requestInAppPurchasesCount:(SeedsInAppPurchaseStatsCallback)callback
+- (void)requestTotalInAppPurchaseCount:(SeedsInAppPurchaseCountCallback)callback
 {
     [self requestInAppPurchaseCount:callback of:nil];
 }
 
-- (void)requestInAppMessageStats:(SeedsInAppMessageStatsCallback)callback
+- (void)requestTotalInAppMessageShowCount:(SeedsInAppMessageShowCountCallback)callback
 {
-    [self requestInAppMessageStats:callback of:nil];
+    [self requestInAppMessageShowCount:callback of:nil];
 }
 
-- (void)requestInAppMessageStats:(SeedsInAppMessageStatsCallback)callback of:(NSString*)messageId
+- (void)requestInAppMessageShowCount:(SeedsInAppMessageShowCountCallback)callback of:(NSString*)messageId
 {
     NSString* endpoint = [self.getAppHost stringByAppendingString:@"/o/app-user/query-interstitial-shown-count"];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
@@ -377,7 +381,10 @@
                             [_deviceId stringByUrlEncoding]];
     if (messageId != nil) {
         parameters = [parameters stringByAppendingString:[NSString stringWithFormat:@"&interstitial_id=%@", [messageId stringByUrlEncoding]]];
+    } else {
+        endpoint = [endpoint stringByAppendingString:@"/total"];
     }
+
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", endpoint, parameters]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod: @"GET"];
@@ -388,13 +395,52 @@
                                NSDictionary* jsonReply = [NSJSONSerialization JSONObjectWithData:data
                                                                                          options:0
                                                                                            error:&error];
-                               if (!jsonReply || error) {
-                                   SEEDS_LOG(@"requestInAppMessageStats error: %@", error);
+
+                               NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                               if (httpResponse.statusCode != 200 || !jsonReply || error) {
+                                   SEEDS_LOG(@"requestInAppMessageShowCount error: %@", error);
+
+                                   if (callback)
+                                       callback(@"status code not 200 or JSON is invalid", -1);
+
                                    return;
                                }
 
                                if (callback)
-                                   callback(messageId, [[jsonReply valueForKey:@"result"] intValue]);
+                                   callback(nil, [[jsonReply valueForKey:@"result"] intValue]);
+                           }];
+}
+
+- (void)requestGenericUserBehaviorQuery:(SeedsGenericUserBehaviorQueryCallback)callback of:(NSString*)queryPath
+{
+    NSString* endpoint = [self.getAppHost stringByAppendingString:[@"/o/app-user/" stringByAppendingString: queryPath]];
+    NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
+                                                      [self.getAppKey stringByUrlEncoding],
+                                                      [_deviceId stringByUrlEncoding]];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", endpoint, parameters]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod: @"GET"];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse* response, NSData* data, NSError* connectionError) {
+                               NSError* error = nil;
+                               NSDictionary* jsonReply = [NSJSONSerialization JSONObjectWithData:data
+                                                                                         options:0
+                                                                                           error:&error];
+
+                               NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                               if (httpResponse.statusCode != 200 || !jsonReply || error) {
+                                   SEEDS_LOG(@"requestGenericUserBehaviorQuery error: %@", error);
+
+                                   if (callback)
+                                       callback(@"status code not 200 or JSON is invalid", nil);
+
+                                   return;
+                               }
+
+                               if (callback)
+                                   callback(nil, [jsonReply valueForKey:@"result"]);
                            }];
 }
 
