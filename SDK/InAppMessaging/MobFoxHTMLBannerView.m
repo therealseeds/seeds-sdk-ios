@@ -366,9 +366,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         self.skipOverlay = @"1";
     }
 
-    NSString *messageId = [json objectForKey:@"message_id"];
-    Seeds.sharedInstance.inAppMessageId = messageId;
-
     NSString *productId = [json objectForKey:@"productIdIos"];
 
     _shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
@@ -398,7 +395,9 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         NSString *messageVariant = [json objectForKey:@"messageVariant"];
         if (messageVariant)
         {
-            Seeds.sharedInstance.inAppMessageVariantName = messageVariant;
+            // Useful for cases where the message id is not defined explicitly
+            // TODO: Refactor this out when moving to model where message is is always explicitly required
+            inferredSeedsMessageId = messageVariant;
         }
 
         id doNotShowValue = [json objectForKey:@"doNotShow"];
@@ -713,7 +712,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
                 [NSURLConnection sendAsynchronousRequest:request2 queue:[[NSOperationQueue alloc] init] completionHandler:nil];
             }
             _tapThroughURL = url;
-            [self tapThrough:nil];
+            [Seeds sharedInstance].clickUrl = _tapThroughURL;
+            [self tapThrough:nil ];
             return NO;
         } else {
             return YES;
@@ -818,6 +818,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @synthesize refreshAnimation;
 @synthesize refreshTimerOff;
 @synthesize requestURL;
+@synthesize inferredSeedsMessageId;
 @synthesize userAgent;
 @synthesize skipOverlay;
 @synthesize adType;

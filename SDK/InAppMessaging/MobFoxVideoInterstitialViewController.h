@@ -59,7 +59,7 @@ typedef enum {
 
 - (void)mobfoxVideoInterstitialViewActionWillLeaveApplication:(MobFoxVideoInterstitialViewController *)videoInterstitial;
 
-- (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial;
+- (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial withUrl:(NSURL *)url;
 
 @end
 
@@ -76,7 +76,6 @@ typedef enum {
     NSString *requestURL;
     NSString *videoRequestURL;
     UIImage *_bannerImage;
-
 }
 
 @property (nonatomic, assign) IBOutlet __unsafe_unretained id <MobFoxVideoInterstitialViewControllerDelegate> delegate;
@@ -89,6 +88,7 @@ typedef enum {
 @property (nonatomic, assign) NSInteger userAge;
 @property (nonatomic, strong) NSString* userGender;
 @property (nonatomic, retain) NSArray* keywords;
+@property (nonatomic, strong) NSString* seedsMessageId;
 
 @property (nonatomic, strong) NSString *requestURL;
 

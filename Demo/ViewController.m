@@ -26,20 +26,24 @@
     Seeds.sharedInstance.inAppMessageDelegate = self;
 }
 
-- (void)seedsInAppMessageClicked:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId {
+- (void)seedsInAppMessageClicked:(NSString*)messageId {
     NSLog(@"seedsInAppMessageClicked(%@)", messageId);
 }
 
-- (void)seedsInAppMessageClosed:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId andCompleted:(BOOL)completed {
-    NSLog(@"seedsInAppMessageClosed(%@), completed = %@", messageId, completed ? @"YES" : @"NO");
+- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(double)price {
+    NSLog(@"seedsInAppMessageClicked(%@), price = %@", messageId, @(price));
+    [Seeds.sharedInstance recordSeedsIAPEvent:IAP_KEY price:0.99];
 }
 
-- (void)seedsInAppMessageLoadSucceeded:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId {
+- (void)seedsInAppMessageDismissed:(NSString*)messageId {
+    NSLog(@"seedsInAppMessageDismissed(%@)", messageId);
+}
+
+- (void)seedsInAppMessageLoadSucceeded:(NSString *)messageId {
     NSLog(@"seedsInAppMessageLoadSucceeded(%@)", messageId);
-    [Seeds.sharedInstance showInAppMessage:messageId in:self];
 }
 
-- (void)seedsInAppMessageShown:(SeedsInAppMessage*)inAppMessage withMessageId:(NSString*)messageId withSuccess:(BOOL)success {
+- (void)seedsInAppMessageShown:(NSString*)messageId withSuccess:(BOOL)success {
     NSLog(@"seedsInAppMessageShown(%@), success = %@", messageId, success ? @"YES" : @"NO");
 }
 
@@ -49,7 +53,28 @@
 
 - (IBAction)iapEvent:(id)sender {
     [Seeds.sharedInstance recordIAPEvent:@"ios_iap" price:0.99];
-    //[Seeds.sharedInstance trackPurchase:@"ios_iap" price:0.99];
+
+
+    // TODO: Create a separate button for user queries
+    [Seeds.sharedInstance requestInAppMessageShowCount:^(NSString *errorMessage, int shownCount) {
+        if(errorMessage == nil)
+            NSLog(@"requestInAppMessageShowCount(%@): %i", MESSAGE_ID_0, shownCount);
+    } of: MESSAGE_ID_0];
+
+    [Seeds.sharedInstance requestTotalInAppMessageShowCount:^(NSString *errorMessage, int showCount) {
+        if(errorMessage == nil)
+            NSLog(@"requestTotalInAppMessageShowCount: %i", showCount);
+    }];
+
+    [Seeds.sharedInstance requestInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount) {
+        if(errorMessage == nil)
+            NSLog(@"requestInAppPurchaseCount(%@): %i", IAP_KEY, purchaseCount);
+    } of: IAP_KEY];
+
+    [Seeds.sharedInstance requestTotalInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount) {
+        if (errorMessage == nil)
+            NSLog(@"requestTotalInAppPurchaseCount: %i", purchaseCount);
+    }];
 }
 
 - (IBAction)seedsIapEvent:(id)sender {
@@ -58,23 +83,16 @@
 
 - (IBAction)showIAM0:(id)sender {
     if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_0])
-        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_0 in:self];
+        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_0 in:self withContext: @"in-demo-app"];
     else
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_0];
 }
 
-- (IBAction)showIAM1:(id)sender {
+- (IBAction)showIAM1:(id)sender {   
     if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_1])
-        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self];
+        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self withContext: @"in-demo-app"];
     else
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
-}
-
-- (void)handleUrl:(NSURL*)url {
-    NSLog(@"url = %@", url);
-    [self.urlLabel setText:[NSString stringWithFormat:@"InApp URL: %@", url]];
-
-    [Seeds.sharedInstance recordSeedsIAPEvent:@"deep-link-item" price:0.99];
 }
 
 @end

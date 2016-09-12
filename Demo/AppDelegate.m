@@ -21,10 +21,8 @@
 
     [Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
 
-    [Seeds.sharedInstance requestInAppMessageStats:^(NSString* key, int purchasesCount) {
-
-    }
-                                                 of:@""];
+    [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_0];
+    [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
 
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey] != nil) {
         NSURL *url = [launchOptions objectForKey: UIApplicationLaunchOptionsURLKey];

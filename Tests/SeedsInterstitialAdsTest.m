@@ -80,8 +80,8 @@ MobFoxVideoInterstitialViewController *mockVideoController;
 }
 
 - (void) testMobfoxVideoInterstitialViewWasClicked {
-    [seedsInterstitialAdsMock mobfoxVideoInterstitialViewWasClicked:mockVideoController];
-    OCMVerify([seedsInterstitialAdsMock mobfoxVideoInterstitialViewWasClicked:mockVideoController]);
+    [seedsInterstitialAdsMock mobfoxVideoInterstitialViewWasClicked:mockVideoController withUrl:nil];
+    OCMVerify([seedsInterstitialAdsMock mobfoxVideoInterstitialViewWasClicked:mockVideoController withUrl:nil]);
 }
 
 //- (void)testPerformanceExample {
