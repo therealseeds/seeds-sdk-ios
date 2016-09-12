@@ -56,22 +56,22 @@
 
 
     // TODO: Create a separate button for user queries
-    [Seeds.sharedInstance requestInAppMessageShowCount:^(NSString *errorMessage, int shownCount, NSString* messageId) {
+    [Seeds.sharedInstance requestInAppMessageShowCount:^(NSString *errorMessage, int shownCount) {
         if(errorMessage == nil)
             NSLog(@"requestInAppMessageShowCount(%@): %i", MESSAGE_ID_0, shownCount);
     } of: MESSAGE_ID_0];
 
-    [Seeds.sharedInstance requestTotalInAppMessageShowCount:^(NSString *errorMessage, int showCount, NSString* _) {
+    [Seeds.sharedInstance requestTotalInAppMessageShowCount:^(NSString *errorMessage, int showCount) {
         if(errorMessage == nil)
             NSLog(@"requestTotalInAppMessageShowCount: %i", showCount);
     }];
 
-    [Seeds.sharedInstance requestInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount, NSString* iapKey) {
+    [Seeds.sharedInstance requestInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount) {
         if(errorMessage == nil)
             NSLog(@"requestInAppPurchaseCount(%@): %i", IAP_KEY, purchaseCount);
     } of: IAP_KEY];
 
-    [Seeds.sharedInstance requestTotalInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount, NSString* _) {
+    [Seeds.sharedInstance requestTotalInAppPurchaseCount:^(NSString *errorMessage, int purchaseCount) {
         if (errorMessage == nil)
             NSLog(@"requestTotalInAppPurchaseCount: %i", purchaseCount);
     }];

@@ -82,15 +82,15 @@ extern NSString* const kCLYUserCustom;
 
 #pragma mark - Seeds Statistics
 
-typedef void (^ SeedsInAppPurchaseCountCallback)(NSString* errorMessage, int purchasesCount, NSString* key);
+typedef void (^ SeedsInAppPurchaseCountCallback)(NSString* errorMessage, int purchasesCount);
 - (void)requestInAppPurchaseCount:(SeedsInAppPurchaseCountCallback)callback of:(NSString*)key;
 - (void)requestTotalInAppPurchaseCount:(SeedsInAppPurchaseCountCallback)callback;
 
-typedef void (^ SeedsInAppMessageShowCountCallback)(NSString* errorMessage, int showCount, NSString* messageId);
+typedef void (^ SeedsInAppMessageShowCountCallback)(NSString* errorMessage, int showCount);
 - (void)requestTotalInAppMessageShowCount:(SeedsInAppMessageShowCountCallback)callback;
 - (void)requestInAppMessageShowCount:(SeedsInAppMessageShowCountCallback)callback of:(NSString*)messageId;
 
-typedef void (^ SeedsGenericUserBehaviorQueryCallback)(NSString* errorMessage, id result, NSString* queryPath);
+typedef void (^ SeedsGenericUserBehaviorQueryCallback)(NSString* errorMessage, id result);
 - (void)requestGenericUserBehaviorQuery:(SeedsGenericUserBehaviorQueryCallback)callback of:(NSString*)queryPath;
 
 #pragma mark - Seeds Messaging

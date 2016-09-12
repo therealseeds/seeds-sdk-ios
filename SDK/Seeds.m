@@ -354,12 +354,12 @@
                                if (httpResponse.statusCode != 200 || !jsonReply || error) {
                                    SEEDS_LOG(@"requestInAppPurchaseCount error: %@", error);
                                    if (callback)
-                                       callback(@"status code not 200 or JSON is invalid", -1, nil);
+                                       callback(@"status code not 200 or JSON is invalid", -1);
                                    return;
                                }
 
                                if (callback)
-                                   callback(nil, [[jsonReply valueForKey:@"result"] intValue], key);
+                                   callback(nil, [[jsonReply valueForKey:@"result"] intValue]);
     }];
 }
 
@@ -401,13 +401,13 @@
                                    SEEDS_LOG(@"requestInAppMessageShowCount error: %@", error);
 
                                    if (callback)
-                                       callback(@"status code not 200 or JSON is invalid", -1, nil);
+                                       callback(@"status code not 200 or JSON is invalid", -1);
 
                                    return;
                                }
 
                                if (callback)
-                                   callback(nil, [[jsonReply valueForKey:@"result"] intValue], messageId);
+                                   callback(nil, [[jsonReply valueForKey:@"result"] intValue]);
                            }];
 }
 
@@ -434,13 +434,13 @@
                                    SEEDS_LOG(@"requestGenericUserBehaviorQuery error: %@", error);
 
                                    if (callback)
-                                       callback(@"status code not 200 or JSON is invalid", nil, nil);
+                                       callback(@"status code not 200 or JSON is invalid", nil);
 
                                    return;
                                }
 
                                if (callback)
-                                   callback(nil, [jsonReply valueForKey:@"result"], queryPath);
+                                   callback(nil, [jsonReply valueForKey:@"result"]);
                            }];
 }
 
