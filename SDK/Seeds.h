@@ -74,17 +74,10 @@ extern NSString* const kCLYUserCustom;
 
 - (void)recordSeedsIAPEvent:(NSString *)key price:(double)price;
 
-- (void)trackPurchase:(NSString *)key price:(double)price;
-
-- (void)requestInAppMessage;
 - (void)requestInAppMessage:(NSString*)messageId;
 
-- (BOOL)isInAppMessageLoaded;
 - (BOOL)isInAppMessageLoaded:(NSString*)messageId;
 
-- (void)showInAppMessageIn:(UIViewController*)viewController;
-- (void)showInAppMessageIn:(UIViewController*)viewController withContext:(NSString*)messageContext;
-- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;
 
 #pragma mark - Seeds Statistics

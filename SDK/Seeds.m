@@ -298,18 +298,6 @@
     [self recordEvent:[@"IAP:" stringByAppendingString:key] segmentation:segmentation count:1 sum:price];
 }
 
-- (void) trackPurchase:(NSString *)key price:(double)price
-{
-    NSLog(@"[Seeds] trackPurchase start %@", Seeds.sharedInstance.adClicked ? @"YES" : @"NO");
-    
-    if (Seeds.sharedInstance.adClicked) {
-        [self recordSeedsIAPEvent:key price:price];
-        Seeds.sharedInstance.adClicked = NO;
-    } else {
-        [self recordIAPEvent:key price:price];
-    }
-}
-
 - (void)recordIAPEvent:(NSString *)key price:(double)price
 {
     [self recordGenericIAPEvent:key price:price isSeedsEvent:NO];
@@ -320,39 +308,14 @@
     [self recordGenericIAPEvent:key price:price isSeedsEvent:YES];
 }
 
-- (void)requestInAppMessage
-{
-    [self requestInAppMessage:nil];
-}
-
 - (void)requestInAppMessage:(NSString*)messageId
 {
     [[SeedsInterstitialAds sharedInstance] requestInAppMessage:messageId];
 }
 
-- (BOOL)isInAppMessageLoaded
-{
-    return [[SeedsInterstitialAds sharedInstance] isInAppMessageLoaded:nil];
-}
-
 - (BOOL)isInAppMessageLoaded:(NSString*)messageId
 {
     return [[SeedsInterstitialAds sharedInstance] isInAppMessageLoaded:messageId];
-}
-
-- (void)showInAppMessageIn:(UIViewController*)viewController;
-{
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController withContext:nil];
-}
-
-- (void)showInAppMessageIn:(UIViewController*)viewController withContext:(NSString*)messageContext;
-{
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:nil in:viewController withContext:messageContext];
-}
-
-- (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController;
-{
-    [[SeedsInterstitialAds sharedInstance] showInAppMessage:messageId in:viewController withContext:nil];
 }
 
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;

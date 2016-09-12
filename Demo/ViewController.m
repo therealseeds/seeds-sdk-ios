@@ -60,14 +60,14 @@
 
 - (IBAction)showIAM0:(id)sender {
     if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_0])
-        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_0 in:self];
+        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_0 in:self withContext: @"in-demo-app"];
     else
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_0];
 }
 
 - (IBAction)showIAM1:(id)sender {   
     if ([Seeds.sharedInstance isInAppMessageLoaded:MESSAGE_ID_1])
-        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self];
+        [Seeds.sharedInstance showInAppMessage:MESSAGE_ID_1 in:self withContext: @"in-demo-app"];
     else
         [Seeds.sharedInstance requestInAppMessage:MESSAGE_ID_1];
 }
