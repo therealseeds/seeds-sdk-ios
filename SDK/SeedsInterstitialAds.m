@@ -174,13 +174,6 @@
 - (BOOL)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial withUrl:(NSURL *)url {
     BOOL closeAfterClick = true;
 
-    NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
-    
-    [Seeds.sharedInstance recordEvent:@"message clicked"
-                         segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
-                                         @"context" : Seeds.sharedInstance.inAppMessageContext }
-                                count:1];
-
     Seeds.sharedInstance.adClicked = YES;
     
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked (ad clicked = %s)", Seeds.sharedInstance.adClicked ? "yes" : "no");
@@ -190,6 +183,7 @@
     NSArray<NSString *> *path = [url pathComponents];
 
     bool isSocialSharingUrl = path.count == 3 && [path[1] isEqualToString: @"social-share"];
+    bool isPriceUrl = path.count == 3 && [path[1] isEqualToString: @"price"];
     if (isSocialSharingUrl) {
         NSURL *sharingUrl = [NSURL URLWithString:[@"http://playseeds.com/" stringByAppendingString: path[2]]];
         UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[sharingUrl] applicationActivities:nil];
@@ -204,24 +198,45 @@
                 UIActivityTypePostToTencentWeibo,
                 UIActivityTypeAirDrop];
         [[videoInterstitial parentViewController] presentViewController:activityController animated:YES completion:nil];
+
         closeAfterClick = false;
-    }
 
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
-        // Interpret the price from the link url
-        bool isPriceUrl = path.count == 3 && [path[1] isEqualToString: @"price"];
-        if (isPriceUrl) {
-            float price = [path[2] floatValue];
+        [Seeds.sharedInstance recordEvent:@"social share clicked"
+                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
+                                     @"context" : Seeds.sharedInstance.inAppMessageContext }
+                                    count:1];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
+            [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
+            [delegate seedsInAppMessageClicked];
+
+    } else if (isPriceUrl) {
+        NSString* priceString = path[2];
+        float price = [priceString floatValue];
+
+        [Seeds.sharedInstance recordEvent:@"dynamic price clicked"
+                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
+                                     @"context" : Seeds.sharedInstance.inAppMessageContext,
+                                     @"price" : priceString}
+                                    count:1];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
             [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:price];
-            return true; // Don't send the normal click event in case of dynamic pricing
         }
+    } else {
+        [Seeds.sharedInstance recordEvent:@"message clicked"
+                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
+                                     @"context" : Seeds.sharedInstance.inAppMessageContext }
+                                    count:1];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
+            [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId];
+
+        if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
+            [delegate seedsInAppMessageClicked];
     }
-
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
-        [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId];
-
-    if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
-        [delegate seedsInAppMessageClicked];
 
     return closeAfterClick;
 }
