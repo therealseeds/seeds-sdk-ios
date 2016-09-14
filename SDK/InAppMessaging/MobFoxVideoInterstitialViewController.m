@@ -1255,6 +1255,11 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 - (void)interstitialSkipAction:(id)sender {
     [self interstitialStopAdvert];
 
+    [Seeds.sharedInstance recordEvent:@"message dismissed"
+                         segmentation:@{ @"message" : seedsMessageId,
+                                 @"context" : Seeds.sharedInstance.inAppMessageContext }
+                                count:1];
+
     id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
         [seedsDelegate seedsInAppMessageDismissed:seedsMessageId];

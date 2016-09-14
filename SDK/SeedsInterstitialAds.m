@@ -184,6 +184,8 @@
 
     bool isSocialSharingUrl = path.count == 3 && [path[1] isEqualToString: @"social-share"];
     bool isPriceUrl = path.count == 3 && [path[1] isEqualToString: @"price"];
+    bool isShowMoreUrl = path.count == 2 && [path[1] isEqualToString: @"show-more"];
+
     if (isSocialSharingUrl) {
         NSURL *sharingUrl = [NSURL URLWithString:[@"http://playseeds.com/" stringByAppendingString: path[2]]];
         UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[sharingUrl] applicationActivities:nil];
@@ -225,6 +227,13 @@
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
             [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:price];
         }
+    } else if (isShowMoreUrl) {
+        [Seeds.sharedInstance recordEvent:@"show more clicked"
+                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
+                                     @"context" : Seeds.sharedInstance.inAppMessageContext }
+                                    count:1];
+
+        closeAfterClick = false;
     } else {
         [Seeds.sharedInstance recordEvent:@"message clicked"
                              segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
