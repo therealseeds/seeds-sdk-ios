@@ -1556,12 +1556,14 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 }
 
 -(void) mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner {
+    BOOL closeAfterClick = true;
+    
     if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
     {
-        [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:[Seeds sharedInstance].clickUrl];
+        closeAfterClick = [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:[Seeds sharedInstance].clickUrl];
     }
 
-    if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
+    if (closeAfterClick && [delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])
     {
         [delegate mobfoxVideoInterstitialViewActionWillLeaveApplication:self];
     }

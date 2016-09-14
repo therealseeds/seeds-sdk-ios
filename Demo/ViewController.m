@@ -56,9 +56,9 @@
 
 
     // TODO: Create a separate button for user queries
-    [Seeds.sharedInstance requestInAppMessageShowCount:^(NSString *errorMessage, int shownCount) {
+    [Seeds.sharedInstance requestInAppMessageShowCount:^(NSString *errorMessage, int showCount) {
         if(errorMessage == nil)
-            NSLog(@"requestInAppMessageShowCount(%@): %i", MESSAGE_ID_0, shownCount);
+            NSLog(@"requestInAppMessageShowCount(%@): %i", MESSAGE_ID_0, showCount);
     } of: MESSAGE_ID_0];
 
     [Seeds.sharedInstance requestTotalInAppMessageShowCount:^(NSString *errorMessage, int showCount) {

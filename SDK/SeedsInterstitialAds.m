@@ -11,6 +11,7 @@
 #import "SeedsInterstitialAds.h"
 #import "Seeds.h"
 #import "SeedsInAppMessageDelegate.h"
+#import <Social/Social.h>
 
 @interface SeedsInterstitialAds()
 @end
@@ -138,7 +139,6 @@
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:)])
         [delegate seedsInAppMessageShown:YES];
-    
 }
 
 - (void)mobfoxVideoInterstitialViewWillDismissScreen:(MobFoxVideoInterstitialViewController *)videoInterstitial
@@ -171,7 +171,9 @@
     }
 }
 
-- (void)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial withUrl:(NSURL *)url {
+- (BOOL)mobfoxVideoInterstitialViewWasClicked:(MobFoxVideoInterstitialViewController *)videoInterstitial withUrl:(NSURL *)url {
+    BOOL closeAfterClick = true;
+
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewWasClicked");
     
     [Seeds.sharedInstance recordEvent:@"message clicked"
@@ -185,15 +187,34 @@
     
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
 
+    NSArray<NSString *> *path = [url pathComponents];
+
+    bool isSocialSharingUrl = path.count == 3 && [path[1] isEqualToString: @"social-share"];
+    if (isSocialSharingUrl) {
+        NSURL *sharingUrl = [NSURL URLWithString:[@"http://playseeds.com/" stringByAppendingString: path[2]]];
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[sharingUrl] applicationActivities:nil];
+        activityController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                UIActivityTypePrint,
+                UIActivityTypeCopyToPasteboard,
+                UIActivityTypeAssignToContact,
+                UIActivityTypeSaveToCameraRoll,
+                UIActivityTypeAddToReadingList,
+                UIActivityTypePostToFlickr,
+                UIActivityTypePostToVimeo,
+                UIActivityTypePostToTencentWeibo,
+                UIActivityTypeAirDrop];
+        [[videoInterstitial parentViewController] presentViewController:activityController animated:YES completion:nil];
+        closeAfterClick = false;
+    }
+
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
         // Interpret the price from the link url
-        bool isPriceUrl = [[url path] hasPrefix:@"/price"];
+        bool isPriceUrl = path.count == 3 && [path[1] isEqualToString: @"price"];
         if (isPriceUrl) {
-            float price = [[url lastPathComponent] floatValue];
+            float price = [path[2] floatValue];
             [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:price];
-            return; // Don't send the normal click event in case of dynamic pricing
+            return true; // Don't send the normal click event in case of dynamic pricing
         }
-
     }
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
@@ -201,8 +222,8 @@
 
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked)])
         [delegate seedsInAppMessageClicked];
-    
-    // - (void)seedsInAppMessageClicked:(NSString*)messageId withPrice:(double)price;
+
+    return closeAfterClick;
 }
 
 @end
