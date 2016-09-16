@@ -32,14 +32,12 @@
 NSString * const MobFoxErrorDomain = @"MobFox";
 
 @interface MobFoxHTMLBannerView () <UIWebViewDelegate, MFCustomEventBannerDelegate, UIGestureRecognizerDelegate> {
-    NSString *skipOverlay;
     BOOL wasUserAction;
 
     SKProductHelper *productHelper;
 }
 
 @property (nonatomic, strong) NSString *userAgent;
-@property (nonatomic, strong) NSString *skipOverlay;
 @property (nonatomic, strong) NSString *adType;
 @property (nonatomic, assign) CGFloat currentLatitude;
 @property (nonatomic, assign) CGFloat currentLongitude;
@@ -353,19 +351,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 		_tapThroughLeavesApp = YES;
 	}
 
-	NSString *clickUrl = [json objectForKey:@"clickurl"];
-	if ([clickUrl length] > 0)
-	{
-        clickUrl = [clickUrl stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
-		_tapThroughURL = [NSURL URLWithString:clickUrl];
-        self.skipOverlay = @"0";
-	}
-    else
-    {
-        self.skipOverlay = @"1";
-    }
-
     NSString *productId = [json objectForKey:@"productIdIos"];
 
     _shouldScaleWebView = NO; //[[xml.documentRoot getNamedChild:@"scale"].text isEqualToString:@"yes"];
@@ -394,12 +379,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
 
-        //load HTML string later (to avoid calling impression pixels when using custom events)
-        if([clickUrl length] > 0) { //means that it's an interstitial ad
-            _htmlString = [NSString stringWithFormat: @"<style>* { -webkit-tap-highlight-color: rgba(0,0,0,0);} body {height:100%%; width:100%%;} img {max-width:100%%; max-height:100%%; width:auto; height:auto; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;}</style>%@",html];
-        } else {
-            _htmlString = html;
-        }
+        _htmlString = html;
 
         NSString *productPrice = @"BUY";
         if (productId != nil && [SKPaymentQueue canMakePayments]) {
@@ -429,27 +409,18 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         }
         _htmlString = [_htmlString stringByReplacingOccurrencesOfString:@"%{LocalizedPrice}" withString:productPrice];
 
-		if([skipOverlay isEqualToString:@"1"]) {
+        wasUserAction = NO;
 
-            wasUserAction = NO;
-            
-            webView.delegate = (id)self;
-            webView.userInteractionEnabled = YES;
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-            
-            [webView addGestureRecognizer:tap];
-            
-            tap.delegate = self;
-            
-            
-        } else {
+        webView.delegate = (id)self;
+        webView.userInteractionEnabled = YES;
 
-            webView.delegate = nil;
-            webView.userInteractionEnabled = NO;
-            
-//          add overlay later, only if no custom event is shown
-        }
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+
+        [webView addGestureRecognizer:tap];
+
+        tap.delegate = self;
+
+
 		webView.backgroundColor = [UIColor clearColor];
         webView.opaque = NO;
         webView.scrollView.scrollsToTop = false;
@@ -486,23 +457,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 - (void)showBannerView:(UIView*)nextBannerView withPreviousSubviews:(NSArray*)previousSubviews
 {
     if([adType isEqualToString:@"textAd"]) {
-        
+
         [(UIWebView*)nextBannerView loadHTMLString:_htmlString baseURL:nil];
-        
-        if(![skipOverlay isEqualToString:@"1"]) { //create overlay only if necessary, to not interfere with custom events
-            UIImage *grayingImage = [self darkeningImageOfSize:self.bannerView.frame.size];
-        
-            UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-            [button setFrame:self.bannerView.bounds];
-            [button addTarget:self action:@selector(tapThrough:) forControlEvents:UIControlEventTouchUpInside];
-            [button setImage:grayingImage forState:UIControlStateHighlighted];
-            button.alpha = 0.47;
-        
-            button.center = CGPointMake(roundf(self.bounds.size.width / 2.0), roundf(self.bounds.size.height / 2.0));
-            button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        
-            [self addSubview:button];
-        }
     }
     
     nextBannerView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -578,33 +534,16 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	bannerViewActionInProgress = YES;
 }
 
-- (void)checker:(MFRedirectChecker *)checker didFinishWithData:(NSData *)data
-{
-	UIViewController *viewController = [self firstAvailableUIViewController];
-	MobFoxAdBrowserViewController *browser = [[MobFoxAdBrowserViewController alloc] initWithUrl:nil];
-	browser.delegate = (id)self;
-	browser.userAgent = self.userAgent;
-	browser.webView.scalesPageToFit = _shouldScaleWebView;
-	NSString *scheme = [_tapThroughURL scheme];
-	NSString *host = [_tapThroughURL host];
-	NSString *path = [[_tapThroughURL path] stringByDeletingLastPathComponent];
-	NSURL *baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/", scheme, host, path]];
-	[browser.webView loadData:data MIMEType:checker.mimeType textEncodingName:checker.textEncodingName baseURL:baseURL];
-	[self hideStatusBar];
-    if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionWillPresent:)])
-    {
-        [delegate mobfoxHTMLBannerViewActionWillPresent:self];
-    }
-    [viewController presentViewController:browser animated:YES completion:nil];
-	bannerViewActionInProgress = YES;
-}
-
 - (void)checker:(MFRedirectChecker *)checker didFailWithError:(NSError *)error
 {
 	bannerViewActionInProgress = NO;
 }
 
-- (void)tapThrough:(id)sender
+- (void)tapThroughFromButton:(id)sender {
+    [self tapThrough: nil];
+}
+
+- (void)tapThrough:(NSURL*)url
 {
 	if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionShouldBegin:willLeaveApplication:)])
 	{
@@ -615,15 +554,14 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 			return;
 		}
 	}
-	if (_tapThroughLeavesApp || [_tapThroughURL isDeviceSupported])
+	if (_tapThroughLeavesApp || [url isDeviceSupported])
 	{
-
-        if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionWillLeaveApplication:)])
+        if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionWillLeaveApplication:withUrl:)])
         {
-            [delegate mobfoxHTMLBannerViewActionWillLeaveApplication:self];
+            [delegate mobfoxHTMLBannerViewActionWillLeaveApplication:self withUrl: url];
         }
 
-        [[UIApplication sharedApplication]openURL:_tapThroughURL];
+        [[UIApplication sharedApplication]openURL:url];
 		return;
 	}
 	UIViewController *viewController = [self firstAvailableUIViewController];
@@ -634,10 +572,10 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	[self setRefreshTimerActive:NO];
 	if (!_shouldSkipLinkPreflight)
 	{
-		redirectChecker = [[MFRedirectChecker alloc] initWithURL:_tapThroughURL userAgent:self.userAgent delegate:(id)self];
+		redirectChecker = [[MFRedirectChecker alloc] initWithURL:url userAgent:self.userAgent delegate:(id)self];
 		return;
 	}
-	MobFoxAdBrowserViewController *browser = [[MobFoxAdBrowserViewController alloc] initWithUrl:_tapThroughURL];
+	MobFoxAdBrowserViewController *browser = [[MobFoxAdBrowserViewController alloc] initWithUrl:url];
 	browser.delegate = (id)self;
 	browser.userAgent = self.userAgent;
 	browser.webView.scalesPageToFit = _shouldScaleWebView;
@@ -692,39 +630,23 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         if ([urlString isEqualToString:@"about:close"]) {
             [self.delegate interstitialSkipAction:nil];
             return NO;
-        } else if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""] && wasUserAction) {
-            if(_tapThroughURL) {
-                NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL:_tapThroughURL];
-                [request2 setHTTPMethod: @"GET"];
-                [NSURLConnection sendAsynchronousRequest:request2 queue:[[NSOperationQueue alloc] init] completionHandler:nil];
-            }
-            _tapThroughURL = url;
-            [Seeds sharedInstance].clickUrl = _tapThroughURL;
-            [self tapThrough:nil ];
+        } else if (![urlString isEqualToString:@""] && wasUserAction) {
+            [self tapThrough:url ];
             return NO;
-        } else {
-            return YES;
         }
-
 	}
     else if(navigationType == UIWebViewNavigationTypeOther)
     {
         NSString* documentURL = [[request mainDocumentURL] absoluteString];
         
         if( [urlString isEqualToString:documentURL]) {             //if they are the same this is a javascript href click
-            if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""] && wasUserAction) {
-                if(_tapThroughURL) {
-                    NSMutableURLRequest *request2 = [[NSMutableURLRequest alloc] initWithURL:_tapThroughURL];
-                    [request2 setHTTPMethod: @"GET"];
-                    [NSURLConnection sendAsynchronousRequest:request2 queue:[[NSOperationQueue alloc] init] completionHandler:nil];
-                }
-                _tapThroughURL = url;
-                [self tapThrough:nil];
+            if (![urlString isEqualToString:@""] && wasUserAction) {
+                [self tapThrough:url];
                 return NO;
             }
         }
     }
-    
+
     return YES;
 }
 
@@ -806,7 +728,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @synthesize refreshTimerOff;
 @synthesize requestURL;
 @synthesize userAgent;
-@synthesize skipOverlay;
 @synthesize adType;
 @synthesize adspaceHeight;
 @synthesize adspaceWidth;

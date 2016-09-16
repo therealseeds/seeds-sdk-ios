@@ -107,7 +107,6 @@
         self.deviceId = nil;
         self.inAppMessageContext = nil;
         self.adClicked = NO;
-        self.clickUrl = nil;
     }
     return self;
 }

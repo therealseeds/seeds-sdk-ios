@@ -78,7 +78,6 @@
     }
     
     [Seeds sharedInstance].adClicked = NO;
-    [Seeds sharedInstance].clickUrl = nil;
 
     MobFoxVideoInterstitialViewController *interstitial = [self getInterstitial:messageId];
     [viewController.view addSubview:interstitial.view];
@@ -98,7 +97,6 @@
     NSLog(@"[Seeds] mobfoxVideoInterstitialViewDidLoadMobFoxAd");
 
     Seeds.sharedInstance.adClicked = NO;
-    Seeds.sharedInstance.clickUrl = nil;
 
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])

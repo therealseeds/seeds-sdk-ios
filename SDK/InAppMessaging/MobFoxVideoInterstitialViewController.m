@@ -666,24 +666,8 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
     [self.interstitialHoldingView addSubview:bannerView];
 
+    // TODO Should this be removed?
     interstitialSkipButtonShow = YES;
-    
-    UIImage *buttonImage = [UIImage mobfoxSkipButtonImage];
-    UIImage *buttonDisabledImage = buttonDisabledImage = [UIImage mobfoxSkipButtonDisabledImage];
-    
-    float skipButtonSize = buttonSize + 4.0f;
-
-    if (bannerView.tapThroughURL) {
-        self.interstitialSkipButton=[UIButton buttonWithType:UIButtonTypeCustom];
-        [self.interstitialSkipButton setFrame:CGRectMake(0, 0, skipButtonSize, skipButtonSize)];
-        [self.interstitialSkipButton addTarget:self action:@selector(interstitialSkipAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.interstitialSkipButton setImage:buttonImage forState:UIControlStateNormal];
-        [self.interstitialSkipButton setImage:buttonDisabledImage forState:UIControlStateHighlighted];
-  
-        self.interstitialSkipButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-
-        [self showInterstitialSkipButton];
-    }
 
     return [bannerView isBannerLoaded];
 }
@@ -1555,12 +1539,12 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     }
 }
 
--(void) mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner {
+-(void) mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner withUrl: (NSURL*) url{
     BOOL closeAfterClick = true;
     
     if ([delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewWasClicked:withUrl:)])
     {
-        closeAfterClick = [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl:[Seeds sharedInstance].clickUrl];
+        closeAfterClick = [delegate mobfoxVideoInterstitialViewWasClicked:self withUrl: url];
     }
 
     if (closeAfterClick && [delegate respondsToSelector:@selector(mobfoxVideoInterstitialViewActionWillLeaveApplication:)])

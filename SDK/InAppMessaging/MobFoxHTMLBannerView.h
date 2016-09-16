@@ -44,7 +44,7 @@ enum {
 
 - (void)mobfoxHTMLBannerViewActionDidFinish:(MobFoxHTMLBannerView *)banner;
 
-- (void)mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner;
+- (void) mobfoxHTMLBannerViewActionWillLeaveApplication:(MobFoxHTMLBannerView *)banner withUrl: (NSURL*) url;
 
 - (void)interstitialSkipAction:(id)sender;
 
@@ -78,7 +78,6 @@ enum {
 
 @property (nonatomic, assign) BOOL refreshTimerOff;
 @property (nonatomic, assign) NSInteger customReloadTime;
-@property (nonatomic, retain) NSURL *tapThroughURL;
 @property (nonatomic, retain) UIImage *bannerImage;
 @property (strong, nonatomic) NSString *requestURL;
 

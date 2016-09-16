@@ -35,7 +35,6 @@
 
 @property (atomic, copy) NSString* inAppMessageContext;
 @property (atomic, assign) BOOL adClicked;
-@property (atomic, assign) NSURL* clickUrl;
 
 + (instancetype)sharedInstance;
 
