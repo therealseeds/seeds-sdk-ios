@@ -32,8 +32,6 @@
 NSString * const MobFoxErrorDomain = @"MobFox";
 
 @interface MobFoxHTMLBannerView () <UIWebViewDelegate, MFCustomEventBannerDelegate, UIGestureRecognizerDelegate> {
-    BOOL wasUserAction;
-
     SKProductHelper *productHelper;
 }
 
@@ -381,35 +379,8 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
         _htmlString = html;
 
-        NSString *productPrice = @"BUY";
-        if (productId != nil && [SKPaymentQueue canMakePayments]) {
-            __block BOOL finished = false;
-            __block SKProduct *product;
-
-            [productHelper getProductsByIdentifiers:@[productId] withResult:^(NSArray *products, NSError *error) {
-                if (products) {
-                    product = [products firstObject];
-                }
-
-                finished = true;
-            }];
-
-            while (!finished) {
-                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-            }
-
-            if (product != nil) {
-                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-                [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-                [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-                [formatter setLocale:product.priceLocale];
-
-                productPrice = [formatter stringFromNumber:product.price];
-            }
-        }
+        NSString *productPrice = [self getProductPrice: productId];
         _htmlString = [_htmlString stringByReplacingOccurrencesOfString:@"%{LocalizedPrice}" withString:productPrice];
-
-        wasUserAction = NO;
 
         webView.delegate = (id)self;
         webView.userInteractionEnabled = YES;
@@ -452,6 +423,36 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 	{
         [self showBannerView:self.bannerView withPreviousSubviews:previousSubviews];
 	}
+}
+
+- (NSString *)getProductPrice:(NSString *)productId {
+    if (productId != nil && [SKPaymentQueue canMakePayments]) {
+        __block BOOL finished = false;
+        __block SKProduct *product;
+
+        [productHelper getProductsByIdentifiers:@[productId] withResult:^(NSArray *products, NSError *error) {
+            if (products) {
+                product = [products firstObject];
+            }
+
+            finished = true;
+        }];
+
+        while (!finished) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+        }
+
+        if (product != nil) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+            [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [formatter setLocale:product.priceLocale];
+
+            return [formatter stringFromNumber:product.price];
+        }
+    }
+
+    return @"BUY";
 }
 
 - (void)showBannerView:(UIView*)nextBannerView withPreviousSubviews:(NSArray*)previousSubviews
@@ -596,12 +597,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    wasUserAction = YES; //countermeasure for malicious, "auto-clicking" banners
-    return YES;
-}
-
 - (void)mobfoxAdBrowserControllerDidDismiss:(MobFoxAdBrowserViewController *)mobfoxAdBrowserController
 {
     if ([delegate respondsToSelector:@selector(mobfoxHTMLBannerViewActionWillFinish:)])
@@ -630,7 +625,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
         if ([urlString isEqualToString:@"about:close"]) {
             [self.delegate interstitialSkipAction:nil];
             return NO;
-        } else if (![urlString isEqualToString:@""] && wasUserAction) {
+        } else if (![urlString isEqualToString:@""]) {
             [self tapThrough:url ];
             return NO;
         }
@@ -638,9 +633,10 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     else if(navigationType == UIWebViewNavigationTypeOther)
     {
         NSString* documentURL = [[request mainDocumentURL] absoluteString];
+        BOOL isJavascriptHrefClick = [urlString isEqualToString:documentURL];
         
-        if( [urlString isEqualToString:documentURL]) {             //if they are the same this is a javascript href click
-            if (![urlString isEqualToString:@""] && wasUserAction) {
+        if(isJavascriptHrefClick) {
+            if (![urlString isEqualToString:@"about:blank"] && ![urlString isEqualToString:@""]) {
                 [self tapThrough:url];
                 return NO;
             }
