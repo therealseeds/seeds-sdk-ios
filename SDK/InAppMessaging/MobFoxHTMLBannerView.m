@@ -392,12 +392,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
             bannerSize = CGSizeMake(320, 50);
         }
 
-        id doNotShowValue = [json objectForKey:@"doNotShow"];
-        if (doNotShowValue)
-            Seeds.sharedInstance.inAppMessageDoNotShow = [doNotShowValue boolValue];
-        else
-            Seeds.sharedInstance.inAppMessageDoNotShow = NO;
-
 		UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, bannerSize.width, bannerSize.height)];
 
         //load HTML string later (to avoid calling impression pixels when using custom events)
@@ -811,7 +805,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @synthesize refreshAnimation;
 @synthesize refreshTimerOff;
 @synthesize requestURL;
-@synthesize inferredSeedsMessageId;
 @synthesize userAgent;
 @synthesize skipOverlay;
 @synthesize adType;

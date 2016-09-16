@@ -66,7 +66,7 @@
 
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext
 {
-    if (![self isInAppMessageLoaded:messageId] || Seeds.sharedInstance.inAppMessageDoNotShow) {
+    if (![self isInAppMessageLoaded:messageId]) {
         id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageShown:withSuccess:)])
             [delegate seedsInAppMessageShown:messageId withSuccess:NO];
