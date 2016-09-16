@@ -81,7 +81,6 @@ enum {
 @property (nonatomic, retain) NSURL *tapThroughURL;
 @property (nonatomic, retain) UIImage *bannerImage;
 @property (strong, nonatomic) NSString *requestURL;
-@property (strong, nonatomic) NSString* inferredSeedsMessageId;
 
 @property (nonatomic, assign) NSInteger userAge;
 @property (nonatomic, strong) NSString* userGender;

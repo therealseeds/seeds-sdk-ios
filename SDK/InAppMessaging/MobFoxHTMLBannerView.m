@@ -392,14 +392,6 @@ NSString * const MobFoxErrorDomain = @"MobFox";
             bannerSize = CGSizeMake(320, 50);
         }
 
-        NSString *messageVariant = [json objectForKey:@"messageVariant"];
-        if (messageVariant)
-        {
-            // Useful for cases where the message id is not defined explicitly
-            // TODO: Refactor this out when moving to model where message is is always explicitly required
-            inferredSeedsMessageId = messageVariant;
-        }
-
         id doNotShowValue = [json objectForKey:@"doNotShow"];
         if (doNotShowValue)
             Seeds.sharedInstance.inAppMessageDoNotShow = [doNotShowValue boolValue];

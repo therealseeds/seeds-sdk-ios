@@ -40,18 +40,15 @@
 
 - (MobFoxVideoInterstitialViewController *)getInterstitial:(NSString*)messageId
 {
-    // TODO: Refactor this when we start to require explicit messageId
-    NSString *key = messageId != nil ? messageId : @"key-for-no-messageid";
-
     // Create the controller on the fly if needed
-    if (self.interstitialsByMessageId[key] == nil) {
-        self.interstitialsByMessageId[key] = [[MobFoxVideoInterstitialViewController alloc] init];
-        self.interstitialsByMessageId[key].delegate = self;
-        self.interstitialsByMessageId[key].enableInterstitialAds = YES;
-        self.interstitialsByMessageId[key].seedsMessageId = messageId;
+    if (self.interstitialsByMessageId[messageId] == nil) {
+        self.interstitialsByMessageId[messageId] = [[MobFoxVideoInterstitialViewController alloc] init];
+        self.interstitialsByMessageId[messageId].delegate = self;
+        self.interstitialsByMessageId[messageId].enableInterstitialAds = YES;
+        self.interstitialsByMessageId[messageId].seedsMessageId = messageId;
     }
 
-    return self.interstitialsByMessageId[key];
+    return self.interstitialsByMessageId[messageId];
 }
 
 - (void)requestInAppMessage:(NSString*)messageId
@@ -102,7 +99,7 @@
 
     Seeds.sharedInstance.adClicked = NO;
     Seeds.sharedInstance.clickUrl = nil;
-    // TODO TODO videoInterstitial
+
     id<SeedsInAppMessageDelegate> delegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageLoadSucceeded:)])
         [delegate seedsInAppMessageLoadSucceeded:videoInterstitial.seedsMessageId];
