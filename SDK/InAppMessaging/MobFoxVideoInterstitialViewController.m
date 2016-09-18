@@ -1234,10 +1234,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 - (void)interstitialSkipAction:(id)sender {
     [self interstitialStopAdvert];
 
-    [Seeds.sharedInstance recordEvent:@"message dismissed"
-                         segmentation:@{ @"message" : seedsMessageId,
-                                 @"context" : Seeds.sharedInstance.inAppMessageContext }
-                                count:1];
+    [self recordInterstitialEvent:@"message dismissed"];
 
     id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
@@ -1555,6 +1552,25 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 -(NSString*) publisherIdForMobFoxHTMLBannerView:(MobFoxHTMLBannerView *)banner {
     return [delegate publisherIdForMobFoxVideoInterstitialView:self];
+}
+
+
+- (void)recordInterstitialEvent:(NSString *)key {
+    [self recordInterstitialEvent:key withCustomSegments:nil];
+}
+
+- (void)recordInterstitialEvent:(NSString *)key withCustomSegments: customSegments  {
+    NSMutableDictionary *segments = [NSMutableDictionary new];
+    [segments addEntriesFromDictionary:@{ @"message" : seedsMessageId,
+            @"context" : Seeds.sharedInstance.inAppMessageContext }];
+
+    if (customSegments != nil) {
+        [segments addEntriesFromDictionary:customSegments];
+    }
+
+    [Seeds.sharedInstance recordEvent:key
+                         segmentation:segments
+                                count:1];
 }
 
 @end

@@ -102,6 +102,9 @@ typedef enum {
 
 - (void)interstitialStopAdvert;
 
+- (void)recordInterstitialEvent:(NSString *)key;
+
+- (void)recordInterstitialEvent:(NSString *)key withCustomSegments:(id)customSegments;
 @end
 
 extern NSString * const MobFoxVideoInterstitialErrorDomain;

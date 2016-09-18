@@ -198,10 +198,7 @@
 
         closeAfterClick = false;
 
-        [Seeds.sharedInstance recordEvent:@"social share clicked"
-                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
-                                     @"context" : Seeds.sharedInstance.inAppMessageContext }
-                                    count:1];
+        [videoInterstitial recordInterstitialEvent: @"social share clicked"];
 
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
             [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId];
@@ -212,28 +209,16 @@
     } else if (isPriceUrl) {
         NSString* priceString = path[2];
         float price = [priceString floatValue];
-
-        [Seeds.sharedInstance recordEvent:@"dynamic price clicked"
-                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
-                                     @"context" : Seeds.sharedInstance.inAppMessageContext,
-                                     @"price" : priceString}
-                                    count:1];
+        [videoInterstitial recordInterstitialEvent: @"dynamic price clicked" withCustomSegments: @{@"price" : priceString}];
 
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
             [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:price];
         }
     } else if (isShowMoreUrl) {
-        [Seeds.sharedInstance recordEvent:@"show more clicked"
-                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
-                                     @"context" : Seeds.sharedInstance.inAppMessageContext }
-                                    count:1];
-
+        [videoInterstitial recordInterstitialEvent: @"show more clicked"];
         closeAfterClick = false;
     } else {
-        [Seeds.sharedInstance recordEvent:@"message clicked"
-                             segmentation:@{ @"message" : videoInterstitial.seedsMessageId,
-                                     @"context" : Seeds.sharedInstance.inAppMessageContext }
-                                    count:1];
+        [videoInterstitial recordInterstitialEvent: @"message clicked"];
 
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:)])
             [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId];
