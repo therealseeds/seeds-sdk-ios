@@ -144,8 +144,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 @synthesize interstitialURL, interstitialHoldingView, interstitialWebView, interstitialMarkup, browserBackButton, browserForwardButton;
 @synthesize userAgent;
 @synthesize userAge, userGender, keywords;
-@synthesize seedsMessageId;
-
+@synthesize seedsMessageId, seedsMessageContext, seedsMessageVariant;
 
 #pragma mark - Init/Dealloc Methods
 
@@ -645,13 +644,13 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     
     self.mobFoxInterstitialPlayerViewController.adInterstitialOrientation = adInterstitialOrientation;
     self.mobFoxInterstitialPlayerViewController.view.frame = self.view.bounds;
-//    self.mobFoxInterstitialPlayerViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.interstitialHoldingView = [[UIView alloc] initWithFrame:self.view.bounds];
-//    self.interstitialHoldingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.interstitialHoldingView.backgroundColor = [UIColor clearColor];
     self.interstitialHoldingView.opaque = NO;
     self.interstitialHoldingView.autoresizesSubviews = YES;
-    
+
+    seedsMessageVariant = json[@"messageVariant"] != nil ? json[@"messageVariant"] : @"";
+
     MobFoxHTMLBannerView* bannerView = [[MobFoxHTMLBannerView alloc] initWithFrame:interstitialHoldingView.frame];
 
     bannerView.delegate = self;
@@ -1561,8 +1560,11 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 - (void)recordInterstitialEvent:(NSString *)key withCustomSegments: customSegments  {
     NSMutableDictionary *segments = [NSMutableDictionary new];
-    [segments addEntriesFromDictionary:@{ @"message" : seedsMessageId,
-            @"context" : Seeds.sharedInstance.inAppMessageContext }];
+    [segments addEntriesFromDictionary:@{
+            @"message" : seedsMessageId,
+            @"variant" : seedsMessageVariant,
+            @"context" : seedsMessageContext,
+    }];
 
     if (customSegments != nil) {
         [segments addEntriesFromDictionary:customSegments];

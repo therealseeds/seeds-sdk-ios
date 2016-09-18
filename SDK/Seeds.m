@@ -105,7 +105,6 @@
 #endif
         
         self.deviceId = nil;
-        self.inAppMessageContext = nil;
         self.adClicked = NO;
     }
     return self;

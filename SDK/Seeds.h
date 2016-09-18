@@ -33,7 +33,6 @@
 @property (nonatomic, copy) NSString* deviceId;
 @property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;
 
-@property (atomic, copy) NSString* inAppMessageContext;
 @property (atomic, assign) BOOL adClicked;
 
 + (instancetype)sharedInstance;

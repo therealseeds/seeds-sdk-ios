@@ -89,6 +89,8 @@ typedef enum {
 @property (nonatomic, strong) NSString* userGender;
 @property (nonatomic, retain) NSArray* keywords;
 @property (nonatomic, strong) NSString* seedsMessageId;
+@property (nonatomic, strong) NSString* seedsMessageVariant;
+@property (nonatomic, strong) NSString* seedsMessageContext;
 
 @property (nonatomic, strong) NSString *requestURL;
 
