@@ -13,11 +13,13 @@
 //#define MESSAGE_ID_0 nil
 //#define MESSAGE_ID_1 nil
 
-#define YOUR_SERVER @"http://staging.playseeds.com"
-#define YOUR_APP_KEY @"71ac2900e9d31647d68d0ddc6f0aaf52611a612d"
-#define MESSAGE_ID_0 @"575f872a64bc1e5b0eca506f"
-#define MESSAGE_ID_1 @"5746851bb29ee753053a7c9a"
-#define IAP_KEY @"test_iap_event"
+#define YOUR_SERVER @"https://dash.playseeds.com"
+#define YOUR_APP_KEY @"2db64b49085be463cade71ce22e6341d7f6bd901"
+#define APP_LAUNCH_INTERSTITIAL_ID @"57e362bead5957420e12083f"
+#define PURCHASE_INTERSTITIAL_ID @"57e36337ad5957420e120842"
+#define SHARING_INTERSTITIAL_ID @"57e36365ad5957420e120845"
+#define SEEDS_IAP_EVENT_KEY @"TestSeedsPurchase"
+#define NORMAL_IAP_EVENT_KEY @"TestNormalPurchase"
 
 //development server info
 //#define YOUR_SERVER @"https://devdash.playseeds.com"
