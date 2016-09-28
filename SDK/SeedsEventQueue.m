@@ -50,23 +50,6 @@
 {
     @synchronized (self)
     {
-        NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
-        for (NSManagedObject* obj in events)
-        {
-            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
-            if ([event.key isEqualToString:key])
-            {
-                event.count += count;
-                event.timestamp = (event.timestamp + time(NULL)) / 2;
-                
-                [obj setValue:@(event.count) forKey:@"count"];
-                [obj setValue:@(event.timestamp) forKey:@"timestamp"];
-                
-                [[SeedsDB sharedInstance] saveContext];
-                return;
-            }
-        }
-        
         SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.count = count;
@@ -80,26 +63,6 @@
 {
     @synchronized (self)
     {
-        NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
-        for (NSManagedObject* obj in events)
-        {
-            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
-            if ([event.key isEqualToString:key])
-            {
-                event.count += count;
-                event.sum += sum;
-                event.timestamp = (event.timestamp + time(NULL)) / 2;
-                
-                [obj setValue:@(event.count) forKey:@"count"];
-                [obj setValue:@(event.sum) forKey:@"sum"];
-                [obj setValue:@(event.timestamp) forKey:@"timestamp"];
-                
-                [[SeedsDB sharedInstance] saveContext];
-                
-                return;
-            }
-        }
-        
         SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.count = count;
@@ -114,25 +77,6 @@
 {
     @synchronized (self)
     {
-        NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
-        for (NSManagedObject* obj in events)
-        {
-            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
-            if ([event.key isEqualToString:key] &&
-                event.segmentation && [event.segmentation isEqualToDictionary:segmentation])
-            {
-                event.count += count;
-                event.timestamp = (event.timestamp + time(NULL)) / 2;
-                
-                [obj setValue:@(event.count) forKey:@"count"];
-                [obj setValue:@(event.timestamp) forKey:@"timestamp"];
-                
-                [[SeedsDB sharedInstance] saveContext];
-                
-                return;
-            }
-        }
-        
         SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.segmentation = segmentation;
@@ -147,27 +91,6 @@
 {
     @synchronized (self)
     {
-        NSArray* events = [[[SeedsDB sharedInstance] getEvents] copy];
-        for (NSManagedObject* obj in events)
-        {
-            SeedsEvent *event = [SeedsEvent objectWithManagedObject:obj];
-            if ([event.key isEqualToString:key] &&
-                event.segmentation && [event.segmentation isEqualToDictionary:segmentation])
-            {
-                event.count += count;
-                event.sum += sum;
-                event.timestamp = (event.timestamp + time(NULL)) / 2;
-                
-                [obj setValue:@(event.count) forKey:@"count"];
-                [obj setValue:@(event.sum) forKey:@"sum"];
-                [obj setValue:@(event.timestamp) forKey:@"timestamp"];
-                
-                [[SeedsDB sharedInstance] saveContext];
-                
-                return;
-            }
-        }
-        
         SeedsEvent *event = [SeedsEvent new];
         event.key = key;
         event.segmentation = segmentation;

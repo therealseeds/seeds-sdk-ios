@@ -11,9 +11,6 @@
 #import "SeedsInAppMessageDelegate.h"
 
 @interface ViewController () <SeedsInAppMessageDelegate>
-
-@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
-
 @end
 
 @implementation ViewController
