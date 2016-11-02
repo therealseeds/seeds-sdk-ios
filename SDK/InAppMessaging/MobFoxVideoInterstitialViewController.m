@@ -145,6 +145,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 @synthesize userAgent;
 @synthesize userAge, userGender, keywords;
 @synthesize seedsMessageId, seedsMessageContext, seedsMessageVariant;
+@synthesize manuallyEnteredLocalizedPrice;
 
 #pragma mark - Init/Dealloc Methods
 
@@ -653,6 +654,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
     MobFoxHTMLBannerView* bannerView = [[MobFoxHTMLBannerView alloc] initWithFrame:interstitialHoldingView.frame];
 
+    bannerView.manuallyEnteredLocalizedPrice = self.manuallyEnteredLocalizedPrice;
     bannerView.delegate = self;
     bannerView.adspaceHeight = interstitialHoldingView.bounds.size.height;
     bannerView.adspaceWidth = interstitialHoldingView.bounds.size.width;

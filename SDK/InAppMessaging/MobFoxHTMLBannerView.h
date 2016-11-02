@@ -85,6 +85,8 @@ enum {
 @property (nonatomic, strong) NSString* userGender;
 @property (nonatomic, retain) NSArray* keywords;
 
+@property (nonatomic, strong) NSString* manuallyEnteredLocalizedPrice;
+
 @property (nonatomic, assign) BOOL locationAwareAdverts;
 
 - (void)setupAdFromJson:(NSDictionary*)json;

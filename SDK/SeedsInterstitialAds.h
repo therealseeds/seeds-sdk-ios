@@ -14,7 +14,7 @@
 @property (nonatomic, retain) NSMutableDictionary<NSString *, MobFoxVideoInterstitialViewController *> *interstitialsByMessageId;
 
 + (instancetype)sharedInstance;
-- (void)requestInAppMessage:(NSString*)messageId;
+- (void)requestInAppMessage:(NSString *)messageId withManualLocalizedPrice: (NSString*)price;
 - (void)showInAppMessage:(NSString*)messageId in:(UIViewController*)viewController withContext:(NSString*)messageContext;
 - (BOOL)isInAppMessageLoaded:(NSString*)messageId;
 

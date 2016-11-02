@@ -91,7 +91,7 @@ typedef enum {
 @property (nonatomic, strong) NSString* seedsMessageId;
 @property (nonatomic, strong) NSString* seedsMessageVariant;
 @property (nonatomic, strong) NSString* seedsMessageContext;
-
+@property (nonatomic, strong) NSString* manuallyEnteredLocalizedPrice;
 @property (nonatomic, strong) NSString *requestURL;
 
 - (BOOL)isAdvertLoaded:(NSString*)messageId;

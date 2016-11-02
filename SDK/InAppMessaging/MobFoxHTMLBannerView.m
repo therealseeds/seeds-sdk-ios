@@ -426,7 +426,9 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 }
 
 - (NSString *)getProductPrice:(NSString *)productId {
-    if (productId != nil && [SKPaymentQueue canMakePayments]) {
+    if (manuallyEnteredLocalizedPrice != NULL && [manuallyEnteredLocalizedPrice length] > 0) {
+      return manuallyEnteredLocalizedPrice;
+    } else if (productId != nil && [SKPaymentQueue canMakePayments]) {
         __block BOOL finished = false;
         __block SKProduct *product;
 
@@ -730,7 +732,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 @synthesize adspaceStrict;
 @synthesize locationAwareAdverts;
 @synthesize userGender,userAge,keywords;
-
+@synthesize manuallyEnteredLocalizedPrice;
 
 
 

@@ -53,11 +53,12 @@
     return self.interstitialsByMessageId[messageId];
 }
 
-- (void)requestInAppMessage:(NSString*)messageId
+- (void)requestInAppMessage:(NSString *)messageId withManualLocalizedPrice: (NSString*)price
 {
     MobFoxVideoInterstitialViewController *interstitial = [self getInterstitial:messageId inContext:@""];
-
+    interstitial.manuallyEnteredLocalizedPrice = price;
     interstitial.requestURL = self.appHost;
+
     [interstitial requestAd:messageId];
 }
 

@@ -307,7 +307,12 @@
 
 - (void)requestInAppMessage:(NSString*)messageId
 {
-    [[SeedsInterstitialAds sharedInstance] requestInAppMessage:messageId];
+    [[SeedsInterstitialAds sharedInstance] requestInAppMessage:messageId withManualLocalizedPrice:NULL];
+}
+
+- (void)requestInAppMessage:(NSString *)messageId withManualLocalizedPrice:(NSString*)price
+{
+    [[SeedsInterstitialAds sharedInstance] requestInAppMessage:messageId withManualLocalizedPrice:price];
 }
 
 - (BOOL)isInAppMessageLoaded:(NSString*)messageId
