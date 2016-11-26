@@ -11,9 +11,9 @@ if [ -z "$XCODEBUILD" ]; then
     exit 127
 fi
 
-$XCODEBUILD -project Seeds.xcodeproj -configuration Release -target SeedsLibrary -sdk iphoneos clean build
-$XCODEBUILD -project Seeds.xcodeproj -configuration Release -target SeedsLibrary -sdk iphonesimulator clean build
-$XCODEBUILD -project Seeds.xcodeproj -configuration Release -target SeedsResources -sdk macosx clean build
+$XCODEBUILD OTHER_CFLAGS="-fembed-bitcode" -project Seeds.xcodeproj -configuration Release -target SeedsLibrary -sdk iphoneos clean build
+$XCODEBUILD OTHER_CFLAGS="-fembed-bitcode" -project Seeds.xcodeproj -configuration Release -target SeedsLibrary -sdk iphonesimulator clean build
+$XCODEBUILD OTHER_CFLAGS="-fembed-bitcode" -project Seeds.xcodeproj -configuration Release -target SeedsResources -sdk macosx clean build
 mkdir -p $UNITY_IOS_PLUGINS_PATH
 cp -a build/Release/SeedsResources.bundle $UNITY_IOS_PLUGINS_PATH
 lipo -create build/Release-iphoneos/libSeedsLibrary.a build/Release-iphonesimulator/libSeedsLibrary.a -output $UNITY_IOS_PLUGINS_PATH/libSeedsLibrary.a
