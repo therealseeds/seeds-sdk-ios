@@ -194,6 +194,17 @@
                 UIActivityTypePostToVimeo,
                 UIActivityTypePostToTencentWeibo,
                 UIActivityTypeAirDrop];
+        
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+            activityController.popoverPresentationController.sourceView = [videoInterstitial parentViewController].view;
+            
+            CGRect bounds = [videoInterstitial parentViewController].view.bounds;
+            bounds.size.height /= 2;
+            
+            activityController.popoverPresentationController.sourceRect = bounds;
+            activityController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
+        }
+
         [[videoInterstitial parentViewController] presentViewController:activityController animated:YES completion:nil];
 
         closeAfterClick = false;
