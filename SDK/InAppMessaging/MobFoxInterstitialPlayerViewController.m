@@ -51,7 +51,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     UIApplication *app = [UIApplication sharedApplication];
-    [app setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 
     if ([adInterstitialOrientation isEqualToString:@"landscape"] || [adInterstitialOrientation isEqualToString:@"Landscape"]) {
         return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
@@ -68,15 +67,7 @@
     return YES;
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    UIApplication *app = [UIApplication sharedApplication];
-    [app setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-
     if ([adInterstitialOrientation isEqualToString:@"landscape"] || [adInterstitialOrientation isEqualToString:@"Landscape"]) {
         return UIInterfaceOrientationMaskLandscape;
     }

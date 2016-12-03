@@ -51,8 +51,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     UIInterfaceOrientation requestedAdOrientation;
     
     BOOL currentlyPlayingInterstitial;
-    float statusBarHeight;
-    BOOL statusBarWasVisible;
     float buttonSize;
     MobFoxAdType advertTypeCurrentlyPlaying;
     BOOL advertRequestInProgress;
@@ -116,8 +114,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 - (void)advertTidyUpAfterAd:(MobFoxAdType)advertType;
 
 - (void)setup;
-- (void)showStatusBarIfNecessary;
-- (void)hideStatusBar;
 
 - (void)updateAllFrames:(UIInterfaceOrientation)interfaceOrientation;
 - (CGRect)returnVideoHTMLOverlayFrame;
@@ -185,9 +181,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 
     if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        [UIApplication sharedApplication].statusBarFrame.size.height;
     } else {
-        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
+        [UIApplication sharedApplication].statusBarFrame.size.width;
     }
 
     CGRect mainFrame = [UIScreen mainScreen].bounds;
@@ -196,7 +192,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-    self.wantsFullScreenLayout = YES;
     self.view.autoresizesSubviews = YES;
 
     self.view.alpha = 0.0f;
@@ -862,8 +857,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
             [delegate mobfoxVideoInterstitialViewActionWillPresentScreen:self];
         }
 
-        [self hideStatusBar];
-
     }
 
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];;
@@ -877,8 +870,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 }
 
 - (void)advertTidyUpAfterAd:(MobFoxAdType)advertType {
-
-    [self showStatusBarIfNecessary];
 
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];;
     [self updateAllFrames:interfaceOrientation];
@@ -1240,7 +1231,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     id<SeedsInAppMessageDelegate> seedsDelegate = Seeds.sharedInstance.inAppMessageDelegate;
     if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed:)])
         [seedsDelegate seedsInAppMessageDismissed:seedsMessageId];
-    
+
     if (seedsDelegate && [seedsDelegate respondsToSelector:@selector(seedsInAppMessageDismissed)])
         [seedsDelegate seedsInAppMessageDismissed];
 }
@@ -1394,93 +1385,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
 #pragma mark
 #pragma mark Status Bar Handling
-
-- (void)hideStatusBar
-{
-    UIApplication *app = [UIApplication sharedApplication];
-    if(!app.statusBarHidden) {
-        statusBarWasVisible = YES;
-    } else {
-        statusBarWasVisible = NO;
-    }
-
-    if(self.mobFoxInterstitialPlayerViewController) {
-        return;
-    }
-    
-	if (!app.statusBarHidden)
-	{
-
-        [app setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-		[app setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
-
-
-        CGRect frame = self.view.superview.frame;
-        if([UIApplication sharedApplication].statusBarHidden ) {
-
-            UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-            if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-
-                if (interfaceOrientation == UIInterfaceOrientationPortrait ) {
-                    frame.origin.y -= statusBarHeight;
-                } else {
-                    frame.origin.y = 0;
-                }
-                frame.size.height += statusBarHeight;
-            } else {
-
-                if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ) {
-                    frame.origin.x -= statusBarHeight;
-                } else {
-                    frame.origin.x = 0;
-                }
-                frame.size.width += statusBarHeight;
-            }
-
-        }
-        self.view.superview.frame = frame;
-
-	}
-
-}
-
-- (void)showStatusBarIfNecessary
-{
-	if (statusBarWasVisible)
-	{
-		UIApplication *app = [UIApplication sharedApplication];
-
-        [app setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-		[app setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
-
-        CGRect frame = self.view.superview.frame;
-        if(![UIApplication sharedApplication].statusBarHidden ) {
-
-            UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-            if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-                if (interfaceOrientation == UIInterfaceOrientationPortrait ) {
-                    frame.origin.y += statusBarHeight;
-                } else {
-                    frame.origin.y = 0;
-                }
-
-                frame.size.height -= statusBarHeight;
-            } else {
-                if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ) {
-                    frame.origin.x += statusBarHeight;
-                } else {
-                    frame.origin.x = 0;
-                }
-
-                frame.size.width -= statusBarHeight;
-
-            }
-        }
-        self.view.superview.frame = frame;
-
-	}
-}
 
 #pragma mark
 #pragma mark Notifications
