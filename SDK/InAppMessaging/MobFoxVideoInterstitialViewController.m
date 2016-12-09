@@ -178,13 +178,6 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
     {
         buttonSize = 50.0f;
     }
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-    if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
-        [UIApplication sharedApplication].statusBarFrame.size.height;
-    } else {
-        [UIApplication sharedApplication].statusBarFrame.size.width;
-    }
 
     CGRect mainFrame = [UIScreen mainScreen].bounds;
     self.view = [[UIView alloc] initWithFrame:mainFrame];
@@ -1428,7 +1421,7 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 }
 
 - (void)deviceOrientationDidChange:(NSNotification *)notification {
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];;
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     [self updateAllFrames:interfaceOrientation];
 }
 

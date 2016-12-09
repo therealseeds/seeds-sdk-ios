@@ -50,8 +50,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    UIApplication *app = [UIApplication sharedApplication];
-
     if ([adInterstitialOrientation isEqualToString:@"landscape"] || [adInterstitialOrientation isEqualToString:@"Landscape"]) {
         return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
     }

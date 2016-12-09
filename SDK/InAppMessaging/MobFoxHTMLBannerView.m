@@ -80,6 +80,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
 	[self setup];
 }
 

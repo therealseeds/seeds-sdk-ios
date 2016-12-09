@@ -42,7 +42,7 @@
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
             [request setHTTPMethod: @"GET"];
             [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-            [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:nil];
+            [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {}];
         }
     }
     @catch (NSException *exception) {
