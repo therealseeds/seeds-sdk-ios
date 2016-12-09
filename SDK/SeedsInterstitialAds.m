@@ -81,9 +81,14 @@
     }
     
     [Seeds sharedInstance].adClicked = NO;
-
+    
     NSString *context = messageContext != nil ? messageContext : @"";
     MobFoxVideoInterstitialViewController *interstitial = [self getInterstitial:messageId inContext: context];
+    
+    // Remove the interstitial from its former superview and parent view controller
+    if ([interstitial.view superview] != nil) [interstitial.view removeFromSuperview];
+    if ([interstitial parentViewController] != nil) [interstitial removeFromParentViewController];
+    
     [viewController.view addSubview:interstitial.view];
     [viewController addChildViewController:interstitial];
     
