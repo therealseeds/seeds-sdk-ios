@@ -1460,9 +1460,9 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 - (void)recordInterstitialEvent:(NSString *)key withCustomSegments: customSegments  {
     NSMutableDictionary *segments = [NSMutableDictionary new];
     [segments addEntriesFromDictionary:@{
-            @"message" : seedsMessageId,
-            @"variant" : seedsMessageVariant,
-            @"context" : seedsMessageContext,
+            @"message" : seedsMessageId.length ? seedsMessageId : @"",
+            @"variant" : seedsMessageVariant.length ? seedsMessageVariant : @"",
+            @"context" : seedsMessageContext.length ? seedsMessageContext : @""
     }];
 
     if (customSegments != nil) {
