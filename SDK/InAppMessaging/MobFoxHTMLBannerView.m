@@ -336,7 +336,7 @@ NSString * const MobFoxErrorDomain = @"MobFox";
 
 - (void)setupAdFromJson:(NSDictionary*)json
 {
-    NSLog(@"%@", json);
+    NSLog(@"Initializing the Seeds interstitial using the downloaded JSON");
 
     NSArray *previousSubviews = [NSArray arrayWithArray:self.subviews];
 
