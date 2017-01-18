@@ -78,12 +78,12 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 @property (nonatomic, strong) NSDate *timerStartTime;
 @property (nonatomic, strong) NSTimer *interstitialTimer;
 @property (nonatomic, strong) UILabel *interstitialTimerLabel;
-@property (nonatomic, strong) NSString *interstitialMarkup;
+@property (nonatomic, copy) NSString *interstitialMarkup;
 @property (nonatomic, strong) UIButton *browserBackButton;
 @property (nonatomic, strong) UIButton *browserForwardButton;
-@property (nonatomic, strong) NSString *interstitialURL;
-@property (nonatomic, strong) NSString *videoClickThrough;
-@property (nonatomic, strong) NSString *overlayClickThrough;
+@property (nonatomic, copy) NSString *interstitialURL;
+@property (nonatomic, copy) NSString *videoClickThrough;
+@property (nonatomic, copy) NSString *overlayClickThrough;
 
 @property (nonatomic, strong) UIButton *interstitialSkipButton;
 

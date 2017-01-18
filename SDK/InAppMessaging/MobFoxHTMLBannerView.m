@@ -35,11 +35,11 @@ NSString * const MobFoxErrorDomain = @"MobFox";
     SKProductHelper *productHelper;
 }
 
-@property (nonatomic, strong) NSString *userAgent;
-@property (nonatomic, strong) NSString *adType;
+@property (nonatomic, copy) NSString *userAgent;
+@property (nonatomic, copy) NSString *adType;
 @property (nonatomic, assign) CGFloat currentLatitude;
 @property (nonatomic, assign) CGFloat currentLongitude;
-@property (nonatomic, strong) NSString* htmlString;
+@property (nonatomic, copy) NSString* htmlString;
 
 @property (nonatomic, retain) UIView *bannerView;
 

@@ -86,13 +86,13 @@ typedef enum {
 @property (nonatomic, assign) BOOL enableInterstitialAds;
 
 @property (nonatomic, assign) NSInteger userAge;
-@property (nonatomic, strong) NSString* userGender;
+@property (nonatomic, copy) NSString* userGender;
 @property (nonatomic, retain) NSArray* keywords;
-@property (nonatomic, strong) NSString* seedsMessageId;
-@property (nonatomic, strong) NSString* seedsMessageVariant;
-@property (nonatomic, strong) NSString* seedsMessageContext;
-@property (nonatomic, strong) NSString* manuallyEnteredLocalizedPrice;
-@property (nonatomic, strong) NSString *requestURL;
+@property (nonatomic, copy) NSString* seedsMessageId;
+@property (nonatomic, copy) NSString* seedsMessageVariant;
+@property (nonatomic, copy) NSString* seedsMessageContext;
+@property (nonatomic, copy) NSString* manuallyEnteredLocalizedPrice;
+@property (nonatomic, copy) NSString *requestURL;
 
 - (BOOL)isAdvertLoaded:(NSString*)messageId;
 

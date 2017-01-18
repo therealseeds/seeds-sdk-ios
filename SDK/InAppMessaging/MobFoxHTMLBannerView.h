@@ -82,10 +82,10 @@ enum {
 @property (strong, nonatomic) NSString *requestURL;
 
 @property (nonatomic, assign) NSInteger userAge;
-@property (nonatomic, strong) NSString* userGender;
+@property (nonatomic, copy) NSString* userGender;
 @property (nonatomic, retain) NSArray* keywords;
 
-@property (nonatomic, strong) NSString* manuallyEnteredLocalizedPrice;
+@property (nonatomic, copy) NSString* manuallyEnteredLocalizedPrice;
 
 @property (nonatomic, assign) BOOL locationAwareAdverts;
 

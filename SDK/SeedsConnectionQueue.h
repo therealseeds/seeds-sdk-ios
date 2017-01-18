@@ -11,7 +11,7 @@
 @property (nonatomic, copy) NSString *appHost;
 @property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic) BOOL startedWithTest;
-@property (nonatomic, strong) NSString *locationString;
+@property (nonatomic, copy) NSString *locationString;
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 @property (nonatomic, assign) UIBackgroundTaskIdentifier bgTask;
 #endif
