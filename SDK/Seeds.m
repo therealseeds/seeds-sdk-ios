@@ -280,7 +280,7 @@
     [SeedsConnectionQueue.sharedInstance sendUserDetails];
 }
 
-- (void)recordGenericIAPEvent:(NSString *)key price:(double)price isSeedsEvent:(BOOL)isSeedsEvent
+- (void)recordGenericIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId isSeedsEvent:(BOOL)isSeedsEvent
 {
     NSMutableDictionary *segmentation = [[NSMutableDictionary alloc] init];
 
@@ -288,6 +288,10 @@
         [segmentation setObject:@"Seeds" forKey:@"IAP type"];
     } else {
         [segmentation setObject:@"Non-Seeds" forKey:@"IAP type"];
+    }
+
+    if (transactionId) {
+        [segmentation setObject:transactionId forKey:@"transaction_id"];
     }
     
     [segmentation setObject:key forKey:@"item"];
@@ -297,12 +301,22 @@
 
 - (void)recordIAPEvent:(NSString *)key price:(double)price
 {
-    [self recordGenericIAPEvent:key price:price isSeedsEvent:NO];
+    [self recordGenericIAPEvent:key price:price transactionId:nil isSeedsEvent:NO];
+}
+
+- (void)recordIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId
+{
+    [self recordGenericIAPEvent:key price:price transactionId:transactionId isSeedsEvent:NO];
 }
 
 - (void)recordSeedsIAPEvent:(NSString *)key price:(double)price
 {
-    [self recordGenericIAPEvent:key price:price isSeedsEvent:YES];
+    [self recordGenericIAPEvent:key price:price transactionId:nil isSeedsEvent:YES];
+}
+
+- (void)recordSeedsIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId
+{
+    [self recordGenericIAPEvent:key price:price transactionId:transactionId isSeedsEvent:YES];
 }
 
 - (void)requestInAppMessage:(NSString*)messageId
