@@ -13,7 +13,7 @@
 @protocol SeedsInterstitialsEventProtocol <NSObject>
 
 - (void)interstitialDidLoad:(SeedsInterstitial *)interstitial;
-- (void)interstitialPurchaseDidClick:(SeedsInterstitial *)interstitial;
+- (void)interstitialDidClick:(SeedsInterstitial *)interstitial;
 - (void)interstitialDidShow:(SeedsInterstitial *)interstitial;
 - (void)interstitialDidClose:(SeedsInterstitial *)interstitial;
 - (void)interstitial:(NSString *)interstitialId error:(NSError *)error;
