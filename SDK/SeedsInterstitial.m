@@ -14,7 +14,7 @@
     return [self initWithId:messageId price:0];
 }
 
-- (instancetype)initWithId:(NSString *)messageId price:(double)price {
+- (instancetype)initWithId:(NSString *)messageId price:(NSString *)price {
     self = [super init];
     if (self) {
         _messageId = messageId;

@@ -11,9 +11,9 @@
 @interface SeedsInterstitial: NSObject
 
 @property (nonatomic, readonly) NSString *messageId;
-@property (nonatomic, assign) double price;
+@property (nonatomic, readonly) NSString *price;
 
 - (instancetype)initWithId:(NSString *)messageId;
-- (instancetype)initWithId:(NSString *)messageId price:(double)price;
+- (instancetype)initWithId:(NSString *)messageId price:(NSString *)price;
 
 @end

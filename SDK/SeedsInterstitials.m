@@ -73,7 +73,7 @@ NSString * const kSeedsInterstitialNotFoundDescription = @"Not found";
     [self performHandlerSelector:@selector(interstitialDidClose:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId]];
 }
 
-- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(double)price {
+- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(NSString *)price {
     [self performHandlerSelector:@selector(interstitialPurchaseDidClick:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId price:price]];
 }
 
