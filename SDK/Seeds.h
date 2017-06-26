@@ -36,10 +36,6 @@
 // SDK upd.
 ///////////
 
-// TODO: move to .m (make as private)
-@property (nonatomic, strong) SeedsInterstitials *interstitials;
-@property (nonatomic, strong) SeedsEvents *events;
-
 + (void)initWithAppKey:(NSString *)appKey;
 + (SeedsInterstitials *)interstitials;
 + (SeedsEvents *)events;

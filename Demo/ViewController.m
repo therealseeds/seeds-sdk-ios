@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "SeedsInAppMessageDelegate.h"
+#import "Seeds.h"
 
-@interface ViewController () <SeedsInAppMessageDelegate>
+@interface ViewController () <SeedsInterstitialsEventProtocol>
 @end
 
 @implementation ViewController
@@ -18,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    Seeds.sharedInstance.inAppMessageDelegate = self;
+    [Seeds.interstitials setEventsHandler:self];
 }
 
 
@@ -61,58 +62,50 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)seedsInAppMessageClicked:(NSString*)messageId {
+- (void)interstitialDidLoad:(SeedsInterstitial *)interstitial {
+    // Called when an interstitial is loaded
+    // The interstitial is specified by messageId parameter
+    if ([interstitial.messageId isEqualToString: APP_LAUNCH_INTERSTITIAL_ID]) {
+        [self showInterstitial:APP_LAUNCH_INTERSTITIAL_ID withContext:@"app startup"];
+    }
+    NSLog(@"interstitialDidLoad(%@)", interstitial.messageId);
+}
+
+- (void)interstitialDidShow:(SeedsInterstitial *)interstitial {
+    // Called when an interstitial is successfully opened
+    // The interstitial is specified by messageId parameter
+    NSLog(@"interstitialDidShow(%@)", interstitial.messageId);
+}
+
+- (void)interstitial:(NSString *)interstitialId error:(NSError *)error {
+    NSLog(@"interstitial %@ - error:(%@)", interstitialId, error);
+}
+
+- (void)interstitialPurchaseDidClick:(SeedsInterstitial *)interstitial {
     // Called when a user clicks the buy button. Handle the purchase here!
     // The interstitial is specified by messageId parameter
-    if ([messageId isEqualToString:PURCHASE_INTERSTITIAL_ID]) {
+    if ([interstitial.messageId isEqualToString:PURCHASE_INTERSTITIAL_ID]) {
         [self triggerPayment:^() {
             [Seeds.sharedInstance recordSeedsIAPEvent:SEEDS_IAP_EVENT_KEY price:0.99];
             NSLog(@"Event %@ tracked as a Seeds purchase", PURCHASE_INTERSTITIAL_ID);
             [self showInterstitial:SHARING_INTERSTITIAL_ID withContext:@"after-purchase"];
         }];
     }
-
-    NSLog(@"seedsInAppMessageClicked(%@)", messageId);
+    
+    NSLog(@"seedsInAppMessageClicked(%@)", interstitial.messageId);
 }
 
-- (void)seedsInAppMessageDismissed:(NSString*)messageId {
+- (void)interstitialDidClose:(SeedsInterstitial *)interstitial {
     // Called when a user dismisses the interstitial and no purchase is being made
     // The interstitial is specified by messageId parameter
-    NSLog(@"seedsInAppMessageDismissed(%@)", messageId);
+    NSLog(@"interstitialDidClose(%@)", interstitial.messageId);
 }
 
-- (void)seedsInAppMessageLoadSucceeded:(NSString *)messageId {
-    // Called when an interstitial is loaded
-    // The interstitial is specified by messageId parameter
-    if ([messageId isEqualToString: APP_LAUNCH_INTERSTITIAL_ID]) {
-        [self showInterstitial:APP_LAUNCH_INTERSTITIAL_ID withContext:@"app startup"];
-    }
-    NSLog(@"seedsInAppMessageLoadSucceeded(%@)", messageId);
-}
-
-- (void)seedsInAppMessageShown:(NSString*)messageId withSuccess:(BOOL)success {
-    // Called when an interstitial is successfully opened
-    // The interstitial is specified by messageId parameter
-    NSLog(@"seedsInAppMessageShown(%@), success = %@", messageId, success ? @"YES" : @"NO");
-}
-
-- (void)seedsNoInAppMessageFound:(NSString*)messageId {
-    // Called when an interstitial couldn't be found or the preloading resulted in an error
-    NSLog(@"seedsNoInAppMessageFound(%@)", messageId);
-}
-
-- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(double)price {
-    // Called when an interstitial has multiple price options, and a user chooses one of them
-    // Not needed in applications where the user can't choose the price in the Seeds interstitial
-    NSLog(@"seedsInAppMessageClicked(%@), price = %@", messageId, @(price));
-}
-
-- (void)showInterstitial: (NSString*)messageId withContext:(NSString*)context {
-    if ([Seeds.sharedInstance isInAppMessageLoaded:messageId])
-        [Seeds.sharedInstance showInAppMessage:messageId in:self withContext: context];
+- (void)showInterstitial:(NSString*)messageId withContext:(NSString*)context {
+    if ([Seeds.interstitials isLoadedWithId:messageId])
+        [Seeds.interstitials showWithId:messageId onViewController:self inContext:context];
     else
-        // Skip the interstitial showing this time and try to reload the interstitial
-        [Seeds.sharedInstance requestInAppMessage:messageId];
+        [Seeds.interstitials fetchWithId:messageId manualPrice:nil];
 }
 
 @end

@@ -10,4 +10,17 @@
 
 @implementation SeedsInterstitial
 
+- (instancetype)initWithId:(NSString *)messageId {
+    return [self initWithId:messageId price:0];
+}
+
+- (instancetype)initWithId:(NSString *)messageId price:(double)price {
+    self = [super init];
+    if (self) {
+        _messageId = messageId;
+        _price = price;
+    }
+    return self;
+}
+
 @end

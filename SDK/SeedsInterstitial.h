@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SeedsInterstitial : NSObject
+@interface SeedsInterstitial: NSObject
 
-// TODO: @property interstitialId, price
+@property (nonatomic, readonly) NSString *messageId;
+@property (nonatomic, assign) double price;
+
+- (instancetype)initWithId:(NSString *)messageId;
+- (instancetype)initWithId:(NSString *)messageId price:(double)price;
 
 @end

@@ -18,14 +18,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    //[Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
     [Seeds initWithAppKey:YOUR_APP_KEY];
     
-    // Preload all interstitials at once
-    [Seeds.sharedInstance requestInAppMessage: PURCHASE_INTERSTITIAL_ID];
-    [Seeds.sharedInstance requestInAppMessage: SHARING_INTERSTITIAL_ID];
-    [Seeds.sharedInstance requestInAppMessage: APP_LAUNCH_INTERSTITIAL_ID];
+    [Seeds.interstitials fetchWithId:PURCHASE_INTERSTITIAL_ID manualPrice:nil];
+    [Seeds.interstitials fetchWithId:SHARING_INTERSTITIAL_ID manualPrice:nil];
+    [Seeds.interstitials fetchWithId:APP_LAUNCH_INTERSTITIAL_ID manualPrice:nil];
 
     // Override point for customization after application launch.
     return YES;

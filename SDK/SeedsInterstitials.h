@@ -32,10 +32,6 @@
 
 - (void)showWithId:(NSString *)interstitialId onViewController:(UIViewController *)viewController inContext:(NSString *)context;
 
-- (void)addEventsHandler:(id<SeedsInterstitialsEventProtocol>)eventsHandler withInterstitialId:(NSString *)interstitialId;
-
-- (void)removeEventsHandler:(id<SeedsInterstitialsEventProtocol>)eventsHandler;
-
-- (void)clearAllEventsHandlers;
+- (void)setEventsHandler:(id<SeedsInterstitialsEventProtocol>)eventsHandler;
 
 @end

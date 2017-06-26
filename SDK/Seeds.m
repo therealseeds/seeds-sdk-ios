@@ -63,6 +63,8 @@
 
 
 @interface Seeds ()
+    @property (nonatomic, strong) SeedsInterstitials *interstitials;
+    @property (nonatomic, strong) SeedsEvents *events;
 @end
 
 @implementation Seeds
