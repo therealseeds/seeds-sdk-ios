@@ -11,6 +11,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SeedsInterstitials.h"
+#import "SeedsEvents.h"
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR) && (!SEEDS_TARGET_WATCHKIT)
 #import <UIKit/UIKit.h>
 #endif
@@ -29,6 +31,21 @@
     NSDictionary *crashCustom;
     NSMutableDictionary *_messageInfos;
 }
+
+///////////
+// SDK upd.
+///////////
+
+// TODO: move to .m (make as private)
+@property (nonatomic, strong) SeedsInterstitials *interstitials;
+@property (nonatomic, strong) SeedsEvents *events;
+
++ (void)initWithAppKey:(NSString *)appKey;
++ (SeedsInterstitials *)interstitials;
++ (SeedsEvents *)events;
+
+///////////
+
 
 @property (nonatomic, copy) NSString* deviceId;
 @property (atomic, retain) id<SeedsInAppMessageDelegate> inAppMessageDelegate;

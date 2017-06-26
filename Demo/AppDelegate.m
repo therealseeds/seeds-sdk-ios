@@ -19,8 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
-
+    //[Seeds.sharedInstance start:YOUR_APP_KEY withHost:YOUR_SERVER];
+    [Seeds initWithAppKey:YOUR_APP_KEY];
+    
     // Preload all interstitials at once
     [Seeds.sharedInstance requestInAppMessage: PURCHASE_INTERSTITIAL_ID];
     [Seeds.sharedInstance requestInAppMessage: SHARING_INTERSTITIAL_ID];

@@ -29,6 +29,8 @@
 
 #define SEEDS_DEFAULT_UPDATE_INTERVAL 60.0
 
+#define SEEDS_DEFAULT_URL @"https://dash.playseeds.com"
+
 #import <Foundation/Foundation.h>
 #import "Seeds.h"
 #import "SeedsEventQueue.h"
@@ -109,6 +111,30 @@
     }
     return self;
 }
+
+//////////////////////
+
++ (void)initWithAppKey:(NSString *)appKey {
+    [[Seeds sharedInstance] start:appKey withHost:SEEDS_DEFAULT_URL];
+}
+
++ (SeedsInterstitials *)interstitials {
+    Seeds *seedsInstance = [Seeds sharedInstance];
+    SeedsInterstitials *interstitials = [seedsInstance interstitials];
+    if (interstitials == nil) {
+        SeedsInterstitials *interstitialsInstance = [[SeedsInterstitials alloc] initWithSeeds:seedsInstance];
+        [seedsInstance setInterstitials:interstitialsInstance];
+    }
+    return interstitials;
+}
+
++ (SeedsEvents *)events {
+    //TODO: same as +interstitials
+    return nil;
+}
+
+
+//////////////////////
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost
 {

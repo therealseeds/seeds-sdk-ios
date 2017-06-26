@@ -21,6 +21,27 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		7DA8273B1EFD60C300E33B25 /* SeedsInterstitials.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA827391EFD60C300E33B25 /* SeedsInterstitials.h */; };
+		7DA8273C1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
+		7DA8273D1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
+		7DA8273E1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
+		7DA8273F1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
+		7DA827401EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
+		7DA827411EFD60C400E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
+		7DA827441EFD610D00E33B25 /* SeedsEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA827421EFD610D00E33B25 /* SeedsEvents.h */; };
+		7DA827451EFD610D00E33B25 /* SeedsEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA827431EFD610D00E33B25 /* SeedsEvents.m */; };
+		7DA827461EFD610D00E33B25 /* SeedsEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA827431EFD610D00E33B25 /* SeedsEvents.m */; };
+		7DA827471EFD610D00E33B25 /* SeedsEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA827431EFD610D00E33B25 /* SeedsEvents.m */; };
+		7DA827481EFD610D00E33B25 /* SeedsEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA827431EFD610D00E33B25 /* SeedsEvents.m */; };
+		7DA827491EFD610D00E33B25 /* SeedsEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA827431EFD610D00E33B25 /* SeedsEvents.m */; };
+		7DA8274A1EFD610D00E33B25 /* SeedsEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA827431EFD610D00E33B25 /* SeedsEvents.m */; };
+		7DA8274D1EFD6CA100E33B25 /* SeedsInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA8274B1EFD6CA100E33B25 /* SeedsInterstitial.h */; };
+		7DA8274E1EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */; };
+		7DA8274F1EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */; };
+		7DA827501EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */; };
+		7DA827511EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */; };
+		7DA827521EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */; };
+		7DA827531EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */; };
 		7ED393BE1BA698E500890DE3 /* SeedsSDK_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */; };
 		7ED393BF1BA698E500890DE3 /* SeedsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A50839B1B7CADAB00A6CF52 /* SeedsSDK.framework */; };
 		7ED393CE1BA6AF9100890DE3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED393CD1BA6AF9100890DE3 /* TestViewController.m */; };
@@ -187,6 +208,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7DA827391EFD60C300E33B25 /* SeedsInterstitials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsInterstitials.h; sourceTree = "<group>"; };
+		7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsInterstitials.m; sourceTree = "<group>"; };
+		7DA827421EFD610D00E33B25 /* SeedsEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsEvents.h; sourceTree = "<group>"; };
+		7DA827431EFD610D00E33B25 /* SeedsEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsEvents.m; sourceTree = "<group>"; };
+		7DA8274B1EFD6CA100E33B25 /* SeedsInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsInterstitial.h; sourceTree = "<group>"; };
+		7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsInterstitial.m; sourceTree = "<group>"; };
 		7ED393B91BA698E500890DE3 /* SeedsSDK Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SeedsSDK Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED393BC1BA698E500890DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ED393BD1BA698E500890DE3 /* SeedsSDK_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeedsSDK_Tests.m; sourceTree = "<group>"; };
@@ -436,6 +463,12 @@
 				8A50839F1B7CADAB00A6CF52 /* EmbeddedFrameworkInfo.plist */,
 				C47793D71D533E1500E4FCC6 /* Seeds.h */,
 				C47793D51D533D6600E4FCC6 /* Seeds.m */,
+				7DA827391EFD60C300E33B25 /* SeedsInterstitials.h */,
+				7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */,
+				7DA8274B1EFD6CA100E33B25 /* SeedsInterstitial.h */,
+				7DA8274C1EFD6CA100E33B25 /* SeedsInterstitial.m */,
+				7DA827421EFD610D00E33B25 /* SeedsEvents.h */,
+				7DA827431EFD610D00E33B25 /* SeedsEvents.m */,
 				C47793DA1D534F8200E4FCC6 /* SeedsDeviceInfo.h */,
 				C47793D81D534E9400E4FCC6 /* SeedsDeviceInfo.m */,
 				C47793DB1D537D1E00E4FCC6 /* SeedsUserDetails.h */,
@@ -524,11 +557,14 @@
 				8A7D3B391B7E07B300440CC8 /* SeedsInAppMessageDelegate.h in Headers */,
 				8A5084651B7CAF7B00A6CF52 /* MobFoxToolBar.h in Headers */,
 				8A5084831B7CAF9300A6CF52 /* MFCustomEventFullscreenDelegate.h in Headers */,
+				7DA827441EFD610D00E33B25 /* SeedsEvents.h in Headers */,
 				C467A2D81D54887300E2DCDC /* SeedsSDK.h in Headers */,
+				7DA8273B1EFD60C300E33B25 /* SeedsInterstitials.h in Headers */,
 				8A50845B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h in Headers */,
 				8A50847E1B7CAF9300A6CF52 /* MFCustomEventBanner.h in Headers */,
 				8A5084321B7CAF2300A6CF52 /* SeedsDB.h in Headers */,
 				8A5084611B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h in Headers */,
+				7DA8274D1EFD6CA100E33B25 /* SeedsInterstitial.h in Headers */,
 				C467A2D71D54884200E2DCDC /* Seeds.h in Headers */,
 				8A5084701B7CAF7B00A6CF52 /* UIButton+MobFox.h in Headers */,
 				8A50846C1B7CAF7B00A6CF52 /* NSString+MobFox.h in Headers */,
@@ -780,10 +816,13 @@
 			files = (
 				7ED393CE1BA6AF9100890DE3 /* TestViewController.m in Sources */,
 				C467A2E01D54D30700E2DCDC /* SeedsEventTest.m in Sources */,
+				7DA827411EFD60C400E33B25 /* SeedsInterstitials.m in Sources */,
 				C467A2DA1D54A37D00E2DCDC /* SeedsInterstitialAdsTest.m in Sources */,
 				7ED393BE1BA698E500890DE3 /* SeedsSDK_Tests.m in Sources */,
 				C467A2DE1D54C97400E2DCDC /* SeedsEventQueueTest.m in Sources */,
+				7DA827531EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */,
 				C47793D21D52297300E4FCC6 /* SeedsTest.m in Sources */,
+				7DA8274A1EFD610D00E33B25 /* SeedsEvents.m in Sources */,
 				C467A2DC1D54B20700E2DCDC /* SeedsConnectionQueueTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -797,6 +836,7 @@
 				8A5084771B7CAF7B00A6CF52 /* UIView+FindViewController.m in Sources */,
 				8A5084661B7CAF7B00A6CF52 /* MobFoxToolBar.m in Sources */,
 				8A5084311B7CAF2300A6CF52 /* Seeds.xcdatamodeld in Sources */,
+				7DA827451EFD610D00E33B25 /* SeedsEvents.m in Sources */,
 				C47793DF1D537EE100E4FCC6 /* SeedsEvent.m in Sources */,
 				8A50846D1B7CAF7B00A6CF52 /* NSString+MobFox.m in Sources */,
 				8A5084621B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.m in Sources */,
@@ -816,8 +856,10 @@
 				8A5084731B7CAF7B00A6CF52 /* UIDevice+MFIdentifierAddition.m in Sources */,
 				8A50845A1B7CAF7B00A6CF52 /* MFRedirectChecker.m in Sources */,
 				8A5084821B7CAF9300A6CF52 /* MFCustomEventFullscreen.m in Sources */,
+				7DA8274E1EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */,
 				8A50842E1B7CAF2300A6CF52 /* Seeds_OpenUDID.m in Sources */,
 				C47793E31D53912C00E4FCC6 /* SeedsEventQueue.m in Sources */,
+				7DA8273C1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,8 +867,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DA827481EFD610D00E33B25 /* SeedsEvents.m in Sources */,
 				8A5083E21B7CAE0700A6CF52 /* ViewController.m in Sources */,
+				7DA827511EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */,
 				8A5083DF1B7CAE0700A6CF52 /* AppDelegate.m in Sources */,
+				7DA8273F1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */,
 				8A5083DC1B7CAE0700A6CF52 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -835,6 +880,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DA8273D1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */,
+				7DA827461EFD610D00E33B25 /* SeedsEvents.m in Sources */,
+				7DA8274F1EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */,
 				8AC3B9141B834CE80059D3CA /* Seeds.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,14 +893,17 @@
 			files = (
 				8ADCF8511D7E9F1E00D5F6D0 /* SeedsDeviceInfo.m in Sources */,
 				8AC3B9261B834D720059D3CA /* MobFoxHTMLBannerView.m in Sources */,
+				7DA827501EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */,
 				8ADCF8571D7E9F3300D5F6D0 /* SeedsConnectionQueue.m in Sources */,
 				8ADCF8531D7E9F2500D5F6D0 /* SeedsUserDetails.m in Sources */,
 				8AC3B9291B834D720059D3CA /* MobFoxVideoInterstitialViewController.m in Sources */,
 				8AC3B92C1B834D720059D3CA /* UIButton+MobFox.m in Sources */,
 				8AC3B92E1B834D720059D3CA /* UIImage+MobFox.m in Sources */,
+				7DA827471EFD610D00E33B25 /* SeedsEvents.m in Sources */,
 				8AC3B9281B834D720059D3CA /* MobFoxToolBar.m in Sources */,
 				8AC3B9331B834D790059D3CA /* MFCustomEventBanner.m in Sources */,
 				8ADCF8501D7E9E3F00D5F6D0 /* Seeds.m in Sources */,
+				7DA8273E1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */,
 				8AC3B92B1B834D720059D3CA /* NSURL+MobFox.m in Sources */,
 				8AC3B92F1B834D720059D3CA /* UIView+FindViewController.m in Sources */,
 				8AC3B9301B834D720059D3CA /* Seeds_OpenUDID.m in Sources */,
@@ -875,8 +926,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DA827491EFD610D00E33B25 /* SeedsEvents.m in Sources */,
 				8AC3B9371B83525C0059D3CA /* ViewController.m in Sources */,
+				7DA827521EFD6CA100E33B25 /* SeedsInterstitial.m in Sources */,
 				8AC3B9381B83525C0059D3CA /* AppDelegate.m in Sources */,
+				7DA827401EFD60C300E33B25 /* SeedsInterstitials.m in Sources */,
 				8AC3B9391B83525C0059D3CA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
