@@ -6,6 +6,16 @@
 //
 //
 
+extern NSString* const kCLYUserName;
+extern NSString* const kCLYUserUsername;
+extern NSString* const kCLYUserEmail;
+extern NSString* const kCLYUserOrganization;
+extern NSString* const kCLYUserPhone;
+extern NSString* const kCLYUserGender;
+extern NSString* const kCLYUserPicture;
+extern NSString* const kCLYUserPicturePath;
+extern NSString* const kCLYUserBirthYear;
+extern NSString* const kCLYUserCustom;
 
 #pragma mark - SeedsUserDetails
 @interface SeedsUserDetails : NSObject

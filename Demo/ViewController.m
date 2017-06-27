@@ -29,7 +29,8 @@
 
 - (IBAction)showIAM1:(id)sender {
     [self triggerPayment: ^() {
-        [Seeds.sharedInstance recordIAPEvent:NORMAL_IAP_EVENT_KEY price:4.99];
+        
+        [Seeds.events logIAPEvent:NORMAL_IAP_EVENT_KEY price:4.99 transactionId:nil];
         NSLog(@"Event %@ tracked as a non-Seeds purchase", NORMAL_IAP_EVENT_KEY);
     }];
 }
@@ -67,7 +68,7 @@
     // The interstitial is specified by messageId parameter
     if ([interstitial.messageId isEqualToString:PURCHASE_INTERSTITIAL_ID]) {
         [self triggerPayment:^() {
-            [Seeds.sharedInstance recordSeedsIAPEvent:SEEDS_IAP_EVENT_KEY price:0.99];
+            [Seeds.events logSeedsIAPEvent:SEEDS_IAP_EVENT_KEY price:0.99 transactionId:nil];
             NSLog(@"Event %@ tracked as a Seeds purchase", PURCHASE_INTERSTITIAL_ID);
             [self showInterstitial:SHARING_INTERSTITIAL_ID withContext:@"after-purchase"];
         }];

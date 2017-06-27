@@ -132,10 +132,15 @@
 }
 
 + (SeedsEvents *)events {
-    //TODO: same as +interstitials
-    return nil;
+    Seeds *seedsInstance = [Seeds sharedInstance];
+    SeedsEvents *events = [seedsInstance events];
+    if (events == nil) {
+        SeedsEvents *seedEvents = [[SeedsEvents alloc] initWithSeeds:seedsInstance];
+        [seedsInstance setEvents:seedEvents];
+        events = seedEvents;
+    }
+    return events;
 }
-
 
 //////////////////////
 

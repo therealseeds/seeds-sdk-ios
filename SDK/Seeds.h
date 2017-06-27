@@ -60,30 +60,12 @@
 
 - (BOOL)isStarted;
 
-- (void)recordEvent:(NSString *)key count:(int)count;
-
-- (void)recordEvent:(NSString *)key count:(int)count sum:(double)sum;
-
-- (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count;
-
 - (void)recordEvent:(NSString *)key segmentation:(NSDictionary *)segmentation count:(int)count sum:(double)sum;
 
 - (void)recordUserDetails:(NSDictionary *)userDetails;
-extern NSString* const kCLYUserName;
-extern NSString* const kCLYUserUsername;
-extern NSString* const kCLYUserEmail;
-extern NSString* const kCLYUserOrganization;
-extern NSString* const kCLYUserPhone;
-extern NSString* const kCLYUserGender;
-extern NSString* const kCLYUserPicture;
-extern NSString* const kCLYUserPicturePath;
-extern NSString* const kCLYUserBirthYear;
-extern NSString* const kCLYUserCustom;
 
-- (void)recordIAPEvent:(NSString *)key price:(double)price;
 - (void)recordIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId;
 
-- (void)recordSeedsIAPEvent:(NSString *)key price:(double)price;
 - (void)recordSeedsIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId;
 
 - (void)requestInAppMessage:(NSString*)messageId;
