@@ -12,6 +12,18 @@
 NSString* const kEventSumKey = @"EventSumKey";
 NSString* const kEventCountKey = @"EventCountKey";
 
+NSString* const kSeedEventUserName = @"name";
+NSString* const kSeedEventUserUsername = @"username";
+NSString* const kSeedEventUserEmail = @"email";
+NSString* const kSeedEventUserOrganization = @"organization";
+NSString* const kSeedEventUserPhone = @"phone";
+NSString* const kSeedEventUserGender = @"gender";
+NSString* const kSeedEventUserPicture = @"picture";
+NSString* const kSeedEventUserPicturePath = @"picturePath";
+NSString* const kSeedEventUserBirthYear = @"byear";
+NSString* const kSeedEventUserCustom = @"custom";
+
+
 @implementation SeedsEvents {
     Seeds *seedsInstance;
 }
