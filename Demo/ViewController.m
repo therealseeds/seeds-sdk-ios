@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "SeedsInAppMessageDelegate.h"
 #import "Seeds.h"
+#import "SeedsUserDetails.h"
 
 @interface ViewController () <SeedsInterstitialsEventProtocol>
 @end
@@ -19,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[Seeds events] logUserInfo:@{}];
+    [[Seeds events] logUserInfo:@{kCLYUserUsername: @"Uncle Sam", kCLYUserPhone: @"+14561234545"}];
     [[Seeds interstitials] setEventsHandler:self];
 }
 
