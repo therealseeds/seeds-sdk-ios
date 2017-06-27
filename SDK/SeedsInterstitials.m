@@ -66,7 +66,7 @@ NSString * const kSeedsInterstitialNotFoundDescription = @"Not found";
 }
 
 - (void)seedsInAppMessageClicked:(NSString *)messageId {
-    [self performHandlerSelector:@selector(interstitialPurchaseDidClick:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId]];
+    [self performHandlerSelector:@selector(interstitialDidClick:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId]];
 }
 
 - (void)seedsInAppMessageDismissed:(NSString *)messageId {
@@ -74,7 +74,7 @@ NSString * const kSeedsInterstitialNotFoundDescription = @"Not found";
 }
 
 - (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(NSString *)price {
-    [self performHandlerSelector:@selector(interstitialPurchaseDidClick:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId price:price]];
+    [self performHandlerSelector:@selector(interstitialDidClick:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId price:price]];
 }
 
 #pragma mark Private

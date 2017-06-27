@@ -224,11 +224,10 @@
 
     } else if (isPriceUrl) {
         NSString* priceString = path[2];
-        float price = [priceString floatValue];
         [videoInterstitial recordInterstitialEvent: @"dynamic price clicked" withCustomSegments: @{@"price" : priceString}];
 
         if (delegate && [delegate respondsToSelector:@selector(seedsInAppMessageClicked:withDynamicPrice:)]) {
-            [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:price];
+            [delegate seedsInAppMessageClicked:videoInterstitial.seedsMessageId withDynamicPrice:priceString];
         }
     } else if (isShowMoreUrl) {
         [videoInterstitial recordInterstitialEvent: @"show more clicked"];

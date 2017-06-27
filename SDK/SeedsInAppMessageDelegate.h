@@ -30,7 +30,7 @@
 - (void)seedsInAppMessageDismissed:(NSString*)messageId;
 
 // Use only if your interstitial enables the user to choose from multiple price tags
-- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(double)price;
+- (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(NSString *)price;
 
 @end
 
