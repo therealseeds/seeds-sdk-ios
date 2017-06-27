@@ -62,26 +62,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)interstitialDidLoad:(SeedsInterstitial *)interstitial {
-    // Called when an interstitial is loaded
-    // The interstitial is specified by messageId parameter
-    if ([interstitial.messageId isEqualToString: APP_LAUNCH_INTERSTITIAL_ID]) {
-        [self showInterstitial:APP_LAUNCH_INTERSTITIAL_ID withContext:@"app startup"];
-    }
-    NSLog(@"interstitialDidLoad(%@)", interstitial.messageId);
-}
-
-- (void)interstitialDidShow:(SeedsInterstitial *)interstitial {
-    // Called when an interstitial is successfully opened
-    // The interstitial is specified by messageId parameter
-    NSLog(@"interstitialDidShow(%@)", interstitial.messageId);
-}
-
-- (void)interstitial:(NSString *)interstitialId error:(NSError *)error {
-    NSLog(@"interstitial %@ - error:(%@)", interstitialId, error);
-}
-
-- (void)interstitialPurchaseDidClick:(SeedsInterstitial *)interstitial {
+- (void)interstitialDidClick:(SeedsInterstitial *)interstitial {
     // Called when a user clicks the buy button. Handle the purchase here!
     // The interstitial is specified by messageId parameter
     if ([interstitial.messageId isEqualToString:PURCHASE_INTERSTITIAL_ID]) {
@@ -101,10 +82,31 @@
     NSLog(@"interstitialDidClose(%@)", interstitial.messageId);
 }
 
-- (void)showInterstitial:(NSString*)messageId withContext:(NSString*)context {
+- (void)interstitialDidLoad:(SeedsInterstitial *)interstitial {
+    // Called when an interstitial is loaded
+    // The interstitial is specified by messageId parameter
+    if ([interstitial.messageId isEqualToString: APP_LAUNCH_INTERSTITIAL_ID]) {
+        [self showInterstitial:APP_LAUNCH_INTERSTITIAL_ID withContext:@"app startup"];
+    }
+    NSLog(@"interstitialDidLoad(%@)", interstitial.messageId);
+}
+
+- (void)interstitialDidShow:(SeedsInterstitial *)interstitial {
+    // Called when an interstitial is successfully opened
+    // The interstitial is specified by messageId parameter
+    NSLog(@"interstitialDidShow(%@)", interstitial.messageId);
+}
+
+- (void)interstitial:(NSString *)interstitialId error:(NSError *)error {
+    // Called when an interstitial couldn't be found or the preloading resulted in an error
+    NSLog(@"interstitial %@ - error:(%@)", interstitialId, error);
+}
+
+- (void)showInterstitial:(NSString *)messageId withContext:(NSString *)context {
     if ([Seeds.interstitials isLoadedWithId:messageId])
         [Seeds.interstitials showWithId:messageId onViewController:self inContext:context];
     else
+        // Skip the interstitial showing this time and try to reload the interstitial
         [Seeds.interstitials fetchWithId:messageId manualPrice:nil];
 }
 
