@@ -19,7 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [Seeds.interstitials setEventsHandler:self];
+    [[Seeds events] logUserInfo:@{}];
+    [[Seeds interstitials] setEventsHandler:self];
 }
 
 - (IBAction)showIAM0:(id)sender {
@@ -104,11 +105,11 @@
 }
 
 - (void)showInterstitial:(NSString *)messageId withContext:(NSString *)context {
-    if ([Seeds.interstitials isLoadedWithId:messageId])
-        [Seeds.interstitials showWithId:messageId onViewController:self inContext:context];
+    if ([[Seeds interstitials] isLoadedWithId:messageId])
+        [[Seeds interstitials] showWithId:messageId onViewController:self inContext:context];
     else
         // Skip the interstitial showing this time and try to reload the interstitial
-        [Seeds.interstitials fetchWithId:messageId manualPrice:nil];
+        [[Seeds interstitials] fetchWithId:messageId manualPrice:nil];
 }
 
 @end
