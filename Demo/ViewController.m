@@ -18,10 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [Seeds.interstitials setEventsHandler:self];
 }
-
 
 - (IBAction)showIAM0:(id)sender {
     [self showInterstitial:PURCHASE_INTERSTITIAL_ID withContext:@"in-store"];
@@ -29,37 +28,38 @@
 
 - (IBAction)showIAM1:(id)sender {
     [self triggerPayment: ^() {
-        
         [Seeds.events logIAPEvent:NORMAL_IAP_EVENT_KEY price:4.99 transactionId:nil];
         NSLog(@"Event %@ tracked as a non-Seeds purchase", NORMAL_IAP_EVENT_KEY);
+        
+        [Seeds.events logEventWithKey:NORMAL_IAP_EVENT_KEY parameters:@{kEventCountKey : @(1)}];
     }];
 }
 
 
 - (void)triggerPayment: (void (^)(void))callback {
     UIAlertController * alert=   [UIAlertController
-            alertControllerWithTitle:@"In-app purchase"
-                             message:@"Do you want to confirm the in-app purchase? (Simulated payment)"
-                      preferredStyle:UIAlertControllerStyleAlert];
-
+                                  alertControllerWithTitle:@"In-app purchase"
+                                  message:@"Do you want to confirm the in-app purchase? (Simulated payment)"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction* ok = [UIAlertAction
-            actionWithTitle:@"OK"
-                      style:UIAlertActionStyleDefault
-                    handler:^(UIAlertAction * action)
-                    {
-                        callback();
-                    }];
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             callback();
+                         }];
     UIAlertAction* cancel = [UIAlertAction
-            actionWithTitle:@"Cancel"
-                      style:UIAlertActionStyleDefault
-                    handler:^(UIAlertAction * action)
-                    {
-                        // No action taken
-                    }];
-
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 // No action taken
+                             }];
+    
     [alert addAction:ok];
     [alert addAction:cancel];
-
+    
     [self presentViewController:alert animated:YES completion:nil];
 }
 

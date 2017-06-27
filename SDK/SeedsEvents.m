@@ -25,7 +25,19 @@ NSString* const kEventCountKey = @"EventCountKey";
 }
 
 - (void)logEventWithKey:(NSString *)eventKey parameters:(NSDictionary *)parameters {
-    [seedsInstance recordEvent:eventKey segmentation:parameters count:[parameters[kEventCountKey] intValue] sum:[parameters[kEventSumKey] doubleValue]];
+    
+    NSUInteger count = 1;
+    if (parameters[kEventCountKey] != nil) {
+        NSUInteger countValue = [parameters[kEventCountKey] unsignedIntegerValue];
+        count = countValue > 0 ? countValue : 1;
+    }
+    
+    double sum = 0;
+    if (parameters[kEventSumKey] != nil) {
+        sum = [parameters[kEventSumKey] doubleValue];
+    }
+
+    [seedsInstance recordEvent:eventKey segmentation:parameters count:(int)count sum:sum];
 }
 
 - (void)logUserInfo:(NSDictionary *)userInfo {
