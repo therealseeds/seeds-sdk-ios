@@ -126,6 +126,7 @@
     if (interstitials == nil) {
         SeedsInterstitials *interstitialsInstance = [[SeedsInterstitials alloc] initWithSeeds:seedsInstance];
         [seedsInstance setInterstitials:interstitialsInstance];
+        interstitials = interstitialsInstance;
     }
     return interstitials;
 }
