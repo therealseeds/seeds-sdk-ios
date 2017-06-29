@@ -7,6 +7,7 @@
 //
 
 #import "SeedsInterstitials.h"
+#import "SeedsInterstitial.h"
 #import "Seeds.h"
 #import "SeedsInAppMessageDelegate.h"
 
@@ -17,29 +18,18 @@ NSString * const kSeedsInterstitialNotFoundDescription = @"Not found";
     @property (atomic, weak) id<SeedsInterstitialsEventProtocol> eventHandler;
 @end
 
-@implementation SeedsInterstitials {
-    Seeds *seedsInstance;    
-}
-
-- (instancetype)initWithSeeds:(Seeds *)seeds {
-    self = [super init];
-    if (self) {
-        seedsInstance = seeds;
-        seedsInstance.inAppMessageDelegate = self;
-    }
-    return self;
-}
+@implementation SeedsInterstitials
 
 - (void)fetchWithId:(NSString *)interstitialId manualPrice:(NSString *)manualPrice {
-    [seedsInstance requestInAppMessage:interstitialId withManualLocalizedPrice:manualPrice];
+    [[Seeds sharedInstance] requestInAppMessage:interstitialId withManualLocalizedPrice:manualPrice];
 }
 
 - (BOOL)isLoadedWithId:(NSString *)interstitialId {
-    return [seedsInstance isInAppMessageLoaded:interstitialId];
+    return [[Seeds sharedInstance]  isInAppMessageLoaded:interstitialId];
 }
 
 - (void)showWithId:(NSString *)interstitialId onViewController:(UIViewController *)viewController inContext:(NSString *)context {
-    [seedsInstance showInAppMessage:interstitialId in:viewController withContext:context];
+    [[Seeds sharedInstance]  showInAppMessage:interstitialId in:viewController withContext:context];
 }
 
 - (void)setEventsHandler:(id<SeedsInterstitialsEventProtocol>)eventsHandler {

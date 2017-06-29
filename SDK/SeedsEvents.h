@@ -26,7 +26,7 @@ extern NSString* const kSeedEventUserCustom;
 
 @interface SeedsEvents: NSObject
 
-- (instancetype)initWithSeeds:(Seeds *)seeds;
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
 - (void)logEventWithKey:(NSString *)eventKey parameters:(NSDictionary *)parameters;
 

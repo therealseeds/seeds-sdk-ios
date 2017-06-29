@@ -42,6 +42,7 @@
 #import "SeedsDB.h"
 #import "SeedsUrlFormatter.h"
 #import "NSString+MobFox.h"
+#import "SeedsInAppMessageDelegate.h"
 
 #import <objc/runtime.h>
 
@@ -59,13 +60,6 @@
 #import <ifaddrs.h>
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
-
-
-
-@interface Seeds ()
-    @property (nonatomic, strong) SeedsInterstitials *interstitials;
-    @property (nonatomic, strong) SeedsEvents *events;
-@end
 
 @implementation Seeds
 
@@ -121,25 +115,23 @@
 }
 
 + (SeedsInterstitials *)interstitials {
+    static SeedsInterstitials *sharedObject = nil;
+    static dispatch_once_t onceToken;
     Seeds *seedsInstance = [Seeds sharedInstance];
-    SeedsInterstitials *interstitials = [seedsInstance interstitials];
-    if (interstitials == nil) {
-        SeedsInterstitials *interstitialsInstance = [[SeedsInterstitials alloc] initWithSeeds:seedsInstance];
-        [seedsInstance setInterstitials:interstitialsInstance];
-        interstitials = interstitialsInstance;
-    }
-    return interstitials;
+    dispatch_once(&onceToken, ^{
+        sharedObject = [SeedsInterstitials new];
+        seedsInstance.inAppMessageDelegate = (SeedsInterstitials <SeedsInAppMessageDelegate> *)sharedObject;
+    });
+    return sharedObject;
 }
 
 + (SeedsEvents *)events {
-    Seeds *seedsInstance = [Seeds sharedInstance];
-    SeedsEvents *events = [seedsInstance events];
-    if (events == nil) {
-        SeedsEvents *seedEvents = [[SeedsEvents alloc] initWithSeeds:seedsInstance];
-        [seedsInstance setEvents:seedEvents];
-        events = seedEvents;
-    }
-    return events;
+    static SeedsEvents *sharedObject = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedObject = [SeedsEvents new];
+    });
+    return sharedObject;
 }
 
 //////////////////////

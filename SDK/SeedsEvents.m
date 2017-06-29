@@ -24,17 +24,7 @@ NSString* const kSeedEventUserBirthYear = @"byear";
 NSString* const kSeedEventUserCustom = @"custom";
 
 
-@implementation SeedsEvents {
-    Seeds *seedsInstance;
-}
-
-- (instancetype)initWithSeeds:(Seeds *)seeds {
-    self = [super init];
-    if (self) {
-        seedsInstance = seeds;
-    }
-    return self;
-}
+@implementation SeedsEvents
 
 - (void)logEventWithKey:(NSString *)eventKey parameters:(NSDictionary *)parameters {
     
@@ -49,19 +39,19 @@ NSString* const kSeedEventUserCustom = @"custom";
         sum = [parameters[kEventSumKey] doubleValue];
     }
 
-    [seedsInstance recordEvent:eventKey segmentation:parameters count:(int)count sum:sum];
+    [[Seeds sharedInstance] recordEvent:eventKey segmentation:parameters count:(int)count sum:sum];
 }
 
 - (void)logUserInfo:(NSDictionary *)userInfo {
-    [seedsInstance recordUserDetails:userInfo];
+    [[Seeds sharedInstance] recordUserDetails:userInfo];
 }
 
 - (void)logIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId {
-    [seedsInstance recordIAPEvent:key price:price transactionId:transactionId];
+    [[Seeds sharedInstance] recordIAPEvent:key price:price transactionId:transactionId];
 }
 
 - (void)logSeedsIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId {
-    [seedsInstance recordSeedsIAPEvent:key price:price transactionId:transactionId];
+    [[Seeds sharedInstance] recordSeedsIAPEvent:key price:price transactionId:transactionId];
 }
 
 @end

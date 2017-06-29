@@ -6,9 +6,6 @@
 //
 //
 
-#ifndef Seeds_SeedsInAppMessageDelegate_h
-#define Seeds_SeedsInAppMessageDelegate_h
-
 @class SeedsInAppMessage;
 
 @protocol SeedsInAppMessageDelegate <NSObject>
@@ -33,5 +30,3 @@
 - (void)seedsInAppMessageClicked:(NSString *)messageId withDynamicPrice:(NSString *)price;
 
 @end
-
-#endif

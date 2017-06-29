@@ -6,9 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "SeedsInterstitial.h"
+
+@class SeedsInterstitial;
 
 @protocol SeedsInterstitialsEventProtocol <NSObject>
 
@@ -20,11 +20,9 @@
 
 @end
 
-@class Seeds;
-
 @interface SeedsInterstitials : NSObject
 
-- (instancetype)initWithSeeds:(Seeds *)seeds;
+- (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
 - (void)fetchWithId:(NSString *)interstitialId manualPrice:(NSString *)manualPrice;
 
