@@ -91,6 +91,7 @@ The delegate implementation contains five methods for treating different scenari
 ```objective-c
  - (void)logUserInfo:(NSDictionary *)userInfo;
 ```
+To specify userInfo data, please use following keys:
 
 ```objective-c
 kSeedEventUserName
