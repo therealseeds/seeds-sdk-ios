@@ -41,7 +41,7 @@ Choose the class which you want to use for handling those events and implement [
  - (void)setEventsHandler:(id <SeedsInterstitialsEventProtocol>)eventsHandler;
 ```
 - Load the required interstitial with *interstitialId*:
-
+<u>If manual price not specified - Seeds SDK load price value from Apple StoreKit.</u> 
 ```objective-c
 - (void)fetchWithId:(NSString *)interstitialId manualPrice:(NSString *)manualPrice
 ```

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "SeedsInterstitialAds.h"
 #import "Seeds.h"
+#import "Seeds_Private.h"
 #import "SeedsInAppMessageDelegate.h"
 #import <Social/Social.h>
 

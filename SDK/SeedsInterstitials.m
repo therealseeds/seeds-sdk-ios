@@ -9,6 +9,7 @@
 #import "SeedsInterstitials.h"
 #import "SeedsInterstitial.h"
 #import "Seeds.h"
+#import "Seeds_Private.h"
 #import "SeedsInAppMessageDelegate.h"
 
 NSString * const kSeedsInterstitialsDomain = @"SeedsInterstitials";

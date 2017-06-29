@@ -8,6 +8,7 @@
 
 #import "SeedsEvents.h"
 #import "Seeds.h"
+#import "Seeds_Private.h"
 
 NSString* const kEventSumKey = @"EventSumKey";
 NSString* const kEventCountKey = @"EventCountKey";

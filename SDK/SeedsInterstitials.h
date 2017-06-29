@@ -6,9 +6,9 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@class SeedsInterstitial;
+@class SeedsInterstitial, UIViewController;
 
 @protocol SeedsInterstitialsEventProtocol <NSObject>
 

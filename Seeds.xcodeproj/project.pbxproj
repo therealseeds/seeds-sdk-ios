@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		78FA06C91F052CB300427153 /* Seeds_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 78FA06C81F052CB300427153 /* Seeds_Private.h */; };
 		7DA8273B1EFD60C300E33B25 /* SeedsInterstitials.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DA827391EFD60C300E33B25 /* SeedsInterstitials.h */; };
 		7DA8273C1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
 		7DA8273D1EFD60C300E33B25 /* SeedsInterstitials.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */; };
@@ -208,6 +209,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		78FA06C81F052CB300427153 /* Seeds_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seeds_Private.h; sourceTree = "<group>"; };
 		7DA827391EFD60C300E33B25 /* SeedsInterstitials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsInterstitials.h; sourceTree = "<group>"; };
 		7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedsInterstitials.m; sourceTree = "<group>"; };
 		7DA827421EFD610D00E33B25 /* SeedsEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedsEvents.h; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				8AC3B94F1B8354DA0059D3CA /* ResourcesBundleInfo.plist */,
 				8A50839F1B7CADAB00A6CF52 /* EmbeddedFrameworkInfo.plist */,
 				C47793D71D533E1500E4FCC6 /* Seeds.h */,
+				78FA06C81F052CB300427153 /* Seeds_Private.h */,
 				C47793D51D533D6600E4FCC6 /* Seeds.m */,
 				7DA827391EFD60C300E33B25 /* SeedsInterstitials.h */,
 				7DA8273A1EFD60C300E33B25 /* SeedsInterstitials.m */,
@@ -563,6 +566,7 @@
 				8A50845B1B7CAF7B00A6CF52 /* MobFoxAdBrowserViewController.h in Headers */,
 				8A50847E1B7CAF9300A6CF52 /* MFCustomEventBanner.h in Headers */,
 				8A5084321B7CAF2300A6CF52 /* SeedsDB.h in Headers */,
+				78FA06C91F052CB300427153 /* Seeds_Private.h in Headers */,
 				8A5084611B7CAF7B00A6CF52 /* MobFoxInterstitialPlayerViewController.h in Headers */,
 				7DA8274D1EFD6CA100E33B25 /* SeedsInterstitial.h in Headers */,
 				C467A2D71D54884200E2DCDC /* Seeds.h in Headers */,

@@ -33,6 +33,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Seeds.h"
+#import "Seeds_Private.h"
 #import "SeedsEventQueue.h"
 #import "SeedsDeviceInfo.h"
 #import "SeedsConnectionQueue.h"
@@ -61,7 +62,20 @@
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
 
-@implementation Seeds
+typedef void (^ SeedsInAppPurchaseCountCallback)(NSString* errorMessage, int purchasesCount);
+typedef void (^ SeedsInAppMessageShowCountCallback)(NSString* errorMessage, int showCount);
+typedef void (^ SeedsGenericUserBehaviorQueryCallback)(NSString* errorMessage, id result);
+
+@implementation Seeds {
+    double unsentSessionLength;
+    NSTimer *timer;
+    time_t startTime;
+    double lastTime;
+    BOOL isSuspended;
+    SeedsEventQueue *eventQueue;
+    NSDictionary *crashCustom;
+    NSMutableDictionary *_messageInfos;
+}
 
 @synthesize inAppMessageDelegate;
 
@@ -375,7 +389,7 @@
     NSString* endpoint = [self.getAppHost stringByAppendingString:@"/o/app-user/query-iap-purchase-count"];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
                             [self.getAppKey stringByUrlEncoding],
-                            [_deviceId stringByUrlEncoding]];
+                            [self.deviceId stringByUrlEncoding]];
     if (key != nil) {
         parameters = [parameters stringByAppendingString:[NSString stringWithFormat:@"&iap_key=%@", [key stringByUrlEncoding]]];
     } else {
@@ -420,7 +434,7 @@
     NSString* endpoint = [self.getAppHost stringByAppendingString:@"/o/app-user/query-interstitial-shown-count"];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
                             [self.getAppKey stringByUrlEncoding],
-                            [_deviceId stringByUrlEncoding]];
+                            [self.deviceId stringByUrlEncoding]];
     if (messageId != nil) {
         parameters = [parameters stringByAppendingString:[NSString stringWithFormat:@"&interstitial_id=%@", [messageId stringByUrlEncoding]]];
     } else {
@@ -458,7 +472,7 @@
     NSString* endpoint = [self.getAppHost stringByAppendingString:[@"/o/app-user/" stringByAppendingString: queryPath]];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
                                                       [self.getAppKey stringByUrlEncoding],
-                                                      [_deviceId stringByUrlEncoding]];
+                                                      [self.deviceId stringByUrlEncoding]];
 
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", endpoint, parameters]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];

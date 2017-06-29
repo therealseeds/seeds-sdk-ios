@@ -9,8 +9,6 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "Seeds.h"
-#import "SeedsEvents.h"
-#import "SeedsInterstitial.h"
 
 @interface ViewController () <SeedsInterstitialsEventProtocol>
 @end
