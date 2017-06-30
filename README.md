@@ -19,7 +19,7 @@ We recommend using CocoaPods for adding the Seeds SDK to your app because it mak
 ```
 target '<Application_Name>' do
     ...   
-    pod 'SeedsSDK', '0.4.6'
+    pod 'SeedsSDK'
 end
 ```
 
