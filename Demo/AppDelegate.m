@@ -7,15 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 #import "Seeds.h"
 
-@interface AppDelegate ()
-
-@end
-
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Seeds initWithAppKey:YOUR_APP_KEY];
