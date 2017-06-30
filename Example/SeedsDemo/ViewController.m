@@ -1,14 +1,13 @@
 //
 //  ViewController.m
-//  iOS Demo
+//  SeedsDemo
 //
-//  Created by Alexey Pelykh on 8/13/15.
-//
+//  Created by Igor Dorofix on 6/30/17.
 //
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "Seeds.h"
+#import <SeedsSDK/Seeds.h>
 
 @interface ViewController () <SeedsInterstitialsEventProtocol>
 @end

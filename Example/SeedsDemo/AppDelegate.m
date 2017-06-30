@@ -1,13 +1,12 @@
 //
 //  AppDelegate.m
-//  iOS Demo
+//  SeedsDemo
 //
-//  Created by Alexey Pelykh on 8/13/15.
-//
+//  Created by Igor Dorofix on 6/30/17.
 //
 
 #import "AppDelegate.h"
-#import "Seeds.h"
+#import <SeedsSDK/Seeds.h>
 
 @implementation AppDelegate
 
@@ -17,7 +16,7 @@
     [[Seeds interstitials] fetchWithId:APP_LAUNCH_INTERSTITIAL_ID manualPrice:nil];
     [[Seeds interstitials] fetchWithId:PURCHASE_INTERSTITIAL_ID manualPrice:nil];
     [[Seeds interstitials] fetchWithId:SHARING_INTERSTITIAL_ID manualPrice:nil];
-
+    
     return YES;
 }
 
