@@ -1,4 +1,4 @@
-#Seeds    
+# Seeds    
 [Seeds](http://www.playseeds.com) increases paying user conversion for freemium mobile games motivating users to make their first purchase by letting them know that their purchase will help finance microloans in the developing world. The SDK implements this with an interstitial ad and event tracking analytics.
 
 ## The following platforms are now available:
