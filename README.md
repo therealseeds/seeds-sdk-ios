@@ -17,13 +17,13 @@ The Seeds iOS SDK is built with production-tested open source components, includ
 We recommend using CocoaPods for adding the Seeds SDK to your app because it makes it easy to update the Seeds SDK later on. Add the following to the Podfile in your project root directory:  
 
 ```
-target '<Application_Name>' do
+target '<Target_Name>' do
     ...   
     pod 'SeedsSDK'
 end
 ```
 
-###Initialization: 
+### Initialization:    
 Seeds will be initialized only once from the very beginning of the app start.
 In Seeds' [Dashboard](https://developers.playseeds.com/index.html) tab you will see find App Keys for both Test Environment and Production Environment. Those keys identify your app and they are needed in the initialization of Seeds SDK.
 
