@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[Seeds events] logUserInfo:@{kSeedEventUserName: @"Uncle Sam", kSeedEventUserPhone: @"+14561234545"}];
+    [[Seeds events] logUserInfo:@{kSeedEventUserName: @"Uncle Sam",
+                                  kSeedEventUserPhone: @"+14561234545"}];
     [[Seeds interstitials] setEventsHandler:self];
 }
 
@@ -27,10 +28,10 @@
 
 - (IBAction)showIAM1:(id)sender {
     [self triggerPayment: ^() {
-        [Seeds.events logIAPEvent:NORMAL_IAP_EVENT_KEY price:4.99 transactionId:nil];
+        [[Seeds events] logIAPEvent:NORMAL_IAP_EVENT_KEY price:4.99 transactionId:nil];
         NSLog(@"Event %@ tracked as a non-Seeds purchase", NORMAL_IAP_EVENT_KEY);
         
-        [Seeds.events logEventWithKey:NORMAL_IAP_EVENT_KEY parameters:@{kEventCountKey : @(1)}];
+        [[Seeds events] logEventWithKey:NORMAL_IAP_EVENT_KEY parameters:@{kEventCountKey : @(1)}];
     }];
 }
 
@@ -67,7 +68,7 @@
     // The interstitial is specified by messageId parameter
     if ([interstitial.messageId isEqualToString:PURCHASE_INTERSTITIAL_ID]) {
         [self triggerPayment:^() {
-            [Seeds.events logSeedsIAPEvent:SEEDS_IAP_EVENT_KEY price:0.99 transactionId:nil];
+            [[Seeds events] logSeedsIAPEvent:SEEDS_IAP_EVENT_KEY price:0.99 transactionId:nil];
             NSLog(@"Event %@ tracked as a Seeds purchase", PURCHASE_INTERSTITIAL_ID);
             [self showInterstitial:SHARING_INTERSTITIAL_ID withContext:@"after-purchase"];
         }];
