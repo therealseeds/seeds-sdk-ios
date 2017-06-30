@@ -28,6 +28,9 @@ Seeds will be initialized only once from the very beginning of the app start.
 In Seeds' [Dashboard](https://developers.playseeds.com/index.html) tab you will see find App Keys for both Test Environment and Production Environment. Those keys identify your app and they are needed in the initialization of Seeds SDK.
 
 ```objective-c
+#import <SeedsSDK/Seeds.h>
+....
+
 [Seeds initWithAppKey:YOUR_APP_KEY];
 ```
 
