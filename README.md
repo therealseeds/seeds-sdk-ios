@@ -35,29 +35,53 @@ In Seeds' [Dashboard](https://developers.playseeds.com/index.html) tab you will 
 ```
 
 ****
-### <a name="interstitials_header"></a>Seeds.Interstitials
+### <a name="interstitials_header"></a>Interstitials
 
-- Set interstitials-handler to receive callback from SDK.    
+- Set interstitials event handler to receive callback from SDK.    
 Choose the class which you want to use for handling those events and implement [SeedsInterstitialsEventProtocol](#interstitialseventprotocol_header) methods:
 
 ```objective-c
  - (void)setEventsHandler:(id <SeedsInterstitialsEventProtocol>)eventsHandler;
 ```
+example:
+
+```objective-c
+[[Seeds Interstitials] setEventsHandler:self];
+```
+
 - Load the required interstitial with *interstitialId*:
 <u>If manual price not specified - Seeds SDK load price value from Apple StoreKit.</u> 
+
 ```objective-c
 - (void)fetchWithId:(NSString *)interstitialId manualPrice:(NSString *)manualPrice
+```
+example:
+
+```objective-c
+[[Seeds interstitials] fetchWithId:@"PURCHASE_INTERSTITIAL_ID" manualPrice:nil];
 ```
 - Check if this interstitial is ready to be shown (is loaded). Returns either true or false.
 
 ```objective-c
  - (BOOL)isLoadedWithId:(NSString *)interstitialId;
 ```
+example:
+
+```objective-c
+if ([[Seeds interstitials] isLoadedWithId:messageId]) {
+	...
+}
+```
 
 - Show the interstitial. The *onViewController* parameter defines the parent viewController where the interstitial view will be added. The withContext parameter is currently obsolete. As callback SDK use the instance that was passed in the setEventsHandler:.
  
 ```objective-c
  - (void)showWithId:(NSString *)interstitialId onViewController:(UIViewController *)viewController inContext:(NSString *)context;
+```
+example:
+
+```objective-c
+[[Seeds interstitials] showWithId:messageId onViewController:self inContext:@"context"];
 ```
 
 #### <a name="interstitialseventprotocol_header"></a> SeedsInterstitialsEventProtocol
@@ -71,7 +95,7 @@ The delegate implementation contains five methods for treating different scenari
 - (void)interstitial:(NSString *)interstitialId error:(NSError *)error;
 ```
 ****
-### <a name="events_header"></a>Seeds.Events
+### <a name="events_header"></a>Events
 
 - Track common event specified by *key* with *parameters*.
 
@@ -88,6 +112,11 @@ The delegate implementation contains five methods for treating different scenari
 ```objective-c
  - (void)logIAPEvent:(NSString *)key price:(double)price transactionId:(NSString *)transactionId;
 
+```
+example:
+
+```objective-c
+[[Seeds events] logIAPEvent:@"NORMAL_IAP_EVENT_KEY" price:4.99 transactionId:nil];
 ```
 - Track userInfo  
 
@@ -107,6 +136,11 @@ kSeedEventUserPicture
 kSeedEventUserPicturePath
 kSeedEventUserBirthYear
 kSeedEventUserCustom
+```
+example:
+
+```objective-c
+[[Seeds events] logUserInfo:@{kSeedEventUserName:@"Uncle Sam", kSeedEventUserPhone:@"+14561234545"}];
 ```
 ****
 
