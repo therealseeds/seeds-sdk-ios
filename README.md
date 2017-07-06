@@ -165,8 +165,8 @@ Depending of the type of purchase (whether it was with Seeds-promoted purchase o
 - (void)someMethod {
 	...
 	//Successful purchase was made above
- 	[[Seeds events] logSeedsIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was a Seeds-promoted purchase
- 	[[Seeds events] logIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was ususal purchase.
+ 	[[Seeds events] logSeedsIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was a Seeds in-app purchase
+ 	[[Seeds events] logIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was non-Seeds in-app purchase
 }
 
 ```
