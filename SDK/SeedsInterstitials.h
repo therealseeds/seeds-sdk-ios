@@ -24,7 +24,7 @@
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 
-- (void)fetchWithId:(NSString *)interstitialId manualPrice:(NSString *)manualPrice;
+- (void)fetchWithId:(NSString *)interstitialId;
 
 - (BOOL)isLoadedWithId:(NSString *)interstitialId;
 

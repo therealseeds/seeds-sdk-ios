@@ -108,7 +108,7 @@
         [[Seeds interstitials] showWithId:messageId onViewController:self inContext:context];
     else
         // Skip the interstitial showing this time and try to reload the interstitial
-        [[Seeds interstitials] fetchWithId:messageId manualPrice:nil];
+        [[Seeds interstitials] fetchWithId:messageId];
 }
 
 @end

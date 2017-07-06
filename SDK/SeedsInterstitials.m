@@ -21,8 +21,8 @@ NSString * const kSeedsInterstitialNotFoundDescription = @"Not found";
 
 @implementation SeedsInterstitials
 
-- (void)fetchWithId:(NSString *)interstitialId manualPrice:(NSString *)manualPrice {
-    [[Seeds sharedInstance] requestInAppMessage:interstitialId withManualLocalizedPrice:manualPrice];
+- (void)fetchWithId:(NSString *)interstitialId {
+    [[Seeds sharedInstance] requestInAppMessage:interstitialId withManualLocalizedPrice:nil];
 }
 
 - (BOOL)isLoadedWithId:(NSString *)interstitialId {
