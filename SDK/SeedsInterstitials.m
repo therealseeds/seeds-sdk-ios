@@ -45,7 +45,11 @@ NSString * const kSeedsInterstitialNotFoundDescription = @"Not found";
 }
 
 - (void)seedsInAppMessageShown:(NSString *)messageId withSuccess:(BOOL)success {
-    [self performHandlerSelector:@selector(interstitialDidShow:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId]];
+    if (success) {
+        [self performHandlerSelector:@selector(interstitialDidShow:) forInterstitial:[[SeedsInterstitial alloc] initWithId:messageId]];
+    } else {
+        [self seedsNoInAppMessageFound:messageId];
+    }
 }
 
 - (void)seedsNoInAppMessageFound:(NSString *)messageId {
