@@ -1,6 +1,6 @@
 # Seeds iOS SDK
 
-Increase your revenue (and so much more) with the power of social good by integrating Seeds into your app!   If you have any questions regarding your specific setup, feel free to contact our team through the website chat.
+Increase your revenue (and so much more) with the power of social good by integrating Seeds into your app!   If you have any questions regarding your specific setup, feel free to contact our team through the [website](http://www.playseeds.com/#social-good) chat.
 
 We’re so happy you’re here!
 
@@ -113,7 +113,7 @@ To receive callbacks about events (e.g. notifications about clicks, dismissals, 
 }
 
 - (void)interstitial:(NSString *)interstitialId error:(NSError *)error {
-	//Called when any some error occures
+	//Called when error occurs
 }
 ```
 
@@ -146,7 +146,7 @@ The protocol contains five methods for addressing different scenarios of a Seeds
 - (void)interstitialDidClick:(SeedsInterstitial *)interstitial; //Called when the interstitial "buy" button was clicked
 - (void)interstitialDidShow:(SeedsInterstitial *)interstitial; //Called when the interstitial was successfully shown
 - (void)interstitialDidClose:(SeedsInterstitial *)interstitial; //Called when the user presses "close" or "back" button
-- (void)interstitial:(NSString *)interstitialId error:(NSError *)error; //Called when any some error occures
+- (void)interstitial:(NSString *)interstitialId error:(NSError *)error; //Called when error occurs
 ```
 
 ## <a name="events_header"></a> Events
@@ -161,8 +161,10 @@ This method should be called after any successful purchase in the app.  Dependin
 - (void)someMethod {
 	...
 	//Successful purchase was made above
- 	[[Seeds events] logSeedsIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was a Seeds in-app purchase
- 	[[Seeds events] logIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was non-Seeds in-app purchase
+ 	[[Seeds events] logSeedsIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; 
+ 	//If there was a Seeds in-app purchase
+ 	[[Seeds events] logIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; 
+ 	//If there was non-Seeds in-app purchase
 }
 ```
 
@@ -195,7 +197,7 @@ Sample usage:
 
 ## Optional: Add Seeds branding to your in-app store
 
-In addition to boosting your revenue using the Seeds interstitials, you can increase profits by adding the Seeds logo to the appropriate in-app purchase items within your marketplace.  If you’d like to try this, please contact us via the website chat. We’re more than happy to help!
+In addition to boosting your revenue using the Seeds interstitials, you can increase profits by adding the Seeds logo to the appropriate in-app purchase items within your marketplace.  If you’d like to try this, please contact us via the [website](http://www.playseeds.com/#social-good) chat. We’re more than happy to help!
 
 ### Switch to the Production Environment App Key
 
