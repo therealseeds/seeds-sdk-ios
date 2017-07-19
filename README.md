@@ -1,34 +1,31 @@
-# Seeds    
-[Seeds](http://www.playseeds.com) makes your users more likely to spend money on your digital product through social good. The SDK implements this with an interstitial (popup) system, event tracking analytics, and a recommendation algorithm.
+# Seeds iOS SDK
+
+Increase your revenue (and so much more) with the power of social good by integrating Seeds into your app!   If you have any questions regarding your specific setup, feel free to contact our team through the website chat.
+
+We’re so happy you’re here!
 
 ## The following platforms are now available:
+
 - [Unity SDK](https://github.com/therealseeds/seeds-sdk-unity)
 - [iOS](https://github.com/therealseeds/seeds-sdk-ios)
 - [Android](https://github.com/therealseeds/seeds-sdk-android)
 - [API](https://github.com/therealseeds/seeds-public-api)
 
 ## Pull requests welcome
-We're built on open source and welcome bug fixes and other contributions.
 
-# The Seeds iOS SDK
+We're built on open source and welcome bug fixes and other contributions.
 
 ## Pre-integration checklist
 
-Check that you have everything set up for Seeds integration:
+Before beginning the integration, please take care of all of the below:
 
-- A Seeds account - [Create it here](https://www.playseeds.com/) if you haven't done so yet
-
-- A registered app with at least one campaign
-
-- [The Dashboard tab](https://developers.playseeds.com/index.html) shows a list of your apps and the campaigns they contain. If you haven't received your final campaigns yet from us, you can start with the default example-campaign campaign.
-
-- You have chosen one or more locations in the app where you want to show the interstitials. [Click here](https://developers.playseeds.com/docs/best-practices.html) to see our best placement guide.
-
-- You have familiarized yourself with the example integration. [iOS Example Integration](https://github.com/therealseeds/seeds-sdk-ios/tree/master/Demo) shows a complete Seeds integration in action, and it's good to have it available as a reference when you are working on the integration.
+- Create a Seeds account [here](http://www.playseeds.com/) if you haven't already done so
+- The [Dashboard](https://developers.playseeds.com/index.html) tab shows a list of your apps and the campaigns they contain. You can start with the default example-campaign, and we’ll add your final campaigns automatically.
+- Familiarize yourself with the [iOS Example Integration](https://github.com/therealseeds/seeds-sdk-ios/tree/master/Example), which shows a complete Seeds integration in action.  It’s good to have on hand as a reference if needed.
 
 ## Installation
-We recommend using CocoaPods for adding the Seeds SDK to your app because it makes it easy to update the Seeds SDK in the future. Add the following to the Podfile in your project root directory:
 
+We recommend using CocoaPods to add the Seeds SDK to your app because it makes it easy to update the Seeds SDK in the future. Please add the following to the Podfile in your project root directory:
 
 ```
 target '<Target_Name>' do
@@ -38,11 +35,12 @@ end
 ```
 
 ## Usage
+
 The Seeds SDK functionality is divided into two parts: [Interstitials](#interstitials_header) that represent all functionality that is connected to the content Seeds shows in-app, and [Events](#events_header) that represent logging analytics data.
 
-### Initialization    
-Seeds will be initialized only once, when the app is first loaded. In your [Dashboard](https://developers.playseeds.com/index.html) tab you will find App Keys for both the Test Environment and the Production Environment. Please use these when initializing the Seeds SDK.
+## Initialization
 
+Seeds will be initialized only once, when your app is first loaded. You will find App Keys for both the Test Environment and the Production Environment in your [Dashboard](https://developers.playseeds.com/index.html) tab. Please use these when initializing the Seeds SDK.
 
 ```objective-c
 #import <SeedsSDK/Seeds.h>
@@ -53,20 +51,20 @@ Seeds will be initialized only once, when the app is first loaded. In your [Dash
   [Seeds initWithAppKey:YOUR_APP_KEY];
   ...
 }
-
 ```
-The earlier Seeds SDK is initialized, the better. It helps us to track the accurate user session length which is used when we target campaigns and interstitials to specific users based on their app use behavior.
 
-****
-### <a name="interstitials_header"></a>Interstitials
+The earlier the Seeds SDK is initialized, the better, as this helps us track accurate user session length.  This in turn allows us to better target users based on their specific behavior, so that we can deliver you the greatest revenue uptick possible. :)
 
-#### General rules:
-* InterstitialId is the id of the interstitial, that can be found in your dashboard under the **Campaign Name** section.
-* Context is the desription of the place, where you are showing the interstitial in human-readable manner. Please use short, but understandable descriptions (e.g. “level_1", “pause”, “app_start”).
+## <a name="interstitials_header"></a> Interstitials
 
-#### 1) Pre-load the intesrtitial:
-**Please note, that every interstitial must be previously loaded before your will attempt to show it.**
-You can pre-load interstitial from the any place of your app, but we suggest to pre-load all the interstitials in the app startup:
+### General rules:
+
+- InterstitialId is the id of the interstitial (naturally :)).  It can be found in your [Dashboard](https://developers.playseeds.com/index.html) under the Campaign Name section.
+- Context is the description of the place in your app at which you are showing the Seeds interstitial.  Please use short but understandable descriptions (e.g. “level_1", “pause”, “app_start”).
+
+### 1) Pre-load the interstitial:
+
+Please note that every interstitial must be pre-loaded before you attempt to show it. We suggest pre-loading all the interstitials in the app startup:
 
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -80,8 +78,9 @@ You can pre-load interstitial from the any place of your app, but we suggest to 
 }
 ```
 
-#### 2) Set the interstitials event handler:
-To receive the callbacks about events, such as notifications about clicks, dismiss, errors, loading, please set the interstitials event handler to receive callback from the SDK. Choose the class which you want to use for handling those events and implement [SeedsInterstitialsEventProtocol](#interstitialseventprotocol_header) methods:
+### 2) Set the interstitials event handler:
+
+To receive callbacks about events (e.g. notifications about clicks, dismissals, errors, and loading), please set the interstitials event handler to receive callback from the SDK. Choose the class you’d like to use for handling those events, and implement [SeedsInterstitialsEventProtocol](#interstitialseventprotocol_header) methods:
 
 ```objective-c
 #import <SeedsSDK/Seeds.h>
@@ -116,14 +115,12 @@ To receive the callbacks about events, such as notifications about clicks, dismi
 - (void)interstitial:(NSString *)interstitialId error:(NSError *)error {
 	//Called when any some error occures
 }
-
 ```
 
-#### 3) Show the Interstitial:
-To show the interstitial please do the following:
+### 3) Show the Interstitial
 
-- At first, сheck to see if the interstitial has already loaded.
-- If the interstitial is loaded - show it.
+- First сheck to see if the interstitial has already loaded.
+- If the interstitial is loaded - show it!  Sample usage:
 
 ```objective-c
 @interface ViewController ()
@@ -140,8 +137,9 @@ To show the interstitial please do the following:
 ...
 ```
 
-#### <a name="interstitialseventprotocol_header"></a> SeedsInterstitialsEventProtocol
-The delegate implementation contains five methods for treating different scenarios after the opening of an interstitial has been attempted.
+### <a name="interstitialseventprotocol_header"></a> SeedsInterstitialsEventProtocol
+
+The protocol contains five methods for addressing different scenarios of a Seeds interstitial events.
 
 ```objective-c
 - (void)interstitialDidLoad:(SeedsInterstitial *)interstitial; //Called when the interstitial was loaded
@@ -151,14 +149,13 @@ The delegate implementation contains five methods for treating different scenari
 - (void)interstitial:(NSString *)interstitialId error:(NSError *)error; //Called when any some error occures
 ```
 
-### <a name="events_header"></a>Events
+## <a name="events_header"></a> Events
 
-An event is the generalized mechanism for tracking all user actions taken in-app. **[Seeds events]** use two approaches for logging data: direct logging for purchases made, and an object-based approach for tracking all other data. Use **logSeedsIAPEvent** or **logIAPEvent** after any successful purchase, and **logUserInfo** with the provided wrapper to empower Seeds to make the targeted recommendations that will best convert your non-payers into paying customers. There is also an additional way to log your app’s custom data **logEventWithKey**.
+An event is the generalized mechanism for tracking all user actions taken in-app. [Seeds events] use two approaches for logging data: direct logging for purchases made, and an object-based approach for tracking all other data.  Please use logSeedsIAPEvent or logIAPEvent after any successful purchase, and logUserInfo with the provided wrapper to empower Seeds to make the targeted recommendations that will best convert your non-payers into paying customers. You can also log your app’s custom data with logEventWithKey.
 
-#### After successful in-app purchase:
+### After a successful in-app purchase:
 
-**This method should be called after any successful purchase in the app to help the to Seeds track the purchases and generate useful tips, statistic and issue correct invoices.**
-Depending of the type of purchase (whether it was with Seeds-promoted purchase or usual one), notify the SDK about it:
+This method should be called after any successful purchase in the app.  Depending on whether a completed purchases was either a Seeds purchase or a non-Seeds purchase, please notify the SDK in one of the two following ways:
 
 ```objective-c
 - (void)someMethod {
@@ -167,12 +164,11 @@ Depending of the type of purchase (whether it was with Seeds-promoted purchase o
  	[[Seeds events] logSeedsIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was a Seeds in-app purchase
  	[[Seeds events] logIAPEvent:PRODUCT_ID price:YOUR_PURCHASE_PRICE transactionId:YOUR_TRANSACTION_ID]; //If there was non-Seeds in-app purchase
 }
-
 ```
 
-#### After generating user data:
+### After generating user data:
 
-To specify userInfo data, please use following keys. This allows Seeds to show your users the opportunities to contribute to social good that will resonate most, optimizing your non-payer to payer conversion, and therefore your revenue.
+To specify userInfo data, please use following keys. This allows Seeds to show your users the opportunities to contribute to social good that they will love most, optimizing your non-payer to payer conversion - and therefore your revenue.
 
 ```objective-c
 kSeedEventUserName
@@ -197,53 +193,52 @@ Sample usage:
 }
 ```
 
-### Optional: Add Seeds branding to your in-app store
+## Optional: Add Seeds branding to your in-app store
 
-In addition to interstitials, you can make Seeds more visible in your app by adding the Seeds logo next to your promoted in-app purchase items. Contact us with the website chat (or at [team@playseeds.com](mailto:team@playseeds.com)) to discuss what kind of branding is best for your app!
+In addition to boosting your revenue using the Seeds interstitials, you can increase profits by adding the Seeds logo to the appropriate in-app purchase items within your marketplace.  If you’d like to try this, please contact us via the website chat. We’re more than happy to help!
 
-### Switch to Production Environment App Key and launch your app update!
+### Switch to the Production Environment App Key
 
-Before you will publish the app update, use Production Environment App Key instead of the one for Test Environment in Seeds initialization. After that you are good to go!
+Before publishing your app update, please switch from using the Test Environment App Key to the Production Environment App Key.  If needed, you can find both keys in your [Dashboard](https://developers.playseeds.com/index.html).
 
-## Solutions to integration problems
+### Add Your Social Good Transfer Information
 
-#### App is crashing after initializing Seeds
+Visit [this link](https://developers.playseeds.com/) and click on the Social Good Transfer tab on the left menu to input the credit card information for your future social good transfers!
 
-All Seeds methods must be run in the main thread, and probably some of your methods where you call Seeds is on background thread. You can fix this easily by adding Seeds method calls to the dispatch queue of main thread:
+### Finally, Submit Your App Update to the Store!
+
+Now you’re all set to make as much as 30% more money while simultaneously helping folks in need around the world.  You are amazing!  Thank you!
+
+## Solutions to common integration problems
+
+### Why is my app crashing after initializing Seeds?
+
+All Seeds methods must be run in the main thread.  If your app is crashing, please confirm that no Seeds methods are on the background thread, as this is a likely cause. If needed, you can easily fix this by adding Seeds method calls to the dispatch queue of the main thread:
 
 ```objective-c
 dispatch_async(dispatch_get_main_queue(), ^{ [Seeds calls here] });
 ```
 
-#### The interstitial doesn't show up
+### Why isn’t the interstitial showing up?
 
-- Check that the campaign name is correct
-- Check in interstitialDidLoad that preloading the interstitial has been successful
-- Check that when calling showWithId you are a parent view that is visible and takes the full screen
+- Check that the campaign name is correct at the [Dashboard](https://developers.playseeds.com/index.html).
+- Confirm in interstitialDidLoad that the interstitial preload was successful
+- If you’re still having trouble, try making sure that when calling showWithId you are in a parent view that is visible and takes up the full screen
 
-#### I'm experiencing some other problem
+### Ahhh, I'm experiencing another problem.  Please help!
 
-Feel free to contact us [team@playseeds.com](mailto:team@playseeds.com)!
+Please reach out via the [website](http://www.playseeds.com/#social-good) chat, and we’ll be happy to quickly assist. 
 
 ## License
+
 MIT License
 
 Copyright (c) 2017 Seeds
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Copyright (c) 2012, 2013 Countly
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
