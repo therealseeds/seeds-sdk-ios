@@ -7,9 +7,7 @@ We’re so happy you’re here!
 ## The following platforms are now available:
 
 - [Unity SDK](https://github.com/therealseeds/seeds-sdk-unity)
-- [iOS](https://github.com/therealseeds/seeds-sdk-ios)
 - [Android](https://github.com/therealseeds/seeds-sdk-android)
-- [API](https://github.com/therealseeds/seeds-public-api)
 
 ## Pull requests welcome
 
