@@ -193,13 +193,13 @@ Sample usage:
 }
 ```
 
-## Optional: Add Seeds branding to your in-app store
-
-In addition to boosting your revenue using the Seeds interstitials, you can increase profits by adding the Seeds logo to the appropriate in-app purchase items within your marketplace.  If you’d like to try this, please contact us via the [website](http://www.playseeds.com/#social-good) chat. We’re more than happy to help!
-
 ### Switch to the Production Environment App Key
 
 Before publishing your app update, please switch from using the Test Environment App Key to the Production Environment App Key.  If needed, you can find both keys in your [Dashboard](https://developers.playseeds.com/index.html).
+
+### Optional: Add Seeds branding to your in-app store
+
+In addition to boosting your revenue using the Seeds interstitials, you can increase profits by adding the Seeds logo to the appropriate in-app purchase items within your marketplace.  If you’d like to try this, please contact us via the [website](http://www.playseeds.com/#social-good) chat. We’re more than happy to help!
 
 ### Add Your Social Good Transfer Information
 
