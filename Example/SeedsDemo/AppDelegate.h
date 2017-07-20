@@ -1,9 +1,8 @@
 //
 //  AppDelegate.h
-//  iOS Demo
+//  SeedsDemo
 //
-//  Created by Alexey Pelykh on 8/13/15.
-//
+//  Created by Igor Dorofix on 6/30/17.
 //
 
 #import <UIKit/UIKit.h>

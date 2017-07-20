@@ -35,6 +35,7 @@
 
 #import "MFCustomEventFullscreen.h"
 #import "Seeds.h"
+#import "Seeds_Private.h"
 #import "SeedsInAppMessageDelegate.h"
 
 NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial";
@@ -1467,11 +1468,10 @@ NSString * const MobFoxVideoInterstitialErrorDomain = @"MobFoxVideoInterstitial"
 
     if (customSegments != nil) {
         [segments addEntriesFromDictionary:customSegments];
+        segments[kEventCountKey] = @(1);
     }
 
-    [Seeds.sharedInstance recordEvent:key
-                         segmentation:segments
-                                count:1];
+    [Seeds.events logEventWithKey:key parameters:segments];
 }
 
 @end

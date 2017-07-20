@@ -29,8 +29,11 @@
 
 #define SEEDS_DEFAULT_UPDATE_INTERVAL 60.0
 
+#define SEEDS_DEFAULT_URL @"https://dash.playseeds.com"
+
 #import <Foundation/Foundation.h>
 #import "Seeds.h"
+#import "Seeds_Private.h"
 #import "SeedsEventQueue.h"
 #import "SeedsDeviceInfo.h"
 #import "SeedsConnectionQueue.h"
@@ -40,6 +43,7 @@
 #import "SeedsDB.h"
 #import "SeedsUrlFormatter.h"
 #import "NSString+MobFox.h"
+#import "SeedsInAppMessageDelegate.h"
 
 #import <objc/runtime.h>
 
@@ -58,12 +62,20 @@
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
 
+typedef void (^ SeedsInAppPurchaseCountCallback)(NSString* errorMessage, int purchasesCount);
+typedef void (^ SeedsInAppMessageShowCountCallback)(NSString* errorMessage, int showCount);
+typedef void (^ SeedsGenericUserBehaviorQueryCallback)(NSString* errorMessage, id result);
 
-
-@interface Seeds ()
-@end
-
-@implementation Seeds
+@implementation Seeds {
+    double unsentSessionLength;
+    NSTimer *timer;
+    time_t startTime;
+    double lastTime;
+    BOOL isSuspended;
+    SeedsEventQueue *eventQueue;
+    NSDictionary *crashCustom;
+    NSMutableDictionary *_messageInfos;
+}
 
 @synthesize inAppMessageDelegate;
 
@@ -109,6 +121,34 @@
     }
     return self;
 }
+
+//////////////////////
+
++ (void)initWithAppKey:(NSString *)appKey {
+    [[Seeds sharedInstance] start:appKey withHost:SEEDS_DEFAULT_URL];
+}
+
++ (SeedsInterstitials *)interstitials {
+    static SeedsInterstitials *sharedObject = nil;
+    static dispatch_once_t onceToken;
+    Seeds *seedsInstance = [Seeds sharedInstance];
+    dispatch_once(&onceToken, ^{
+        sharedObject = [SeedsInterstitials new];
+        seedsInstance.inAppMessageDelegate = (SeedsInterstitials <SeedsInAppMessageDelegate> *)sharedObject;
+    });
+    return sharedObject;
+}
+
++ (SeedsEvents *)events {
+    static SeedsEvents *sharedObject = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedObject = [SeedsEvents new];
+    });
+    return sharedObject;
+}
+
+//////////////////////
 
 - (void)start:(NSString *)appKey withHost:(NSString *)appHost
 {
@@ -349,7 +389,7 @@
     NSString* endpoint = [self.getAppHost stringByAppendingString:@"/o/app-user/query-iap-purchase-count"];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
                             [self.getAppKey stringByUrlEncoding],
-                            [_deviceId stringByUrlEncoding]];
+                            [self.deviceId stringByUrlEncoding]];
     if (key != nil) {
         parameters = [parameters stringByAppendingString:[NSString stringWithFormat:@"&iap_key=%@", [key stringByUrlEncoding]]];
     } else {
@@ -394,7 +434,7 @@
     NSString* endpoint = [self.getAppHost stringByAppendingString:@"/o/app-user/query-interstitial-shown-count"];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
                             [self.getAppKey stringByUrlEncoding],
-                            [_deviceId stringByUrlEncoding]];
+                            [self.deviceId stringByUrlEncoding]];
     if (messageId != nil) {
         parameters = [parameters stringByAppendingString:[NSString stringWithFormat:@"&interstitial_id=%@", [messageId stringByUrlEncoding]]];
     } else {
@@ -432,7 +472,7 @@
     NSString* endpoint = [self.getAppHost stringByAppendingString:[@"/o/app-user/" stringByAppendingString: queryPath]];
     NSString* parameters = [NSString stringWithFormat:@"app_key=%@&device_id=%@",
                                                       [self.getAppKey stringByUrlEncoding],
-                                                      [_deviceId stringByUrlEncoding]];
+                                                      [self.deviceId stringByUrlEncoding]];
 
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", endpoint, parameters]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
